@@ -1,0 +1,111 @@
+#poststuff {
+    #ry-line-richmenu-action,
+    #ry-line-richmenu-operate {
+        .inside {
+            margin: 0;
+            padding: 0;
+        }
+    }
+    #ry-line-richmenu-operate {
+        p {
+            margin-top: 0;
+        }
+        input {
+            width: 100%;
+        }
+    }
+
+    #ry-line-richmenu-area .form-table {
+        th,
+        td {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    }
+}
+
+.ry-line-row {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    margin-right: -1rem;
+    margin-left: -1rem;
+
+    > * {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+}
+
+.ry-line-col {
+    flex: 1 0 0%;
+}
+
+.ry-line-col-auto {
+    flex: 0 0 auto;
+    width: auto;
+}
+
+.richmenu-img {
+    width: 40%;
+    min-width: 320px;
+    max-width: 480px;
+}
+
+.richmenu-svg {
+    overflow: hidden;
+    user-select: none;
+    border: 1px solid #ddd;
+
+    image {
+        pointer-events: none;
+    }
+    text {
+        fill: #fff;
+        stroke-width: 3px;
+        stroke: #000;
+        font-size: 26px;
+        font-weight: bold;
+        paint-order: stroke;
+    }
+
+    .temp-line {
+        pointer-events: none;
+        opacity: 0.7;
+    }
+
+    .permanent-line {
+        cursor: pointer;
+
+        &:hover {
+            stroke-width: 4;
+        }
+    }
+
+    .dragging {
+        &.horizontal {
+            cursor: ns-resize;
+        }
+        &.vertical {
+            cursor: ew-resize;
+        }
+    }
+
+    // 當正在繪製時改變游標
+    &.drawing {
+        cursor: crosshair;
+    }
+}
+
+#richmenu-area-list,
+#richmenu-action-list {
+    tbody {
+        input,
+        textarea {
+            width: 100%;
+        }
+    }
+}

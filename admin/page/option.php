@@ -8,7 +8,7 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
 
     public static function init_menu(): void
     {
-        add_submenu_page('', 'LINE 設定', '', 'manage_options', 'ry-line-option', [__CLASS__, 'pre_show_page']);
+        add_submenu_page('', __('LINE options', 'ry-line'), '', 'manage_options', 'ry-line-option', [__CLASS__, 'pre_show_page']);
         add_action('load-admin_page_ry-line-option', [__CLASS__, 'instance']);
         add_action('admin_post_ry/admin-line-option', [__CLASS__, 'admin_action']);
     }
@@ -17,9 +17,11 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
     {
         global $_wp_menu_nopriv, $_wp_real_parent_file, $submenu_file;
 
-        $_wp_menu_nopriv['ry-line-option'] = true;
-        $_wp_real_parent_file['ry-line-option'] = RY_LINE()->admin->main_slug;
-        $submenu_file = 'ry-line';
+        if ($_wp_menu_nopriv) {
+            $_wp_menu_nopriv['ry-line-option'] = true;
+            $_wp_real_parent_file['ry-line-option'] = RY_LINE()->admin->main_slug;
+            $submenu_file = 'ry-line';
+        }
     }
 
     public function output_page(): void
@@ -31,7 +33,7 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
                 $bot_info = [
                     'id' => $bot_info->basicId,
                     'name' => $bot_info->displayName,
-                    'icon' => $bot_info->pictureUrl,
+                    'icon' => $bot_info->pictureUrl ?? '',
                     'webhook-url' => '',
                     'webhook-status' => '',
                 ];
@@ -40,10 +42,27 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
             }
         }
 
+        $user_info = RY_LINE::get_transient('user_info');
+        if (empty($user_info)) {
+            $line_user_ID = RY_LINE::get_option('test_user_id');
+            if (!empty($line_user_ID)) {
+                $user_info = RY_LINE_Api::get_user_info($line_user_ID);
+                if ($user_info) {
+                    $user_info = [
+                        'name' => $user_info->displayName,
+                        'icon' => $user_info->pictureUrl ?? '',
+                        'lang' => $user_info->language ?? '',
+                    ];
+
+                    RY_LINE::set_transient('user_info', $user_info, DAY_IN_SECONDS);
+                }
+            }
+        }
+
         echo '<div class="wrap">';
         $show_type = 'ry-line-option';
         include __DIR__ . '/html/nav.php';
-        echo '<h1>LINE 串接設定</h1>';
+        echo '<h1>' . esc_html__('LINE API setting', 'ry-line') . '</h1>';
         echo '<form method="post" action="admin-post.php">';
         echo '<input type="hidden" name="action" value="ry/admin-line-option">';
         wp_nonce_field('ry/admin-line-option');
@@ -54,7 +73,7 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
 
     public function do_admin_action(string $action): void
     {
-        if (in_array($action, ['ry/admin-line-option'], true) === false) {
+        if ($action !== 'ry/admin-line-option') {
             return;
         }
 
@@ -62,11 +81,13 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
             wp_die('Invalid nonce');
         }
 
-        RY_LINE::update_option('channel_id', sanitize_text_field(wp_unslash($_POST['channel-id'] ?? '')), false);
-        RY_LINE::update_option('channel_secret', sanitize_text_field(wp_unslash($_POST['channel-secret'] ?? '')), false);
+        RY_LINE::update_option('channel_id', sanitize_locale_name($_POST['channel-id'] ?? ''), false);
+        RY_LINE::update_option('channel_secret', sanitize_locale_name($_POST['channel-secret'] ?? ''), false);
+        RY_LINE::update_option('test_user_id', sanitize_locale_name($_POST['test-user-id'] ?? ''), false);
 
         RY_LINE::delete_transient('bot_info');
-        RY_LINE::delete_transient('access_token');
+        RY_LINE::delete_transient('user_info');
+        RY_LINE_Api::revoke_access_token();
         if (RY_LINE_Api::get_access_token()) {
             $this->add_notice('success', __('Settings saved.', 'ry-line'));
         } else {

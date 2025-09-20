@@ -27,6 +27,7 @@ function getCopyPatterns() {
 module.exports = {
     ...defaultConfig,
     entry: {
+        'admin/basic': path.join(srcPath, 'admin/basic.js'),
         'admin/richmenu': path.join(srcPath, 'admin/richmenu.js')
     },
     output: {

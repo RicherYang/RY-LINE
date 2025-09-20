@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-03-02T11:52:45+08:00\n"
-"PO-Revision-Date: 2025-09-13 16:59+0800\n"
+"PO-Revision-Date: 2025-09-20 14:43+0800\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
@@ -41,15 +41,11 @@ msgstr "https://ry-plugin.com/ry-line"
 #. Description of the plugin
 #: ry-line.php
 msgid "LINE support"
-msgstr ""
+msgstr "LINE support"
 
-#: admin/page/option.php:71
+#: admin/page/option.php:92
 msgid "Settings saved."
 msgstr "設定已儲存。"
-
-#: admin/page/html/option.php:11
-msgid "Channel icon"
-msgstr "帳號圖片"
 
 #: admin/page/html/option.php:14
 msgid "Bot basic ID: "
@@ -59,7 +55,7 @@ msgstr "專屬ID："
 msgid "Channel name: "
 msgstr "帳號名稱："
 
-#: admin/page/option.php:73
+#: admin/page/option.php:94
 msgid "Error channel ID or channel secret."
 msgstr "錯誤的 channel ID 或是 channel secret。"
 
@@ -71,6 +67,329 @@ msgstr "Channel ID"
 msgid "Channel secret"
 msgstr "Channel secret"
 
+#: includes/main.php:66
+msgctxt "post type general name"
+msgid "LINE rich menu"
+msgstr "LINE 圖文選單"
+
+#: includes/main.php:67
+msgid "Add rich menu"
+msgstr "新增圖文選單"
+
+#: includes/main.php:68
+msgid "Edit rich menu"
+msgstr "編輯圖文選單"
+
+#: includes/main.php:69
+msgid "Search rich menu"
+msgstr "搜尋圖文選單"
+
+#: includes/main.php:71
+msgid "Menu image"
+msgstr "選單圖片"
+
+#: includes/main.php:72
+msgid "Set menu image"
+msgstr "設定選單圖片"
+
+#: includes/main.php:73
+msgid "Remove menu image"
+msgstr "移除選單圖片"
+
+#: admin/meta-boxes/richmenu.php:55
+#: admin/meta-boxes/richmenu.php:70
+msgid "Please set menu image first."
+msgstr "請先設定選單圖片。"
+
+#: includes/main.php:74
+msgid "Use as menu image"
+msgstr "設定為選單圖片"
+
+#: includes/main.php:70
+msgid "Uploaded to this rich menu"
+msgstr "已關聯至這圖文選單"
+
+#: admin/meta-boxes/richmenu.php:15
+#: admin/meta-boxes/richmenu.php:17
+msgid "Action area"
+msgstr "操作區域"
+
+#: admin/media.php:41
+msgid "Image must be JPEG or PNG format"
+msgstr "圖片必須為 JPEG 或 PNG 格式"
+
+#: admin/media.php:44
+msgid "Image width must be between 800 and 2500 pixels"
+msgstr "圖片寬度必須介於 800 到 2500 像素"
+
+#: admin/media.php:47
+msgid "Image aspect ratio must be greater than 1.45"
+msgstr "圖片長寬比必須大於 1.45"
+
+#: admin/media.php:50
+msgid "Image file size must be less than 1MB"
+msgstr "圖片檔案大小必須小於 1MB"
+
+#: admin/meta-boxes/html/richmenu-area.php:65
+msgid "Phone display size is based on width 360px. The recommended area is larger than 30px."
+msgstr "手機顯示大小以寬度 360 像素計算。建議區域大小超過 30 像素。"
+
+#: admin/meta-boxes/html/richmenu-area.php:56
+msgid "Phone display size"
+msgstr "手機顯示大小"
+
+#: admin/meta-boxes/html/richmenu-area.php:55
+#: admin/meta-boxes/html/richmenu-area.php:77
+msgid "No"
+msgstr "編號"
+
+#: admin/meta-boxes/html/richmenu-area.php:34
+msgid "Create area by dragging them, starting from the edge of the partition."
+msgstr "用拖曳的方式建立分區，請從分區的邊緣開始建立。"
+
+#: admin/meta-boxes/html/richmenu-area.php:35
+msgid "Drag the line to adjust their positions. After adjustment, the line that are not started by edges will be removed."
+msgstr "拖曳線段可以調整位置，調整後將自動移除不是由邊緣建立的線段。"
+
+#: admin/meta-boxes/html/richmenu-area.php:36
+msgid "Double-click line to delete it."
+msgstr "雙擊線段可將線段刪除。"
+
+#: admin/media.php:56
+msgid "Changing the image size will clear the option of action areas"
+msgstr "變更圖片大小將清除操作區域的設定"
+
+#. translators: %1$d: image width, %2$d: image height
+#: admin/meta-boxes/html/richmenu-area.php:43
+msgid "Image size: %1$d x %2$d px"
+msgstr "圖片尺寸：%1$d x %2$d 像素"
+
+#: admin/meta-boxes/html/richmenu-area.php:48
+msgid "Reset area"
+msgstr "重設區域"
+
+#: admin/meta-boxes/html/richmenu-area.php:57
+#: admin/meta-boxes/html/richmenu-area.php:110
+msgid "Start"
+msgstr "起點"
+
+#: admin/meta-boxes/html/richmenu-area.php:58
+#: admin/meta-boxes/html/richmenu-area.php:111
+msgid "Size"
+msgstr "大小"
+
+#: admin/meta-boxes/html/richmenu-area.php:66
+msgid "Save area position"
+msgstr "儲存區域位置"
+
+#: admin/meta-boxes/html/richmenu-area.php:78
+msgid "Position"
+msgstr "位置"
+
+#: admin/meta-boxes/html/richmenu-area.php:79
+msgid "Action type"
+msgstr "動作類型"
+
+#: admin/meta-boxes/html/richmenu-area.php:80
+msgid "Action info"
+msgstr "動作資訊"
+
+#: admin/meta-boxes/html/richmenu-area.php:115
+msgctxt "action type"
+msgid "None"
+msgstr "無"
+
+#: admin/meta-boxes/html/richmenu-area.php:116
+msgctxt "action type"
+msgid "Link"
+msgstr "連結"
+
+#: admin/meta-boxes/html/richmenu-area.php:117
+msgctxt "action type"
+msgid "Text"
+msgstr "文字"
+
+#: admin/meta-boxes/html/richmenu-area.php:118
+msgctxt "action type"
+msgid "Switch menu"
+msgstr "切換選單"
+
+#: admin/meta-boxes/html/richmenu-area.php:123
+msgid "URL"
+msgstr "網址"
+
+#: admin/meta-boxes/html/richmenu-area.php:124
+msgid "Enter url"
+msgstr "輸入網址"
+
+#: admin/meta-boxes/html/richmenu-area.php:127
+msgid "Message text"
+msgstr "訊息文字"
+
+#: admin/meta-boxes/html/richmenu-area.php:128
+msgid "Enter message text"
+msgstr "輸入訊息文字"
+
+#: admin/meta-boxes/html/richmenu-area.php:131
+#: admin/meta-boxes/html/richmenu-operate.php:17
+#: admin/richmenu.php:50
+msgid "Menu alias"
+msgstr "選單代稱"
+
+#: admin/meta-boxes/html/richmenu-area.php:132
+#: admin/meta-boxes/html/richmenu-operate.php:18
+msgid "Enter menu alias"
+msgstr "輸入選單代稱"
+
+#: admin/meta-boxes/html/richmenu-area.php:135
+msgid "Action label"
+msgstr "動作標籤"
+
+#: admin/meta-boxes/html/richmenu-area.php:136
+msgid "Enter action label"
+msgstr "輸入動作標籤"
+
+#: admin/meta-boxes/html/richmenu-area.php:87
+msgid "Save area action"
+msgstr "儲存區域動作"
+
+#: admin/meta-boxes/html/richmenu-operate.php:3
+msgid "Please save data before performing any LINE operations."
+msgstr "請在進行 LINE 操作前請先儲存資料。"
+
+#: admin/meta-boxes/richmenu.php:16
+msgid "LINE Operation"
+msgstr "LINE 操作"
+
+#: admin/meta-boxes/richmenu.php:48
+msgid "license key"
+msgstr "授權金鑰"
+
+#. translators: %s: license key link
+#: admin/meta-boxes/richmenu.php:50
+msgid "Please activate %s to use this feature."
+msgstr "請先啟用 %s 再使用本功能。"
+
+#: admin/meta-boxes/html/richmenu-action.php:6
+msgid "Move to Trash"
+msgstr "移至回收桶"
+
+#: admin/meta-boxes/html/richmenu-action.php:10
+msgid "Update"
+msgstr "更新"
+
+#: admin/meta-boxes/html/richmenu-operate.php:9
+msgid "Create menu"
+msgstr "建立選單"
+
+#: admin/ajax.php:207
+#: admin/meta-boxes/html/richmenu-operate.php:33
+msgid "Unset default menu"
+msgstr "取消預設選單"
+
+#: admin/meta-boxes/html/richmenu-operate.php:30
+msgid "Delete menu"
+msgstr "刪除選單"
+
+#: admin/meta-boxes/html/richmenu-action.php:16
+msgid "Upload to LINE menu can't edit."
+msgstr "已上傳至 LINE 的選單無法進行編輯。"
+
+#: admin/meta-boxes/html/richmenu-operate.php:20
+msgid "Set menu alias"
+msgstr "設定選單代稱"
+
 #: admin/page/html/nav.php:6
-msgid "options"
+#: admin/page/tools.php:36
+msgid "Tools"
+msgstr "工具"
+
+#: admin/page/html/nav.php:12
+msgid "Options"
 msgstr "設定"
+
+#: admin/page/option.php:11
+msgid "LINE options"
+msgstr "LINE 設定"
+
+#: admin/page/tools.php:11
+msgid "LINE tools"
+msgstr "LINE 工具"
+
+#: admin/page/html/tools.php:15
+#: admin/page/html/tools.php:22
+msgid "Reload rich menu"
+msgstr "重新載入圖文選單"
+
+#: admin/page/option.php:65
+msgid "LINE API setting"
+msgstr "LINE API 設定"
+
+#: admin/page/tools.php:140
+msgid "Reloaded successfully."
+msgstr "重新載入成功。"
+
+#: admin/meta-boxes/html/richmenu-area.php:8
+msgid "Display"
+msgstr "顯示"
+
+#: admin/meta-boxes/html/richmenu-area.php:12
+msgid "Default display the rich menu"
+msgstr "預設顯示圖文選單"
+
+#: admin/meta-boxes/html/richmenu-area.php:4
+msgid "Chat button text"
+msgstr "聊天室按鈕文字"
+
+#: admin/meta-boxes/html/richmenu-area.php:5
+#: admin/richmenu.php:87
+msgid "Open menu"
+msgstr "開啟選單"
+
+#: admin/page/html/tools.php:28
+msgid "Clear unused rich menu alias"
+msgstr "清除未使用的圖文選單代稱"
+
+#: admin/page/html/tools.php:35
+msgid "Clear alias"
+msgstr "清除代稱"
+
+#. translators: %d: number of deleted aliases
+#: admin/page/tools.php:157
+msgid "Deleted %d unused rich menu alias."
+msgid_plural "Deleted %d unused rich menu aliases."
+msgstr[0] "刪除 %d 個未使用的圖文選單代稱。"
+
+#: admin/ajax.php:207
+#: admin/meta-boxes/html/richmenu-operate.php:33
+#: admin/richmenu.php:42
+msgid "Default menu"
+msgstr "預設選單"
+
+#: admin/meta-boxes/html/richmenu-operate.php:24
+msgid "Link to test user"
+msgstr "連結至測試使用者"
+
+#: admin/page/html/option.php:29
+msgid "Test user ID"
+msgstr "測試使用者 ID"
+
+#: admin/page/html/option.php:39
+msgid "User name: "
+msgstr "使用者名稱："
+
+#: admin/page/html/option.php:40
+msgid "Language: "
+msgstr "語言："
+
+#: admin/page/html/tools.php:42
+msgid "Unlink test user rich menu"
+msgstr "移除連結至測試使用者的圖文選單"
+
+#: admin/page/html/tools.php:49
+msgid "Unlink test user"
+msgstr "移除連結至測試使用者"
+
+#: admin/page/tools.php:164
+msgid "Unlink test user rich menu successfully."
+msgstr "成功移除連結至測試使用者的圖文選單。"
