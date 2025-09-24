@@ -29,7 +29,9 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
         $bot_info = RY_LINE::get_transient('bot_info');
         if (empty($bot_info)) {
             $bot_info = RY_LINE_Api::get_bot_info();
-            if ($bot_info) {
+            if (is_wp_error($bot_info)) {
+                $bot_info = [];
+            } else {
                 $bot_info = [
                     'id' => $bot_info->basicId,
                     'name' => $bot_info->displayName,
@@ -47,7 +49,9 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
             $line_user_ID = RY_LINE::get_option('test_user_id');
             if (!empty($line_user_ID)) {
                 $user_info = RY_LINE_Api::get_user_info($line_user_ID);
-                if ($user_info) {
+                if (is_wp_error($user_info)) {
+                    $user_info = [];
+                } else {
                     $user_info = [
                         'name' => $user_info->displayName,
                         'icon' => $user_info->pictureUrl ?? '',
