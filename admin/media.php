@@ -43,6 +43,9 @@ final class RY_LINE_Admin_Media
                 if ($image_meta['width'] < 800 || $image_meta['width'] > 2500) {
                     $add_info[] = esc_html__('Image width must be between 800 and 2500 pixels', 'ry-line');
                 }
+                if ($image_meta['height'] < 250) {
+                    $add_info[] = esc_html__('Image height must be more than 250 pixels', 'ry-line');
+                }
                 if ($image_meta['width'] / $image_meta['height'] < 1.45) {
                     $add_info[] = esc_html__('Image aspect ratio must be greater than 1.45', 'ry-line');
                 }

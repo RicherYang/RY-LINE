@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-03-02T11:52:45+08:00\n"
-"PO-Revision-Date: 2025-09-20 14:43+0800\n"
+"PO-Revision-Date: 2025-09-23 20:33+0800\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
@@ -43,7 +43,7 @@ msgstr "https://ry-plugin.com/ry-line"
 msgid "LINE support"
 msgstr "LINE support"
 
-#: admin/page/option.php:92
+#: admin/page/option.php:96
 msgid "Settings saved."
 msgstr "設定已儲存。"
 
@@ -55,7 +55,7 @@ msgstr "專屬ID："
 msgid "Channel name: "
 msgstr "帳號名稱："
 
-#: admin/page/option.php:94
+#: admin/page/option.php:98
 msgid "Error channel ID or channel secret."
 msgstr "錯誤的 channel ID 或是 channel secret。"
 
@@ -122,11 +122,11 @@ msgstr "圖片必須為 JPEG 或 PNG 格式"
 msgid "Image width must be between 800 and 2500 pixels"
 msgstr "圖片寬度必須介於 800 到 2500 像素"
 
-#: admin/media.php:47
+#: admin/media.php:50
 msgid "Image aspect ratio must be greater than 1.45"
 msgstr "圖片長寬比必須大於 1.45"
 
-#: admin/media.php:50
+#: admin/media.php:53
 msgid "Image file size must be less than 1MB"
 msgstr "圖片檔案大小必須小於 1MB"
 
@@ -155,7 +155,7 @@ msgstr "拖曳線段可以調整位置，調整後將自動移除不是由邊緣
 msgid "Double-click line to delete it."
 msgstr "雙擊線段可將線段刪除。"
 
-#: admin/media.php:56
+#: admin/media.php:59
 msgid "Changing the image size will clear the option of action areas"
 msgstr "變更圖片大小將清除操作區域的設定"
 
@@ -321,7 +321,7 @@ msgstr "LINE 工具"
 msgid "Reload rich menu"
 msgstr "重新載入圖文選單"
 
-#: admin/page/option.php:65
+#: admin/page/option.php:69
 msgid "LINE API setting"
 msgstr "LINE API 設定"
 
@@ -393,3 +393,7 @@ msgstr "移除連結至測試使用者"
 #: admin/page/tools.php:164
 msgid "Unlink test user rich menu successfully."
 msgstr "成功移除連結至測試使用者的圖文選單。"
+
+#: admin/media.php:47
+msgid "Image height must be more than 250 pixels"
+msgstr "圖片高度必須大於 250 像素"
