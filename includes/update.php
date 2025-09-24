@@ -15,8 +15,8 @@ final class RY_LINE_update
 
         RY_LINE::create_roles();
 
-        if (version_compare($now_version, '0.3.1', '<')) {
-            RY_LINE::update_option('version', '0.3.1', true);
+        if (version_compare($now_version, '0.3.2', '<')) {
+            RY_LINE::update_option('version', '0.3.2', true);
         }
     }
 }

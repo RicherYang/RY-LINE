@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: RY LINE 0.3.1\n"
+"Project-Id-Version: RY LINE 0.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ry-line\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-23T23:04:45+08:00\n"
+"POT-Creation-Date: 2025-09-24T18:04:27+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ry-line\n"
@@ -266,7 +266,7 @@ msgid "Please set menu image first."
 msgstr ""
 
 #: admin/page/html/nav.php:6
-#: admin/page/tools.php:36
+#: admin/page/tools.php:34
 msgid "Tools"
 msgstr ""
 
@@ -323,38 +323,38 @@ msgstr ""
 msgid "Unlink test user"
 msgstr ""
 
-#: admin/page/option.php:11
+#: admin/page/option.php:9
 msgid "LINE options"
 msgstr ""
 
-#: admin/page/option.php:69
+#: admin/page/option.php:67
 msgid "LINE API setting"
 msgstr ""
 
-#: admin/page/option.php:96
+#: admin/page/option.php:94
 msgid "Settings saved."
 msgstr ""
 
-#: admin/page/option.php:98
+#: admin/page/option.php:96
 msgid "Error channel ID or channel secret."
 msgstr ""
 
-#: admin/page/tools.php:11
+#: admin/page/tools.php:9
 msgid "LINE tools"
 msgstr ""
 
-#: admin/page/tools.php:140
+#: admin/page/tools.php:138
 msgid "Reloaded successfully."
 msgstr ""
 
 #. translators: %d: number of deleted aliases
-#: admin/page/tools.php:157
+#: admin/page/tools.php:155
 msgid "Deleted %d unused rich menu alias."
 msgid_plural "Deleted %d unused rich menu aliases."
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/page/tools.php:164
+#: admin/page/tools.php:162
 msgid "Unlink test user rich menu successfully."
 msgstr ""
 

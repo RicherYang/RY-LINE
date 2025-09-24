@@ -82,11 +82,11 @@ final class RY_LINE_Admin_Richmenu
             'width' => $thumbnail_meta['width'],
             'height' => $thumbnail_meta['height'],
         ];
-        $richmenu_data['chatBarText'] = sanitize_text_field(wp_unslash($_POST['chatBarText'] ?? ''));
+        $richmenu_data['chatBarText'] = sanitize_text_field(wp_unslash($_POST['chatBarText'] ?? '')); // phpcs:ignore WordPress.Security.NonceVerification.Missing
         if (empty($richmenu_data['chatBarText'])) {
             $richmenu_data['chatBarText'] = __('Open menu', 'ry-line');
         }
-        $richmenu_data['selected'] = isset($_POST['selected']);
+        $richmenu_data['selected'] = isset($_POST['selected']); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
         update_post_meta($post_ID, 'ry_line_richmenu_data', $richmenu_data);
     }

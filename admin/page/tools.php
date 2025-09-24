@@ -4,8 +4,6 @@ final class RY_Line_Admin_Tools extends RY_Abstract_Admin_Page
 {
     protected static $_instance = null;
 
-    protected $license_list = [];
-
     public static function init_menu(): void
     {
         add_submenu_page('', __('LINE tools', 'ry-line'), '', 'manage_options', 'ry-line-tools', [__CLASS__, 'pre_show_page']);
@@ -59,8 +57,8 @@ final class RY_Line_Admin_Tools extends RY_Abstract_Admin_Page
                 foreach ($list->richmenus as $richmenu) {
                     $posts = $get_posts->query([
                         'post_type' => RY_LINE::POSTTYPE_RICHERMENU,
-                        'meta_key' => 'ry_line_richmenu_richMenuId',
-                        'meta_value' => $richmenu->richMenuId,
+                        'meta_key' => 'ry_line_richmenu_richMenuId', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+                        'meta_value' => $richmenu->richMenuId, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
                         'posts_per_page' => -1,
                         'fields' => 'ids',
                     ]);
@@ -102,7 +100,7 @@ final class RY_Line_Admin_Tools extends RY_Abstract_Admin_Page
                         $thumbnail_ID = get_post_thumbnail_id($post_ID);
                         if ($thumbnail_ID > 0) {
                             if (md5_file(get_attached_file($thumbnail_ID)) === md5_file($tmp_name)) {
-                                @unlink($tmp_name);
+                                @unlink($tmp_name); // phpcs:ignore WordPress.WP.AlternativeFunctions.unlink_unlink
                                 continue;
                             }
                         }
@@ -117,7 +115,7 @@ final class RY_Line_Admin_Tools extends RY_Abstract_Admin_Page
                         if (!is_wp_error($att_ID)) {
                             set_post_thumbnail($post_ID, $att_ID);
                         }
-                        @unlink($tmp_name);
+                        @unlink($tmp_name); // phpcs:ignore WordPress.WP.AlternativeFunctions.unlink_unlink
                     }
                 }
             }
@@ -126,8 +124,8 @@ final class RY_Line_Admin_Tools extends RY_Abstract_Admin_Page
             if (!is_wp_error($default)) {
                 $posts = $get_posts->query([
                     'post_type' => RY_LINE::POSTTYPE_RICHERMENU,
-                    'meta_key' => 'ry_line_richmenu_richMenuId',
-                    'meta_value' => $default->richMenuId,
+                    'meta_key' => 'ry_line_richmenu_richMenuId', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+                    'meta_value' => $default->richMenuId, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
                     'posts_per_page' => -1,
                     'fields' => 'ids',
                 ]);

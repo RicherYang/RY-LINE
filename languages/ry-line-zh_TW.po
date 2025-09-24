@@ -43,7 +43,7 @@ msgstr "https://ry-plugin.com/ry-line"
 msgid "LINE support"
 msgstr "LINE support"
 
-#: admin/page/option.php:96
+#: admin/page/option.php:94
 msgid "Settings saved."
 msgstr "設定已儲存。"
 
@@ -55,7 +55,7 @@ msgstr "專屬ID："
 msgid "Channel name: "
 msgstr "帳號名稱："
 
-#: admin/page/option.php:98
+#: admin/page/option.php:96
 msgid "Error channel ID or channel secret."
 msgstr "錯誤的 channel ID 或是 channel secret。"
 
@@ -300,7 +300,7 @@ msgid "Set menu alias"
 msgstr "設定選單代稱"
 
 #: admin/page/html/nav.php:6
-#: admin/page/tools.php:36
+#: admin/page/tools.php:34
 msgid "Tools"
 msgstr "工具"
 
@@ -308,11 +308,11 @@ msgstr "工具"
 msgid "Options"
 msgstr "設定"
 
-#: admin/page/option.php:11
+#: admin/page/option.php:9
 msgid "LINE options"
 msgstr "LINE 設定"
 
-#: admin/page/tools.php:11
+#: admin/page/tools.php:9
 msgid "LINE tools"
 msgstr "LINE 工具"
 
@@ -321,11 +321,11 @@ msgstr "LINE 工具"
 msgid "Reload rich menu"
 msgstr "重新載入圖文選單"
 
-#: admin/page/option.php:69
+#: admin/page/option.php:67
 msgid "LINE API setting"
 msgstr "LINE API 設定"
 
-#: admin/page/tools.php:140
+#: admin/page/tools.php:138
 msgid "Reloaded successfully."
 msgstr "重新載入成功。"
 
@@ -355,7 +355,7 @@ msgid "Clear alias"
 msgstr "清除代稱"
 
 #. translators: %d: number of deleted aliases
-#: admin/page/tools.php:157
+#: admin/page/tools.php:155
 msgid "Deleted %d unused rich menu alias."
 msgid_plural "Deleted %d unused rich menu aliases."
 msgstr[0] "刪除 %d 個未使用的圖文選單代稱。"
@@ -390,7 +390,7 @@ msgstr "移除連結至測試使用者的圖文選單"
 msgid "Unlink test user"
 msgstr "移除連結至測試使用者"
 
-#: admin/page/tools.php:164
+#: admin/page/tools.php:162
 msgid "Unlink test user rich menu successfully."
 msgstr "成功移除連結至測試使用者的圖文選單。"
 
