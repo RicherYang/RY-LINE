@@ -50,6 +50,7 @@ final class RY_LINE_Admin_Ajax
 
         $richmenu_data = get_post_meta($post_ID, 'ry_line_richmenu_data', true);
 
+        $areas = [];
         $input = sanitize_text_field(wp_unslash($_POST['areas'] ?? ''));
         wp_parse_str($input, $areas);
         if (is_array($areas)) {
@@ -137,9 +138,9 @@ final class RY_LINE_Admin_Ajax
 
         $post_data = get_post_meta($post_ID, 'ry_line_richmenu_data', true);
         $post_data['name'] = get_the_title($post_ID);
-        $post_data['areas'] = array_filter($post_data['areas'], function ($area) {
+        $post_data['areas'] = array_values(array_filter($post_data['areas'], function ($area) {
             return count($area['action']);
-        });
+        }));
 
         $response = RY_LINE_Api::richmenu_validate($post_data);
         if (is_wp_error($response)) {
