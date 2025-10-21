@@ -12,7 +12,9 @@
                             </td>
                             <td style="padding-bottom:0">
                                 <?php esc_html_e('Bot basic ID: ', 'ry-line'); ?> <?php echo esc_html($bot_info['id']); ?><br>
-                                <?php esc_html_e('Channel name: ', 'ry-line'); ?> <?php echo esc_html($bot_info['name']); ?>
+                                <?php esc_html_e('Channel name: ', 'ry-line'); ?> <?php echo esc_html($bot_info['name']); ?><br>
+                                <?php esc_html_e('Webhook URL: ', 'ry-line'); ?> <?php echo esc_html($bot_info['webhook-url']); ?><br>
+                                <?php esc_html_e('Webhook status: ', 'ry-line'); ?> <?php $bot_info['webhook-status'] ? esc_html_e('Enabled', 'ry-line') : esc_html_e('Disabled', 'ry-line'); ?>
                             </td>
                         </tr>
                     </table>

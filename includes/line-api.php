@@ -32,7 +32,7 @@ final class RY_LINE_Api
                 $result = json_decode(wp_remote_retrieve_body($response));
                 if (isset($result->access_token)) {
                     $token = $result->access_token;
-                    RY_LINE::set_transient('access_token', $token, DAY_IN_SECONDS * 2);
+                    RY_LINE::set_transient('access_token', $token, $result->expires_in / 2);
                 }
             }
         }
@@ -44,7 +44,7 @@ final class RY_LINE_Api
     {
         $token = RY_LINE::get_transient('access_token');
         if (!empty($token)) {
-            $response = wp_remote_request('https://api.line.me/v2/oauth/revoke', [
+            wp_remote_request('https://api.line.me/v2/oauth/revoke', [
                 'method' => 'POST',
                 'httpversion' => '1.1',
                 'headers' => [
@@ -55,8 +55,72 @@ final class RY_LINE_Api
                 ],
             ]);
         }
+    }
 
-        return $token;
+    public static function build_message_object($posts)
+    {
+        $message_object = [];
+        foreach ($posts as $post) {
+            if (get_post_type($post) !== RY_LINE::POSTTYPE_MESSAGE) {
+                continue;
+            }
+
+            $post_data = get_post_meta($post->ID, 'ry_line_message_data', true);
+            switch ($post_data['type']) {
+                case 'text':
+                    $post_data['type'] = 'textV2';
+                    $post_data['text'] = $post->post_content;
+                    break;
+                case 'image':
+                    $thumbnail_ID = get_post_thumbnail_id($post);
+                    if ($thumbnail_ID) {
+                        $post_data['type'] = 'image';
+                        $post_data['originalContentUrl'] = wp_get_attachment_image_src($thumbnail_ID, 'full')[0];
+                        $post_data['previewImageUrl'] = wp_get_attachment_image_src($thumbnail_ID, [1024, 0])[0];
+                    }
+                    break;
+                case 'flex':
+                    $content = maybe_unserialize($post->post_content);
+                    if (is_object($content)) {
+                        $post_data['type'] = 'flex';
+                        $post_data['altText'] = $post->post_excerpt;
+                        $post_data['contents'] = $content;
+                    }
+            }
+            $message_object[$post->ID] = $post_data;
+        }
+
+        return $message_object;
+    }
+
+    public static function build_richmenu_object($post_ID)
+    {
+        $richmenu_object = [];
+        if (get_post_type($post_ID) == RY_LINE::POSTTYPE_RICHERMENU) {
+            $post = get_post($post_ID);
+            $richmenu_object = get_post_meta($post->ID, 'ry_line_richmenu_data', true);
+            $richmenu_object['name'] = $post->post_title;
+            $richmenu_object['areas'] = array_values(array_filter($richmenu_object['areas'], function ($area) {
+                return count($area['action']);
+            }));
+            foreach ($richmenu_object['areas'] as &$area) {
+                switch ($area['action']['type']) {
+                    case 'richmenuswitch':
+                        $area['action']['data'] = 'ry/switch-richmenu';
+                        break;
+                    case 'accountlink':
+                        $area['action']['type'] = 'postback';
+                        $area['action']['data'] = 'ry/account-link';
+                        break;
+                    case 'selfmessage':
+                        $area['action']['type'] = 'postback';
+                        $area['action']['data'] = 'ry/message/' . $area['action']['message'];
+                        break;
+                }
+            }
+        }
+
+        return $richmenu_object;
     }
 
     public static function get_bot_info()
@@ -64,9 +128,54 @@ final class RY_LINE_Api
         return self::do_remote_request('https://api.line.me/v2/bot/info', 'GET');
     }
 
+    public static function get_webhook_info()
+    {
+        return self::do_remote_request('https://api.line.me/v2/bot/channel/webhook/endpoint', 'GET');
+    }
+
+    public static function webhook_url($url)
+    {
+        return self::do_remote_request('https://api.line.me/v2/bot/channel/webhook/endpoint', 'PUT', [
+            'endpoint' => $url,
+        ]);
+    }
+
+    public static function test_webhook()
+    {
+        return self::do_remote_request('https://api.line.me/v2/bot/channel/webhook/test', 'POST', []);
+    }
+
     public static function get_user_info($userId)
     {
         return self::do_remote_request('https://api.line.me/v2/bot/profile/' . $userId, 'GET');
+    }
+
+    public static function get_user_linktoken($userId)
+    {
+        return self::do_remote_request('https://api.line.me/v2/bot/user/' . $userId . '/linkToken', 'POST');
+    }
+
+    public static function message_validate($post_data)
+    {
+        return self::do_remote_request('https://api.line.me/v2/bot/message/validate/push', 'POST', [
+            'messages' => self::fixed_message_object($post_data),
+        ]);
+    }
+
+    public static function message_reply($post_data, $replyToken)
+    {
+        return self::do_remote_request('https://api.line.me/v2/bot/message/reply', 'POST', [
+            'replyToken' => $replyToken,
+            'messages' => self::fixed_message_object($post_data),
+        ]);
+    }
+
+    public static function message_push($post_data, $userId)
+    {
+        return self::do_remote_request('https://api.line.me/v2/bot/message/push', 'POST', [
+            'to' => $userId,
+            'messages' => self::fixed_message_object($post_data),
+        ]);
     }
 
     public static function richmenu_list()
@@ -149,6 +258,39 @@ final class RY_LINE_Api
         return self::do_remote_request('https://api.line.me/v2/bot/richmenu/alias/' . $alias, 'DELETE');
     }
 
+    public static function reply_message($replyToken, $messages)
+    {
+        return self::do_remote_request('https://api.line.me/v2/bot/message/reply', 'POST', [
+            'replyToken' => $replyToken,
+            'messages' => $messages,
+        ]);
+    }
+
+    protected static function fixed_message_object($message_object)
+    {
+        $new_message_object = [];
+        foreach ($message_object as $message) {
+            switch ($message['type']) {
+                case 'textV2':
+                    $message['text'] = wp_strip_all_tags($message['text']);
+                    $message['text'] = str_replace(['{', '}'], ['{{', '}}'], $message['text']);
+                    break;
+                case 'flex':
+                    $message['contents'] = wp_json_encode($message['contents']);
+                    $message['contents'] = str_replace(['<br>', '<br/>', '<br />'], '\n', $message['contents']);
+                    $message['contents'] = wp_strip_all_tags($message['contents']);
+                    $message['contents'] = json_decode($message['contents']);
+                    break;
+            }
+            $new_message_object[] = $message;
+            if (count($new_message_object) >= 5) {
+                break;
+            }
+        }
+
+        return $new_message_object;
+    }
+
     protected static function do_remote_request(string $url, string $method = 'GET', mixed $content = null, bool $retry = true)
     {
         $header = [
@@ -156,7 +298,11 @@ final class RY_LINE_Api
         ];
         if ($content !== null) {
             if (is_array($content)) {
-                $body = json_encode($content);
+                if (empty($content)) {
+                    $body = '{}';
+                } else {
+                    $body = json_encode($content);
+                }
                 $header['Content-Type'] = 'application/json';
             } elseif (get_post_type($content) === 'attachment') {
                 $header['Content-Type'] = get_post_mime_type($content);

@@ -22,8 +22,11 @@ final class RY_LINE_Admin_Media
 
     public function size_for_richmenu($size, $thumbnail_ID, $post)
     {
+        if ($post->post_type === RY_LINE::POSTTYPE_MESSAGE) {
+            $size = [300, 0];
+        }
         if ($post->post_type === RY_LINE::POSTTYPE_RICHERMENU) {
-            $size = 'medium';
+            $size = [300, 0];
         }
 
         return $size;
@@ -31,9 +34,23 @@ final class RY_LINE_Admin_Media
 
     public function check_for_richmenu($content, $post_ID, $thumbnail_ID)
     {
+        $add_info = [];
+        if (get_post_type($post_ID) === RY_LINE::POSTTYPE_MESSAGE) {
+            if (str_contains($content, 'remove-post-thumbnail')) {
+                $image_meta = wp_get_attachment_metadata($thumbnail_ID);
+                $mime_type = get_post_mime_type($thumbnail_ID);
+
+                if (!in_array($mime_type, ['image/jpeg', 'image/png'], true)) {
+                    $add_info[] = esc_html__('Image must be JPEG or PNG format', 'ry-line');
+                }
+                if ($image_meta['filesize'] > 5 * MB_IN_BYTES) {
+                    $add_info[] = esc_html__('Image file size must be less than 5MB', 'ry-line');
+                }
+            }
+        }
+
         if (get_post_type($post_ID) === RY_LINE::POSTTYPE_RICHERMENU) {
             if (str_contains($content, 'remove-post-thumbnail')) {
-                $add_info = [];
                 $image_meta = wp_get_attachment_metadata($thumbnail_ID);
                 $mime_type = get_post_mime_type($thumbnail_ID);
 
@@ -59,14 +76,14 @@ final class RY_LINE_Admin_Media
                         $add_info[] = esc_html__('Changing the image size will clear the option of action areas', 'ry-line');
                     }
                 }
-
-                if (count($add_info)) {
-                    $add_html = '<p class="file-error">' . implode('<br>', $add_info) . '</p>';
-
-                    $pos = strrpos($content, '<p ');
-                    $content = substr_replace($content, $add_html, $pos, 0);
-                }
             }
+        }
+
+        if (count($add_info)) {
+            $add_html = '<p class="file-error">' . implode('<br>', $add_info) . '</p>';
+
+            $pos = strrpos($content, '<p ');
+            $content = substr_replace($content, $add_html, $pos, 0);
         }
 
         return $content;

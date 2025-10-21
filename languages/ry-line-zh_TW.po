@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-03-02T11:52:45+08:00\n"
-"PO-Revision-Date: 2025-09-23 20:33+0800\n"
+"PO-Revision-Date: 2025-10-20 20:08+0800\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
@@ -43,7 +43,8 @@ msgstr "https://ry-plugin.com/ry-line"
 msgid "LINE support"
 msgstr "LINE support"
 
-#: admin/page/option.php:94
+#: admin/page/option.php:111
+#: admin/page/option.php:144
 msgid "Settings saved."
 msgstr "設定已儲存。"
 
@@ -55,7 +56,7 @@ msgstr "專屬ID："
 msgid "Channel name: "
 msgstr "帳號名稱："
 
-#: admin/page/option.php:96
+#: admin/page/option.php:146
 msgid "Error channel ID or channel secret."
 msgstr "錯誤的 channel ID 或是 channel secret。"
 
@@ -63,239 +64,223 @@ msgstr "錯誤的 channel ID 或是 channel secret。"
 msgid "Channel ID"
 msgstr "Channel ID"
 
-#: admin/page/html/option.php:23
+#: admin/page/html/option.php:25
 msgid "Channel secret"
 msgstr "Channel secret"
 
-#: includes/main.php:66
+#: includes/main.php:97
 msgctxt "post type general name"
 msgid "LINE rich menu"
 msgstr "LINE 圖文選單"
 
-#: includes/main.php:67
+#: includes/main.php:98
 msgid "Add rich menu"
 msgstr "新增圖文選單"
 
-#: includes/main.php:68
+#: includes/main.php:99
 msgid "Edit rich menu"
 msgstr "編輯圖文選單"
 
-#: includes/main.php:69
+#: includes/main.php:100
 msgid "Search rich menu"
 msgstr "搜尋圖文選單"
 
-#: includes/main.php:71
-msgid "Menu image"
-msgstr "選單圖片"
-
-#: includes/main.php:72
-msgid "Set menu image"
-msgstr "設定選單圖片"
-
-#: includes/main.php:73
-msgid "Remove menu image"
-msgstr "移除選單圖片"
-
-#: admin/meta-boxes/richmenu.php:55
-#: admin/meta-boxes/richmenu.php:70
-msgid "Please set menu image first."
-msgstr "請先設定選單圖片。"
-
-#: includes/main.php:74
-msgid "Use as menu image"
-msgstr "設定為選單圖片"
-
-#: includes/main.php:70
+#: includes/main.php:101
 msgid "Uploaded to this rich menu"
 msgstr "已關聯至這圖文選單"
 
-#: admin/meta-boxes/richmenu.php:15
-#: admin/meta-boxes/richmenu.php:17
+#: admin/meta-boxes.php:16
+#: admin/meta-boxes.php:41
 msgid "Action area"
 msgstr "操作區域"
 
-#: admin/media.php:41
+#: admin/media.php:44
+#: admin/media.php:58
 msgid "Image must be JPEG or PNG format"
 msgstr "圖片必須為 JPEG 或 PNG 格式"
 
-#: admin/media.php:44
+#: admin/media.php:61
 msgid "Image width must be between 800 and 2500 pixels"
 msgstr "圖片寬度必須介於 800 到 2500 像素"
 
-#: admin/media.php:50
+#: admin/media.php:67
 msgid "Image aspect ratio must be greater than 1.45"
 msgstr "圖片長寬比必須大於 1.45"
 
-#: admin/media.php:53
+#: admin/media.php:70
 msgid "Image file size must be less than 1MB"
 msgstr "圖片檔案大小必須小於 1MB"
 
-#: admin/meta-boxes/html/richmenu-area.php:65
+#: admin/html/image-area.php:46
 msgid "Phone display size is based on width 360px. The recommended area is larger than 30px."
 msgstr "手機顯示大小以寬度 360 像素計算。建議區域大小超過 30 像素。"
 
-#: admin/meta-boxes/html/richmenu-area.php:56
+#: admin/html/image-area.php:37
 msgid "Phone display size"
 msgstr "手機顯示大小"
 
-#: admin/meta-boxes/html/richmenu-area.php:55
-#: admin/meta-boxes/html/richmenu-area.php:77
+#: admin/html/image-area.php:36
+#: admin/html/image-area.php:58
 msgid "No"
 msgstr "編號"
 
-#: admin/meta-boxes/html/richmenu-area.php:34
+#: admin/html/image-area.php:15
 msgid "Create area by dragging them, starting from the edge of the partition."
 msgstr "用拖曳的方式建立分區，請從分區的邊緣開始建立。"
 
-#: admin/meta-boxes/html/richmenu-area.php:35
+#: admin/html/image-area.php:16
 msgid "Drag the line to adjust their positions. After adjustment, the line that are not started by edges will be removed."
 msgstr "拖曳線段可以調整位置，調整後將自動移除不是由邊緣建立的線段。"
 
-#: admin/meta-boxes/html/richmenu-area.php:36
+#: admin/html/image-area.php:17
 msgid "Double-click line to delete it."
 msgstr "雙擊線段可將線段刪除。"
 
-#: admin/media.php:59
+#: admin/media.php:76
 msgid "Changing the image size will clear the option of action areas"
 msgstr "變更圖片大小將清除操作區域的設定"
 
 #. translators: %1$d: image width, %2$d: image height
-#: admin/meta-boxes/html/richmenu-area.php:43
+#: admin/html/image-area.php:24
+#, php-format
 msgid "Image size: %1$d x %2$d px"
 msgstr "圖片尺寸：%1$d x %2$d 像素"
 
-#: admin/meta-boxes/html/richmenu-area.php:48
+#: admin/html/image-area.php:29
 msgid "Reset area"
 msgstr "重設區域"
 
-#: admin/meta-boxes/html/richmenu-area.php:57
-#: admin/meta-boxes/html/richmenu-area.php:110
+#: admin/html/image-area.php:38
+#: admin/html/image-area.php:101
 msgid "Start"
 msgstr "起點"
 
-#: admin/meta-boxes/html/richmenu-area.php:58
-#: admin/meta-boxes/html/richmenu-area.php:111
+#: admin/html/image-area.php:39
+#: admin/html/image-area.php:102
 msgid "Size"
 msgstr "大小"
 
-#: admin/meta-boxes/html/richmenu-area.php:66
+#: admin/html/image-area.php:47
 msgid "Save area position"
 msgstr "儲存區域位置"
 
-#: admin/meta-boxes/html/richmenu-area.php:78
+#: admin/html/image-area.php:59
 msgid "Position"
 msgstr "位置"
 
-#: admin/meta-boxes/html/richmenu-area.php:79
+#: admin/html/image-area.php:60
 msgid "Action type"
 msgstr "動作類型"
 
-#: admin/meta-boxes/html/richmenu-area.php:80
+#: admin/html/image-area.php:61
 msgid "Action info"
 msgstr "動作資訊"
 
-#: admin/meta-boxes/html/richmenu-area.php:115
+#: admin/html/image-area.php:106
 msgctxt "action type"
 msgid "None"
 msgstr "無"
 
-#: admin/meta-boxes/html/richmenu-area.php:116
+#: admin/html/image-area.php:107
 msgctxt "action type"
 msgid "Link"
 msgstr "連結"
 
-#: admin/meta-boxes/html/richmenu-area.php:117
+#: admin/html/image-area.php:108
 msgctxt "action type"
 msgid "Text"
 msgstr "文字"
 
-#: admin/meta-boxes/html/richmenu-area.php:118
+#: admin/html/image-area.php:110
 msgctxt "action type"
 msgid "Switch menu"
 msgstr "切換選單"
 
-#: admin/meta-boxes/html/richmenu-area.php:123
+#: admin/html/image-area.php:116
 msgid "URL"
 msgstr "網址"
 
-#: admin/meta-boxes/html/richmenu-area.php:124
+#: admin/html/image-area.php:118
 msgid "Enter url"
 msgstr "輸入網址"
 
-#: admin/meta-boxes/html/richmenu-area.php:127
+#: admin/html/image-area.php:132
 msgid "Message text"
 msgstr "訊息文字"
 
-#: admin/meta-boxes/html/richmenu-area.php:128
+#: admin/html/image-area.php:134
 msgid "Enter message text"
 msgstr "輸入訊息文字"
 
-#: admin/meta-boxes/html/richmenu-area.php:131
-#: admin/meta-boxes/html/richmenu-operate.php:17
-#: admin/richmenu.php:50
+#: admin/html/image-area.php:138
+#: admin/html/richmenu-operate.php:17
+#: admin/richmenu.php:51
 msgid "Menu alias"
 msgstr "選單代稱"
 
-#: admin/meta-boxes/html/richmenu-area.php:132
-#: admin/meta-boxes/html/richmenu-operate.php:18
+#: admin/html/image-area.php:140
+#: admin/html/richmenu-operate.php:18
 msgid "Enter menu alias"
 msgstr "輸入選單代稱"
 
-#: admin/meta-boxes/html/richmenu-area.php:135
+#: admin/html/image-area.php:144
 msgid "Action label"
 msgstr "動作標籤"
 
-#: admin/meta-boxes/html/richmenu-area.php:136
+#: admin/html/image-area.php:146
 msgid "Enter action label"
 msgstr "輸入動作標籤"
 
-#: admin/meta-boxes/html/richmenu-area.php:87
+#: admin/html/image-area.php:68
 msgid "Save area action"
 msgstr "儲存區域動作"
 
-#: admin/meta-boxes/html/richmenu-operate.php:3
+#: admin/html/richmenu-operate.php:3
 msgid "Please save data before performing any LINE operations."
 msgstr "請在進行 LINE 操作前請先儲存資料。"
 
-#: admin/meta-boxes/richmenu.php:16
+#: admin/meta-boxes.php:42
 msgid "LINE Operation"
 msgstr "LINE 操作"
 
-#: admin/meta-boxes/richmenu.php:48
+#: admin/meta-boxes.php:112
 msgid "license key"
 msgstr "授權金鑰"
 
 #. translators: %s: license key link
-#: admin/meta-boxes/richmenu.php:50
+#: admin/meta-boxes.php:114
+#, php-format
 msgid "Please activate %s to use this feature."
 msgstr "請先啟用 %s 再使用本功能。"
 
-#: admin/meta-boxes/html/richmenu-action.php:6
+#: admin/html/message-action.php:25
+#: admin/html/richmenu-action.php:6
 msgid "Move to Trash"
 msgstr "移至回收桶"
 
-#: admin/meta-boxes/html/richmenu-action.php:10
+#: admin/html/message-action.php:29
+#: admin/html/richmenu-action.php:10
 msgid "Update"
 msgstr "更新"
 
-#: admin/meta-boxes/html/richmenu-operate.php:9
+#: admin/html/richmenu-operate.php:9
 msgid "Create menu"
 msgstr "建立選單"
 
-#: admin/ajax.php:207
-#: admin/meta-boxes/html/richmenu-operate.php:33
+#: admin/ajax.php:238
+#: admin/html/richmenu-operate.php:33
 msgid "Unset default menu"
 msgstr "取消預設選單"
 
-#: admin/meta-boxes/html/richmenu-operate.php:30
+#: admin/html/richmenu-operate.php:30
 msgid "Delete menu"
 msgstr "刪除選單"
 
-#: admin/meta-boxes/html/richmenu-action.php:16
+#: admin/html/richmenu-action.php:16
 msgid "Upload to LINE menu can't edit."
 msgstr "已上傳至 LINE 的選單無法進行編輯。"
 
-#: admin/meta-boxes/html/richmenu-operate.php:20
+#: admin/html/richmenu-operate.php:20
 msgid "Set menu alias"
 msgstr "設定選單代稱"
 
@@ -321,7 +306,7 @@ msgstr "LINE 工具"
 msgid "Reload rich menu"
 msgstr "重新載入圖文選單"
 
-#: admin/page/option.php:67
+#: admin/page/option.php:73
 msgid "LINE API setting"
 msgstr "LINE API 設定"
 
@@ -329,20 +314,20 @@ msgstr "LINE API 設定"
 msgid "Reloaded successfully."
 msgstr "重新載入成功。"
 
-#: admin/meta-boxes/html/richmenu-area.php:8
+#: admin/html/richmenu-content.php:8
 msgid "Display"
 msgstr "顯示"
 
-#: admin/meta-boxes/html/richmenu-area.php:12
+#: admin/html/richmenu-content.php:12
 msgid "Default display the rich menu"
 msgstr "預設顯示圖文選單"
 
-#: admin/meta-boxes/html/richmenu-area.php:4
+#: admin/html/richmenu-content.php:4
 msgid "Chat button text"
 msgstr "聊天室按鈕文字"
 
-#: admin/meta-boxes/html/richmenu-area.php:5
-#: admin/richmenu.php:87
+#: admin/html/richmenu-content.php:5
+#: admin/richmenu.php:92
 msgid "Open menu"
 msgstr "開啟選單"
 
@@ -356,29 +341,30 @@ msgstr "清除代稱"
 
 #. translators: %d: number of deleted aliases
 #: admin/page/tools.php:155
+#, php-format
 msgid "Deleted %d unused rich menu alias."
 msgid_plural "Deleted %d unused rich menu aliases."
 msgstr[0] "刪除 %d 個未使用的圖文選單代稱。"
 
-#: admin/ajax.php:207
-#: admin/meta-boxes/html/richmenu-operate.php:33
+#: admin/ajax.php:238
+#: admin/html/richmenu-operate.php:33
 #: admin/richmenu.php:42
 msgid "Default menu"
 msgstr "預設選單"
 
-#: admin/meta-boxes/html/richmenu-operate.php:24
+#: admin/html/richmenu-operate.php:24
 msgid "Link to test user"
 msgstr "連結至測試使用者"
 
-#: admin/page/html/option.php:29
+#: admin/page/html/option.php:31
 msgid "Test user ID"
 msgstr "測試使用者 ID"
 
-#: admin/page/html/option.php:39
+#: admin/page/html/option.php:41
 msgid "User name: "
 msgstr "使用者名稱："
 
-#: admin/page/html/option.php:40
+#: admin/page/html/option.php:42
 msgid "Language: "
 msgstr "語言："
 
@@ -394,6 +380,247 @@ msgstr "移除連結至測試使用者"
 msgid "Unlink test user rich menu successfully."
 msgstr "成功移除連結至測試使用者的圖文選單。"
 
-#: admin/media.php:47
+#: admin/media.php:64
 msgid "Image height must be more than 250 pixels"
 msgstr "圖片高度必須大於 250 像素"
+
+#: admin/html/image-area.php:111
+msgctxt "action type"
+msgid "Account link"
+msgstr "綁定帳號"
+
+#: admin/page/html/option-webhook.php:1
+msgid "Webhook"
+msgstr "Webhook"
+
+#: admin/page/html/option-webhook.php:10
+msgid "Set webhook URL"
+msgstr "設定 webhook 網址"
+
+#: admin/page/html/option-webhook.php:19
+msgid "Test webhook"
+msgstr "測試 webhook"
+
+#: admin/page/html/option.php:16
+msgid "Webhook URL: "
+msgstr "Webhook 網址："
+
+#: admin/page/html/option.php:17
+msgid "Webhook status: "
+msgstr "Webhook 狀態："
+
+#: admin/page/html/option.php:17
+msgid "Enabled"
+msgstr "啟用"
+
+#: admin/page/html/option.php:17
+msgid "Disabled"
+msgstr "停用"
+
+#: admin/page/option.php:106
+#: admin/page/option.php:108
+msgid "Settings failed."
+msgstr "設定失敗。"
+
+#: admin/page/option.php:122
+#: admin/page/option.php:124
+#: admin/page/option.php:130
+msgid "Test failed."
+msgstr "測試失敗。"
+
+#: admin/page/option.php:128
+msgid "Test success."
+msgstr "測試成功。"
+
+#: includes/line-action.php:110
+msgid "Please click below button"
+msgstr "請點擊以下按鈕"
+
+#: includes/line-action.php:119
+msgid "Unlink account"
+msgstr "取消綁定帳號"
+
+#: includes/line-action.php:126
+#: includes/line-action.php:135
+msgid "Link account"
+msgstr "綁定帳號"
+
+#: includes/line-action.php:162
+msgid "No linked account found."
+msgstr "沒有以綁定的帳號。"
+
+#: includes/line-action.php:169
+msgid "Unlink account success."
+msgstr "取消綁定成功。"
+
+#: includes/line-action.php:212
+msgid "Sorry!\\nLink account failed."
+msgstr ""
+"抱歉！\n"
+"綁定帳號失敗。"
+
+#: includes/line-action.php:105
+#: includes/line-action.php:149
+#: includes/line-action.php:178
+msgid "Account link action can only do at one-by-one chat."
+msgstr "綁定帳號只可以在一對一聊天室中進行。"
+
+#. translators: %s: user display name
+#: includes/line-action.php:116
+#, php-format
+msgid "Linked account: %s"
+msgstr "綁定帳號：%s"
+
+#. translators: %s: user display name
+#: includes/line-action.php:203
+#, php-format
+msgid "Welcome %s\\nLink account success."
+msgstr ""
+"歡迎 %s\n"
+"帳號綁定成功。"
+
+#: includes/main.php:72
+msgctxt "post type general name"
+msgid "LINE message"
+msgstr "LINE 訊息"
+
+#: includes/main.php:73
+msgid "Add message"
+msgstr "新增訊息"
+
+#: includes/main.php:74
+msgid "Edit message"
+msgstr "編輯訊息"
+
+#: includes/main.php:75
+msgid "Search message"
+msgstr "搜尋訊息"
+
+#: includes/main.php:76
+msgid "Uploaded to this message"
+msgstr "已關聯至這訊息"
+
+#: includes/main.php:77
+#: includes/main.php:102
+msgid "Show image"
+msgstr "顯示圖片"
+
+#: includes/main.php:78
+#: includes/main.php:103
+msgid "Set show image"
+msgstr "設定顯示圖片"
+
+#: includes/main.php:79
+#: includes/main.php:104
+msgid "Remove show image"
+msgstr "移除顯示圖片"
+
+#: includes/main.php:80
+#: includes/main.php:105
+msgid "Use as show image"
+msgstr "設定為顯示圖片"
+
+#: admin/meta-boxes.php:43
+msgid "Menu content"
+msgstr "選單內容"
+
+#: admin/meta-boxes.php:119
+#: admin/meta-boxes.php:142
+msgid "Please set show image first."
+msgstr "請先設定顯示圖片。"
+
+#: admin/meta-boxes.php:44
+msgid "Image action area"
+msgstr "圖片動作區域"
+
+#: admin/html/message-content.php:4
+msgid "Type"
+msgstr "類型"
+
+#: admin/html/message-content.php:7
+msgctxt "message type"
+msgid "Text"
+msgstr "文字"
+
+#: admin/html/message-content.php:8
+msgctxt "message type"
+msgid "Image"
+msgstr "圖片"
+
+#: admin/html/message-content.php:9
+msgctxt "message type"
+msgid "Flex"
+msgstr "Flex"
+
+#: admin/html/message-content.php:14
+msgid "Content"
+msgstr "內容"
+
+#: admin/meta-boxes.php:17
+msgid "Message content"
+msgstr "訊息內容"
+
+#: admin/html/message-content.php:17
+msgid "For Flex message, please enter the JSON content."
+msgstr "Flex 訊息，請直接輸入 JSON 內容。"
+
+#: admin/html/message-content.php:21
+msgid "Alt content"
+msgstr "替代內容"
+
+#: admin/media.php:47
+msgid "Image file size must be less than 5MB"
+msgstr "圖片檔案大小必須小於 5MB"
+
+#: admin/html/message-action.php:5
+msgid "Validate status:"
+msgstr "驗證狀態："
+
+#: admin/html/message-action.php:6
+msgid "Valid"
+msgstr "通過"
+
+#: admin/html/message-action.php:6
+msgid "Invalid"
+msgstr "無效的"
+
+#: admin/html/message-action.php:10
+msgid "Error info:"
+msgstr "錯誤資訊："
+
+#: admin/html/message-action.php:16
+msgid "Send to test user"
+msgstr "發送至測試使用者"
+
+#: admin/html/message-reply.php:4
+msgid "Reply Keyword"
+msgstr "回應關鍵字"
+
+#: admin/html/message-reply.php:10
+msgid "Reply Source"
+msgstr "回應來源"
+
+#: admin/html/message-reply.php:14
+msgid "User"
+msgstr "使用者"
+
+#: admin/html/message-reply.php:17
+msgid "Group"
+msgstr "群組"
+
+#: admin/html/message-reply.php:20
+msgid "Room"
+msgstr "會議室"
+
+#: admin/meta-boxes.php:18
+msgid "Message reply"
+msgstr "訊息回應"
+
+#: admin/html/image-area.php:109
+msgctxt "action type"
+msgid "Customized message"
+msgstr "客製訊息"
+
+#: admin/html/image-area.php:122
+msgid "Message"
+msgstr "訊息"

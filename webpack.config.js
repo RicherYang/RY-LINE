@@ -28,7 +28,7 @@ module.exports = {
     ...defaultConfig,
     entry: {
         'admin/basic': path.join(srcPath, 'admin/basic.js'),
-        'admin/richmenu': path.join(srcPath, 'admin/richmenu.js')
+        'admin/meta-box': path.join(srcPath, 'admin/meta-box.js')
     },
     output: {
         ...defaultConfig.output,

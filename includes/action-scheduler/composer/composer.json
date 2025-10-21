@@ -1,0 +1,12 @@
+{
+    "require": {
+        "woocommerce/action-scheduler": "^3.9.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "platform-check": true,
+        "platform": {
+            "php": "8.1"
+        }
+    }
+}

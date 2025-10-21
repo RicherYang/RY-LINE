@@ -10,6 +10,8 @@ final class RY_LINE extends RY_Abstract_Basic
 
     public const POSTTYPE_RICHERMENU = 'ry-line-richmenu';
 
+    public const POSTTYPE_MESSAGE = 'ry-line-message';
+
     protected static $_instance = null;
 
     public RY_LINE_Admin $admin;
@@ -27,6 +29,8 @@ final class RY_LINE extends RY_Abstract_Basic
     protected function do_init(): void
     {
         load_plugin_textdomain('ry-line', false, plugin_basename(dirname(__DIR__)) . '/languages');
+        include_once RY_LINE_PLUGIN_DIR . 'includes/cron.php';
+        include_once RY_LINE_PLUGIN_DIR . 'includes/action-scheduler/action-scheduler.php';
 
         if (is_admin()) {
             include_once RY_LINE_PLUGIN_DIR . 'includes/update.php';
@@ -55,12 +59,39 @@ final class RY_LINE extends RY_Abstract_Basic
             include_once RY_LINE_PLUGIN_DIR . 'includes/cron.php';
             RY_LINE_Cron::add_action();
 
+            include_once RY_LINE_PLUGIN_DIR . 'includes/line-action.php';
             include_once RY_LINE_PLUGIN_DIR . 'includes/line-api.php';
+            include_once RY_LINE_PLUGIN_DIR . 'includes/line-webhook.php';
         }
     }
 
     public function register_post_type(): void
     {
+        register_post_type(self::POSTTYPE_MESSAGE, [
+            'labels' => [
+                'name' => _x('LINE message', 'post type general name', 'ry-line'),
+                'add_new_item' => __('Add message', 'ry-line'),
+                'edit_item' => __('Edit message', 'ry-line'),
+                'search_items' => __('Search message', 'ry-line'),
+                'uploaded_to_this_item' => __('Uploaded to this message', 'ry-line'),
+                'featured_image' => __('Show image', 'ry-line'),
+                'set_featured_image' => __('Set show image', 'ry-line'),
+                'remove_featured_image' => __('Remove show image', 'ry-line'),
+                'use_featured_image' => __('Use as show image', 'ry-line'),
+            ],
+            'public' => false,
+            'show_ui' => true,
+            'show_in_admin_bar' => false,
+            'show_in_menu' => 'ry-line',
+            'show_in_rest' => false,
+            'capability_type' => self::POSTTYPE_MESSAGE,
+            'rewrite' => [
+                'with_front' => false,
+            ],
+            'delete_with_user' => false,
+            'supports' => ['title', 'author', 'thumbnail'],
+        ]);
+
         register_post_type(self::POSTTYPE_RICHERMENU, [
             'labels' => [
                 'name' => _x('LINE rich menu', 'post type general name', 'ry-line'),
@@ -68,10 +99,10 @@ final class RY_LINE extends RY_Abstract_Basic
                 'edit_item' => __('Edit rich menu', 'ry-line'),
                 'search_items' => __('Search rich menu', 'ry-line'),
                 'uploaded_to_this_item' => __('Uploaded to this rich menu', 'ry-line'),
-                'featured_image' => __('Menu image', 'ry-line'),
-                'set_featured_image' => __('Set menu image', 'ry-line'),
-                'remove_featured_image' => __('Remove menu image', 'ry-line'),
-                'use_featured_image' => __('Use as menu image', 'ry-line'),
+                'featured_image' => __('Show image', 'ry-line'),
+                'set_featured_image' => __('Set show image', 'ry-line'),
+                'remove_featured_image' => __('Remove show image', 'ry-line'),
+                'use_featured_image' => __('Use as show image', 'ry-line'),
             ],
             'public' => false,
             'show_ui' => true,
@@ -95,7 +126,7 @@ final class RY_LINE extends RY_Abstract_Basic
             $wp_roles = new WP_Roles();
         }
 
-        foreach ([self::POSTTYPE_RICHERMENU] as $post_type) {
+        foreach ([self::POSTTYPE_RICHERMENU, self::POSTTYPE_MESSAGE] as $post_type) {
             $wp_roles->add_cap('administrator', "edit_{$post_type}");
             $wp_roles->add_cap('administrator', "read_{$post_type}");
             $wp_roles->add_cap('administrator', "delete_{$post_type}");

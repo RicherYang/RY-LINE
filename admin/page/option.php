@@ -35,8 +35,14 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
                     'name' => $bot_info->displayName,
                     'icon' => $bot_info->pictureUrl ?? '',
                     'webhook-url' => '',
-                    'webhook-status' => '',
+                    'webhook-status' => false,
                 ];
+
+                $webhook_info = RY_LINE_Api::get_webhook_info();
+                if (!is_wp_error($webhook_info)) {
+                    $bot_info['webhook-url'] = $webhook_info->endpoint;
+                    $bot_info['webhook-status'] = $webhook_info->active;
+                }
 
                 RY_LINE::set_transient('bot_info', $bot_info, DAY_IN_SECONDS);
             }
@@ -67,10 +73,18 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
         echo '<h1>' . esc_html__('LINE API setting', 'ry-line') . '</h1>';
         echo '<form method="post" action="admin-post.php">';
         echo '<input type="hidden" name="action" value="ry/admin-line-option">';
+        echo '<input type="hidden" name="do" value="save-option">';
         wp_nonce_field('ry/admin-line-option');
         include __DIR__ . '/html/option.php';
         submit_button();
-        echo '</form></div>';
+        echo '</form>';
+
+        if (!empty($bot_info)) {
+            include __DIR__ . '/html/option-webhook.php';
+        }
+        echo '</div>';
+
+        do_action('ry/line-webhook/message', (object) ['type' => 'text', 'text' => 'gf'], (object) ['type' => 'user'], 'test-reply-token');
     }
 
     public function do_admin_action(string $action): void
@@ -83,17 +97,54 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
             wp_die('Invalid nonce');
         }
 
-        RY_LINE::update_option('channel_id', sanitize_locale_name($_POST['channel-id'] ?? ''), false);
-        RY_LINE::update_option('channel_secret', sanitize_locale_name($_POST['channel-secret'] ?? ''), false);
-        RY_LINE::update_option('test_user_id', sanitize_locale_name($_POST['test-user-id'] ?? ''), false);
+        $do = sanitize_key($_POST['do'] ?? '');
+        if ($do === 'set-webhook') {
+            $webhook_url = RY_LINE_Webhook::get_webhook_url();
+            $set_status = RY_LINE_Api::webhook_url($webhook_url);
+            if (is_wp_error($set_status)) {
+                if ($set_status->get_error_code() === 'line_error') {
+                    $this->add_notice('error', __('Settings failed.', 'ry-line') . ' ' . $set_status->get_error_data()->message);
+                } else {
+                    $this->add_notice('error', __('Settings failed.', 'ry-line') . ' ' . $set_status->get_error_message());
+                }
+            } else {
+                $this->add_notice('success', __('Settings saved.', 'ry-line'));
+            }
 
-        RY_LINE::delete_transient('bot_info');
-        RY_LINE::delete_transient('user_info');
-        RY_LINE_Api::revoke_access_token();
-        if (RY_LINE_Api::get_access_token()) {
-            $this->add_notice('success', __('Settings saved.', 'ry-line'));
-        } else {
-            $this->add_notice('error', __('Error channel ID or channel secret.', 'ry-line'));
+            RY_LINE::set_transient('bot_info', []);
+            flush_rewrite_rules();
+        }
+
+        if ($do === 'test-webhook') {
+            $webhook_status = RY_LINE_Api::test_webhook();
+            if (is_wp_error($webhook_status)) {
+                if ($webhook_status->get_error_code() === 'line_error') {
+                    $this->add_notice('error', __('Test failed.', 'ry-line') . ' ' . $webhook_status->get_error_data()->message);
+                } else {
+                    $this->add_notice('error', __('Test failed.', 'ry-line') . ' ' . $webhook_status->get_error_message());
+                }
+            } else {
+                if ($webhook_status->success === true) {
+                    $this->add_notice('success', __('Test success.', 'ry-line'));
+                } else {
+                    $this->add_notice('error', __('Test failed.', 'ry-line') . ' ' . $webhook_status->detail);
+                }
+            }
+        }
+
+        if ($do === 'save-option') {
+            RY_LINE::update_option('channel_id', sanitize_locale_name($_POST['channel-id'] ?? ''), false);
+            RY_LINE::update_option('channel_secret', sanitize_locale_name($_POST['channel-secret'] ?? ''), false);
+            RY_LINE::update_option('test_user_id', sanitize_locale_name($_POST['test-user-id'] ?? ''), false);
+
+            RY_LINE::set_transient('bot_info', []);
+            RY_LINE::set_transient('user_info', []);
+            RY_LINE_Api::revoke_access_token();
+            if (RY_LINE_Api::get_access_token()) {
+                $this->add_notice('success', __('Settings saved.', 'ry-line'));
+            } else {
+                $this->add_notice('error', __('Error channel ID or channel secret.', 'ry-line'));
+            }
         }
 
         wp_safe_redirect(admin_url('admin.php?page=ry-line-option'));

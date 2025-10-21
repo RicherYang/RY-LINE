@@ -17,6 +17,18 @@ final class RY_LINE_LinkServer extends RY_Abstract_Link_Server
         return self::$_instance;
     }
 
+    protected function get_base_info(): array
+    {
+        $base_info = [
+            'plugin' => RY_LINE_VERSION,
+            'wp' => get_bloginfo('version'),
+        ];
+        if (defined('WC_VERSION')) {
+            $base_info['wc'] = WC_VERSION;
+        }
+        return $base_info;
+    }
+
     protected function get_user_agent()
     {
         return sprintf(

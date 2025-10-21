@@ -2,16 +2,16 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: RY LINE 0.3.2\n"
+"Project-Id-Version: RY LINE 0.4.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ry-line\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-24T18:04:27+08:00\n"
+"POT-Creation-Date: 2025-10-21T10:13:09+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ry-line\n"
 
 #. Plugin Name of the plugin
@@ -39,230 +39,340 @@ msgstr ""
 msgid "https://richer.tw/"
 msgstr ""
 
-#: admin/ajax.php:207
-#: admin/meta-boxes/html/richmenu-operate.php:33
+#: admin/ajax.php:238
+#: admin/html/richmenu-operate.php:33
 #: admin/richmenu.php:42
 msgid "Default menu"
 msgstr ""
 
-#: admin/ajax.php:207
-#: admin/meta-boxes/html/richmenu-operate.php:33
+#: admin/ajax.php:238
+#: admin/html/richmenu-operate.php:33
 msgid "Unset default menu"
 msgstr ""
 
-#: admin/media.php:41
-msgid "Image must be JPEG or PNG format"
-msgstr ""
-
-#: admin/media.php:44
-msgid "Image width must be between 800 and 2500 pixels"
-msgstr ""
-
-#: admin/media.php:47
-msgid "Image height must be more than 250 pixels"
-msgstr ""
-
-#: admin/media.php:50
-msgid "Image aspect ratio must be greater than 1.45"
-msgstr ""
-
-#: admin/media.php:53
-msgid "Image file size must be less than 1MB"
-msgstr ""
-
-#: admin/media.php:59
-msgid "Changing the image size will clear the option of action areas"
-msgstr ""
-
-#: admin/meta-boxes/html/richmenu-action.php:6
-msgid "Move to Trash"
-msgstr ""
-
-#: admin/meta-boxes/html/richmenu-action.php:10
-msgid "Update"
-msgstr ""
-
-#: admin/meta-boxes/html/richmenu-action.php:16
-msgid "Upload to LINE menu can't edit."
-msgstr ""
-
-#: admin/meta-boxes/html/richmenu-area.php:4
-msgid "Chat button text"
-msgstr ""
-
-#: admin/meta-boxes/html/richmenu-area.php:5
-#: admin/richmenu.php:87
-msgid "Open menu"
-msgstr ""
-
-#: admin/meta-boxes/html/richmenu-area.php:8
-msgid "Display"
-msgstr ""
-
-#: admin/meta-boxes/html/richmenu-area.php:12
-msgid "Default display the rich menu"
-msgstr ""
-
-#: admin/meta-boxes/html/richmenu-area.php:34
+#: admin/html/image-area.php:15
 msgid "Create area by dragging them, starting from the edge of the partition."
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:35
+#: admin/html/image-area.php:16
 msgid "Drag the line to adjust their positions. After adjustment, the line that are not started by edges will be removed."
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:36
+#: admin/html/image-area.php:17
 msgid "Double-click line to delete it."
 msgstr ""
 
 #. translators: %1$d: image width, %2$d: image height
-#: admin/meta-boxes/html/richmenu-area.php:43
+#: admin/html/image-area.php:24
+#, php-format
 msgid "Image size: %1$d x %2$d px"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:48
+#: admin/html/image-area.php:29
 msgid "Reset area"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:55
-#: admin/meta-boxes/html/richmenu-area.php:77
+#: admin/html/image-area.php:36
+#: admin/html/image-area.php:58
 msgid "No"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:56
+#: admin/html/image-area.php:37
 msgid "Phone display size"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:57
-#: admin/meta-boxes/html/richmenu-area.php:110
+#: admin/html/image-area.php:38
+#: admin/html/image-area.php:101
 msgid "Start"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:58
-#: admin/meta-boxes/html/richmenu-area.php:111
+#: admin/html/image-area.php:39
+#: admin/html/image-area.php:102
 msgid "Size"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:65
+#: admin/html/image-area.php:46
 msgid "Phone display size is based on width 360px. The recommended area is larger than 30px."
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:66
+#: admin/html/image-area.php:47
 msgid "Save area position"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:78
+#: admin/html/image-area.php:59
 msgid "Position"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:79
+#: admin/html/image-area.php:60
 msgid "Action type"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:80
+#: admin/html/image-area.php:61
 msgid "Action info"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:87
+#: admin/html/image-area.php:68
 msgid "Save area action"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:115
+#: admin/html/image-area.php:106
 msgctxt "action type"
 msgid "None"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:116
+#: admin/html/image-area.php:107
 msgctxt "action type"
 msgid "Link"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:117
+#: admin/html/image-area.php:108
 msgctxt "action type"
 msgid "Text"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:118
+#: admin/html/image-area.php:109
+msgctxt "action type"
+msgid "Customized message"
+msgstr ""
+
+#: admin/html/image-area.php:110
 msgctxt "action type"
 msgid "Switch menu"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:123
+#: admin/html/image-area.php:111
+msgctxt "action type"
+msgid "Account link"
+msgstr ""
+
+#: admin/html/image-area.php:116
 msgid "URL"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:124
+#: admin/html/image-area.php:118
 msgid "Enter url"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:127
+#: admin/html/image-area.php:122
+msgid "Message"
+msgstr ""
+
+#: admin/html/image-area.php:132
 msgid "Message text"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:128
+#: admin/html/image-area.php:134
 msgid "Enter message text"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:131
-#: admin/meta-boxes/html/richmenu-operate.php:17
-#: admin/richmenu.php:50
+#: admin/html/image-area.php:138
+#: admin/html/richmenu-operate.php:17
+#: admin/richmenu.php:51
 msgid "Menu alias"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:132
-#: admin/meta-boxes/html/richmenu-operate.php:18
+#: admin/html/image-area.php:140
+#: admin/html/richmenu-operate.php:18
 msgid "Enter menu alias"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:135
+#: admin/html/image-area.php:144
 msgid "Action label"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-area.php:136
+#: admin/html/image-area.php:146
 msgid "Enter action label"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-operate.php:3
+#: admin/html/message-action.php:5
+msgid "Validate status:"
+msgstr ""
+
+#: admin/html/message-action.php:6
+msgid "Valid"
+msgstr ""
+
+#: admin/html/message-action.php:6
+msgid "Invalid"
+msgstr ""
+
+#: admin/html/message-action.php:10
+msgid "Error info:"
+msgstr ""
+
+#: admin/html/message-action.php:16
+msgid "Send to test user"
+msgstr ""
+
+#: admin/html/message-action.php:25
+#: admin/html/richmenu-action.php:6
+msgid "Move to Trash"
+msgstr ""
+
+#: admin/html/message-action.php:29
+#: admin/html/richmenu-action.php:10
+msgid "Update"
+msgstr ""
+
+#: admin/html/message-content.php:4
+msgid "Type"
+msgstr ""
+
+#: admin/html/message-content.php:7
+msgctxt "message type"
+msgid "Text"
+msgstr ""
+
+#: admin/html/message-content.php:8
+msgctxt "message type"
+msgid "Image"
+msgstr ""
+
+#: admin/html/message-content.php:9
+msgctxt "message type"
+msgid "Flex"
+msgstr ""
+
+#: admin/html/message-content.php:14
+msgid "Content"
+msgstr ""
+
+#: admin/html/message-content.php:17
+msgid "For Flex message, please enter the JSON content."
+msgstr ""
+
+#: admin/html/message-content.php:21
+msgid "Alt content"
+msgstr ""
+
+#: admin/html/message-reply.php:4
+msgid "Reply Keyword"
+msgstr ""
+
+#: admin/html/message-reply.php:10
+msgid "Reply Source"
+msgstr ""
+
+#: admin/html/message-reply.php:14
+msgid "User"
+msgstr ""
+
+#: admin/html/message-reply.php:17
+msgid "Group"
+msgstr ""
+
+#: admin/html/message-reply.php:20
+msgid "Room"
+msgstr ""
+
+#: admin/html/richmenu-action.php:16
+msgid "Upload to LINE menu can't edit."
+msgstr ""
+
+#: admin/html/richmenu-content.php:4
+msgid "Chat button text"
+msgstr ""
+
+#: admin/html/richmenu-content.php:5
+#: admin/richmenu.php:92
+msgid "Open menu"
+msgstr ""
+
+#: admin/html/richmenu-content.php:8
+msgid "Display"
+msgstr ""
+
+#: admin/html/richmenu-content.php:12
+msgid "Default display the rich menu"
+msgstr ""
+
+#: admin/html/richmenu-operate.php:3
 msgid "Please save data before performing any LINE operations."
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-operate.php:9
+#: admin/html/richmenu-operate.php:9
 msgid "Create menu"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-operate.php:20
+#: admin/html/richmenu-operate.php:20
 msgid "Set menu alias"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-operate.php:24
+#: admin/html/richmenu-operate.php:24
 msgid "Link to test user"
 msgstr ""
 
-#: admin/meta-boxes/html/richmenu-operate.php:30
+#: admin/html/richmenu-operate.php:30
 msgid "Delete menu"
 msgstr ""
 
-#: admin/meta-boxes/richmenu.php:15
-#: admin/meta-boxes/richmenu.php:17
+#: admin/media.php:44
+#: admin/media.php:58
+msgid "Image must be JPEG or PNG format"
+msgstr ""
+
+#: admin/media.php:47
+msgid "Image file size must be less than 5MB"
+msgstr ""
+
+#: admin/media.php:61
+msgid "Image width must be between 800 and 2500 pixels"
+msgstr ""
+
+#: admin/media.php:64
+msgid "Image height must be more than 250 pixels"
+msgstr ""
+
+#: admin/media.php:67
+msgid "Image aspect ratio must be greater than 1.45"
+msgstr ""
+
+#: admin/media.php:70
+msgid "Image file size must be less than 1MB"
+msgstr ""
+
+#: admin/media.php:76
+msgid "Changing the image size will clear the option of action areas"
+msgstr ""
+
+#: admin/meta-boxes.php:16
+#: admin/meta-boxes.php:41
 msgid "Action area"
 msgstr ""
 
-#: admin/meta-boxes/richmenu.php:16
+#: admin/meta-boxes.php:17
+msgid "Message content"
+msgstr ""
+
+#: admin/meta-boxes.php:18
+msgid "Message reply"
+msgstr ""
+
+#: admin/meta-boxes.php:42
 msgid "LINE Operation"
 msgstr ""
 
-#: admin/meta-boxes/richmenu.php:48
+#: admin/meta-boxes.php:43
+msgid "Menu content"
+msgstr ""
+
+#: admin/meta-boxes.php:44
+msgid "Image action area"
+msgstr ""
+
+#: admin/meta-boxes.php:112
 msgid "license key"
 msgstr ""
 
 #. translators: %s: license key link
-#: admin/meta-boxes/richmenu.php:50
+#: admin/meta-boxes.php:114
+#, php-format
 msgid "Please activate %s to use this feature."
 msgstr ""
 
-#: admin/meta-boxes/richmenu.php:55
-#: admin/meta-boxes/richmenu.php:70
-msgid "Please set menu image first."
+#: admin/meta-boxes.php:119
+#: admin/meta-boxes.php:142
+msgid "Please set show image first."
 msgstr ""
 
 #: admin/page/html/nav.php:6
@@ -272,6 +382,18 @@ msgstr ""
 
 #: admin/page/html/nav.php:12
 msgid "Options"
+msgstr ""
+
+#: admin/page/html/option-webhook.php:1
+msgid "Webhook"
+msgstr ""
+
+#: admin/page/html/option-webhook.php:10
+msgid "Set webhook URL"
+msgstr ""
+
+#: admin/page/html/option-webhook.php:19
+msgid "Test webhook"
 msgstr ""
 
 #: admin/page/html/option.php:4
@@ -286,19 +408,35 @@ msgstr ""
 msgid "Channel name: "
 msgstr ""
 
-#: admin/page/html/option.php:23
+#: admin/page/html/option.php:16
+msgid "Webhook URL: "
+msgstr ""
+
+#: admin/page/html/option.php:17
+msgid "Webhook status: "
+msgstr ""
+
+#: admin/page/html/option.php:17
+msgid "Enabled"
+msgstr ""
+
+#: admin/page/html/option.php:17
+msgid "Disabled"
+msgstr ""
+
+#: admin/page/html/option.php:25
 msgid "Channel secret"
 msgstr ""
 
-#: admin/page/html/option.php:29
+#: admin/page/html/option.php:31
 msgid "Test user ID"
 msgstr ""
 
-#: admin/page/html/option.php:39
+#: admin/page/html/option.php:41
 msgid "User name: "
 msgstr ""
 
-#: admin/page/html/option.php:40
+#: admin/page/html/option.php:42
 msgid "Language: "
 msgstr ""
 
@@ -327,15 +465,31 @@ msgstr ""
 msgid "LINE options"
 msgstr ""
 
-#: admin/page/option.php:67
+#: admin/page/option.php:73
 msgid "LINE API setting"
 msgstr ""
 
-#: admin/page/option.php:94
+#: admin/page/option.php:106
+#: admin/page/option.php:108
+msgid "Settings failed."
+msgstr ""
+
+#: admin/page/option.php:111
+#: admin/page/option.php:144
 msgid "Settings saved."
 msgstr ""
 
-#: admin/page/option.php:96
+#: admin/page/option.php:122
+#: admin/page/option.php:124
+#: admin/page/option.php:130
+msgid "Test failed."
+msgstr ""
+
+#: admin/page/option.php:128
+msgid "Test success."
+msgstr ""
+
+#: admin/page/option.php:146
 msgid "Error channel ID or channel secret."
 msgstr ""
 
@@ -349,6 +503,7 @@ msgstr ""
 
 #. translators: %d: number of deleted aliases
 #: admin/page/tools.php:155
+#, php-format
 msgid "Deleted %d unused rich menu alias."
 msgid_plural "Deleted %d unused rich menu aliases."
 msgstr[0] ""
@@ -358,39 +513,107 @@ msgstr[1] ""
 msgid "Unlink test user rich menu successfully."
 msgstr ""
 
-#: includes/main.php:66
+#: includes/line-action.php:105
+#: includes/line-action.php:149
+#: includes/line-action.php:178
+msgid "Account link action can only do at one-by-one chat."
+msgstr ""
+
+#: includes/line-action.php:110
+msgid "Please click below button"
+msgstr ""
+
+#. translators: %s: user display name
+#: includes/line-action.php:116
+#, php-format
+msgid "Linked account: %s"
+msgstr ""
+
+#: includes/line-action.php:119
+msgid "Unlink account"
+msgstr ""
+
+#: includes/line-action.php:126
+#: includes/line-action.php:135
+msgid "Link account"
+msgstr ""
+
+#: includes/line-action.php:162
+msgid "No linked account found."
+msgstr ""
+
+#: includes/line-action.php:169
+msgid "Unlink account success."
+msgstr ""
+
+#. translators: %s: user display name
+#: includes/line-action.php:203
+#, php-format
+msgid "Welcome %s\\nLink account success."
+msgstr ""
+
+#: includes/line-action.php:212
+msgid "Sorry!\\nLink account failed."
+msgstr ""
+
+#: includes/main.php:72
+msgctxt "post type general name"
+msgid "LINE message"
+msgstr ""
+
+#: includes/main.php:73
+msgid "Add message"
+msgstr ""
+
+#: includes/main.php:74
+msgid "Edit message"
+msgstr ""
+
+#: includes/main.php:75
+msgid "Search message"
+msgstr ""
+
+#: includes/main.php:76
+msgid "Uploaded to this message"
+msgstr ""
+
+#: includes/main.php:77
+#: includes/main.php:102
+msgid "Show image"
+msgstr ""
+
+#: includes/main.php:78
+#: includes/main.php:103
+msgid "Set show image"
+msgstr ""
+
+#: includes/main.php:79
+#: includes/main.php:104
+msgid "Remove show image"
+msgstr ""
+
+#: includes/main.php:80
+#: includes/main.php:105
+msgid "Use as show image"
+msgstr ""
+
+#: includes/main.php:97
 msgctxt "post type general name"
 msgid "LINE rich menu"
 msgstr ""
 
-#: includes/main.php:67
+#: includes/main.php:98
 msgid "Add rich menu"
 msgstr ""
 
-#: includes/main.php:68
+#: includes/main.php:99
 msgid "Edit rich menu"
 msgstr ""
 
-#: includes/main.php:69
+#: includes/main.php:100
 msgid "Search rich menu"
 msgstr ""
 
-#: includes/main.php:70
+#: includes/main.php:101
 msgid "Uploaded to this rich menu"
-msgstr ""
-
-#: includes/main.php:71
-msgid "Menu image"
-msgstr ""
-
-#: includes/main.php:72
-msgid "Set menu image"
-msgstr ""
-
-#: includes/main.php:73
-msgid "Remove menu image"
-msgstr ""
-
-#: includes/main.php:74
-msgid "Use as menu image"
 msgstr ""

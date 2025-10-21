@@ -41,6 +41,7 @@ final class RY_LINE_Admin_Richmenu
         if ($post->ID == RY_LINE::get_option('richmenu_default')) {
             $post_states[] = __('Default menu', 'ry-line');
         }
+
         return $post_states;
     }
 
@@ -63,6 +64,10 @@ final class RY_LINE_Admin_Richmenu
     public function save_date($post_ID, $post)
     {
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
+
+        if (!in_array($post->post_status, ['auto-draft', 'draft', 'publish'], true)) {
             return;
         }
 

@@ -26,6 +26,7 @@ final class RY_LINE_Admin extends RY_Abstract_Admin
         add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('add_meta_boxes', [$this, 'load_meta_boxes']);
         include_once RY_LINE_PLUGIN_DIR . 'admin/media.php';
+        include_once RY_LINE_PLUGIN_DIR . 'admin/message.php';
         include_once RY_LINE_PLUGIN_DIR . 'admin/richmenu.php';
 
         if (defined('DOING_AJAX') && DOING_AJAX) {
@@ -61,7 +62,7 @@ final class RY_LINE_Admin extends RY_Abstract_Admin
 
     public function load_meta_boxes()
     {
-        include_once RY_LINE_PLUGIN_DIR . 'admin/meta-boxes/richmenu.php';
+        include_once RY_LINE_PLUGIN_DIR . 'admin/meta-boxes.php';
     }
 
     public function add_menu($menu_list)

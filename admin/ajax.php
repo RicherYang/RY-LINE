@@ -16,45 +16,48 @@ final class RY_LINE_Admin_Ajax
 
     protected function do_init(): void
     {
-        $actions = [
-            'ry-line/get-richmenu-areas',
-            'ry-line/save-richmenu-areas',
-            'ry-line/save-richmenu-actions',
+        if (isset($_GET['action'])) {
+            $actions = [
+                'get-image-areas',
+                'save-image-position',
+                'save-image-actions',
 
-            'ry-line/remote-richmenu-create',
-            'ry-line/remote-richmenu-default',
-            'ry-line/remote-richmenu-delete',
-            'ry-line/remote-richmenu-alias',
-            'ry-line/remote-richmenu-test',
-        ];
+                'remote-message-testsend',
 
-        $action_idx = array_search($_GET['action'] ?? '', $actions, true); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        if ($action_idx !== false) {
-            $action_hook = $actions[$action_idx];
-            add_action('wp_ajax_' . $action_hook, [$this, str_replace('-', '_', substr($action_hook, 8))]);
+                'remote-richmenu-create',
+                'remote-richmenu-default',
+                'remote-richmenu-delete',
+                'remote-richmenu-alias',
+                'remote-richmenu-test',
+            ];
+            foreach ($actions as $action_hook) {
+                add_action('wp_ajax_ry-line/' . $action_hook, [$this, str_replace('-', '_', $action_hook)]);
+            }
         }
     }
 
-    public function get_richmenu_areas()
+    public function get_image_areas()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
-        check_ajax_referer('get-richmenu-areas_' . $post_ID);
+        check_ajax_referer('get-image-areas_' . $post_ID);
 
-        wp_send_json_success(get_post_meta($post_ID, 'ry_line_richmenu_data', true));
+        $meta_key = str_replace('-', '_', get_post_type($post_ID)) . '_data';
+        wp_send_json_success(get_post_meta($post_ID, $meta_key, true));
     }
 
-    public function save_richmenu_areas()
+    public function save_image_position()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
-        check_ajax_referer('save-richmenu-areas_' . $post_ID);
+        check_ajax_referer('save-image-position_' . $post_ID);
 
-        $richmenu_data = get_post_meta($post_ID, 'ry_line_richmenu_data', true);
+        $meta_key = str_replace('-', '_', get_post_type($post_ID)) . '_data';
+        $post_data = get_post_meta($post_ID, $meta_key, true);
 
         $areas = [];
         $input = sanitize_text_field(wp_unslash($_POST['areas'] ?? ''));
         wp_parse_str($input, $areas);
         if (is_array($areas)) {
-            $richmenu_data['areas'] = [];
+            $post_data['areas'] = [];
             $idx = 0;
             while (isset($areas['area-' . $idx])) {
                 $area = array_map('intval', explode('-', sanitize_key($areas['area-' . $idx])));
@@ -64,7 +67,7 @@ final class RY_LINE_Admin_Ajax
                     continue;
                 }
 
-                $richmenu_data['areas'][] = [
+                $post_data['areas'][] = [
                     'bounds' => [
                         'x' => $area[0],
                         'y' => $area[1],
@@ -76,23 +79,24 @@ final class RY_LINE_Admin_Ajax
             }
         }
 
-        update_post_meta($post_ID, 'ry_line_richmenu_data', $richmenu_data);
-        wp_send_json_success($richmenu_data['areas']);
+        update_post_meta($post_ID, $meta_key, $post_data);
+        wp_send_json_success($post_data['areas']);
     }
 
-    public function save_richmenu_actions()
+    public function save_image_actions()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
-        check_ajax_referer('save-richmenu-actions_' . $post_ID);
+        check_ajax_referer('save-image-actions_' . $post_ID);
 
-        $richmenu_data = get_post_meta($post_ID, 'ry_line_richmenu_data', true);
+        $meta_key = str_replace('-', '_', get_post_type($post_ID)) . '_data';
+        $post_data = get_post_meta($post_ID, $meta_key, true);
 
         $input = sanitize_text_field(wp_unslash($_POST['actions'] ?? ''));
         wp_parse_str($input, $actions);
 
-        if (is_array($actions) && is_array($richmenu_data['areas'])) {
+        if (is_array($actions) && is_array($post_data['areas'])) {
             $idx = 0;
-            while (isset($actions["action-type-{$idx}"], $richmenu_data['areas'][$idx])) {
+            while (isset($actions["action-type-{$idx}"], $post_data['areas'][$idx])) {
                 $action = [];
                 $action_type = sanitize_text_field($actions["action-type-{$idx}"]);
                 switch ($action_type) {
@@ -112,23 +116,54 @@ final class RY_LINE_Admin_Ajax
                             $action['label'] = sanitize_textarea_field($actions["action-info-{$idx}-label"] ?? '');
                         }
                         break;
+                    case 'selfmessage':
+                        $message = intval($actions["action-info-{$idx}-message"] ?? '');
+                        if (get_post_type($message) === RY_LINE::POSTTYPE_MESSAGE) {
+                            $action['type'] = $action_type;
+                            $action['message'] = $message;
+                            $action['label'] = sanitize_textarea_field($actions["action-info-{$idx}-label"] ?? '');
+                        }
+                        break;
                     case 'richmenuswitch':
                         $alias = sanitize_key($actions["action-info-{$idx}-richMenuAliasId"] ?? '');
                         if ($alias !== '') {
                             $action['type'] = $action_type;
                             $action['richMenuAliasId'] = $alias;
-                            $action['data'] = 'ry/switch-richmenu';
                         }
                         break;
+                    case 'accountlink':
+                        $action['type'] = $action_type;
+                        $action['displayText'] = sanitize_textarea_field($actions["action-info-{$idx}-text"] ?? '');
+                        break;
                 }
-                $richmenu_data['areas'][$idx]['action'] = $action;
+                $post_data['areas'][$idx]['action'] = $action;
 
                 $idx += 1;
             }
         }
 
-        update_post_meta($post_ID, 'ry_line_richmenu_data', $richmenu_data);
-        wp_send_json_success($richmenu_data['areas']);
+        update_post_meta($post_ID, $meta_key, $post_data);
+        wp_send_json_success($post_data['areas']);
+    }
+
+    public function remote_message_testsend()
+    {
+        $post_ID = intval($_POST['post_id'] ?? '');
+        check_ajax_referer('remote-message-testsend_' . $post_ID);
+
+        $line_user_ID = RY_LINE::get_option('test_user_id');
+        $message_object = RY_LINE_Api::build_message_object([get_post($post_ID)]);
+        $status = RY_LINE_Api::message_push($message_object, $line_user_ID);
+        if (isset($status) && is_wp_error($status)) {
+            if ($status->get_error_code() === 'line_error') {
+                wp_send_json_error($status->get_error_data());
+            } else {
+                wp_send_json_error(['message' => $status->get_error_message()]);
+            }
+            return;
+        }
+
+        wp_send_json_success();
     }
 
     public function remote_richmenu_create()
@@ -136,13 +171,8 @@ final class RY_LINE_Admin_Ajax
         $post_ID = intval($_POST['post_id'] ?? '');
         check_ajax_referer('remote-richmenu-create_' . $post_ID);
 
-        $post_data = get_post_meta($post_ID, 'ry_line_richmenu_data', true);
-        $post_data['name'] = get_the_title($post_ID);
-        $post_data['areas'] = array_values(array_filter($post_data['areas'], function ($area) {
-            return count($area['action']);
-        }));
-
-        $response = RY_LINE_Api::richmenu_validate($post_data);
+        $richmenu_object = RY_LINE_Api::build_richmenu_object($post_ID);
+        $response = RY_LINE_Api::richmenu_validate($richmenu_object);
         if (is_wp_error($response)) {
             if ($response->get_error_code() === 'line_error') {
                 wp_send_json_error($response->get_error_data());
@@ -152,7 +182,7 @@ final class RY_LINE_Admin_Ajax
             return;
         }
 
-        $response = RY_LINE_Api::richmenu_create($post_data);
+        $response = RY_LINE_Api::richmenu_create($richmenu_object);
         if (is_wp_error($response)) {
             if ($response->get_error_code() === 'line_error') {
                 wp_send_json_error($response->get_error_data());

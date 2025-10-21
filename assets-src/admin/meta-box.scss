@@ -1,25 +1,10 @@
 #poststuff {
+    #ry-line-message-action,
     #ry-line-richmenu-action,
     #ry-line-richmenu-operate {
         .inside {
             margin: 0;
             padding: 0;
-        }
-    }
-    #ry-line-richmenu-operate {
-        p {
-            margin-top: 0;
-        }
-        input {
-            width: 100%;
-        }
-    }
-
-    #ry-line-richmenu-area .form-table {
-        th,
-        td {
-            padding-top: 10px;
-            padding-bottom: 10px;
         }
     }
 }
@@ -48,20 +33,16 @@
     flex: 0 0 auto;
     width: auto;
 }
-
-.richmenu-img {
-    width: 40%;
-    min-width: 320px;
-    max-width: 480px;
+label.ry-line-col-auto {
+    padding-right: 0;
 }
 
-.richmenu-svg {
+.image-area {
     overflow: hidden;
     user-select: none;
-    border: 1px solid #ddd;
 
-    image {
-        pointer-events: none;
+    svg {
+        border: 1px solid #ddd;
     }
     text {
         fill: #fff;
@@ -100,12 +81,46 @@
     }
 }
 
-#richmenu-area-list,
-#richmenu-action-list {
-    tbody {
-        input,
-        textarea {
-            width: 100%;
+#ry-line-message-action {
+    pre {
+        white-space: pre-wrap;
+    }
+}
+
+#ry-line-message-content,
+#ry-line-message-reply,
+#ry-line-richmenu-content,
+#ry-line-image-area {
+    input[type="text"],
+    input[type="url"],
+    textarea {
+        width: 100%;
+    }
+
+    .form-table {
+        th {
+            padding: 15px 0;
         }
+        td {
+            padding: 10px 0;
+        }
+    }
+}
+
+#ry-line-message-content .form-table th {
+    width: 100px;
+}
+
+#ry-line-message-reply .form-table th {
+    width: 110px;
+}
+
+#ry-line-richmenu-content .form-table th {
+    width: 150px;
+}
+
+#ry-line-image-area {
+    .action-info {
+        margin-bottom: 5px;
     }
 }
