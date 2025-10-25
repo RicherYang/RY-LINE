@@ -57,7 +57,7 @@ final class RY_LINE_Api
         }
     }
 
-    public static function build_message_object($posts)
+    public static function build_message_object($posts, $template_info)
     {
         $message_object = [];
         foreach ($posts as $post) {
@@ -69,7 +69,7 @@ final class RY_LINE_Api
             switch ($post_data['type']) {
                 case 'text':
                     $post_data['type'] = 'textV2';
-                    $post_data['text'] = $post->post_content;
+                    $post_data['text'] = RY_LINE_Template::instance()->do_template_string($post->post_content, $template_info);
                     break;
                 case 'image':
                     $thumbnail_ID = get_post_thumbnail_id($post);
@@ -83,8 +83,8 @@ final class RY_LINE_Api
                     $content = maybe_unserialize($post->post_content);
                     if (is_object($content)) {
                         $post_data['type'] = 'flex';
-                        $post_data['altText'] = $post->post_excerpt;
-                        $post_data['contents'] = $content;
+                        $post_data['altText'] = RY_LINE_Template::instance()->do_template_string($post->post_excerpt, $template_info);
+                        $post_data['contents'] = json_decode(RY_LINE_Template::instance()->do_template_string(wp_json_encode($content), $template_info), true);
                     }
             }
             $message_object[$post->ID] = $post_data;

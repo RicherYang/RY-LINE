@@ -14,8 +14,6 @@ final class RY_LINE extends RY_Abstract_Basic
 
     protected static $_instance = null;
 
-    public RY_LINE_Admin $admin;
-
     public static function instance(): RY_LINE
     {
         if (null === self::$_instance) {
@@ -52,15 +50,17 @@ final class RY_LINE extends RY_Abstract_Basic
         if (is_admin()) {
             include_once RY_LINE_PLUGIN_DIR . 'includes/ry-global/admin-license.php';
             include_once RY_LINE_PLUGIN_DIR . 'admin/admin.php';
-            $this->admin = RY_LINE_Admin::instance();
+            RY_LINE_Admin::instance();
         }
 
         if (RY_LINE_License::instance()->is_activated()) {
             include_once RY_LINE_PLUGIN_DIR . 'includes/cron.php';
+            include_once RY_LINE_PLUGIN_DIR . 'includes/user.php';
             RY_LINE_Cron::add_action();
 
             include_once RY_LINE_PLUGIN_DIR . 'includes/line-action.php';
             include_once RY_LINE_PLUGIN_DIR . 'includes/line-api.php';
+            include_once RY_LINE_PLUGIN_DIR . 'includes/line-template.php';
             include_once RY_LINE_PLUGIN_DIR . 'includes/line-webhook.php';
         }
     }

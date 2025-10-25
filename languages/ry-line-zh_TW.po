@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-03-02T11:52:45+08:00\n"
-"PO-Revision-Date: 2025-10-20 20:08+0800\n"
+"PO-Revision-Date: 2025-10-25 11:02+0800\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
@@ -43,8 +43,8 @@ msgstr "https://ry-plugin.com/ry-line"
 msgid "LINE support"
 msgstr "LINE support"
 
-#: admin/page/option.php:111
-#: admin/page/option.php:144
+#: admin/page/option.php:109
+#: admin/page/option.php:142
 msgid "Settings saved."
 msgstr "設定已儲存。"
 
@@ -56,7 +56,7 @@ msgstr "專屬ID："
 msgid "Channel name: "
 msgstr "帳號名稱："
 
-#: admin/page/option.php:146
+#: admin/page/option.php:144
 msgid "Error channel ID or channel secret."
 msgstr "錯誤的 channel ID 或是 channel secret。"
 
@@ -90,7 +90,7 @@ msgid "Uploaded to this rich menu"
 msgstr "已關聯至這圖文選單"
 
 #: admin/meta-boxes.php:16
-#: admin/meta-boxes.php:41
+#: admin/meta-boxes.php:42
 msgid "Action area"
 msgstr "操作區域"
 
@@ -239,16 +239,16 @@ msgstr "儲存區域動作"
 msgid "Please save data before performing any LINE operations."
 msgstr "請在進行 LINE 操作前請先儲存資料。"
 
-#: admin/meta-boxes.php:42
+#: admin/meta-boxes.php:43
 msgid "LINE Operation"
 msgstr "LINE 操作"
 
-#: admin/meta-boxes.php:112
+#: admin/meta-boxes.php:113
 msgid "license key"
 msgstr "授權金鑰"
 
 #. translators: %s: license key link
-#: admin/meta-boxes.php:114
+#: admin/meta-boxes.php:115
 #, php-format
 msgid "Please activate %s to use this feature."
 msgstr "請先啟用 %s 再使用本功能。"
@@ -267,7 +267,7 @@ msgstr "更新"
 msgid "Create menu"
 msgstr "建立選單"
 
-#: admin/ajax.php:238
+#: admin/ajax.php:241
 #: admin/html/richmenu-operate.php:33
 msgid "Unset default menu"
 msgstr "取消預設選單"
@@ -346,7 +346,7 @@ msgid "Deleted %d unused rich menu alias."
 msgid_plural "Deleted %d unused rich menu aliases."
 msgstr[0] "刪除 %d 個未使用的圖文選單代稱。"
 
-#: admin/ajax.php:238
+#: admin/ajax.php:241
 #: admin/html/richmenu-operate.php:33
 #: admin/richmenu.php:42
 msgid "Default menu"
@@ -417,62 +417,62 @@ msgstr "啟用"
 msgid "Disabled"
 msgstr "停用"
 
+#: admin/page/option.php:104
 #: admin/page/option.php:106
-#: admin/page/option.php:108
 msgid "Settings failed."
 msgstr "設定失敗。"
 
+#: admin/page/option.php:120
 #: admin/page/option.php:122
-#: admin/page/option.php:124
-#: admin/page/option.php:130
+#: admin/page/option.php:128
 msgid "Test failed."
 msgstr "測試失敗。"
 
-#: admin/page/option.php:128
+#: admin/page/option.php:126
 msgid "Test success."
 msgstr "測試成功。"
 
-#: includes/line-action.php:110
+#: includes/line-action.php:108
 msgid "Please click below button"
 msgstr "請點擊以下按鈕"
 
-#: includes/line-action.php:119
+#: includes/line-action.php:117
 msgid "Unlink account"
 msgstr "取消綁定帳號"
 
-#: includes/line-action.php:126
-#: includes/line-action.php:135
+#: includes/line-action.php:124
+#: includes/line-action.php:133
 msgid "Link account"
 msgstr "綁定帳號"
 
-#: includes/line-action.php:162
+#: includes/line-action.php:160
 msgid "No linked account found."
 msgstr "沒有以綁定的帳號。"
 
-#: includes/line-action.php:169
+#: includes/line-action.php:167
 msgid "Unlink account success."
 msgstr "取消綁定成功。"
 
-#: includes/line-action.php:212
+#: includes/line-action.php:210
 msgid "Sorry!\\nLink account failed."
 msgstr ""
 "抱歉！\n"
 "綁定帳號失敗。"
 
-#: includes/line-action.php:105
-#: includes/line-action.php:149
-#: includes/line-action.php:178
+#: includes/line-action.php:103
+#: includes/line-action.php:147
+#: includes/line-action.php:176
 msgid "Account link action can only do at one-by-one chat."
 msgstr "綁定帳號只可以在一對一聊天室中進行。"
 
 #. translators: %s: user display name
-#: includes/line-action.php:116
+#: includes/line-action.php:114
 #, php-format
 msgid "Linked account: %s"
 msgstr "綁定帳號：%s"
 
 #. translators: %s: user display name
-#: includes/line-action.php:203
+#: includes/line-action.php:201
 #, php-format
 msgid "Welcome %s\\nLink account success."
 msgstr ""
@@ -520,16 +520,16 @@ msgstr "移除顯示圖片"
 msgid "Use as show image"
 msgstr "設定為顯示圖片"
 
-#: admin/meta-boxes.php:43
+#: admin/meta-boxes.php:44
 msgid "Menu content"
 msgstr "選單內容"
 
-#: admin/meta-boxes.php:119
-#: admin/meta-boxes.php:142
+#: admin/meta-boxes.php:120
+#: admin/meta-boxes.php:143
 msgid "Please set show image first."
 msgstr "請先設定顯示圖片。"
 
-#: admin/meta-boxes.php:44
+#: admin/meta-boxes.php:45
 msgid "Image action area"
 msgstr "圖片動作區域"
 
@@ -552,7 +552,7 @@ msgctxt "message type"
 msgid "Flex"
 msgstr "Flex"
 
-#: admin/html/message-content.php:14
+#: admin/html/message-content.php:15
 msgid "Content"
 msgstr "內容"
 
@@ -560,11 +560,11 @@ msgstr "內容"
 msgid "Message content"
 msgstr "訊息內容"
 
-#: admin/html/message-content.php:17
+#: admin/html/message-content.php:20
 msgid "For Flex message, please enter the JSON content."
 msgstr "Flex 訊息，請直接輸入 JSON 內容。"
 
-#: admin/html/message-content.php:21
+#: admin/html/message-content.php:25
 msgid "Alt content"
 msgstr "替代內容"
 
@@ -601,6 +601,7 @@ msgid "Reply Source"
 msgstr "回應來源"
 
 #: admin/html/message-reply.php:14
+#: includes/line-template.php:78
 msgid "User"
 msgstr "使用者"
 
@@ -624,3 +625,47 @@ msgstr "客製訊息"
 #: admin/html/image-area.php:122
 msgid "Message"
 msgstr "訊息"
+
+#: includes/line-template.php:53
+msgid "General"
+msgstr "一般"
+
+#: includes/line-template.php:57
+msgid "Site title"
+msgstr "網站標題"
+
+#: includes/line-template.php:61
+msgid "Site tagline"
+msgstr "網站說明"
+
+#: includes/line-template.php:73
+msgid "Admin Email"
+msgstr "網站管理員電子郵件地址"
+
+#: includes/line-template.php:65
+msgid "WordPress URL"
+msgstr "WordPress 網址"
+
+#: includes/line-template.php:69
+msgid "Site URL"
+msgstr "網站網址"
+
+#: includes/line-template.php:82
+msgid "Public display name"
+msgstr "公開顯示名稱"
+
+#: includes/line-template.php:86
+msgid "Nickname"
+msgstr "暱稱"
+
+#: includes/line-template.php:90
+msgid "First Name"
+msgstr "名字"
+
+#: includes/line-template.php:94
+msgid "Last Name"
+msgstr "姓氏"
+
+#: includes/line-template.php:98
+msgid "Email"
+msgstr "電子郵件地址"

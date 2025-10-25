@@ -152,7 +152,10 @@ final class RY_LINE_Admin_Ajax
         check_ajax_referer('remote-message-testsend_' . $post_ID);
 
         $line_user_ID = RY_LINE::get_option('test_user_id');
-        $message_object = RY_LINE_Api::build_message_object([get_post($post_ID)]);
+        $template_info = (object) [
+            'wp_user' => RY_LINE_User::instance()->get_wp_user($line_user_ID),
+        ];
+        $message_object = RY_LINE_Api::build_message_object([get_post($post_ID)], $template_info);
         $status = RY_LINE_Api::message_push($message_object, $line_user_ID);
         if (isset($status) && is_wp_error($status)) {
             if ($status->get_error_code() === 'line_error') {

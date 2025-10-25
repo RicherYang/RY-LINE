@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: RY LINE 0.4.0\n"
+"Project-Id-Version: RY LINE 0.4.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ry-line\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-21T10:13:09+08:00\n"
+"POT-Creation-Date: 2025-10-25T15:12:56+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ry-line\n"
@@ -39,13 +39,13 @@ msgstr ""
 msgid "https://richer.tw/"
 msgstr ""
 
-#: admin/ajax.php:238
+#: admin/ajax.php:241
 #: admin/html/richmenu-operate.php:33
 #: admin/richmenu.php:42
 msgid "Default menu"
 msgstr ""
 
-#: admin/ajax.php:238
+#: admin/ajax.php:241
 #: admin/html/richmenu-operate.php:33
 msgid "Unset default menu"
 msgstr ""
@@ -233,15 +233,15 @@ msgctxt "message type"
 msgid "Flex"
 msgstr ""
 
-#: admin/html/message-content.php:14
+#: admin/html/message-content.php:15
 msgid "Content"
 msgstr ""
 
-#: admin/html/message-content.php:17
+#: admin/html/message-content.php:20
 msgid "For Flex message, please enter the JSON content."
 msgstr ""
 
-#: admin/html/message-content.php:21
+#: admin/html/message-content.php:25
 msgid "Alt content"
 msgstr ""
 
@@ -254,6 +254,7 @@ msgid "Reply Source"
 msgstr ""
 
 #: admin/html/message-reply.php:14
+#: includes/line-template.php:78
 msgid "User"
 msgstr ""
 
@@ -336,7 +337,7 @@ msgid "Changing the image size will clear the option of action areas"
 msgstr ""
 
 #: admin/meta-boxes.php:16
-#: admin/meta-boxes.php:41
+#: admin/meta-boxes.php:42
 msgid "Action area"
 msgstr ""
 
@@ -348,30 +349,30 @@ msgstr ""
 msgid "Message reply"
 msgstr ""
 
-#: admin/meta-boxes.php:42
+#: admin/meta-boxes.php:43
 msgid "LINE Operation"
 msgstr ""
 
-#: admin/meta-boxes.php:43
+#: admin/meta-boxes.php:44
 msgid "Menu content"
 msgstr ""
 
-#: admin/meta-boxes.php:44
+#: admin/meta-boxes.php:45
 msgid "Image action area"
 msgstr ""
 
-#: admin/meta-boxes.php:112
+#: admin/meta-boxes.php:113
 msgid "license key"
 msgstr ""
 
 #. translators: %s: license key link
-#: admin/meta-boxes.php:114
+#: admin/meta-boxes.php:115
 #, php-format
 msgid "Please activate %s to use this feature."
 msgstr ""
 
-#: admin/meta-boxes.php:119
-#: admin/meta-boxes.php:142
+#: admin/meta-boxes.php:120
+#: admin/meta-boxes.php:143
 msgid "Please set show image first."
 msgstr ""
 
@@ -469,27 +470,27 @@ msgstr ""
 msgid "LINE API setting"
 msgstr ""
 
+#: admin/page/option.php:104
 #: admin/page/option.php:106
-#: admin/page/option.php:108
 msgid "Settings failed."
 msgstr ""
 
-#: admin/page/option.php:111
-#: admin/page/option.php:144
+#: admin/page/option.php:109
+#: admin/page/option.php:142
 msgid "Settings saved."
 msgstr ""
 
+#: admin/page/option.php:120
 #: admin/page/option.php:122
-#: admin/page/option.php:124
-#: admin/page/option.php:130
+#: admin/page/option.php:128
 msgid "Test failed."
 msgstr ""
 
-#: admin/page/option.php:128
+#: admin/page/option.php:126
 msgid "Test success."
 msgstr ""
 
-#: admin/page/option.php:146
+#: admin/page/option.php:144
 msgid "Error channel ID or channel secret."
 msgstr ""
 
@@ -513,47 +514,91 @@ msgstr[1] ""
 msgid "Unlink test user rich menu successfully."
 msgstr ""
 
-#: includes/line-action.php:105
-#: includes/line-action.php:149
-#: includes/line-action.php:178
+#: includes/line-action.php:103
+#: includes/line-action.php:147
+#: includes/line-action.php:176
 msgid "Account link action can only do at one-by-one chat."
 msgstr ""
 
-#: includes/line-action.php:110
+#: includes/line-action.php:108
 msgid "Please click below button"
 msgstr ""
 
 #. translators: %s: user display name
-#: includes/line-action.php:116
+#: includes/line-action.php:114
 #, php-format
 msgid "Linked account: %s"
 msgstr ""
 
-#: includes/line-action.php:119
+#: includes/line-action.php:117
 msgid "Unlink account"
 msgstr ""
 
-#: includes/line-action.php:126
-#: includes/line-action.php:135
+#: includes/line-action.php:124
+#: includes/line-action.php:133
 msgid "Link account"
 msgstr ""
 
-#: includes/line-action.php:162
+#: includes/line-action.php:160
 msgid "No linked account found."
 msgstr ""
 
-#: includes/line-action.php:169
+#: includes/line-action.php:167
 msgid "Unlink account success."
 msgstr ""
 
 #. translators: %s: user display name
-#: includes/line-action.php:203
+#: includes/line-action.php:201
 #, php-format
 msgid "Welcome %s\\nLink account success."
 msgstr ""
 
-#: includes/line-action.php:212
+#: includes/line-action.php:210
 msgid "Sorry!\\nLink account failed."
+msgstr ""
+
+#: includes/line-template.php:53
+msgid "General"
+msgstr ""
+
+#: includes/line-template.php:57
+msgid "Site title"
+msgstr ""
+
+#: includes/line-template.php:61
+msgid "Site tagline"
+msgstr ""
+
+#: includes/line-template.php:65
+msgid "WordPress URL"
+msgstr ""
+
+#: includes/line-template.php:69
+msgid "Site URL"
+msgstr ""
+
+#: includes/line-template.php:73
+msgid "Admin Email"
+msgstr ""
+
+#: includes/line-template.php:82
+msgid "Public display name"
+msgstr ""
+
+#: includes/line-template.php:86
+msgid "Nickname"
+msgstr ""
+
+#: includes/line-template.php:90
+msgid "First Name"
+msgstr ""
+
+#: includes/line-template.php:94
+msgid "Last Name"
+msgstr ""
+
+#: includes/line-template.php:98
+msgid "Email"
 msgstr ""
 
 #: includes/main.php:72

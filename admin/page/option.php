@@ -17,7 +17,7 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
 
         if ($_wp_menu_nopriv) {
             $_wp_menu_nopriv['ry-line-option'] = true;
-            $_wp_real_parent_file['ry-line-option'] = RY_LINE()->admin->main_slug;
+            $_wp_real_parent_file['ry-line-option'] = RY_LINE_Admin::instance()->main_slug;
             $submenu_file = 'ry-line';
         }
     }
@@ -83,8 +83,6 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
             include __DIR__ . '/html/option-webhook.php';
         }
         echo '</div>';
-
-        do_action('ry/line-webhook/message', (object) ['type' => 'text', 'text' => 'gf'], (object) ['type' => 'user'], 'test-reply-token');
     }
 
     public function do_admin_action(string $action): void

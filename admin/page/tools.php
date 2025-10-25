@@ -17,7 +17,7 @@ final class RY_Line_Admin_Tools extends RY_Abstract_Admin_Page
 
         if ($_wp_menu_nopriv) {
             $_wp_menu_nopriv['ry-line-tools'] = true;
-            $_wp_real_parent_file['ry-line-tools'] = RY_LINE()->admin->main_slug;
+            $_wp_real_parent_file['ry-line-tools'] = RY_LINE_Admin::instance()->main_slug;
             $submenu_file = 'ry-line';
         }
     }

@@ -89,7 +89,10 @@ final class RY_LINE_Admin_Message
             return;
         }
 
-        $message_object = RY_LINE_Api::build_message_object([get_post($post_ID)]);
+        $template_info = (object) [
+            'wp_user' => wp_get_current_user(),
+        ];
+        $message_object = RY_LINE_Api::build_message_object([get_post($post_ID)], $template_info);
         if ($message_object) {
             $status = RY_LINE_Api::message_validate($message_object);
             if (is_wp_error($status)) {

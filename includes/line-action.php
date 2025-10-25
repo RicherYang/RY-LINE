@@ -4,11 +4,6 @@ final class RY_LINE_Action
 {
     public const LINK_QUERY = 'line-token';
 
-    public const LINE_META_KEY = [
-        'ry_line_user_id',
-        'wc_notify_line_user_id', // OrderNotify for WooCommerce
-    ];
-
     protected static $_instance = null;
 
     public static function instance(): RY_LINE_Action
@@ -80,7 +75,10 @@ final class RY_LINE_Action
     {
         $message_data = [];
         $message_reply = [];
-        $message_object = RY_LINE_Api::build_message_object($messages);
+        $template_info = (object) [
+            'wp_user' => RY_LINE_User::instance()->get_wp_user($source->userId),
+        ];
+        $message_object = RY_LINE_Api::build_message_object($messages, $template_info);
         foreach ($message_object as $message_ID => $message) {
             $message_data[$message_ID] = get_post_meta($message_ID, 'ry_line_message_data', true);
             $message_reply[$message_ID] = get_post_meta($message_ID, 'ry_line_message_reply', true);
@@ -110,7 +108,7 @@ final class RY_LINE_Action
         $text = __('Please click below button', 'ry-line');
         $actions = [];
 
-        $wp_user = $this->get_wp_user_from_line($source->userId);
+        $wp_user = RY_LINE_User::instance()->get_wp_user($source->userId);
         if ($wp_user) {
             /* translators: %s: user display name */
             $text = sprintf(__('Linked account: %s', 'ry-line'), $wp_user->display_name) . "\n" . $text;
@@ -151,9 +149,9 @@ final class RY_LINE_Action
             return;
         }
 
-        $wp_user = $this->get_wp_user_from_line($source->userId);
+        $wp_user = RY_LINE_User::instance()->get_wp_user($source->userId);
         if ($wp_user) {
-            foreach (self::LINE_META_KEY as $meta_key) {
+            foreach (RY_LINE_User::MAYPE_USER_META_KEY as $meta_key) {
                 delete_user_meta($wp_user->ID, $meta_key);
             }
         } else {
@@ -188,14 +186,14 @@ final class RY_LINE_Action
             if ($user_ID === sanitize_key($user_ID)) {
                 $user_ID = intval($user_ID);
                 if ($user_ID > 0) {
-                    $wp_user = $this->get_wp_user_from_line($source->userId);
+                    $wp_user = RY_LINE_User::instance()->get_wp_user($source->userId);
                     if ($wp_user->ID != $user_ID) {
-                        foreach (self::LINE_META_KEY as $meta_key) {
+                        foreach (RY_LINE_User::MAYPE_USER_META_KEY as $meta_key) {
                             delete_user_meta($wp_user->ID, $meta_key);
                         }
                     }
 
-                    update_user_meta($user_ID, self::LINE_META_KEY[0], $source->userId);
+                    update_user_meta($user_ID, RY_LINE_User::MAYPE_USER_META_KEY[0], $source->userId);
                     $wp_user = get_user_by('id', $user_ID);
                     RY_LINE_Api::reply_message($reply_token, [[
                         'type' => 'textV2',
@@ -239,24 +237,6 @@ final class RY_LINE_Action
             'linkToken' => $link_token,
             'nonce' => bin2hex($nonce),
         ], 'https://access.line.me/dialog/bot/accountLink'));
-    }
-
-    public function get_wp_user_from_line($line_user_ID)
-    {
-        foreach (self::LINE_META_KEY as $meta_key) {
-            $query = new WP_User_Query([
-                'meta_key' => $meta_key,
-                'meta_value' => $line_user_ID,
-                'fields' => 'ID',
-                'number' => 1,
-            ]);
-            $wp_user = $query->get_results();
-            if (!empty($wp_user)) {
-                return $wp_user[0];
-            }
-        }
-
-        return false;
     }
 }
 

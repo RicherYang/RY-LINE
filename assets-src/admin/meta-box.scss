@@ -124,3 +124,90 @@ label.ry-line-col-auto {
         margin-bottom: 5px;
     }
 }
+
+.ry-template-string {
+    display: inline-block;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 1px 10px 4px;
+    margin-top: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: #e9e9e9;
+        border-color: #ccc;
+    }
+}
+
+#ry-template-dialog {
+    position: absolute;
+    min-width: 300px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+
+    .ry-line-row {
+        margin: 0;
+    }
+    .ry-line-col {
+        padding: 0;
+    }
+    .ry-line-col-auto {
+        padding: 0;
+        background: #1d2327;
+    }
+
+    .template-group {
+        padding: 10px 0;
+    }
+    .template-group-item {
+        position: relative;
+        padding: 5px 20px 5px 12px;
+        margin: 2px 0 5px;
+        color: #f0f0f1;
+        cursor: pointer;
+
+        &.active {
+            color: #fff;
+            background: #2271b1;
+
+            &:after {
+                right: 0;
+                border: solid 8px transparent;
+                border-right-color: #fff;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+
+                top: 50%;
+                margin-top: -8px;
+            }
+        }
+    }
+
+    .template-string {
+        padding: 10px;
+        overflow-y: scroll;
+        max-height: 400px;
+    }
+    .template-string-item {
+        border-bottom: 1px solid #c3c4c7;
+        padding: 6px 10px 10px;
+        margin-bottom: 6px;
+        cursor: pointer;
+
+        p {
+            margin: 0 0 3px;
+            font-size: 1.15em;
+        }
+    }
+}

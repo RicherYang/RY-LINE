@@ -834,4 +834,112 @@ $(function () {
         }
         alert(message);
     };
+
+    // 模板字符串對話框功能
+    let $string = $('.ry-template-string');
+    let $targetInput;
+    if ($string.length) {
+        const $dialog = $('#ry-template-dialog');
+        const hideDialog = () => {
+            $dialog.animate({
+                opacity: 0
+            }, 400, function () {
+                $dialog.css('visibility', 'hidden');
+            });
+        }
+
+        $dialog.on('click', '.template-group-item', function () {
+            const $btn = $(this);
+            $dialog.find('.template-group-item').removeClass(['active']);
+            $btn.addClass(['active']);
+
+            const stringTemplate = wp.template('string-item');
+            const $string = $dialog.find('.template-string');
+            $string.empty();
+            $btn.data('strings').forEach((d) => {
+                $string.append(stringTemplate(d));
+
+            });
+        });
+        $dialog.on('click', '.template-string-item', function () {
+            const targetElement = $targetInput[0];
+            const currentValue = $targetInput.val();
+            const cursorPosition = targetElement.selectionStart || currentValue.length;
+            const templateCode = ' ' + $(this).find('code').text() + ' ';
+            $targetInput.val(currentValue.slice(0, cursorPosition) + templateCode + currentValue.slice(cursorPosition));
+
+            // 設定新的游標位置到插入文字的末尾
+            const newCursorPosition = cursorPosition + templateCode.length;
+            targetElement.setSelectionRange(newCursorPosition, newCursorPosition);
+            $targetInput.focus();
+
+            hideDialog();
+        });
+        setTimeout(() => {
+            const itemTemplate = wp.template('group-item');
+            const $group = $dialog.find('.template-group');
+            for (const template of RYLineMetabox.templateString) {
+                $group.append(itemTemplate({
+                    name: template.name
+                }));
+                $group.find('.template-group-item:last').data('strings', template.strings);
+            }
+            $group.find('.template-group-item:first').trigger('click');
+        });
+
+        // 點擊顯示對話框
+        $string.on('click', function (e) {
+            const $btn = $(this);
+            const position = $btn.position();
+            const elementHeight = $btn.outerHeight();
+            $targetInput = $($btn.data('target'));
+            if ($targetInput.length == 0) {
+                return;
+            }
+
+
+            $dialog.css({
+                left: position.left + $btn.outerWidth() + 20 + 'px',
+                top: position.top + 'px',
+                visibility: 'visible'
+            });
+
+            // 檢查對話框是否超出視窗右邊界，如果是則調整位置到左側
+            const dialogRight = $dialog.position().left + $dialog.outerWidth();
+            const windowWidth = $(window).width();
+            if (dialogRight > windowWidth - 20) {
+                $dialog.css({
+                    left: position.left - $dialog.outerWidth() - 20 + 'px'
+                });
+            }
+
+            // 檢查對話框是否超出視窗下邊界，如果是則向上調整
+            const dialogBottom = $dialog.position().top + $dialog.outerHeight();
+            const windowHeight = $(window).height();
+
+            if (dialogBottom > windowHeight - 20) {
+                $dialog.css({
+                    top: Math.max(20, position.top - $dialog.outerHeight() + elementHeight) + 'px'
+                });
+            }
+
+            $dialog.animate({
+                opacity: 1
+            }, 400);
+        });
+
+        // 點擊其他地方隱藏對話框
+        $(document).on('click', function (e) {
+            if ($dialog.css('opacity') == 1 && !$(e.target).closest('#ry-template-dialog, .ry-template-string').length) {
+                hideDialog();
+            }
+        });
+
+        // 滾動時隱藏對話框
+        $(window).on('scroll', function () {
+            if ($dialog.css('opacity') == 1) {
+                hideDialog();
+            }
+        });
+    }
 });

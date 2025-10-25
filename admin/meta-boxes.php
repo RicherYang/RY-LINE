@@ -23,6 +23,7 @@ final class RY_LINE_Admin_Meta_Box
         wp_enqueue_script('ry-line-admin-meta-box', RY_LINE_PLUGIN_URL . 'assets/admin/meta-box.js', $asset_info['dependencies'], $asset_info['version'], true);
 
         wp_localize_script('ry-line-admin-meta-box', 'RYLineMetabox', [
+            'templateString' => apply_filters('ry_line_template_string', []),
             'nonce' => [
                 'get' => wp_create_nonce('get-image-areas_' . $post->ID),
                 'position' => wp_create_nonce('save-image-position_' . $post->ID),
