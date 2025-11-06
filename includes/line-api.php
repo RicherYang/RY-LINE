@@ -123,6 +123,39 @@ final class RY_LINE_Api
         return $richmenu_object;
     }
 
+    public static function get_info($types)
+    {
+        $info = [];
+        foreach ($types as $type) {
+            switch ($type) {
+                case 'quota':
+                    $remote = self::do_remote_request('https://api.line.me/v2/bot/message/quota', 'GET');
+                    if (!is_wp_error($remote)) {
+                        $info['quota'] = $remote->type === 'limited' ? $remote->value : 'unlimited';
+                    }
+                    break;
+                case 'consumption':
+                    $remote = self::do_remote_request('https://api.line.me/v2/bot/message/quota/consumption', 'GET');
+                    if (!is_wp_error($remote)) {
+                        $info['consumption'] = $remote->totalUsage;
+                    }
+                    break;
+                case 'friends':
+                    $remote = self::do_remote_request('https://api.line.me/v2/bot/insight/followers', 'GET', [
+                        'date' => current_time('Ymd'),
+                    ]);
+                    if (!is_wp_error($remote)) {
+                        if ($remote->status === 'ready') {
+                            $info['friends'] = $remote->followers - $remote->blocks;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        return $info;
+    }
+
     public static function get_bot_info()
     {
         return self::do_remote_request('https://api.line.me/v2/bot/info', 'GET');
@@ -297,16 +330,20 @@ final class RY_LINE_Api
             'Authorization' => 'Bearer ' . self::get_access_token(),
         ];
         if ($content !== null) {
-            if (is_array($content)) {
-                if (empty($content)) {
-                    $body = '{}';
-                } else {
-                    $body = json_encode($content);
+            if ($method === 'GET') {
+                $url = add_query_arg($content, $url);
+            } else {
+                if (is_array($content)) {
+                    if (empty($content)) {
+                        $body = '{}';
+                    } else {
+                        $body = json_encode($content);
+                    }
+                    $header['Content-Type'] = 'application/json';
+                } elseif (get_post_type($content) === 'attachment') {
+                    $header['Content-Type'] = get_post_mime_type($content);
+                    $body = file_get_contents(get_attached_file($content));
                 }
-                $header['Content-Type'] = 'application/json';
-            } elseif (get_post_type($content) === 'attachment') {
-                $header['Content-Type'] = get_post_mime_type($content);
-                $body = file_get_contents(get_attached_file($content));
             }
         }
 

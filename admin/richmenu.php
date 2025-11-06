@@ -49,6 +49,7 @@ final class RY_LINE_Admin_Richmenu
     {
         $add_columns = [
             'alias' => __('Menu alias', 'ry-line'),
+            'actions' => __('Menu actions', 'ry-line'),
         ];
 
         return array_merge(array_slice($columns, 0, 2, true), $add_columns, array_slice($columns, 2, null, true));
@@ -58,6 +59,40 @@ final class RY_LINE_Admin_Richmenu
     {
         if ('alias' === $column_name) {
             echo esc_html(get_post_meta($post_ID, 'ry_line_richmenu_richMenuAliasId', true));
+        }
+        if ('actions' === $column_name) {
+            $richmenu_data = get_post_meta($post_ID, 'ry_line_richmenu_data', true);
+            if (is_array($richmenu_data)) {
+                echo '<ul style="list-style: disc inside; margin: 0;">';
+                foreach ($richmenu_data['areas'] as $area) {
+                    if (isset($area['action']['type']) && !empty($area['action']['type'])) {
+                        echo '<li style="margin: 0;">';
+                        switch ($area['action']['type']) {
+                            case 'uri':
+                                echo esc_html_x('Link', 'action type', 'ry-line');
+                                echo ' ' . esc_url($area['action']['uri']);
+                                break;
+                            case 'message':
+                                echo esc_html_x('Text', 'action type', 'ry-line');
+                                echo ' ' . esc_html($area['action']['text']);
+                                break;
+                            case 'selfmessage':
+                                echo esc_html_x('Customized message', 'action type', 'ry-line');
+                                echo ' ' . esc_html(get_the_title($area['action']['message']));
+                                break;
+                            case 'richmenuswitch':
+                                echo esc_html_x('Switch menu', 'action type', 'ry-line');
+                                echo ' ' . esc_html($area['action']['richMenuAliasId']);
+                                break;
+                            case 'accountlink':
+                                echo esc_html_x('Account link', 'action type', 'ry-line');
+                                break;
+                        }
+                        echo '</li>';
+                    }
+                }
+                echo '</ul>';
+            }
         }
     }
 

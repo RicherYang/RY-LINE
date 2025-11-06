@@ -15,7 +15,7 @@ final class RY_LINE_Admin_Meta_Box
 
         add_meta_box('ry-line-message-action', __('Action area', 'ry-line'), [__CLASS__, 'display_message_action'], null, 'side', 'high');
         add_meta_box('ry-line-message-content', __('Message content', 'ry-line'), [__CLASS__, 'display_message_content'], '', 'normal', 'core');
-        add_meta_box('ry-line-message-reply', __('Message reply', 'ry-line'), [__CLASS__, 'display_message_reply'], '', 'normal', 'core');
+        add_meta_box('ry-line-message-autosend', __('Automatic send', 'ry-line'), [__CLASS__, 'display_message_autosend'], '', 'normal', 'core');
 
         $asset_info = include RY_LINE_PLUGIN_DIR . 'assets/admin/meta-box.asset.php';
         wp_enqueue_style('ry-line-admin-meta-box', RY_LINE_PLUGIN_URL . 'assets/admin/meta-box.css', [], $asset_info['version']);
@@ -23,7 +23,7 @@ final class RY_LINE_Admin_Meta_Box
         wp_enqueue_script('ry-line-admin-meta-box', RY_LINE_PLUGIN_URL . 'assets/admin/meta-box.js', $asset_info['dependencies'], $asset_info['version'], true);
 
         wp_localize_script('ry-line-admin-meta-box', 'RYLineMetabox', [
-            'templateString' => apply_filters('ry_line_template_string', []),
+            'templateString' => apply_filters('ry/line_template_string', []),
             'nonce' => [
                 'get' => wp_create_nonce('get-image-areas_' . $post->ID),
                 'position' => wp_create_nonce('save-image-position_' . $post->ID),
@@ -71,16 +71,19 @@ final class RY_LINE_Admin_Meta_Box
         include RY_LINE_PLUGIN_DIR . 'admin/html/message-action.php';
     }
 
-    public static function display_message_reply($post)
+    public static function display_message_autosend($post)
     {
         $message_data = get_post_meta($post->ID, 'ry_line_message_data', true);
         $reply_keyword = get_post_meta($post->ID, 'ry_line_message_reply', true);
+        $autosend = get_post_meta($post->ID, 'ry_line_message_autosend');
 
         if (count($message_data['reply_from']) === 0) {
             $message_data['reply_from'] = ['user', 'group', 'room'];
         }
 
-        include RY_LINE_PLUGIN_DIR . 'admin/html/message-reply.php';
+        $autosend_events = apply_filters('ry/line_autosend_events', []);
+
+        include RY_LINE_PLUGIN_DIR . 'admin/html/message-autosend.php';
     }
 
     public static function display_message_content($post)

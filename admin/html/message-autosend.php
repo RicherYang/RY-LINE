@@ -22,5 +22,17 @@
                 </div>
             </td>
         </tr>
+        <tr>
+            <th><?php esc_html_e('Event action', 'ry-line'); ?></th>
+            <td>
+                <div class="ry-line-row">
+                    <?php foreach ($autosend_events as $event_key => $event_label) { ?>
+                    <label class="ry-line-col-auto">
+                        <input name="autosend_event[]" type="checkbox" value="<?php echo esc_attr($event_key); ?>" <?php checked(in_array($event_key, $autosend)); ?>> <?php echo esc_html($event_label); ?>
+                    </label>
+                    <?php } ?>
+                 </div>
+            </td>
+        </tr>
     </tbody>
 </table>

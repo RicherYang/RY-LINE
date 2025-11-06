@@ -58,10 +58,15 @@ final class RY_LINE extends RY_Abstract_Basic
             include_once RY_LINE_PLUGIN_DIR . 'includes/user.php';
             RY_LINE_Cron::add_action();
 
-            include_once RY_LINE_PLUGIN_DIR . 'includes/line-action.php';
+            include_once RY_LINE_PLUGIN_DIR . 'includes/line-autosend.php';
             include_once RY_LINE_PLUGIN_DIR . 'includes/line-api.php';
             include_once RY_LINE_PLUGIN_DIR . 'includes/line-template.php';
             include_once RY_LINE_PLUGIN_DIR . 'includes/line-webhook.php';
+
+            if (defined('WC_PLUGIN_FILE')) {
+                include_once RY_LINE_PLUGIN_DIR . 'includes/integrations/woocommerce/template.php';
+                include_once RY_LINE_PLUGIN_DIR . 'includes/integrations/woocommerce/autosend.php';
+            }
         }
     }
 

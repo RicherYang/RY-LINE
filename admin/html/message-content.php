@@ -1,7 +1,7 @@
 <table class="form-table">
     <tbody>
         <tr>
-            <th><?php esc_html_e('Type', 'ry-line'); ?></th>
+            <th><?php esc_html_e('Message type', 'ry-line'); ?></th>
             <td>
                 <select name="message-type" id="message-type">
                     <option value="text" <?php selected($message_data['type'], 'text'); ?>><?php echo esc_html_x('Text', 'message type', 'ry-line'); ?></option>
@@ -27,6 +27,12 @@
             </th>
             <td>
                 <textarea name="message-alt" id="message-alt" class="long-text" rows="2"><?php echo esc_textarea($post->post_excerpt); ?></textarea>
+            </td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e('Use order', 'ry-line'); ?></th>
+            <td>
+                <input type="number" name="message-order" id="message-order" class="small-text" value="<?php echo esc_attr($post->menu_order); ?>" min="0" step="1" />
             </td>
         </tr>
     </tbody>

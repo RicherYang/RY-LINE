@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: RY LINE 0.4.5\n"
+"Project-Id-Version: RY LINE 0.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ry-line\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-25T15:12:56+08:00\n"
+"POT-Creation-Date: 2025-11-05T23:51:23+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ry-line\n"
@@ -39,14 +39,19 @@ msgstr ""
 msgid "https://richer.tw/"
 msgstr ""
 
-#: admin/ajax.php:241
-#: admin/html/richmenu-operate.php:33
+#: admin/ajax.php:166
+#: admin/ajax.php:346
+msgid "Test user ID is not set."
+msgstr ""
+
+#: admin/ajax.php:256
+#: admin/html/richmenu-operate.php:31
 #: admin/richmenu.php:42
 msgid "Default menu"
 msgstr ""
 
-#: admin/ajax.php:241
-#: admin/html/richmenu-operate.php:33
+#: admin/ajax.php:256
+#: admin/html/richmenu-operate.php:31
 msgid "Unset default menu"
 msgstr ""
 
@@ -121,26 +126,31 @@ msgid "None"
 msgstr ""
 
 #: admin/html/image-area.php:107
+#: admin/richmenu.php:72
 msgctxt "action type"
 msgid "Link"
 msgstr ""
 
 #: admin/html/image-area.php:108
+#: admin/richmenu.php:76
 msgctxt "action type"
 msgid "Text"
 msgstr ""
 
 #: admin/html/image-area.php:109
+#: admin/richmenu.php:80
 msgctxt "action type"
 msgid "Customized message"
 msgstr ""
 
 #: admin/html/image-area.php:110
+#: admin/richmenu.php:84
 msgctxt "action type"
 msgid "Switch menu"
 msgstr ""
 
 #: admin/html/image-area.php:111
+#: admin/richmenu.php:88
 msgctxt "action type"
 msgid "Account link"
 msgstr ""
@@ -214,21 +224,51 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
+#: admin/html/message-autosend.php:4
+#: admin/message.php:68
+msgid "Reply Keyword"
+msgstr ""
+
+#: admin/html/message-autosend.php:10
+msgid "Reply Source"
+msgstr ""
+
+#: admin/html/message-autosend.php:14
+#: includes/line-template.php:55
+msgid "User"
+msgstr ""
+
+#: admin/html/message-autosend.php:17
+msgid "Group"
+msgstr ""
+
+#: admin/html/message-autosend.php:20
+msgid "Room"
+msgstr ""
+
+#: admin/html/message-autosend.php:26
+msgid "Event action"
+msgstr ""
+
 #: admin/html/message-content.php:4
-msgid "Type"
+#: admin/message.php:38
+msgid "Message type"
 msgstr ""
 
 #: admin/html/message-content.php:7
+#: admin/message.php:52
 msgctxt "message type"
 msgid "Text"
 msgstr ""
 
 #: admin/html/message-content.php:8
+#: admin/message.php:55
 msgctxt "message type"
 msgid "Image"
 msgstr ""
 
 #: admin/html/message-content.php:9
+#: admin/message.php:58
 msgctxt "message type"
 msgid "Flex"
 msgstr ""
@@ -245,25 +285,8 @@ msgstr ""
 msgid "Alt content"
 msgstr ""
 
-#: admin/html/message-reply.php:4
-msgid "Reply Keyword"
-msgstr ""
-
-#: admin/html/message-reply.php:10
-msgid "Reply Source"
-msgstr ""
-
-#: admin/html/message-reply.php:14
-#: includes/line-template.php:78
-msgid "User"
-msgstr ""
-
-#: admin/html/message-reply.php:17
-msgid "Group"
-msgstr ""
-
-#: admin/html/message-reply.php:20
-msgid "Room"
+#: admin/html/message-content.php:33
+msgid "Use order"
 msgstr ""
 
 #: admin/html/richmenu-action.php:16
@@ -275,7 +298,7 @@ msgid "Chat button text"
 msgstr ""
 
 #: admin/html/richmenu-content.php:5
-#: admin/richmenu.php:92
+#: admin/richmenu.php:127
 msgid "Open menu"
 msgstr ""
 
@@ -299,11 +322,11 @@ msgstr ""
 msgid "Set menu alias"
 msgstr ""
 
-#: admin/html/richmenu-operate.php:24
+#: admin/html/richmenu-operate.php:23
 msgid "Link to test user"
 msgstr ""
 
-#: admin/html/richmenu-operate.php:30
+#: admin/html/richmenu-operate.php:28
 msgid "Delete menu"
 msgstr ""
 
@@ -336,6 +359,11 @@ msgstr ""
 msgid "Changing the image size will clear the option of action areas"
 msgstr ""
 
+#: admin/message.php:39
+#: admin/meta-boxes.php:18
+msgid "Automatic send"
+msgstr ""
+
 #: admin/meta-boxes.php:16
 #: admin/meta-boxes.php:42
 msgid "Action area"
@@ -343,10 +371,6 @@ msgstr ""
 
 #: admin/meta-boxes.php:17
 msgid "Message content"
-msgstr ""
-
-#: admin/meta-boxes.php:18
-msgid "Message reply"
 msgstr ""
 
 #: admin/meta-boxes.php:43
@@ -361,18 +385,18 @@ msgstr ""
 msgid "Image action area"
 msgstr ""
 
-#: admin/meta-boxes.php:113
+#: admin/meta-boxes.php:116
 msgid "license key"
 msgstr ""
 
 #. translators: %s: license key link
-#: admin/meta-boxes.php:115
+#: admin/meta-boxes.php:118
 #, php-format
 msgid "Please activate %s to use this feature."
 msgstr ""
 
-#: admin/meta-boxes.php:120
-#: admin/meta-boxes.php:143
+#: admin/meta-boxes.php:123
+#: admin/meta-boxes.php:146
 msgid "Please set show image first."
 msgstr ""
 
@@ -425,19 +449,27 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: admin/page/html/option.php:25
+#: admin/page/html/option.php:18
+msgid "Message usage: "
+msgstr ""
+
+#: admin/page/html/option.php:19
+msgid "Friends count: "
+msgstr ""
+
+#: admin/page/html/option.php:27
 msgid "Channel secret"
 msgstr ""
 
-#: admin/page/html/option.php:31
+#: admin/page/html/option.php:33
 msgid "Test user ID"
 msgstr ""
 
-#: admin/page/html/option.php:41
+#: admin/page/html/option.php:43
 msgid "User name: "
 msgstr ""
 
-#: admin/page/html/option.php:42
+#: admin/page/html/option.php:44
 msgid "Language: "
 msgstr ""
 
@@ -466,31 +498,31 @@ msgstr ""
 msgid "LINE options"
 msgstr ""
 
-#: admin/page/option.php:73
+#: admin/page/option.php:80
 msgid "LINE API setting"
 msgstr ""
 
-#: admin/page/option.php:104
-#: admin/page/option.php:106
+#: admin/page/option.php:111
+#: admin/page/option.php:113
 msgid "Settings failed."
 msgstr ""
 
-#: admin/page/option.php:109
-#: admin/page/option.php:142
+#: admin/page/option.php:116
+#: admin/page/option.php:149
 msgid "Settings saved."
 msgstr ""
 
-#: admin/page/option.php:120
-#: admin/page/option.php:122
-#: admin/page/option.php:128
+#: admin/page/option.php:127
+#: admin/page/option.php:129
+#: admin/page/option.php:135
 msgid "Test failed."
 msgstr ""
 
-#: admin/page/option.php:126
+#: admin/page/option.php:133
 msgid "Test success."
 msgstr ""
 
-#: admin/page/option.php:144
+#: admin/page/option.php:151
 msgid "Error channel ID or channel secret."
 msgstr ""
 
@@ -514,151 +546,223 @@ msgstr[1] ""
 msgid "Unlink test user rich menu successfully."
 msgstr ""
 
-#: includes/line-action.php:103
-#: includes/line-action.php:147
-#: includes/line-action.php:176
+#: admin/richmenu.php:52
+msgid "Menu actions"
+msgstr ""
+
+#: includes/integrations/woocommerce/autosend.php:31
+msgid "WooCommerce new order"
+msgstr ""
+
+#: includes/integrations/woocommerce/autosend.php:32
+msgid "WooCommerce completed order"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:29
+msgid "WooCommerce order"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:33
+msgid "Order ID"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:37
+msgid "Order number"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:41
+msgid "Order transaction ID"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:45
+msgid "Order date"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:49
+msgid "Order status"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:53
+msgid "Order total"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:57
+msgid "Order note"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:61
+msgid "Payment method"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:65
+msgid "Billing address"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:69
+msgid "Shipping address"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:73
+msgid "Item count"
+msgstr ""
+
+#: includes/integrations/woocommerce/template.php:77
+msgid "View order url"
+msgstr ""
+
+#: includes/line-autosend.php:104
+msgid "Linked LINE account"
+msgstr ""
+
+#: includes/line-autosend.php:105
+msgid "Unlinked LINE account"
+msgstr ""
+
+#: includes/line-template.php:30
+msgid "General"
+msgstr ""
+
+#: includes/line-template.php:34
+msgid "Site title"
+msgstr ""
+
+#: includes/line-template.php:38
+msgid "Site tagline"
+msgstr ""
+
+#: includes/line-template.php:42
+msgid "WordPress URL"
+msgstr ""
+
+#: includes/line-template.php:46
+msgid "Site URL"
+msgstr ""
+
+#: includes/line-template.php:50
+msgid "Admin Email"
+msgstr ""
+
+#: includes/line-template.php:59
+msgid "Public display name"
+msgstr ""
+
+#: includes/line-template.php:63
+msgid "Nickname"
+msgstr ""
+
+#: includes/line-template.php:67
+msgid "First Name"
+msgstr ""
+
+#: includes/line-template.php:71
+msgid "Last Name"
+msgstr ""
+
+#: includes/line-template.php:75
+msgid "Email"
+msgstr ""
+
+#: includes/line-webhook.php:193
+#: includes/line-webhook.php:237
+#: includes/line-webhook.php:267
 msgid "Account link action can only do at one-by-one chat."
 msgstr ""
 
-#: includes/line-action.php:108
+#: includes/line-webhook.php:198
 msgid "Please click below button"
 msgstr ""
 
 #. translators: %s: user display name
-#: includes/line-action.php:114
+#: includes/line-webhook.php:204
 #, php-format
 msgid "Linked account: %s"
 msgstr ""
 
-#: includes/line-action.php:117
+#: includes/line-webhook.php:207
 msgid "Unlink account"
 msgstr ""
 
-#: includes/line-action.php:124
-#: includes/line-action.php:133
+#: includes/line-webhook.php:214
+#: includes/line-webhook.php:223
 msgid "Link account"
 msgstr ""
 
-#: includes/line-action.php:160
+#: includes/line-webhook.php:250
 msgid "No linked account found."
 msgstr ""
 
-#: includes/line-action.php:167
+#: includes/line-webhook.php:258
 msgid "Unlink account success."
 msgstr ""
 
 #. translators: %s: user display name
-#: includes/line-action.php:201
+#: includes/line-webhook.php:293
 #, php-format
 msgid "Welcome %s\\nLink account success."
 msgstr ""
 
-#: includes/line-action.php:210
+#: includes/line-webhook.php:302
 msgid "Sorry!\\nLink account failed."
 msgstr ""
 
-#: includes/line-template.php:53
-msgid "General"
-msgstr ""
-
-#: includes/line-template.php:57
-msgid "Site title"
-msgstr ""
-
-#: includes/line-template.php:61
-msgid "Site tagline"
-msgstr ""
-
-#: includes/line-template.php:65
-msgid "WordPress URL"
-msgstr ""
-
-#: includes/line-template.php:69
-msgid "Site URL"
-msgstr ""
-
-#: includes/line-template.php:73
-msgid "Admin Email"
-msgstr ""
-
-#: includes/line-template.php:82
-msgid "Public display name"
-msgstr ""
-
-#: includes/line-template.php:86
-msgid "Nickname"
-msgstr ""
-
-#: includes/line-template.php:90
-msgid "First Name"
-msgstr ""
-
-#: includes/line-template.php:94
-msgid "Last Name"
-msgstr ""
-
-#: includes/line-template.php:98
-msgid "Email"
-msgstr ""
-
-#: includes/main.php:72
+#: includes/main.php:77
 msgctxt "post type general name"
 msgid "LINE message"
 msgstr ""
 
-#: includes/main.php:73
+#: includes/main.php:78
 msgid "Add message"
 msgstr ""
 
-#: includes/main.php:74
+#: includes/main.php:79
 msgid "Edit message"
 msgstr ""
 
-#: includes/main.php:75
+#: includes/main.php:80
 msgid "Search message"
 msgstr ""
 
-#: includes/main.php:76
+#: includes/main.php:81
 msgid "Uploaded to this message"
 msgstr ""
 
-#: includes/main.php:77
-#: includes/main.php:102
+#: includes/main.php:82
+#: includes/main.php:107
 msgid "Show image"
 msgstr ""
 
-#: includes/main.php:78
-#: includes/main.php:103
+#: includes/main.php:83
+#: includes/main.php:108
 msgid "Set show image"
 msgstr ""
 
-#: includes/main.php:79
-#: includes/main.php:104
+#: includes/main.php:84
+#: includes/main.php:109
 msgid "Remove show image"
 msgstr ""
 
-#: includes/main.php:80
-#: includes/main.php:105
+#: includes/main.php:85
+#: includes/main.php:110
 msgid "Use as show image"
 msgstr ""
 
-#: includes/main.php:97
+#: includes/main.php:102
 msgctxt "post type general name"
 msgid "LINE rich menu"
 msgstr ""
 
-#: includes/main.php:98
+#: includes/main.php:103
 msgid "Add rich menu"
 msgstr ""
 
-#: includes/main.php:99
+#: includes/main.php:104
 msgid "Edit rich menu"
 msgstr ""
 
-#: includes/main.php:100
+#: includes/main.php:105
 msgid "Search rich menu"
 msgstr ""
 
-#: includes/main.php:101
+#: includes/main.php:106
 msgid "Uploaded to this rich menu"
 msgstr ""

@@ -88,7 +88,7 @@ label.ry-line-col-auto {
 }
 
 #ry-line-message-content,
-#ry-line-message-reply,
+#ry-line-message-autosend,
 #ry-line-richmenu-content,
 #ry-line-image-area {
     input[type="text"],
@@ -111,7 +111,7 @@ label.ry-line-col-auto {
     width: 100px;
 }
 
-#ry-line-message-reply .form-table th {
+#ry-line-message-autosend .form-table th {
     width: 110px;
 }
 
@@ -197,7 +197,7 @@ label.ry-line-col-auto {
     .template-string {
         padding: 10px;
         overflow-y: scroll;
-        max-height: 400px;
+        max-height: min(500px, 50vh);
     }
     .template-string-item {
         border-bottom: 1px solid #c3c4c7;

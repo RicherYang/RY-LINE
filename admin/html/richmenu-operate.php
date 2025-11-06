@@ -19,11 +19,9 @@
             </p>
             <button type="button" class="button ry-line-loading ry-set-alias"><?php esc_html_e('Set menu alias', 'ry-line'); ?></button>
         </div>
-        <?php if (!empty($line_user_ID)) { ?>
         <div class="misc-pub-section">
             <button type="button" class="button ry-line-loading ry-set-test"><?php esc_html_e('Link to test user', 'ry-line'); ?></button>
         </div>
-        <?php } ?>
     </div>
     <div id="major-publishing-actions">
         <div id="delete-action">

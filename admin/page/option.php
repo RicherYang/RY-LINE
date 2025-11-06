@@ -24,6 +24,13 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
 
     public function output_page(): void
     {
+        wp_enqueue_script('ry-line-admin');
+        wp_localize_script('ry-line-admin', 'RYLine', [
+            'nonce' => [
+                'get' => wp_create_nonce('get-info'),
+            ],
+        ]);
+
         $bot_info = RY_LINE::get_transient('bot_info');
         if (empty($bot_info)) {
             $bot_info = RY_LINE_Api::get_bot_info();

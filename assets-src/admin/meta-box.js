@@ -871,7 +871,7 @@ $(function () {
             // 設定新的游標位置到插入文字的末尾
             const newCursorPosition = cursorPosition + templateCode.length;
             targetElement.setSelectionRange(newCursorPosition, newCursorPosition);
-            $targetInput.focus();
+            $targetInput.trigger('focus');
 
             hideDialog();
         });
@@ -931,13 +931,6 @@ $(function () {
         // 點擊其他地方隱藏對話框
         $(document).on('click', function (e) {
             if ($dialog.css('opacity') == 1 && !$(e.target).closest('#ry-template-dialog, .ry-template-string').length) {
-                hideDialog();
-            }
-        });
-
-        // 滾動時隱藏對話框
-        $(window).on('scroll', function () {
-            if ($dialog.css('opacity') == 1) {
                 hideDialog();
             }
         });

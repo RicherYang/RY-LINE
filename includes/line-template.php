@@ -16,35 +16,12 @@ final class RY_LINE_Template
 
     protected function do_init(): void
     {
-        add_filter('ry_line_template_string', [$this, 'add_template_string']);
-
-        add_filter('ry_line_template_replace-wp', [$this, 'replace_wp_template_string'], 10, 2);
-        add_filter('ry_line_template_replace-user', [$this, 'replace_user_template_string'], 10, 3);
-    }
-
-    public function do_template_string($string, $template_info)
-    {
-        if (! str_contains($string, '{{')) {
-            return $string;
+        if (is_admin()) {
+            add_filter('ry/line_template_string', [$this, 'add_template_string']);
         }
 
-        return preg_replace_callback('@\{\{([^\{\}\x00-\x20]+)\}\}@', function ($matches) use ($template_info) {
-            return $this->replace($matches, $template_info);
-        }, $string);
-    }
-
-    public function replace($matches, $template_info)
-    {
-        $template_string = trim($matches[1]);
-        if (str_contains($template_string, '.')) {
-            $group = strstr($template_string, '.', true);
-            $key = substr(strstr($template_string, '.'), 1);
-        } else {
-            $group = '';
-            $key = $template_string;
-        }
-
-        return apply_filters('ry_line_template_replace-' . $group, $key, $template_info);
+        add_filter('ry/line_template_replace-wp', [$this, 'replace_wp_template_string'], 10, 2);
+        add_filter('ry/line_template_replace-user', [$this, 'replace_user_template_string'], 10, 4);
     }
 
     public function add_template_string($templates)
@@ -103,15 +80,15 @@ final class RY_LINE_Template
         return $templates;
     }
 
-    public function replace_wp_template_string($key)
+    public function replace_wp_template_string($value, $key)
     {
         return get_bloginfo($key);
     }
 
-    public function replace_user_template_string($key, $template_info)
+    public function replace_user_template_string($value, $key, $template_info, $default)
     {
         if (!isset($template_info->wp_user)) {
-            return '';
+            return $default;
         }
 
         if (str_starts_with($key, 'meta.')) {
@@ -129,7 +106,38 @@ final class RY_LINE_Template
             return $value;
         }
 
-        return '';
+        return $default;
+    }
+
+    public function do_template_string($string, $template_info)
+    {
+        if (! str_contains($string, '{{')) {
+            return $string;
+        }
+
+        return preg_replace_callback('@\{\{([^\{\}\x00-\x20]+)\}\}@', function ($matches) use ($template_info) {
+            return $this->replace($matches, $template_info);
+        }, $string);
+    }
+
+    public function replace($matches, $template_info)
+    {
+        $template_string = trim($matches[1]);
+        if (str_contains($template_string, '.')) {
+            $group = strstr($template_string, '.', true);
+            $key = substr(strstr($template_string, '.'), 1);
+        } else {
+            $group = '';
+            $key = $template_string;
+        }
+
+        if (str_contains($key, '|')) {
+            list($key, $default) = explode('|', $key, 2);
+        } else {
+            $default = '';
+        }
+
+        return apply_filters('ry/line_template_replace-' . $group, $default, $key, $template_info, $default);
     }
 }
 

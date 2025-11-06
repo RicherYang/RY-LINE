@@ -18,6 +18,8 @@ final class RY_LINE_Admin_Ajax
     {
         if (isset($_GET['action'])) {
             $actions = [
+                'get-info',
+
                 'get-image-areas',
                 'save-image-position',
                 'save-image-actions',
@@ -34,6 +36,14 @@ final class RY_LINE_Admin_Ajax
                 add_action('wp_ajax_ry-line/' . $action_hook, [$this, str_replace('-', '_', $action_hook)]);
             }
         }
+    }
+
+    public function get_info()
+    {
+        check_ajax_referer('get-info');
+
+        $types = array_map('sanitize_key', wp_unslash($_POST['types'] ?? []));
+        wp_send_json_success(RY_LINE_Api::get_info($types));
     }
 
     public function get_image_areas()
@@ -152,6 +162,11 @@ final class RY_LINE_Admin_Ajax
         check_ajax_referer('remote-message-testsend_' . $post_ID);
 
         $line_user_ID = RY_LINE::get_option('test_user_id');
+        if (empty($line_user_ID)) {
+            wp_send_json_error(['message' => __('Test user ID is not set.', 'ry-line')]);
+            return;
+        }
+
         $template_info = (object) [
             'wp_user' => RY_LINE_User::instance()->get_wp_user($line_user_ID),
         ];
@@ -327,6 +342,10 @@ final class RY_LINE_Admin_Ajax
 
         $richMenuId = get_post_meta($post_ID, 'ry_line_richmenu_richMenuId', true);
         $line_user_ID = RY_LINE::get_option('test_user_id');
+        if (empty($line_user_ID)) {
+            wp_send_json_error(['message' => __('Test user ID is not set.', 'ry-line')]);
+            return;
+        }
 
         $response = RY_LINE_Api::richmenu_link_user($line_user_ID, $richMenuId);
         if (isset($response) && is_wp_error($response)) {

@@ -29,10 +29,6 @@ final class RY_ActionScheduler_Dashboard
         $store = ActionScheduler::store();
         $counts = $store->action_counts() + $store->extra_action_counts();
 
-        if (!isset($counts['all'])) {
-            $counts = ['all' => array_sum($counts)] + $counts;
-        }
-
         foreach ($counts as $status_name => $count) {
             if (0 === $count) {
                 continue;

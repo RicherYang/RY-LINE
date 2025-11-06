@@ -40,7 +40,7 @@ class RY_ActionScheduler_ListTable extends ActionScheduler_ListTable
         $schedule->get_date()->setTimezone($this->timezone);
         $next_timestamp = $schedule->get_date()->getTimestamp();
 
-        $schedule_display_string = $schedule->get_date()->format('Y-m-d H:i:s') . '<br/>';
+        $schedule_display_string = $schedule->get_date()->format('Y-m-d H:i:s') . '<br>';
 
         if (gmdate('U') > $next_timestamp) {
             /* translators: %s: date interval */

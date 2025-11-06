@@ -40,6 +40,18 @@ final class RY_LINE_User
             }
         }
     }
+
+    public function get_line_user_id(int $user_ID): string
+    {
+        foreach (self::MAYPE_USER_META_KEY as $meta_key) {
+            $line_user_ID = get_user_meta($user_ID, $meta_key, true);
+            if (!empty($line_user_ID)) {
+                return $line_user_ID;
+            }
+        }
+
+        return '';
+    }
 }
 
 RY_LINE_User::instance();
