@@ -44,6 +44,11 @@ final class RY_LINE_Admin_Message
 
     public function show_columns($column_name, $post_ID)
     {
+        static $autosend_events = null;
+        if (null === $autosend_events) {
+            $autosend_events = apply_filters('ry/line_autosend_events', []);
+        }
+
         if ('mtype' === $column_name) {
             $message_data = get_post_meta($post_ID, 'ry_line_message_data', true);
             if (is_array($message_data)) {
@@ -61,12 +66,29 @@ final class RY_LINE_Admin_Message
             }
         }
         if ('autosend' === $column_name) {
-            $message_data = get_post_meta($post_ID, 'ry_line_message_data', true);
-            if (is_array($message_data)) {
-                $reply_keyword = get_post_meta($post_ID, 'ry_line_message_reply', true);
-                if (!empty($reply_keyword)) {
-                    echo esc_html__('Reply Keyword', 'ry-line') . ': ' . esc_html($reply_keyword);
+            switch (get_post_meta($post_ID, 'ry_line_message_reply_type', true)) {
+                case 'keyword':
+                    $reply_keyword = get_post_meta($post_ID, 'ry_line_message_reply', true);
+                    if (!empty($reply_keyword)) {
+                        echo esc_html__('Reply keyword: ', 'ry-line') . esc_html($reply_keyword) . '<br>';
+                    }
+                    break;
+                case 'all-nokeyword':
+                    echo esc_html__('Reply all without keyword', 'ry-line') . '<br>';
+                    break;
+                default:
+                    break;
+            }
+
+            $used_events = [];
+            $autosend = get_post_meta($post_ID, 'ry_line_message_autosend');
+            foreach ($autosend_events as $event_key => $event_label) {
+                if (in_array($event_key, $autosend)) {
+                    $used_events[] = $event_label;
                 }
+            }
+            if (count($used_events)) {
+                echo esc_html__('Autosend events: ', 'ry-line') . esc_html(implode(__(', ', 'ry-line'), $used_events)) . '<br>';
             }
         }
     }
@@ -117,15 +139,32 @@ final class RY_LINE_Admin_Message
 
         unset($message_data['error']);
         $message_data['type'] = sanitize_key($_POST['message-type'] ?? '');
-        $message_data['account_link'] = isset($_POST['account_link']);
-        $message_data['reply_from'] = array_map('sanitize_key', is_array($_POST['reply_from'] ?? '') ? $_POST['reply_from'] : []);
+        $message_data['reply_from'] = array_map('sanitize_key', is_array($_POST['reply-from'] ?? '') ? $_POST['reply-from'] : []);
 
         $message_data['reply_from'] = array_intersect($message_data['reply_from'], ['user', 'group', 'room']);
         if (count($message_data['reply_from']) === 3) {
             $message_data['reply_from'] = [];
         }
 
-        $post_event = array_map('sanitize_text_field', is_array($_POST['autosend_event'] ?? '') ? $_POST['autosend_event'] : []);
+        update_post_meta($post_ID, 'ry_line_message_data', $message_data);
+
+        $reply_type = sanitize_key($_POST['reply-type'] ?? '');
+        switch ($reply_type) {
+            case 'keyword':
+                update_post_meta($post->ID, 'ry_line_message_reply_type', $reply_type);
+                update_post_meta($post_ID, 'ry_line_message_reply', sanitize_text_field(wp_unslash($_POST['reply-keyword'] ?? '')));
+                break;
+            case 'all-nokeyword':
+                update_post_meta($post->ID, 'ry_line_message_reply_type', $reply_type);
+                delete_post_meta($post_ID, 'ry_line_message_reply');
+                break;
+            default:
+                delete_post_meta($post_ID, 'ry_line_message_reply_type');
+                delete_post_meta($post_ID, 'ry_line_message_reply');
+                break;
+        }
+
+        $post_event = array_map('sanitize_text_field', is_array($_POST['autosend-event'] ?? '') ? $_POST['autosend-event'] : []);
         $pre_autosend = get_post_meta($post_ID, 'ry_line_message_autosend');
         $pre_autosend = array_fill_keys($pre_autosend, true);
         $autosend_hooks = RY_LINE::get_option('autosend_hooks', []);
@@ -162,9 +201,6 @@ final class RY_LINE_Admin_Message
             as_schedule_single_action(time() + HOUR_IN_SECONDS, RY_LINE::OPTION_PREFIX . 'check_autosend_hooks', [], 'ry-line', true);
         }
         RY_LINE::update_option('autosend_hooks', $autosend_hooks, true);
-
-        update_post_meta($post_ID, 'ry_line_message_data', $message_data);
-        update_post_meta($post_ID, 'ry_line_message_reply', sanitize_text_field(wp_unslash($_POST['reply-keyword'] ?? '')));
 
         if ($post->post_status === 'auto-draft') {
             return;

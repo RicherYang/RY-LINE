@@ -146,14 +146,32 @@ final class RY_LINE_Webhook
             'post_status' => 'publish',
             'meta_query' => [
                 [
+                    'key' => 'ry_line_message_reply_type',
+                    'value' => 'keyword',
+                ],
+                [
                     'key' => 'ry_line_message_reply',
                     'value' => $text,
-                    'compare' => '=',
                 ],
             ],
             'orderby' => 'menu_order',
             'order' => 'DESC',
         ]);
+        if (empty($messages)) {
+            $messages = $query->query([
+                'post_type' => RY_LINE::POSTTYPE_MESSAGE,
+                'posts_per_page' => -1,
+                'post_status' => 'publish',
+                'meta_query' => [
+                    [
+                        'key' => 'ry_line_message_reply_type',
+                        'value' => 'all-nokeyword',
+                    ],
+                ],
+                'orderby' => 'menu_order',
+                'order' => 'DESC',
+            ]);
+        }
         if (empty($messages)) {
             return;
         }

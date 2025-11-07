@@ -671,22 +671,21 @@ $(function () {
     }).trigger('input');
 
     // 訊息類型切換
-    $('#message-type').on('change', function () {
+    $('#message-type').on('input', function () {
         $('#postimagediv').hide();
         $('.type-info').hide();
         $('.type-info-' + $(this).val()).show();
         if ($(this).val() == 'image') {
             $('#postimagediv').show();
         }
-    }).trigger('change');
+    }).trigger('input');
 
     // 訊息回應關鍵字
-    $('#reply-keyword').on('input', function () {
+    $('[name="reply-type"]').on('input', function () {
         $('.reply-info').hide();
-        if ($(this).val() != '') {
-            $('.reply-info').show();
-        }
-    }).trigger('input');
+        $('.reply-info-' + $(this).val()).show();
+    });
+    $('[name="reply-type"]:checked').trigger('input');
 
     // 按鈕-發送訊息
     $('.ry-send-test').on('click', function (e) {

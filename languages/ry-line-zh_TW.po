@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-03-02T11:52:45+08:00\n"
-"PO-Revision-Date: 2025-11-05 23:39+0800\n"
+"PO-Revision-Date: 2025-11-07 11:45+0800\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
@@ -246,12 +246,12 @@ msgstr "請在進行 LINE 操作前請先儲存資料。"
 msgid "LINE Operation"
 msgstr "LINE 操作"
 
-#: admin/meta-boxes.php:116
+#: admin/meta-boxes.php:117
 msgid "license key"
 msgstr "授權金鑰"
 
 #. translators: %s: license key link
-#: admin/meta-boxes.php:118
+#: admin/meta-boxes.php:119
 #, php-format
 msgid "Please activate %s to use this feature."
 msgstr "請先啟用 %s 再使用本功能。"
@@ -436,47 +436,47 @@ msgstr "測試失敗。"
 msgid "Test success."
 msgstr "測試成功。"
 
-#: includes/line-webhook.php:198
+#: includes/line-webhook.php:216
 msgid "Please click below button"
 msgstr "請點擊以下按鈕"
 
-#: includes/line-webhook.php:207
+#: includes/line-webhook.php:225
 msgid "Unlink account"
 msgstr "取消綁定帳號"
 
-#: includes/line-webhook.php:214
-#: includes/line-webhook.php:223
+#: includes/line-webhook.php:232
+#: includes/line-webhook.php:241
 msgid "Link account"
 msgstr "綁定帳號"
 
-#: includes/line-webhook.php:250
+#: includes/line-webhook.php:268
 msgid "No linked account found."
 msgstr "沒有以綁定的帳號。"
 
-#: includes/line-webhook.php:258
+#: includes/line-webhook.php:276
 msgid "Unlink account success."
 msgstr "取消綁定成功。"
 
-#: includes/line-webhook.php:302
+#: includes/line-webhook.php:320
 msgid "Sorry!\\nLink account failed."
 msgstr ""
 "抱歉！\n"
 "綁定帳號失敗。"
 
-#: includes/line-webhook.php:193
-#: includes/line-webhook.php:237
-#: includes/line-webhook.php:267
+#: includes/line-webhook.php:211
+#: includes/line-webhook.php:255
+#: includes/line-webhook.php:285
 msgid "Account link action can only do at one-by-one chat."
 msgstr "綁定帳號只可以在一對一聊天室中進行。"
 
 #. translators: %s: user display name
-#: includes/line-webhook.php:204
+#: includes/line-webhook.php:222
 #, php-format
 msgid "Linked account: %s"
 msgstr "綁定帳號：%s"
 
 #. translators: %s: user display name
-#: includes/line-webhook.php:293
+#: includes/line-webhook.php:311
 #, php-format
 msgid "Welcome %s\\nLink account success."
 msgstr ""
@@ -528,8 +528,8 @@ msgstr "設定為顯示圖片"
 msgid "Menu content"
 msgstr "選單內容"
 
-#: admin/meta-boxes.php:123
-#: admin/meta-boxes.php:146
+#: admin/meta-boxes.php:124
+#: admin/meta-boxes.php:147
 msgid "Please set show image first."
 msgstr "請先設定顯示圖片。"
 
@@ -538,19 +538,19 @@ msgid "Image action area"
 msgstr "圖片動作區域"
 
 #: admin/html/message-content.php:7
-#: admin/message.php:52
+#: admin/message.php:57
 msgctxt "message type"
 msgid "Text"
 msgstr "文字"
 
 #: admin/html/message-content.php:8
-#: admin/message.php:55
+#: admin/message.php:60
 msgctxt "message type"
 msgid "Image"
 msgstr "圖片"
 
 #: admin/html/message-content.php:9
-#: admin/message.php:58
+#: admin/message.php:63
 msgctxt "message type"
 msgid "Flex"
 msgstr "Flex"
@@ -595,25 +595,20 @@ msgstr "錯誤資訊："
 msgid "Send to test user"
 msgstr "發送至測試使用者"
 
-#: admin/html/message-autosend.php:4
-#: admin/message.php:68
-msgid "Reply Keyword"
-msgstr "回應關鍵字"
-
-#: admin/html/message-autosend.php:10
+#: admin/html/message-autosend.php:26
 msgid "Reply Source"
 msgstr "回應來源"
 
-#: admin/html/message-autosend.php:14
+#: admin/html/message-autosend.php:30
 #: includes/line-template.php:55
 msgid "User"
 msgstr "使用者"
 
-#: admin/html/message-autosend.php:17
+#: admin/html/message-autosend.php:33
 msgid "Group"
 msgstr "群組"
 
-#: admin/html/message-autosend.php:20
+#: admin/html/message-autosend.php:36
 msgid "Room"
 msgstr "會議室"
 
@@ -689,7 +684,7 @@ msgstr "選單動作"
 msgid "Message type"
 msgstr "訊息類型"
 
-#: admin/html/message-autosend.php:26
+#: admin/html/message-autosend.php:42
 msgid "Event action"
 msgstr "事件動作"
 
@@ -773,3 +768,36 @@ msgstr "好友數量："
 #: includes/integrations/woocommerce/autosend.php:32
 msgid "WooCommerce completed order"
 msgstr "WooCommerce 完成訂單"
+
+#: admin/html/message-autosend.php:20
+msgid "Reply keyword"
+msgstr "回應關鍵字"
+
+#: admin/message.php:73
+msgid "Reply keyword: "
+msgstr "回應關鍵字："
+
+#: admin/message.php:91
+msgid "Autosend events: "
+msgstr "自動發送事件："
+
+#: admin/message.php:91
+msgid ", "
+msgstr "、"
+
+#: admin/html/message-autosend.php:4
+msgid "Reply type"
+msgstr "回覆類型"
+
+#: admin/html/message-autosend.php:8
+msgid "None"
+msgstr "無"
+
+#: admin/html/message-autosend.php:11
+msgid "Keyword"
+msgstr "關鍵字"
+
+#: admin/html/message-autosend.php:14
+#: admin/message.php:77
+msgid "Reply all without keyword"
+msgstr "回覆所有非關鍵字"

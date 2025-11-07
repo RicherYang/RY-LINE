@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: RY LINE 0.5.0\n"
+"Project-Id-Version: RY LINE 0.5.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ry-line\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-05T23:51:23+08:00\n"
+"POT-Creation-Date: 2025-11-07T12:22:37+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ry-line\n"
@@ -225,28 +225,44 @@ msgid "Update"
 msgstr ""
 
 #: admin/html/message-autosend.php:4
-#: admin/message.php:68
-msgid "Reply Keyword"
+msgid "Reply type"
 msgstr ""
 
-#: admin/html/message-autosend.php:10
-msgid "Reply Source"
+#: admin/html/message-autosend.php:8
+msgid "None"
+msgstr ""
+
+#: admin/html/message-autosend.php:11
+msgid "Keyword"
 msgstr ""
 
 #: admin/html/message-autosend.php:14
+#: admin/message.php:77
+msgid "Reply all without keyword"
+msgstr ""
+
+#: admin/html/message-autosend.php:20
+msgid "Reply keyword"
+msgstr ""
+
+#: admin/html/message-autosend.php:26
+msgid "Reply Source"
+msgstr ""
+
+#: admin/html/message-autosend.php:30
 #: includes/line-template.php:55
 msgid "User"
 msgstr ""
 
-#: admin/html/message-autosend.php:17
+#: admin/html/message-autosend.php:33
 msgid "Group"
 msgstr ""
 
-#: admin/html/message-autosend.php:20
+#: admin/html/message-autosend.php:36
 msgid "Room"
 msgstr ""
 
-#: admin/html/message-autosend.php:26
+#: admin/html/message-autosend.php:42
 msgid "Event action"
 msgstr ""
 
@@ -256,19 +272,19 @@ msgid "Message type"
 msgstr ""
 
 #: admin/html/message-content.php:7
-#: admin/message.php:52
+#: admin/message.php:57
 msgctxt "message type"
 msgid "Text"
 msgstr ""
 
 #: admin/html/message-content.php:8
-#: admin/message.php:55
+#: admin/message.php:60
 msgctxt "message type"
 msgid "Image"
 msgstr ""
 
 #: admin/html/message-content.php:9
-#: admin/message.php:58
+#: admin/message.php:63
 msgctxt "message type"
 msgid "Flex"
 msgstr ""
@@ -364,6 +380,18 @@ msgstr ""
 msgid "Automatic send"
 msgstr ""
 
+#: admin/message.php:73
+msgid "Reply keyword: "
+msgstr ""
+
+#: admin/message.php:91
+msgid "Autosend events: "
+msgstr ""
+
+#: admin/message.php:91
+msgid ", "
+msgstr ""
+
 #: admin/meta-boxes.php:16
 #: admin/meta-boxes.php:42
 msgid "Action area"
@@ -385,18 +413,18 @@ msgstr ""
 msgid "Image action area"
 msgstr ""
 
-#: admin/meta-boxes.php:116
+#: admin/meta-boxes.php:117
 msgid "license key"
 msgstr ""
 
 #. translators: %s: license key link
-#: admin/meta-boxes.php:118
+#: admin/meta-boxes.php:119
 #, php-format
 msgid "Please activate %s to use this feature."
 msgstr ""
 
-#: admin/meta-boxes.php:123
-#: admin/meta-boxes.php:146
+#: admin/meta-boxes.php:124
+#: admin/meta-boxes.php:147
 msgid "Please set show image first."
 msgstr ""
 
@@ -662,46 +690,46 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: includes/line-webhook.php:193
-#: includes/line-webhook.php:237
-#: includes/line-webhook.php:267
+#: includes/line-webhook.php:211
+#: includes/line-webhook.php:255
+#: includes/line-webhook.php:285
 msgid "Account link action can only do at one-by-one chat."
 msgstr ""
 
-#: includes/line-webhook.php:198
+#: includes/line-webhook.php:216
 msgid "Please click below button"
 msgstr ""
 
 #. translators: %s: user display name
-#: includes/line-webhook.php:204
+#: includes/line-webhook.php:222
 #, php-format
 msgid "Linked account: %s"
 msgstr ""
 
-#: includes/line-webhook.php:207
+#: includes/line-webhook.php:225
 msgid "Unlink account"
 msgstr ""
 
-#: includes/line-webhook.php:214
-#: includes/line-webhook.php:223
+#: includes/line-webhook.php:232
+#: includes/line-webhook.php:241
 msgid "Link account"
 msgstr ""
 
-#: includes/line-webhook.php:250
+#: includes/line-webhook.php:268
 msgid "No linked account found."
 msgstr ""
 
-#: includes/line-webhook.php:258
+#: includes/line-webhook.php:276
 msgid "Unlink account success."
 msgstr ""
 
 #. translators: %s: user display name
-#: includes/line-webhook.php:293
+#: includes/line-webhook.php:311
 #, php-format
 msgid "Welcome %s\\nLink account success."
 msgstr ""
 
-#: includes/line-webhook.php:302
+#: includes/line-webhook.php:320
 msgid "Sorry!\\nLink account failed."
 msgstr ""
 

@@ -74,6 +74,7 @@ final class RY_LINE_Admin_Meta_Box
     public static function display_message_autosend($post)
     {
         $message_data = get_post_meta($post->ID, 'ry_line_message_data', true);
+        $reply_type = get_post_meta($post->ID, 'ry_line_message_reply_type', true);
         $reply_keyword = get_post_meta($post->ID, 'ry_line_message_reply', true);
         $autosend = get_post_meta($post->ID, 'ry_line_message_autosend');
 
