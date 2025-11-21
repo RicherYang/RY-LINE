@@ -28,6 +28,7 @@ if (!class_exists('RY_ActionScheduler')) {
         {
             add_action('action_scheduler_begin_execute', [$this, 'set_action_id']);
             add_filter('action_scheduler_queue_runner_time_limit', [$this, 'set_45']);
+            add_filter('action_scheduler_retention_period', [$this, 'set_delete_time'], 99);
 
             if (is_admin()) {
                 include_once __DIR__ . '/admin/admin-view.php';
@@ -46,6 +47,11 @@ if (!class_exists('RY_ActionScheduler')) {
         public function set_45(): int
         {
             return 45;
+        }
+
+        public function set_delete_time(): int
+        {
+            return MONTH_IN_SECONDS;
         }
 
         public function change_adminview(): string

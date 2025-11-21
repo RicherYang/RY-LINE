@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-03-02T11:52:45+08:00\n"
-"PO-Revision-Date: 2025-11-07 11:45+0800\n"
+"PO-Revision-Date: 2025-11-21 20:05+0800\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
@@ -48,11 +48,11 @@ msgstr "LINE support"
 msgid "Settings saved."
 msgstr "設定已儲存。"
 
-#: admin/page/html/option.php:14
+#: admin/page/html/option.php:16
 msgid "Bot basic ID: "
-msgstr "專屬ID："
+msgstr "專屬 ID："
 
-#: admin/page/html/option.php:15
+#: admin/page/html/option.php:17
 msgid "Channel name: "
 msgstr "帳號名稱："
 
@@ -60,11 +60,11 @@ msgstr "帳號名稱："
 msgid "Error channel ID or channel secret."
 msgstr "錯誤的 channel ID 或是 channel secret。"
 
-#: admin/page/html/option.php:4
+#: admin/page/html/option.php:6
 msgid "Channel ID"
 msgstr "Channel ID"
 
-#: admin/page/html/option.php:27
+#: admin/page/html/option.php:29
 msgid "Channel secret"
 msgstr "Channel secret"
 
@@ -89,8 +89,8 @@ msgstr "搜尋圖文選單"
 msgid "Uploaded to this rich menu"
 msgstr "已關聯至這圖文選單"
 
-#: admin/meta-boxes.php:16
-#: admin/meta-boxes.php:42
+#: admin/meta-boxes.php:15
+#: admin/meta-boxes.php:40
 msgid "Action area"
 msgstr "操作區域"
 
@@ -242,16 +242,16 @@ msgstr "儲存區域動作"
 msgid "Please save data before performing any LINE operations."
 msgstr "請在進行 LINE 操作前請先儲存資料。"
 
-#: admin/meta-boxes.php:43
+#: admin/meta-boxes.php:41
 msgid "LINE Operation"
 msgstr "LINE 操作"
 
-#: admin/meta-boxes.php:117
+#: admin/meta-boxes.php:118
 msgid "license key"
 msgstr "授權金鑰"
 
 #. translators: %s: license key link
-#: admin/meta-boxes.php:119
+#: admin/meta-boxes.php:120
 #, php-format
 msgid "Please activate %s to use this feature."
 msgstr "請先啟用 %s 再使用本功能。"
@@ -309,10 +309,6 @@ msgstr "LINE 工具"
 msgid "Reload rich menu"
 msgstr "重新載入圖文選單"
 
-#: admin/page/option.php:80
-msgid "LINE API setting"
-msgstr "LINE API 設定"
-
 #: admin/page/tools.php:138
 msgid "Reloaded successfully."
 msgstr "重新載入成功。"
@@ -359,15 +355,15 @@ msgstr "預設選單"
 msgid "Link to test user"
 msgstr "連結至測試使用者"
 
-#: admin/page/html/option.php:33
+#: admin/page/html/option.php:35
 msgid "Test user ID"
 msgstr "測試使用者 ID"
 
-#: admin/page/html/option.php:43
+#: admin/page/html/option.php:45
 msgid "User name: "
 msgstr "使用者名稱："
 
-#: admin/page/html/option.php:44
+#: admin/page/html/option.php:46
 msgid "Language: "
 msgstr "語言："
 
@@ -405,19 +401,19 @@ msgstr "設定 webhook 網址"
 msgid "Test webhook"
 msgstr "測試 webhook"
 
-#: admin/page/html/option.php:16
+#: admin/page/html/option.php:18
 msgid "Webhook URL: "
 msgstr "Webhook 網址："
 
-#: admin/page/html/option.php:17
+#: admin/page/html/option.php:19
 msgid "Webhook status: "
 msgstr "Webhook 狀態："
 
-#: admin/page/html/option.php:17
+#: admin/page/html/option.php:19
 msgid "Enabled"
 msgstr "啟用"
 
-#: admin/page/html/option.php:17
+#: admin/page/html/option.php:19
 msgid "Disabled"
 msgstr "停用"
 
@@ -524,16 +520,16 @@ msgstr "移除顯示圖片"
 msgid "Use as show image"
 msgstr "設定為顯示圖片"
 
-#: admin/meta-boxes.php:44
+#: admin/meta-boxes.php:42
 msgid "Menu content"
 msgstr "選單內容"
 
-#: admin/meta-boxes.php:124
-#: admin/meta-boxes.php:147
+#: admin/meta-boxes.php:125
+#: admin/meta-boxes.php:148
 msgid "Please set show image first."
 msgstr "請先設定顯示圖片。"
 
-#: admin/meta-boxes.php:45
+#: admin/meta-boxes.php:43
 msgid "Image action area"
 msgstr "圖片動作區域"
 
@@ -559,7 +555,7 @@ msgstr "Flex"
 msgid "Content"
 msgstr "內容"
 
-#: admin/meta-boxes.php:17
+#: admin/meta-boxes.php:16
 msgid "Message content"
 msgstr "訊息內容"
 
@@ -689,15 +685,15 @@ msgid "Event action"
 msgstr "事件動作"
 
 #: admin/message.php:39
-#: admin/meta-boxes.php:18
+#: admin/meta-boxes.php:17
 msgid "Automatic send"
 msgstr "自動發送"
 
-#: includes/line-autosend.php:104
+#: includes/line-autosend.php:122
 msgid "Linked LINE account"
 msgstr "綁定 LINE 帳號"
 
-#: includes/line-autosend.php:105
+#: includes/line-autosend.php:123
 msgid "Unlinked LINE account"
 msgstr "取消綁定 LINE 帳號"
 
@@ -757,11 +753,11 @@ msgstr "商品數量"
 msgid "WooCommerce new order"
 msgstr "WooCommerce 新訂單"
 
-#: admin/page/html/option.php:18
+#: admin/page/html/option.php:20
 msgid "Message usage: "
 msgstr "訊息使用量："
 
-#: admin/page/html/option.php:19
+#: admin/page/html/option.php:21
 msgid "Friends count: "
 msgstr "好友數量："
 
@@ -801,3 +797,23 @@ msgstr "關鍵字"
 #: admin/message.php:77
 msgid "Reply all without keyword"
 msgstr "回覆所有非關鍵字"
+
+#: admin/html/message-autosend.php:54
+msgid "Event send copy"
+msgstr "事件發送副本"
+
+#: admin/html/message-autosend.php:57
+msgid "Enter the LINE User ID."
+msgstr "請輸入 LINE 使用者 ID。"
+
+#: admin/page/html/option.php:1
+msgid "Messaging API"
+msgstr "Messaging API"
+
+#: admin/page/option.php:80
+msgid "LINE setting"
+msgstr "LINE 設定"
+
+#: includes/line-autosend.php:121
+msgid "User login"
+msgstr "使用者登入"

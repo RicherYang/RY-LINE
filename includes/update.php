@@ -13,12 +13,6 @@ final class RY_LINE_update
             return;
         }
 
-        if (version_compare($now_version, '0.4.0', '<')) {
-            RY_LINE::create_roles();
-
-            RY_LINE::update_option('version', '0.4.0', true);
-        }
-
         if (version_compare($now_version, '0.5.1', '<')) {
             $query = new WP_Query();
             $messages = $query->query([
@@ -39,6 +33,10 @@ final class RY_LINE_update
             }
 
             RY_LINE::update_option('version', '0.5.1', true);
+        }
+
+        if (version_compare($now_version, '0.5.3', '<')) {
+            RY_LINE::update_option('version', '0.5.3', true);
         }
     }
 }

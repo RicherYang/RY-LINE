@@ -77,7 +77,7 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
         echo '<div class="wrap">';
         $show_type = 'ry-line-option';
         include __DIR__ . '/html/nav.php';
-        echo '<h1>' . esc_html__('LINE API setting', 'ry-line') . '</h1>';
+        echo '<h1>' . esc_html__('LINE setting', 'ry-line') . '</h1>';
         echo '<form method="post" action="admin-post.php">';
         echo '<input type="hidden" name="action" value="ry/admin-line-option">';
         echo '<input type="hidden" name="do" value="save-option">';

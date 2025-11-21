@@ -50,5 +50,12 @@
                  </div>
             </td>
         </tr>
+        <tr class="event-info">
+            <th><?php esc_html_e('Event send copy', 'ry-line'); ?></th>
+            <td>
+                <input name="cc-user-id" type="text" class="regular-text" value="<?php echo esc_attr($message_data['send_cc_lineid']); ?>">
+                <p class="description"><?php esc_html_e('Enter the LINE User ID.', 'ry-line'); ?></p>
+            </td>
+        </tr>
     </tbody>
 </table>

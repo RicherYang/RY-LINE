@@ -11,7 +11,6 @@ final class RY_LINE_Admin_Meta_Box
     public static function add_message_metabox($post)
     {
         remove_meta_box('submitdiv', '', 'side');
-        remove_meta_box('slugdiv', '', 'normal');
 
         add_meta_box('ry-line-message-action', __('Action area', 'ry-line'), [__CLASS__, 'display_message_action'], null, 'side', 'high');
         add_meta_box('ry-line-message-content', __('Message content', 'ry-line'), [__CLASS__, 'display_message_content'], '', 'normal', 'core');
@@ -37,7 +36,6 @@ final class RY_LINE_Admin_Meta_Box
     public static function add_richmenu_metabox($post)
     {
         remove_meta_box('submitdiv', '', 'side');
-        remove_meta_box('slugdiv', '', 'normal');
 
         add_meta_box('ry-line-richmenu-action', __('Action area', 'ry-line'), [__CLASS__, 'display_richmenu_action'], null, 'side', 'high');
         add_meta_box('ry-line-richmenu-operate', __('LINE Operation', 'ry-line'), [__CLASS__, 'display_richmenu_operate'], null, 'side', 'core');
@@ -80,6 +78,9 @@ final class RY_LINE_Admin_Meta_Box
 
         if (count($message_data['reply_from']) === 0) {
             $message_data['reply_from'] = ['user', 'group', 'room'];
+        }
+        if (empty($message_data['send_cc_lineid'])) {
+            $message_data['send_cc_lineid'] = '';
         }
 
         $autosend_events = apply_filters('ry/line_autosend_events', []);

@@ -34,21 +34,23 @@ $(function () {
         $types[$type] = $types[$type] || [];
         $types[$type].push($(this));
     });
-    $.ajax({
-        url: ajaxurl + '?action=ry-line/get-info',
-        method: 'POST',
-        dataType: 'json',
-        data: {
-            types: Object.keys($types),
-            _ajax_nonce: RYLine.nonce.get
-        },
-    }).done(function (Jdata) {
-        if (Jdata.success === true) {
-            for (const type in $types) {
-                for (const $el of $types[type]) {
-                    $el.text(Jdata.data[type] || 'N/A');
+    if (Object.keys($types).length) {
+        $.ajax({
+            url: ajaxurl + '?action=ry-line/get-info',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                types: Object.keys($types),
+                _ajax_nonce: RYLine.nonce.get
+            },
+        }).done(function (Jdata) {
+            if (Jdata.success === true) {
+                for (const type in $types) {
+                    for (const $el of $types[type]) {
+                        $el.text(Jdata.data[type] || 'N/A');
+                    }
                 }
             }
-        }
-    });
+        });
+    }
 });

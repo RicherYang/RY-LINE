@@ -140,6 +140,7 @@ final class RY_LINE_Admin_Message
         unset($message_data['error']);
         $message_data['type'] = sanitize_key($_POST['message-type'] ?? '');
         $message_data['reply_from'] = array_map('sanitize_key', is_array($_POST['reply-from'] ?? '') ? $_POST['reply-from'] : []);
+        $message_data['send_cc_lineid'] = sanitize_locale_name($_POST['cc-user-id'] ?? '');
 
         $message_data['reply_from'] = array_intersect($message_data['reply_from'], ['user', 'group', 'room']);
         if (count($message_data['reply_from']) === 3) {

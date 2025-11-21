@@ -9,30 +9,18 @@ final class RY_LINE_Api
             $client_id = RY_LINE::get_option('channel_id');
             $client_secret = RY_LINE::get_option('channel_secret');
             if (!empty($client_id) && !empty($client_secret)) {
-                $response = wp_remote_request('https://api.line.me/v2/oauth/accessToken', [
-                    'method' => 'POST',
-                    'httpversion' => '1.1',
-                    'headers' => [
-                        'Content-Type' => 'application/x-www-form-urlencoded',
-                    ],
-                    'body' => [
-                        'grant_type' => 'client_credentials',
-                        'client_id' => $client_id,
-                        'client_secret' => $client_secret,
-                    ],
-                ]);
+                $remote = self::do_remote_request('https://api.line.me/v2/oauth/accessToken', 'POST', http_build_query([
+                    'grant_type' => 'client_credentials',
+                    'client_id' => $client_id,
+                    'client_secret' => $client_secret,
+                ]), false);
 
-                if (is_wp_error($response)) {
+                if (is_wp_error($remote)) {
                     return false;
                 }
-                if (wp_remote_retrieve_response_code($response) !== 200) {
-                    return false;
-                }
-
-                $result = json_decode(wp_remote_retrieve_body($response));
-                if (isset($result->access_token)) {
-                    $token = $result->access_token;
-                    RY_LINE::set_transient('access_token', $token, $result->expires_in / 2);
+                if (isset($remote->access_token)) {
+                    $token = $remote->access_token;
+                    RY_LINE::set_transient('access_token', $token, $remote->expires_in / 2);
                 }
             }
         }
@@ -44,16 +32,9 @@ final class RY_LINE_Api
     {
         $token = RY_LINE::get_transient('access_token');
         if (!empty($token)) {
-            wp_remote_request('https://api.line.me/v2/oauth/revoke', [
-                'method' => 'POST',
-                'httpversion' => '1.1',
-                'headers' => [
-                    'Content-Type' => 'application/x-www-form-urlencoded',
-                ],
-                'body' => [
-                    'access_token' => $token,
-                ],
-            ]);
+            self::do_remote_request('https://api.line.me/v2/oauth/revoke', 'POST', http_build_query([
+                'access_token' => $token,
+            ]), false);
         }
     }
 
@@ -203,6 +184,14 @@ final class RY_LINE_Api
         ]);
     }
 
+    public static function message_multicast($post_data, $userIds)
+    {
+        return self::do_remote_request('https://api.line.me/v2/bot/message/multicast', 'POST', [
+            'to' => $userIds,
+            'messages' => self::fixed_message_object($post_data),
+        ]);
+    }
+
     public static function message_push($post_data, $userId)
     {
         return self::do_remote_request('https://api.line.me/v2/bot/message/push', 'POST', [
@@ -326,25 +315,39 @@ final class RY_LINE_Api
 
     protected static function do_remote_request(string $url, string $method = 'GET', mixed $content = null, bool $retry = true)
     {
-        $header = [
-            'Authorization' => 'Bearer ' . self::get_access_token(),
-        ];
+        $header = [];
         if ($content !== null) {
-            if ($method === 'GET') {
-                $url = add_query_arg($content, $url);
-            } else {
-                if (is_array($content)) {
-                    if (empty($content)) {
-                        $body = '{}';
+            switch ($method) {
+                case 'POST':
+                    if (is_array($content)) {
+                        if (empty($content)) {
+                            $body = '{}';
+                        } else {
+                            $body = json_encode($content);
+                        }
+                        $header['Content-Type'] = 'application/json';
+                    } elseif (get_post_type($content) === 'attachment') {
+                        $body = file_get_contents(get_attached_file($content));
+                        $header['Content-Type'] = get_post_mime_type($content);
                     } else {
-                        $body = json_encode($content);
+                        $body = $content;
+                        $header['Content-Type'] = 'application/x-www-form-urlencoded';
                     }
+                    break;
+                case 'PUT':
+                    $body = json_encode($content);
                     $header['Content-Type'] = 'application/json';
-                } elseif (get_post_type($content) === 'attachment') {
-                    $header['Content-Type'] = get_post_mime_type($content);
-                    $body = file_get_contents(get_attached_file($content));
-                }
+                    break;
+                case 'DELETE':
+                    break;
+                case 'GET':
+                default:
+                    $url = add_query_arg($content, $url);
+                    break;
             }
+        }
+        if (($header['Content-Type'] ?? '') !== 'application/x-www-form-urlencoded') {
+            $header['Authorization'] = 'Bearer ' . self::get_access_token();
         }
 
         $response = wp_remote_request($url, [

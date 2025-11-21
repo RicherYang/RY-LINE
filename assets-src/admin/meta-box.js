@@ -687,6 +687,14 @@ $(function () {
     });
     $('[name="reply-type"]:checked').trigger('input');
 
+    // 事件副本
+    $('[name="autosend-event[]"]').on('input', function () {
+        $('.event-info').hide();
+        if ($('[name="autosend-event[]"]:checked').length) {
+            $('.event-info').show();
+        }
+    }).first().trigger('input');
+
     // 按鈕-發送訊息
     $('.ry-send-test').on('click', function (e) {
         if (e.isPropagationStopped()) return;

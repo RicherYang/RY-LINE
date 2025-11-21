@@ -21,6 +21,7 @@ final class RY_LINE_LinkServer extends RY_Abstract_Link_Server
     {
         $base_info = [
             'plugin' => RY_LINE_VERSION,
+            'php' => PHP_VERSION,
             'wp' => get_bloginfo('version'),
         ];
         if (defined('WC_VERSION')) {

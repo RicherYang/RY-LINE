@@ -22,12 +22,16 @@ final class RY_LINE_Autosend
         }
 
         add_filter('ry/line_autosend_events', [$this, 'add_autosend_events']);
+
+        add_filter('ry/line_autosend_info-wp_login', [$this, 'set_login_info']);
+        add_filter('ry/line_autosend_template-wp_login', [$this, 'set_login_template'], 10, 2);
+        add_filter('ry/line_autosend_user-wp_login', [$this, 'set_login_user'], 10, 2);
+
         add_filter('ry/line_autosend_info-line_account_linked', [$this, 'set_linked_info']);
         add_filter('ry/line_autosend_info-line_account_unlinked', [$this, 'set_unlinked_info']);
         foreach (['line_account_linked', 'line_account_unlinked'] as $autosend_key) {
             add_filter('ry/line_autosend_template-' . $autosend_key, [$this, 'set_link_template'], 10, 2);
             add_filter('ry/line_autosend_token-' . $autosend_key, [$this, 'set_link_token'], 10, 2);
-            add_filter('ry/line_autosend_user-' . $autosend_key, [$this, 'set_link_user'], 10, 2);
         }
     }
 
@@ -83,28 +87,65 @@ final class RY_LINE_Autosend
             }
         }
 
-        $line_user_ID = '';
+        $line_users = '';
         foreach ($autosend_hooks[$hook_name]['autosend'] as $event_key) {
-            $line_user_ID = apply_filters('ry/line_autosend_user-' . $event_key, $line_user_ID, $args);
+            $line_users = apply_filters('ry/line_autosend_user-' . $event_key, $line_users, $args);
         }
-        if ($line_user_ID instanceof WP_User) {
-            $line_user_ID = (int) $line_user_ID->ID;
+        if (!is_array($line_users)) {
+            $line_users = [$line_users];
         }
-        if (is_int($line_user_ID)) {
-            $line_user_ID = RY_LINE_User::instance()->get_line_user_id($line_user_ID);
+        foreach ($message_object as $message_ID => $message_data) {
+            $message_data = get_post_meta($message_ID, 'ry_line_message_data', true);
+            if (!empty($message_data['send_cc_lineid'])) {
+                $line_users[] = $message_data['send_cc_lineid'];
+            }
         }
+        foreach ($line_users as &$line_user_ID) {
+            if ($line_user_ID instanceof WP_User) {
+                $line_user_ID = (int) $line_user_ID->ID;
+            }
+            if (is_int($line_user_ID)) {
+                $line_user_ID = RY_LINE_User::instance()->get_line_user_id($line_user_ID);
+            }
+        }
+        unset($line_user_ID);
+        $line_users = array_filter($line_users);
 
-        if (!empty($line_user_ID)) {
-            RY_LINE_Api::message_push($message_object, $line_user_ID);
+        if (count($line_users)) {
+            $status = RY_LINE_Api::message_multicast($message_object, array_values($line_users));
         }
     }
 
     public function add_autosend_events($events)
     {
+        $events['wp_login'] = __('User login', 'ry-line');
         $events['line_account_linked'] = __('Linked LINE account', 'ry-line');
         $events['line_account_unlinked'] = __('Unlinked LINE account', 'ry-line');
 
         return $events;
+    }
+
+    public function set_login_info()
+    {
+        return [
+            'hook' => ['wp_login'],
+            'args' => 2,
+        ];
+    }
+
+    public function set_login_template($template, $args)
+    {
+        list($user_login, $wp_user) = $args;
+        $template['wp_user'] = $wp_user;
+
+        return $template;
+    }
+
+    public function set_login_user($user, $args)
+    {
+        list($user_login, $wp_user) = $args;
+
+        return (int) $wp_user->ID;
     }
 
     public function set_linked_info()
@@ -136,13 +177,6 @@ final class RY_LINE_Autosend
         list($wp_user, $line_user_ID, $reply_token) = $args;
 
         return $reply_token;
-    }
-
-    public function set_link_user($user, $args)
-    {
-        list($wp_user, $line_user_ID, $reply_token) = $args;
-
-        return $line_user_ID;
     }
 }
 

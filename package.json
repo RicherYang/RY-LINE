@@ -1,7 +1,7 @@
 {
     "name": "ry-line",
     "title": "RY LINE",
-    "version": "0.5.1",
+    "version": "0.5.3",
     "author": "Richer Yang",
     "private": true,
     "devDependencies": {
