@@ -37,6 +37,14 @@ label.ry-line-col-auto {
     padding-right: 0;
 }
 
+.ry-line-error {
+    border: 1px solid #d63638;
+    box-shadow: 0 0 6px rgba(214, 54, 56, 0.75);
+}
+.description.error {
+    color: #d63638;
+}
+
 .image-area {
     overflow: hidden;
     user-select: none;

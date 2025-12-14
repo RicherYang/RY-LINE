@@ -47,12 +47,12 @@ final class RY_LINE_Admin_Richmenu
 
     public function add_columns($columns)
     {
-        $add_columns = [
+        $add_index = array_search('author', array_keys($columns));
+        $pre_array = array_splice($columns, 0, $add_index);
+        return array_merge($pre_array, [
             'alias' => __('Menu alias', 'ry-line'),
             'actions' => __('Menu actions', 'ry-line'),
-        ];
-
-        return array_merge(array_slice($columns, 0, 2, true), $add_columns, array_slice($columns, 2, null, true));
+        ], $columns);
     }
 
     public function show_columns($column_name, $post_ID)

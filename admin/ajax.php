@@ -24,6 +24,7 @@ final class RY_LINE_Admin_Ajax
                 'save-image-position',
                 'save-image-actions',
 
+                'get-flex',
                 'remote-message-testsend',
 
                 'remote-richmenu-create',
@@ -154,6 +155,45 @@ final class RY_LINE_Admin_Ajax
 
         update_post_meta($post_ID, $meta_key, $post_data);
         wp_send_json_success($post_data['areas']);
+    }
+
+    public function get_flex()
+    {
+        $post_ID = intval($_POST['post_id'] ?? '');
+        check_ajax_referer('get-flex_' . $post_ID);
+
+        $search = sanitize_text_field(wp_unslash($_POST['search'] ?? ''));
+        $page = intval($_POST['page'] ?? 1);
+        $per_page = 20;
+
+        $args = [
+            'post_type' => RY_LINE::POSTTYPE_MESSAGE,
+            'post_status' => 'publish',
+            's' => $search,
+            'posts_per_page' => $per_page,
+            'paged' => $page,
+            'meta_query' => [
+                [
+                    'key' => 'ry_line_message_type',
+                    'value' => 'flex',
+                ],
+            ],
+        ];
+
+        $results = [];
+        $query = new WP_Query($args);
+        while ($query->have_posts()) {
+            $query->the_post();
+            $results[] = [
+                'id' => get_the_ID(),
+                'text' => get_the_title(),
+            ];
+        }
+
+        wp_send_json_success([
+            'results' => $results,
+            'next' => $page < $query->max_num_pages,
+        ]);
     }
 
     public function remote_message_testsend()

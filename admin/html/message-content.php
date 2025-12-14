@@ -4,23 +4,45 @@
             <th><?php esc_html_e('Message type', 'ry-line'); ?></th>
             <td>
                 <select name="message-type" id="message-type">
-                    <option value="text" <?php selected($message_data['type'], 'text'); ?>><?php echo esc_html_x('Text', 'message type', 'ry-line'); ?></option>
-                    <option value="image" <?php selected($message_data['type'], 'image'); ?>><?php echo esc_html_x('Image', 'message type', 'ry-line'); ?></option>
-                    <option value="flex" <?php selected($message_data['type'], 'flex'); ?>><?php echo esc_html_x('Flex', 'message type', 'ry-line'); ?></option>
+                    <option value="text" <?php selected($message_type, 'text'); ?>><?php echo esc_html_x('Text', 'message type', 'ry-line'); ?></option>
+                    <option value="image" <?php selected($message_type, 'image'); ?>><?php echo esc_html_x('Image', 'message type', 'ry-line'); ?></option>
+                    <option value="flex" <?php selected($message_type, 'flex'); ?>><?php echo esc_html_x('Flex single', 'message type', 'ry-line'); ?></option>
+                    <option value="flexes" <?php selected($message_type, 'flexes'); ?>><?php echo esc_html_x('Flex multiple', 'message type', 'ry-line'); ?></option>
                 </select>
             </td>
         </tr>
-        <tr class="type-info type-info-text type-info-flex">
+        <tr class="type-info type-info-text">
             <th>
                 <?php esc_html_e('Content', 'ry-line'); ?><br>
                 <span class="ry-template-string" data-target="#message-content">{{ }}</span>
             </th>
             <td>
                 <textarea name="message-content" id="message-content" class="large-text" rows="3"><?php echo esc_textarea($post->post_content); ?></textarea>
-                <p class="description type-info type-info-flex"><?php esc_html_e('For Flex message, please enter the JSON content.', 'ry-line'); ?></p>
             </td>
         </tr>
         <tr class="type-info type-info-flex">
+            <th>
+                <?php esc_html_e('Content', 'ry-line'); ?><br>
+                <span class="ry-template-string" data-target="#flex-message-content">{{ }}</span>
+            </th>
+            <td>
+                <textarea name="flex-message-content" id="flex-message-content" class="large-text" rows="6"><?php echo esc_textarea($post->post_content); ?></textarea>
+                <p class="description type-info type-info-flex"><?php esc_html_e('For Flex message, please enter the JSON content.', 'ry-line'); ?></p>
+            </td>
+        </tr>
+        <tr class="type-info type-info-flexes">
+            <th>
+                <?php esc_html_e('Content', 'ry-line'); ?>
+            </th>
+            <td>
+                <select name="use-messages[]" id="use-messages" multiple>
+                    <?php foreach ($message_data['use'] ?? [] as $flex_message_ID) { ?>
+                    <option value="<?php echo esc_attr($flex_message_ID); ?>" selected><?php echo esc_html(get_the_title($flex_message_ID)); ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr class="type-info type-info-flex type-info-flexes">
             <th>
                 <?php esc_html_e('Alt content', 'ry-line'); ?><br>
                 <span class="ry-template-string" data-target="#message-alt">{{ }}</span>

@@ -28,6 +28,7 @@ module.exports = {
     ...defaultConfig,
     entry: {
         'admin/basic': path.join(srcPath, 'admin/basic.js'),
+        'admin/flex-message': path.join(srcPath, 'admin/flex-message.js'),
         'admin/meta-box': path.join(srcPath, 'admin/meta-box.js')
     },
     output: {

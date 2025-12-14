@@ -46,29 +46,54 @@ final class RY_LINE_Api
                 continue;
             }
 
-            $post_data = get_post_meta($post->ID, 'ry_line_message_data', true);
-            switch ($post_data['type']) {
+            $message_data = [];
+            $message_type = get_post_meta($post->ID, 'ry_line_message_type', true);
+            switch ($message_type) {
                 case 'text':
-                    $post_data['type'] = 'textV2';
-                    $post_data['text'] = RY_LINE_Template::instance()->do_template_string($post->post_content, $template_info);
+                    $message_data['type'] = 'textV2';
+                    $message_data['text'] = RY_LINE_Template::instance()->do_template_string($post->post_content, $template_info);
                     break;
                 case 'image':
                     $thumbnail_ID = get_post_thumbnail_id($post);
                     if ($thumbnail_ID) {
-                        $post_data['type'] = 'image';
-                        $post_data['originalContentUrl'] = wp_get_attachment_image_src($thumbnail_ID, 'full')[0];
-                        $post_data['previewImageUrl'] = wp_get_attachment_image_src($thumbnail_ID, [1024, 0])[0];
+                        $message_data['type'] = 'image';
+                        $message_data['originalContentUrl'] = wp_get_attachment_image_src($thumbnail_ID, 'full')[0];
+                        $message_data['previewImageUrl'] = wp_get_attachment_image_src($thumbnail_ID, [1024, 0])[0];
                     }
                     break;
                 case 'flex':
                     $content = maybe_unserialize($post->post_content);
                     if (is_object($content)) {
-                        $post_data['type'] = 'flex';
-                        $post_data['altText'] = RY_LINE_Template::instance()->do_template_string($post->post_excerpt, $template_info);
-                        $post_data['contents'] = json_decode(RY_LINE_Template::instance()->do_template_string(wp_json_encode($content), $template_info), true);
+                        $message_data['type'] = 'flex';
+                        $message_data['altText'] = RY_LINE_Template::instance()->do_template_string($post->post_excerpt, $template_info);
+                        $message_data['contents'] = json_decode(RY_LINE_Template::instance()->do_template_string(wp_json_encode($content), $template_info), true);
                     }
+                    break;
+                case 'flexes':
+                    $use_messages = get_post_meta($post->ID, 'ry_line_message_data', true)['use'] ?? [];
+                    $flex_contents = [];
+                    foreach ($use_messages as $message_ID) {
+                        $flex_post = get_post($message_ID);
+                        if (get_post_type($flex_post) !== RY_LINE::POSTTYPE_MESSAGE) {
+                            continue;
+                        }
+                        $content = maybe_unserialize($flex_post->post_content);
+                        if (is_object($content)) {
+                            $flex_contents[] = json_decode(RY_LINE_Template::instance()->do_template_string(wp_json_encode($content), $template_info), true);
+                            if (count($flex_contents) > 12) {
+                                break;
+                            }
+                        }
+                    }
+                    $message_data['type'] = 'flex';
+                    $message_data['altText'] = RY_LINE_Template::instance()->do_template_string($post->post_excerpt, $template_info);
+                    $message_data['contents'] = [
+                        'type' => 'carousel',
+                        'contents' => $flex_contents,
+                    ];
+                    break;
             }
-            $message_object[$post->ID] = $post_data;
+            $message_object[$post->ID] = $message_data;
         }
 
         return $message_object;

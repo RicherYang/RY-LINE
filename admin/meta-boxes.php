@@ -31,6 +31,17 @@ final class RY_LINE_Admin_Meta_Box
                 'testsend' => wp_create_nonce('remote-message-testsend_' . $post->ID),
             ],
         ]);
+
+        $asset_info = include RY_LINE_PLUGIN_DIR . 'assets/admin/flex-message.asset.php';
+        wp_enqueue_style('ry-line-admin-flex-message', RY_LINE_PLUGIN_URL . 'assets/admin/flex-message.css', [], $asset_info['version']);
+        wp_enqueue_script('ry-line-admin-flex-message', RY_LINE_PLUGIN_URL . 'assets/admin/flex-message.js', $asset_info['dependencies'], $asset_info['version'], true);
+        wp_set_script_translations('ry-line-admin-flex-message', 'ry-line', RY_LINE_PLUGIN_DIR . 'languages');
+
+        wp_localize_script('ry-line-admin-flex-message', 'ryLineFlex', [
+            'nonce' => [
+                'get' => wp_create_nonce('get-flex_' . $post->ID),
+            ],
+        ]);
     }
 
     public static function add_richmenu_metabox($post)
@@ -90,8 +101,9 @@ final class RY_LINE_Admin_Meta_Box
 
     public static function display_message_content($post)
     {
+        $message_type = get_post_meta($post->ID, 'ry_line_message_type', true);
         $message_data = get_post_meta($post->ID, 'ry_line_message_data', true);
-        switch ($message_data['type']) {
+        switch ($message_type) {
             case 'flex':
                 $post->post_content = maybe_unserialize($post->post_content);
                 if (is_object($post->post_content)) {

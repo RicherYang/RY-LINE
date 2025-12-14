@@ -942,4 +942,8 @@ $(function () {
             }
         });
     }
+
+    $('form#post').on('change', function () {
+        $('#save').prop('disabled', $(this).find('.description.error').length > 0);
+    });
 });

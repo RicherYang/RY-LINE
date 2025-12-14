@@ -34,12 +34,12 @@ final class RY_LINE_Admin_Message
 
     public function add_columns($columns)
     {
-        $add_columns = [
+        $add_index = array_search('author', array_keys($columns));
+        $pre_array = array_splice($columns, 0, $add_index);
+        return array_merge($pre_array, [
             'mtype' => __('Message type', 'ry-line'),
             'autosend' => __('Automatic send', 'ry-line'),
-        ];
-
-        return array_merge(array_slice($columns, 0, 2, true), $add_columns, array_slice($columns, 2, null, true));
+        ], $columns);
     }
 
     public function show_columns($column_name, $post_ID)
@@ -50,19 +50,20 @@ final class RY_LINE_Admin_Message
         }
 
         if ('mtype' === $column_name) {
-            $message_data = get_post_meta($post_ID, 'ry_line_message_data', true);
-            if (is_array($message_data)) {
-                switch ($message_data['type']) {
-                    case 'text':
-                        echo esc_html_x('Text', 'message type', 'ry-line');
-                        break;
-                    case 'image':
-                        echo esc_html_x('Image', 'message type', 'ry-line');
-                        break;
-                    case 'flex':
-                        echo esc_html_x('Flex', 'message type', 'ry-line');
-                        break;
-                }
+            $message_type = get_post_meta($post_ID, 'ry_line_message_type', true);
+            switch ($message_type) {
+                case 'text':
+                    echo esc_html_x('Text', 'message type', 'ry-line');
+                    break;
+                case 'image':
+                    echo esc_html_x('Image', 'message type', 'ry-line');
+                    break;
+                case 'flex':
+                    echo esc_html_x('Flex single', 'message type', 'ry-line');
+                    break;
+                case 'flexes':
+                    echo esc_html_x('Flex multiple', 'message type', 'ry-line');
+                    break;
             }
         }
         if ('autosend' === $column_name) {
@@ -101,17 +102,22 @@ final class RY_LINE_Admin_Message
                 $data['post_excerpt'] = '';
                 $data['menu_order'] = intval($_POST['message-order'] ?? '');
                 $data['menu_order'] = $data['menu_order'] > 0 ? $data['menu_order'] : 0;
+
                 switch ($_POST['message-type']) {
                     case 'text':
                         $data['post_content'] = sanitize_textarea_field(wp_unslash($_POST['message-content']));
                         break;
                     case 'flex':
-                        $data['post_content'] = sanitize_textarea_field(wp_unslash($_POST['message-content']));
+                        $data['post_content'] = sanitize_textarea_field(wp_unslash($_POST['flex-message-content']));
                         $data['post_content'] = json_decode($data['post_content']);
                         if ($data['post_content'] === null) {
                             $data['post_content'] = '';
                         }
                         $data['post_content'] = maybe_serialize($data['post_content']);
+                        $data['post_excerpt'] = sanitize_textarea_field(wp_unslash($_POST['message-alt']));
+                        break;
+                    case 'flexes':
+                        $data['post_excerpt'] = sanitize_textarea_field(wp_unslash($_POST['message-alt']));
                         break;
                 }
             }
@@ -138,15 +144,29 @@ final class RY_LINE_Admin_Message
         }
 
         unset($message_data['error']);
-        $message_data['type'] = sanitize_key($_POST['message-type'] ?? '');
+        $message_type = sanitize_key($_POST['message-type'] ?? '');
+        update_post_meta($post_ID, 'ry_line_message_type', $message_type);
+
         $message_data['reply_from'] = array_map('sanitize_key', is_array($_POST['reply-from'] ?? '') ? $_POST['reply-from'] : []);
         $message_data['send_cc_lineid'] = sanitize_locale_name($_POST['cc-user-id'] ?? '');
-
         $message_data['reply_from'] = array_intersect($message_data['reply_from'], ['user', 'group', 'room']);
         if (count($message_data['reply_from']) === 3) {
             $message_data['reply_from'] = [];
         }
-
+        switch ($message_type) {
+            case 'flexes':
+                $message_data['use'] = array_map('intval', is_array($_POST['use-messages'] ?? '') ? $_POST['use-messages'] : []);
+                $query = new WP_Query();
+                $message_data['use'] = $query->query([
+                    'post_type' => RY_LINE::POSTTYPE_MESSAGE,
+                    'post__in' => $message_data['use'],
+                    'orderby' => 'menu_order',
+                    'order' => 'DESC',
+                    'fields' => 'ids',
+                    'posts_per_page' => -1,
+                ]);
+                break;
+        }
         update_post_meta($post_ID, 'ry_line_message_data', $message_data);
 
         $reply_type = sanitize_key($_POST['reply-type'] ?? '');
