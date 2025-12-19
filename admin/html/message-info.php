@@ -23,11 +23,44 @@
         <tr class="type-info type-info-flex">
             <th>
                 <?php esc_html_e('Content', 'ry-line'); ?><br>
-                <span class="ry-template-string" data-target="#flex-message-content">{{ }}</span>
+                <span id="flex-message-template-string" class="ry-template-string" data-target="#flex-message-content">{{ }}</span>
             </th>
-            <td>
-                <textarea name="flex-message-content" id="flex-message-content" class="large-text" rows="6"><?php echo esc_textarea($post->post_content); ?></textarea>
-                <p class="description type-info type-info-flex"><?php esc_html_e('For Flex message, please enter the JSON content.', 'ry-line'); ?></p>
+            <td id="flex-message">
+                <div class="ry-line-row">
+                    <div class="ry-line-col">
+                        <div id="flex-message-tree-actions" class="ry-line-row">
+                            <div class="ry-line-col-auto">
+                                <button type="button" class="ry-action" id="node-create" title="<?php esc_attr_e('Add node', 'ry-line'); ?>" disabled></button>
+                            </div>
+                            <div class="ry-line-col-auto">
+                                <button type="button" class="ry-action" id="node-up" title="<?php esc_attr_e('Move up', 'ry-line'); ?>" disabled></button>
+                            </div>
+                            <div class="ry-line-col-auto">
+                                <button type="button" class="ry-action" id="node-down" title="<?php esc_attr_e('Move down', 'ry-line'); ?>" disabled></button>
+                            </div>
+                            <div class="ry-line-col-auto">
+                                <button type="button" class="ry-action" id="node-delete" title="<?php esc_attr_e('Delete node', 'ry-line'); ?>" disabled></button>
+                            </div>
+                        </div>
+
+                        <div id="flex-message-tree"></div>
+                    </div>
+                    <div class="ry-line-col">
+                        <div id="flex-node-property"></div>
+                    </div>
+                </div>
+
+                <div class="ry-line-row">
+                    <div class="ry-line-col-auto">
+                        <div  id="flex-message-actions">
+                            <button type="button" class="ry-action" id="json-import" title="<?php esc_attr_e('Import', 'ry-line'); ?>"></button><br>
+                            <button type="button" class="ry-action" id="json-export" title="<?php esc_attr_e('Export', 'ry-line'); ?>"></button>
+                        </div>
+                    </div>
+                    <div class="ry-line-col">
+                        <textarea id="flex-message-content" name="flex-message-content" class="large-text" rows="6" readonly><?php echo esc_textarea($post->post_content); ?></textarea>
+                    </div>
+                </div>
             </td>
         </tr>
         <tr class="type-info type-info-flexes">
@@ -70,11 +103,13 @@
         </div>
     </div>
 </div>
+
 <script type="text/html" id="tmpl-group-item">
     <div class="template-group-item">
         <span>{{ data.name }}</span>
     </div>
 </script>
+
 <script type="text/html" id="tmpl-string-item">
     <div class="template-string-item">
         <p>{{ data.name }}</p>

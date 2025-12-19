@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-03-02T11:52:45+08:00\n"
-"PO-Revision-Date: 2025-12-13 14:45+0800\n"
+"PO-Revision-Date: 2025-12-19 21:38+0800\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
@@ -90,7 +90,7 @@ msgid "Uploaded to this rich menu"
 msgstr "已關聯至這圖文選單"
 
 #: admin/meta-boxes.php:15
-#: admin/meta-boxes.php:51
+#: admin/meta-boxes.php:52
 msgid "Action area"
 msgstr "操作區域"
 
@@ -157,6 +157,7 @@ msgstr "起點"
 
 #: admin/html/image-area.php:39
 #: admin/html/image-area.php:102
+#: assets/admin/flex-message.js:1
 msgid "Size"
 msgstr "大小"
 
@@ -165,6 +166,7 @@ msgid "Save area position"
 msgstr "儲存區域位置"
 
 #: admin/html/image-area.php:59
+#: assets/admin/flex-message.js:1
 msgid "Position"
 msgstr "位置"
 
@@ -200,6 +202,7 @@ msgid "Switch menu"
 msgstr "切換選單"
 
 #: admin/html/image-area.php:116
+#: assets/admin/flex-message.js:1
 msgid "URL"
 msgstr "網址"
 
@@ -208,6 +211,7 @@ msgid "Enter url"
 msgstr "輸入網址"
 
 #: admin/html/image-area.php:132
+#: assets/admin/flex-message.js:1
 msgid "Message text"
 msgstr "訊息文字"
 
@@ -242,16 +246,16 @@ msgstr "儲存區域動作"
 msgid "Please save data before performing any LINE operations."
 msgstr "請在進行 LINE 操作前請先儲存資料。"
 
-#: admin/meta-boxes.php:52
+#: admin/meta-boxes.php:53
 msgid "LINE Operation"
 msgstr "LINE 操作"
 
-#: admin/meta-boxes.php:130
+#: admin/meta-boxes.php:132
 msgid "license key"
 msgstr "授權金鑰"
 
 #. translators: %s: license key link
-#: admin/meta-boxes.php:132
+#: admin/meta-boxes.php:134
 #, php-format
 msgid "Please activate %s to use this feature."
 msgstr "請先啟用 %s 再使用本功能。"
@@ -313,19 +317,19 @@ msgstr "重新載入圖文選單"
 msgid "Reloaded successfully."
 msgstr "重新載入成功。"
 
-#: admin/html/richmenu-content.php:8
+#: admin/html/richmenu-info.php:8
 msgid "Display"
 msgstr "顯示"
 
-#: admin/html/richmenu-content.php:12
+#: admin/html/richmenu-info.php:12
 msgid "Default display the rich menu"
 msgstr "預設顯示圖文選單"
 
-#: admin/html/richmenu-content.php:4
+#: admin/html/richmenu-info.php:4
 msgid "Chat button text"
 msgstr "聊天室按鈕文字"
 
-#: admin/html/richmenu-content.php:5
+#: admin/html/richmenu-info.php:5
 #: admin/richmenu.php:127
 msgid "Open menu"
 msgstr "開啟選單"
@@ -520,34 +524,34 @@ msgstr "移除顯示圖片"
 msgid "Use as show image"
 msgstr "設定為顯示圖片"
 
-#: admin/meta-boxes.php:53
+#: admin/meta-boxes.php:54
 msgid "Menu content"
 msgstr "選單內容"
 
-#: admin/meta-boxes.php:137
-#: admin/meta-boxes.php:160
+#: admin/meta-boxes.php:139
+#: admin/meta-boxes.php:162
 msgid "Please set show image first."
 msgstr "請先設定顯示圖片。"
 
-#: admin/meta-boxes.php:54
+#: admin/meta-boxes.php:55
 msgid "Image action area"
 msgstr "圖片動作區域"
 
-#: admin/html/message-content.php:7
+#: admin/html/message-info.php:7
 #: admin/message.php:56
 msgctxt "message type"
 msgid "Text"
 msgstr "文字"
 
-#: admin/html/message-content.php:8
+#: admin/html/message-info.php:8
 #: admin/message.php:59
 msgctxt "message type"
 msgid "Image"
 msgstr "圖片"
 
-#: admin/html/message-content.php:16
-#: admin/html/message-content.php:25
-#: admin/html/message-content.php:35
+#: admin/html/message-info.php:16
+#: admin/html/message-info.php:25
+#: admin/html/message-info.php:68
 msgid "Content"
 msgstr "內容"
 
@@ -555,11 +559,7 @@ msgstr "內容"
 msgid "Message content"
 msgstr "訊息內容"
 
-#: admin/html/message-content.php:30
-msgid "For Flex message, please enter the JSON content."
-msgstr "Flex 訊息，請直接輸入 JSON 內容。"
-
-#: admin/html/message-content.php:47
+#: admin/html/message-info.php:80
 msgid "Alt content"
 msgstr "替代內容"
 
@@ -658,7 +658,7 @@ msgstr "姓氏"
 msgid "Email"
 msgstr "電子郵件地址"
 
-#: admin/html/message-content.php:55
+#: admin/html/message-info.php:88
 msgid "Use order"
 msgstr "使用順序"
 
@@ -671,7 +671,7 @@ msgstr "尚未設定測試使用者 ID。"
 msgid "Menu actions"
 msgstr "選單動作"
 
-#: admin/html/message-content.php:4
+#: admin/html/message-info.php:4
 #: admin/message.php:40
 msgid "Message type"
 msgstr "訊息類型"
@@ -814,29 +814,13 @@ msgstr "LINE 設定"
 msgid "User login"
 msgstr "使用者登入"
 
-#: assets/admin/flex-message.js:1
-msgid "Only \"Bubble\" Container is allowed"
-msgstr "僅允許容器為 \"Bubble\""
-
-#: assets/admin/flex-message.js:1
-msgid "Invalid JSON string"
-msgstr "無效的 JSON 字串"
-
-#: assets/admin/flex-message.js:1
-msgid "Only object is allowed"
-msgstr "僅允許內容為物件"
-
-#: assets/admin/flex-message.js:1
-msgid "Invalid data"
-msgstr "無效的資料"
-
-#: admin/html/message-content.php:9
+#: admin/html/message-info.php:9
 #: admin/message.php:62
 msgctxt "message type"
 msgid "Flex single"
 msgstr "Flex ( 單一 )"
 
-#: admin/html/message-content.php:10
+#: admin/html/message-info.php:10
 #: admin/message.php:65
 msgctxt "message type"
 msgid "Flex multiple"
@@ -857,3 +841,247 @@ msgstr "沒有符合條件的訊息"
 #: assets/admin/flex-message.js:1
 msgid "Search flex message"
 msgstr "搜尋 Flex 訊息"
+
+#: admin/html/message-info.php:36
+msgid "Move up"
+msgstr "向上移動"
+
+#: admin/html/message-info.php:39
+msgid "Move down"
+msgstr "向下移動"
+
+#: admin/html/message-info.php:42
+msgid "Delete node"
+msgstr "刪除節點"
+
+#: admin/html/message-flex-teml.php:32
+msgid "Node Properties"
+msgstr "節點屬性值"
+
+#: assets/admin/flex-message.js:1
+msgid "Layout"
+msgstr "版面配置"
+
+#: assets/admin/flex-message.js:1
+msgid "Spacing"
+msgstr "Spacing"
+
+#: assets/admin/flex-message.js:1
+msgid "Margin"
+msgstr "Margin"
+
+#: assets/admin/flex-message.js:1
+msgid "Padding All"
+msgstr "邊框間距 (全部)"
+
+#: assets/admin/flex-message.js:1
+msgid "Text"
+msgstr "文字"
+
+#: assets/admin/flex-message.js:1
+msgid "Color"
+msgstr "色彩"
+
+#: assets/admin/flex-message.js:1
+msgid "Max Lines"
+msgstr "最大行數"
+
+#: assets/admin/flex-message.js:1
+msgid "Style"
+msgstr "樣式"
+
+#: assets/admin/flex-message.js:1
+msgid "Height"
+msgstr "高度"
+
+#: assets/admin/flex-message.js:1
+msgid "Aspect Ratio"
+msgstr "外觀比例"
+
+#: assets/admin/flex-message.js:1
+msgid "Aspect Mode"
+msgstr "外觀比例模式"
+
+#: assets/admin/flex-message.js:1
+msgid "Separator"
+msgstr "分隔線"
+
+#: assets/admin/flex-message.js:1
+msgid "Padding Top"
+msgstr "邊框間距 (上方)"
+
+#: assets/admin/flex-message.js:1
+msgid "Padding Bottom"
+msgstr "邊框間距 (下方)"
+
+#: assets/admin/flex-message.js:1
+msgid "Padding Start"
+msgstr "邊框間距 (開頭)"
+
+#: assets/admin/flex-message.js:1
+msgid "Padding End"
+msgstr "邊框間距 (結尾)"
+
+#: assets/admin/flex-message.js:1
+msgid "Width"
+msgstr "寬度"
+
+#: assets/admin/flex-message.js:1
+msgid "Max Width"
+msgstr "最大寬度"
+
+#: assets/admin/flex-message.js:1
+msgid "Max Height"
+msgstr "最大高度"
+
+#: assets/admin/flex-message.js:1
+msgid "Flex"
+msgstr "Flex"
+
+#: assets/admin/flex-message.js:1
+msgid "Decoration"
+msgstr "外觀裝飾"
+
+#: assets/admin/flex-message.js:1
+msgid "Background color"
+msgstr "背景色彩"
+
+#: assets/admin/flex-message.js:1
+msgid "Separator color"
+msgstr "分隔線色彩"
+
+#: assets/admin/flex-message.js:1
+msgid "Border color"
+msgstr "框線色彩"
+
+#: admin/html/message-info.php:33
+msgid "Add node"
+msgstr "新增節點"
+
+#: assets/admin/flex-message.js:1
+msgid "Text direction"
+msgstr "文字方向"
+
+#: assets/admin/flex-message.js:1
+msgid "Border width"
+msgstr "框線寬度"
+
+#: assets/admin/flex-message.js:1
+msgid "Border radius"
+msgstr "框線圓角半徑"
+
+#: assets/admin/flex-message.js:1
+msgid "Font weight"
+msgstr "字型粗細"
+
+#: assets/admin/flex-message.js:1
+msgid "Font style"
+msgstr "字型樣式"
+
+#: assets/admin/flex-message.js:1
+msgid "Wrap text"
+msgstr "文字換行"
+
+#: assets/admin/flex-message.js:1
+msgid "Justification"
+msgstr "分散對齊方式"
+
+#: assets/admin/flex-message.js:1
+msgid "Vertical alignment"
+msgstr "垂直對齊方式"
+
+#: assets/admin/flex-message.js:1
+msgid "Line spacing"
+msgstr "行與行間距"
+
+#: assets/admin/flex-message.js:1
+msgid "Font size"
+msgstr "字型大小"
+
+#: assets/admin/flex-message.js:1
+msgid "Font size adjust Mode"
+msgstr "字型大小調整模式"
+
+#: assets/admin/flex-message.js:1
+msgid "Horizontal alignment"
+msgstr "水平對齊方式"
+
+#: assets/admin/flex-message.js:1
+msgid "Offset Top"
+msgstr "偏移量 (上方)"
+
+#: assets/admin/flex-message.js:1
+msgid "Offset Bottom"
+msgstr "偏移量 (下方)"
+
+#: assets/admin/flex-message.js:1
+msgid "Offset Start"
+msgstr "偏移量 (開頭)"
+
+#: assets/admin/flex-message.js:1
+msgid "Offset End"
+msgstr "偏移量 (結尾)"
+
+#: assets/admin/flex-message.js:1
+msgid "Image format: JPEG or PNG, Max image size: 1024 x 1024 pixels, Max file size: 1 MB"
+msgstr "圖片格式：JPEG 或 PNG，最大圖片尺寸：1024 x 1024 像素，最大檔案大小：1 MB"
+
+#: assets/admin/flex-message.js:1
+msgid "Action"
+msgstr "操作"
+
+#: assets/admin/flex-message.js:1
+msgid "Label"
+msgstr "標籤"
+
+#: assets/admin/flex-message.js:1
+msgid "Mode"
+msgstr "模式"
+
+#: assets/admin/flex-message.js:1
+msgid "Min"
+msgstr "最小值"
+
+#: assets/admin/flex-message.js:1
+msgid "Max"
+msgstr "最大值"
+
+#: assets/admin/flex-message.js:1
+msgid "Clipboard text"
+msgstr "剪貼簿文字"
+
+#: assets/admin/flex-message.js:1
+msgid "Desktop URL"
+msgstr "電腦版網址"
+
+#: assets/admin/flex-message.js:1
+msgid "Default"
+msgstr "預設值"
+
+#: assets/admin/flex-message.js:1
+msgid "Webhook data"
+msgstr "網站勾點資料"
+
+#: assets/admin/flex-message.js:1
+msgid "Image format: JPEG or PNG, Max image size: 1024 x 1024 pixels, Max file size: 10 MB"
+msgstr "圖片格式：JPEG 或 PNG，最大圖片尺寸：1024 x 1024 像素，最大檔案大小：10 MB"
+
+#: assets/admin/flex-message.js:1
+msgid "Scaled according APP"
+msgstr "依照 APP 調整大小"
+
+#: admin/html/message-info.php:56
+msgid "Import"
+msgstr "匯入"
+
+#: admin/html/message-info.php:57
+msgid "Export"
+msgstr "匯出"
+
+#: assets/admin/flex-message.js:1
+msgid "Paste JSON here. Only bubble type is supported."
+msgstr "貼上 JSON，僅支援 bubble 類型。"
+
+#: assets/admin/flex-message.js:1
+msgid "Flex Message JSON copied to clipboard."
+msgstr "Flex Message JSON 已複製至剪貼簿。"

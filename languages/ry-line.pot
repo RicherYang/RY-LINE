@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: RY LINE 0.5.5\n"
+"Project-Id-Version: RY LINE 0.6.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ry-line\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-14T09:54:51+08:00\n"
+"POT-Creation-Date: 2025-12-19T22:43:21+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ry-line\n"
@@ -93,6 +93,7 @@ msgstr ""
 
 #: admin/html/image-area.php:39
 #: admin/html/image-area.php:102
+#: assets/admin/flex-message.js:1
 msgid "Size"
 msgstr ""
 
@@ -105,6 +106,7 @@ msgid "Save area position"
 msgstr ""
 
 #: admin/html/image-area.php:59
+#: assets/admin/flex-message.js:1
 msgid "Position"
 msgstr ""
 
@@ -156,6 +158,7 @@ msgid "Account link"
 msgstr ""
 
 #: admin/html/image-area.php:116
+#: assets/admin/flex-message.js:1
 msgid "URL"
 msgstr ""
 
@@ -168,6 +171,7 @@ msgid "Message"
 msgstr ""
 
 #: admin/html/image-area.php:132
+#: assets/admin/flex-message.js:1
 msgid "Message text"
 msgstr ""
 
@@ -274,50 +278,74 @@ msgstr ""
 msgid "Enter the LINE User ID."
 msgstr ""
 
-#: admin/html/message-content.php:4
+#: admin/html/message-flex-teml.php:32
+msgid "Node Properties"
+msgstr ""
+
+#: admin/html/message-info.php:4
 #: admin/message.php:40
 msgid "Message type"
 msgstr ""
 
-#: admin/html/message-content.php:7
+#: admin/html/message-info.php:7
 #: admin/message.php:56
 msgctxt "message type"
 msgid "Text"
 msgstr ""
 
-#: admin/html/message-content.php:8
+#: admin/html/message-info.php:8
 #: admin/message.php:59
 msgctxt "message type"
 msgid "Image"
 msgstr ""
 
-#: admin/html/message-content.php:9
+#: admin/html/message-info.php:9
 #: admin/message.php:62
 msgctxt "message type"
 msgid "Flex single"
 msgstr ""
 
-#: admin/html/message-content.php:10
+#: admin/html/message-info.php:10
 #: admin/message.php:65
 msgctxt "message type"
 msgid "Flex multiple"
 msgstr ""
 
-#: admin/html/message-content.php:16
-#: admin/html/message-content.php:25
-#: admin/html/message-content.php:35
+#: admin/html/message-info.php:16
+#: admin/html/message-info.php:25
+#: admin/html/message-info.php:68
 msgid "Content"
 msgstr ""
 
-#: admin/html/message-content.php:30
-msgid "For Flex message, please enter the JSON content."
+#: admin/html/message-info.php:33
+msgid "Add node"
 msgstr ""
 
-#: admin/html/message-content.php:47
+#: admin/html/message-info.php:36
+msgid "Move up"
+msgstr ""
+
+#: admin/html/message-info.php:39
+msgid "Move down"
+msgstr ""
+
+#: admin/html/message-info.php:42
+msgid "Delete node"
+msgstr ""
+
+#: admin/html/message-info.php:56
+msgid "Import"
+msgstr ""
+
+#: admin/html/message-info.php:57
+msgid "Export"
+msgstr ""
+
+#: admin/html/message-info.php:80
 msgid "Alt content"
 msgstr ""
 
-#: admin/html/message-content.php:55
+#: admin/html/message-info.php:88
 msgid "Use order"
 msgstr ""
 
@@ -325,20 +353,20 @@ msgstr ""
 msgid "Upload to LINE menu can't edit."
 msgstr ""
 
-#: admin/html/richmenu-content.php:4
+#: admin/html/richmenu-info.php:4
 msgid "Chat button text"
 msgstr ""
 
-#: admin/html/richmenu-content.php:5
+#: admin/html/richmenu-info.php:5
 #: admin/richmenu.php:127
 msgid "Open menu"
 msgstr ""
 
-#: admin/html/richmenu-content.php:8
+#: admin/html/richmenu-info.php:8
 msgid "Display"
 msgstr ""
 
-#: admin/html/richmenu-content.php:12
+#: admin/html/richmenu-info.php:12
 msgid "Default display the rich menu"
 msgstr ""
 
@@ -409,7 +437,7 @@ msgid ", "
 msgstr ""
 
 #: admin/meta-boxes.php:15
-#: admin/meta-boxes.php:51
+#: admin/meta-boxes.php:52
 msgid "Action area"
 msgstr ""
 
@@ -417,30 +445,30 @@ msgstr ""
 msgid "Message content"
 msgstr ""
 
-#: admin/meta-boxes.php:52
+#: admin/meta-boxes.php:53
 msgid "LINE Operation"
 msgstr ""
 
-#: admin/meta-boxes.php:53
+#: admin/meta-boxes.php:54
 msgid "Menu content"
 msgstr ""
 
-#: admin/meta-boxes.php:54
+#: admin/meta-boxes.php:55
 msgid "Image action area"
 msgstr ""
 
-#: admin/meta-boxes.php:130
+#: admin/meta-boxes.php:132
 msgid "license key"
 msgstr ""
 
 #. translators: %s: license key link
-#: admin/meta-boxes.php:132
+#: admin/meta-boxes.php:134
 #, php-format
 msgid "Please activate %s to use this feature."
 msgstr ""
 
-#: admin/meta-boxes.php:137
-#: admin/meta-boxes.php:160
+#: admin/meta-boxes.php:139
+#: admin/meta-boxes.php:162
 msgid "Please set show image first."
 msgstr ""
 
@@ -836,17 +864,217 @@ msgid "Search flex message"
 msgstr ""
 
 #: assets/admin/flex-message.js:1
-msgid "Only object is allowed"
+msgid "Paste JSON here. Only bubble type is supported."
 msgstr ""
 
 #: assets/admin/flex-message.js:1
-msgid "Only \"Bubble\" Container is allowed"
+msgid "Flex Message JSON copied to clipboard."
 msgstr ""
 
 #: assets/admin/flex-message.js:1
-msgid "Invalid JSON string"
+msgid "Text direction"
 msgstr ""
 
 #: assets/admin/flex-message.js:1
-msgid "Invalid data"
+msgid "Action"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Background color"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Separator"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Separator color"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Layout"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Border color"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Border width"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Border radius"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Width"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Max Width"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Height"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Max Height"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Flex"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Justification"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Vertical alignment"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Spacing"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Margin"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Padding All"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Padding Top"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Padding Bottom"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Padding Start"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Padding End"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Offset Top"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Offset Bottom"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Offset Start"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Offset End"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Color"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Style"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Scaled according APP"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Font size adjust Mode"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Image format: JPEG or PNG, Max image size: 1024 x 1024 pixels, Max file size: 10 MB"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Aspect Ratio"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Aspect Mode"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Horizontal alignment"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Image format: JPEG or PNG, Max image size: 1024 x 1024 pixels, Max file size: 1 MB"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Text"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Font size"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Font weight"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Font style"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Decoration"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Wrap text"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Line spacing"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Max Lines"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Label"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Webhook data"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Desktop URL"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Mode"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Default"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Min"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Max"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Clipboard text"
 msgstr ""

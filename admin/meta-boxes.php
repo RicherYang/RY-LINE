@@ -13,12 +13,12 @@ final class RY_LINE_Admin_Meta_Box
         remove_meta_box('submitdiv', '', 'side');
 
         add_meta_box('ry-line-message-action', __('Action area', 'ry-line'), [__CLASS__, 'display_message_action'], null, 'side', 'high');
-        add_meta_box('ry-line-message-content', __('Message content', 'ry-line'), [__CLASS__, 'display_message_content'], '', 'normal', 'core');
+        add_meta_box('ry-line-message-info', __('Message content', 'ry-line'), [__CLASS__, 'display_message_info'], '', 'normal', 'core');
         add_meta_box('ry-line-message-autosend', __('Automatic send', 'ry-line'), [__CLASS__, 'display_message_autosend'], '', 'normal', 'core');
 
         $asset_info = include RY_LINE_PLUGIN_DIR . 'assets/admin/meta-box.asset.php';
         wp_enqueue_style('ry-line-admin-meta-box', RY_LINE_PLUGIN_URL . 'assets/admin/meta-box.css', [], $asset_info['version']);
-        array_unshift($asset_info['dependencies'], 'ry-line-admin');
+        $asset_info['dependencies'][] = 'ry-line-admin';
         wp_enqueue_script('ry-line-admin-meta-box', RY_LINE_PLUGIN_URL . 'assets/admin/meta-box.js', $asset_info['dependencies'], $asset_info['version'], true);
 
         wp_localize_script('ry-line-admin-meta-box', 'RYLineMetabox', [
@@ -33,7 +33,8 @@ final class RY_LINE_Admin_Meta_Box
         ]);
 
         $asset_info = include RY_LINE_PLUGIN_DIR . 'assets/admin/flex-message.asset.php';
-        wp_enqueue_style('ry-line-admin-flex-message', RY_LINE_PLUGIN_URL . 'assets/admin/flex-message.css', [], $asset_info['version']);
+        wp_enqueue_style('ry-line-admin-flex-message', RY_LINE_PLUGIN_URL . 'assets/admin/flex-message.css', ['wp-color-picker'], $asset_info['version']);
+        $asset_info['dependencies'][] = 'wp-color-picker';
         wp_enqueue_script('ry-line-admin-flex-message', RY_LINE_PLUGIN_URL . 'assets/admin/flex-message.js', $asset_info['dependencies'], $asset_info['version'], true);
         wp_set_script_translations('ry-line-admin-flex-message', 'ry-line', RY_LINE_PLUGIN_DIR . 'languages');
 
@@ -50,7 +51,7 @@ final class RY_LINE_Admin_Meta_Box
 
         add_meta_box('ry-line-richmenu-action', __('Action area', 'ry-line'), [__CLASS__, 'display_richmenu_action'], null, 'side', 'high');
         add_meta_box('ry-line-richmenu-operate', __('LINE Operation', 'ry-line'), [__CLASS__, 'display_richmenu_operate'], null, 'side', 'core');
-        add_meta_box('ry-line-richmenu-content', __('Menu content', 'ry-line'), [__CLASS__, 'display_richmenu_content'], null, 'advanced', 'high');
+        add_meta_box('ry-line-richmenu-info', __('Menu content', 'ry-line'), [__CLASS__, 'display_richmenu_info'], null, 'advanced', 'high');
         add_meta_box('ry-line-image-area', __('Image action area', 'ry-line'), [__CLASS__, 'display_image_area'], null, 'advanced');
 
         $asset_info = include RY_LINE_PLUGIN_DIR . 'assets/admin/meta-box.asset.php';
@@ -99,7 +100,7 @@ final class RY_LINE_Admin_Meta_Box
         include RY_LINE_PLUGIN_DIR . 'admin/html/message-autosend.php';
     }
 
-    public static function display_message_content($post)
+    public static function display_message_info($post)
     {
         $message_type = get_post_meta($post->ID, 'ry_line_message_type', true);
         $message_data = get_post_meta($post->ID, 'ry_line_message_data', true);
@@ -107,14 +108,15 @@ final class RY_LINE_Admin_Meta_Box
             case 'flex':
                 $post->post_content = maybe_unserialize($post->post_content);
                 if (is_object($post->post_content)) {
-                    $post->post_content = wp_json_encode($post->post_content, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+                    $post->post_content = wp_json_encode($post->post_content);
                 } else {
                     $post->post_content = '';
                 }
                 break;
         }
 
-        include RY_LINE_PLUGIN_DIR . 'admin/html/message-content.php';
+        include RY_LINE_PLUGIN_DIR . 'admin/html/message-info.php';
+        include RY_LINE_PLUGIN_DIR . 'admin/html/message-flex-teml.php';
     }
 
     public static function display_richmenu_action($post)
@@ -146,12 +148,12 @@ final class RY_LINE_Admin_Meta_Box
         include RY_LINE_PLUGIN_DIR . 'admin/html/richmenu-operate.php';
     }
 
-    public static function display_richmenu_content($post)
+    public static function display_richmenu_info($post)
     {
         $richMenuId = get_post_meta($post->ID, 'ry_line_richmenu_richMenuId', true);
         $richmenu_data = get_post_meta($post->ID, 'ry_line_richmenu_data', true);
 
-        include RY_LINE_PLUGIN_DIR . 'admin/html/richmenu-content.php';
+        include RY_LINE_PLUGIN_DIR . 'admin/html/richmenu-info.php';
     }
 
     public static function display_image_area($post)

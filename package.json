@@ -1,15 +1,13 @@
 {
     "name": "ry-line",
     "title": "RY LINE",
-    "version": "0.5.5",
+    "version": "0.6.0",
     "author": "Richer Yang",
     "private": true,
-    "dependencies": {
-        "select2": "^4.0.0"
-    },
     "devDependencies": {
         "react": "^18.0.0",
         "clean-webpack-plugin": "^4.0.0",
+        "select2": "^4.0.0",
         "@wordpress/i18n": "^6.9.0",
         "@wordpress/scripts": "^31.1.0"
     },

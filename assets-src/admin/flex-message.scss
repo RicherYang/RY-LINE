@@ -1,0 +1,275 @@
+// Flex Message 編輯器樣式
+#flex-message {
+    .ry-line-row {
+        --ry-grid-space: 0.5rem;
+
+        &:first-of-type {
+            margin-bottom: 0.75rem;
+        }
+    }
+
+    .ry-action {
+        line-height: 1;
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        padding: 2px;
+        cursor: pointer;
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        &:before {
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        &#node-create:before {
+            background-image: url("../icon/plus.svg");
+        }
+        &#node-up:before {
+            background-image: url("../icon/angle-up.svg");
+        }
+        &#node-down:before {
+            background-image: url("../icon/angle-down.svg");
+        }
+        &#node-delete:before {
+            background-image: url("../icon/trash-can.svg");
+        }
+        &#json-import:before {
+            background-image: url("../icon/upload.svg");
+        }
+        &#json-export:before {
+            background-image: url("../icon/download.svg");
+        }
+    }
+}
+
+// 操作按鈕區域
+#flex-message-tree-actions {
+    --ry-grid-space: 0.35rem;
+    margin-bottom: 0.75rem;
+}
+
+#flex-message-actions button {
+    margin: 0.4rem 0;
+}
+
+// 隱藏原始內容區域
+#flex-message-content {
+    display: block;
+}
+
+// 樹狀結構編輯器
+#flex-message-tree {
+    border: 1px solid #c3c4c7;
+    padding: 10px;
+    background-color: #fafafa;
+    min-height: 30vh;
+    max-height: 60vh;
+    overflow: auto;
+
+    .flex-tree-node {
+        margin: 3px 0;
+
+        &.selected > .flex-tree-node-header {
+            background-color: #0073aa;
+            color: #fff;
+
+            .flex-tree-node-icon {
+                opacity: 1;
+            }
+            .flex-tree-node-label {
+                color: #ccc;
+            }
+        }
+
+        &.collapsed > .flex-tree-node-children {
+            display: none;
+        }
+
+        &.collapsed > .flex-tree-node-header .flex-tree-node-toggle .dashicons {
+            transform: rotate(-90deg);
+        }
+    }
+
+    .flex-tree-node-header {
+        display: flex;
+        align-items: center;
+        padding: 6px 8px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: #f0f0f1;
+
+            .flex-tree-node-icon {
+                opacity: 0.8;
+            }
+        }
+    }
+
+    .flex-tree-node-toggle {
+        width: 20px;
+        height: 20px;
+
+        .dashicons {
+            width: 16px;
+            height: 16px;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+    }
+
+    .flex-tree-node-icon {
+        font-size: 16px;
+        line-height: 1;
+        margin-right: 0.3em;
+        opacity: 0.6;
+    }
+
+    .flex-tree-node-type {
+        font-weight: 600;
+        font-size: 13px;
+        margin-right: 0.5em;
+    }
+
+    .flex-tree-node-label {
+        color: #666;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .flex-tree-node-children {
+        margin-left: 16px;
+        padding-left: 8px;
+        border-left: 1px dashed #ccc;
+
+        &.has-children {
+            margin-bottom: 6px;
+        }
+    }
+}
+
+// 屬性編輯器
+#flex-node-property {
+    border: 1px solid #c3c4c7;
+    padding: 0.8rem;
+    background-color: #fff;
+    min-height: 30vh;
+    max-height: calc(60vh + 34px);
+    overflow: auto;
+
+    .flex-property-editor {
+        .flex-property-header {
+            display: flex;
+            align-items: baseline;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 0.5rem;
+        }
+
+        h3 {
+            margin: 0;
+            padding-right: 1rem;
+        }
+    }
+
+    .flex-property-field {
+        + .flex-property-field {
+            margin-top: 0.75rem;
+        }
+
+        label {
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 5px;
+
+            .required {
+                color: #d63638;
+                margin-left: 2px;
+            }
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            font-size: 14px;
+            font-family: inherit;
+            line-height: 2;
+        }
+        input[type="text"].wp-color-picker {
+            width: 6em;
+        }
+
+        &.field-paddingAll,
+        &.field-position,
+        &.field-action {
+            border-top: 1px solid #c3c4c7;
+            padding-top: 0.75rem;
+        }
+    }
+
+    p.description {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.4;
+    }
+}
+
+// 新增節點選單
+.flex-add-node-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    min-width: 8rem;
+    z-index: 1000;
+
+    .flex-node-menu-item {
+        padding: 10px 12px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: background-color 0.2s;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid #eee;
+        }
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+
+        &:active {
+            background-color: #e5e5e5;
+        }
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    #flex-node-property .flex-property-field {
+        display: flex;
+
+        label {
+            flex: 0 0 7.5rem;
+            margin: 0.3rem 0 0;
+            padding-right: 0.5rem;
+        }
+
+        .flex-property-field-wrapper {
+            flex: 1;
+        }
+    }
+}
