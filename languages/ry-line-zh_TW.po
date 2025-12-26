@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-03-02T11:52:45+08:00\n"
-"PO-Revision-Date: 2025-12-19 21:38+0800\n"
+"PO-Revision-Date: 2025-12-24 21:42+0800\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
@@ -551,7 +551,7 @@ msgstr "圖片"
 
 #: admin/html/message-info.php:16
 #: admin/html/message-info.php:25
-#: admin/html/message-info.php:68
+#: admin/html/message-info.php:72
 msgid "Content"
 msgstr "內容"
 
@@ -559,7 +559,7 @@ msgstr "內容"
 msgid "Message content"
 msgstr "訊息內容"
 
-#: admin/html/message-info.php:80
+#: admin/html/message-info.php:84
 msgid "Alt content"
 msgstr "替代內容"
 
@@ -658,7 +658,7 @@ msgstr "姓氏"
 msgid "Email"
 msgstr "電子郵件地址"
 
-#: admin/html/message-info.php:88
+#: admin/html/message-info.php:92
 msgid "Use order"
 msgstr "使用順序"
 
@@ -842,15 +842,15 @@ msgstr "沒有符合條件的訊息"
 msgid "Search flex message"
 msgstr "搜尋 Flex 訊息"
 
-#: admin/html/message-info.php:36
+#: admin/html/message-info.php:40
 msgid "Move up"
 msgstr "向上移動"
 
-#: admin/html/message-info.php:39
+#: admin/html/message-info.php:43
 msgid "Move down"
 msgstr "向下移動"
 
-#: admin/html/message-info.php:42
+#: admin/html/message-info.php:46
 msgid "Delete node"
 msgstr "刪除節點"
 
@@ -954,7 +954,7 @@ msgstr "分隔線色彩"
 msgid "Border color"
 msgstr "框線色彩"
 
-#: admin/html/message-info.php:33
+#: admin/html/message-info.php:37
 msgid "Add node"
 msgstr "新增節點"
 
@@ -1023,10 +1023,6 @@ msgid "Offset End"
 msgstr "偏移量 (結尾)"
 
 #: assets/admin/flex-message.js:1
-msgid "Image format: JPEG or PNG, Max image size: 1024 x 1024 pixels, Max file size: 1 MB"
-msgstr "圖片格式：JPEG 或 PNG，最大圖片尺寸：1024 x 1024 像素，最大檔案大小：1 MB"
-
-#: assets/admin/flex-message.js:1
 msgid "Action"
 msgstr "操作"
 
@@ -1063,18 +1059,14 @@ msgid "Webhook data"
 msgstr "網站勾點資料"
 
 #: assets/admin/flex-message.js:1
-msgid "Image format: JPEG or PNG, Max image size: 1024 x 1024 pixels, Max file size: 10 MB"
-msgstr "圖片格式：JPEG 或 PNG，最大圖片尺寸：1024 x 1024 像素，最大檔案大小：10 MB"
-
-#: assets/admin/flex-message.js:1
 msgid "Scaled according APP"
 msgstr "依照 APP 調整大小"
 
-#: admin/html/message-info.php:56
+#: admin/html/message-info.php:60
 msgid "Import"
 msgstr "匯入"
 
-#: admin/html/message-info.php:57
+#: admin/html/message-info.php:61
 msgid "Export"
 msgstr "匯出"
 
@@ -1085,3 +1077,31 @@ msgstr "貼上 JSON，僅支援 bubble 類型。"
 #: assets/admin/flex-message.js:1
 msgid "Flex Message JSON copied to clipboard."
 msgstr "Flex Message JSON 已複製至剪貼簿。"
+
+#: admin/html/message-info.php:32
+msgid "NOT all properties options are supported."
+msgstr "沒有支援所有的屬性值。"
+
+#: assets/admin/flex-message.js:1
+msgid "Invalid URL"
+msgstr "無效的網址"
+
+#: assets/admin/flex-message.js:1
+msgid "Only HTTPS protocol is allowed"
+msgstr "只允許使用 HTTPS 協定"
+
+#: assets/admin/flex-message.js:1
+msgid "Unable to load image"
+msgstr "無法讀取圖片"
+
+#: assets/admin/flex-message.js:1
+msgid "Image format: JPEG or PNG"
+msgstr "圖片格式：JPEG 或 PNG"
+
+#: assets/admin/flex-message.js:1
+msgid "Value is required"
+msgstr "必填項目"
+
+#: assets/admin/flex-message.js:1
+msgid "Invalid color"
+msgstr "無效的色彩"

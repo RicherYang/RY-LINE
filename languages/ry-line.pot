@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: RY LINE 0.6.0\n"
+"Project-Id-Version: RY LINE 0.6.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ry-line\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-19T22:43:21+08:00\n"
+"POT-Creation-Date: 2025-12-26T16:41:52+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ry-line\n"
@@ -313,39 +313,43 @@ msgstr ""
 
 #: admin/html/message-info.php:16
 #: admin/html/message-info.php:25
-#: admin/html/message-info.php:68
+#: admin/html/message-info.php:72
 msgid "Content"
 msgstr ""
 
-#: admin/html/message-info.php:33
+#: admin/html/message-info.php:32
+msgid "NOT all properties options are supported."
+msgstr ""
+
+#: admin/html/message-info.php:37
 msgid "Add node"
 msgstr ""
 
-#: admin/html/message-info.php:36
+#: admin/html/message-info.php:40
 msgid "Move up"
 msgstr ""
 
-#: admin/html/message-info.php:39
+#: admin/html/message-info.php:43
 msgid "Move down"
 msgstr ""
 
-#: admin/html/message-info.php:42
+#: admin/html/message-info.php:46
 msgid "Delete node"
 msgstr ""
 
-#: admin/html/message-info.php:56
+#: admin/html/message-info.php:60
 msgid "Import"
 msgstr ""
 
-#: admin/html/message-info.php:57
+#: admin/html/message-info.php:61
 msgid "Export"
 msgstr ""
 
-#: admin/html/message-info.php:80
+#: admin/html/message-info.php:84
 msgid "Alt content"
 msgstr ""
 
-#: admin/html/message-info.php:88
+#: admin/html/message-info.php:92
 msgid "Use order"
 msgstr ""
 
@@ -848,30 +852,6 @@ msgid "Uploaded to this rich menu"
 msgstr ""
 
 #: assets/admin/flex-message.js:1
-msgid "Enter search keyword"
-msgstr ""
-
-#: assets/admin/flex-message.js:1
-msgid "Loading..."
-msgstr ""
-
-#: assets/admin/flex-message.js:1
-msgid "No matching message found"
-msgstr ""
-
-#: assets/admin/flex-message.js:1
-msgid "Search flex message"
-msgstr ""
-
-#: assets/admin/flex-message.js:1
-msgid "Paste JSON here. Only bubble type is supported."
-msgstr ""
-
-#: assets/admin/flex-message.js:1
-msgid "Flex Message JSON copied to clipboard."
-msgstr ""
-
-#: assets/admin/flex-message.js:1
 msgid "Text direction"
 msgstr ""
 
@@ -996,7 +976,7 @@ msgid "Font size adjust Mode"
 msgstr ""
 
 #: assets/admin/flex-message.js:1
-msgid "Image format: JPEG or PNG, Max image size: 1024 x 1024 pixels, Max file size: 10 MB"
+msgid "Image format: JPEG or PNG"
 msgstr ""
 
 #: assets/admin/flex-message.js:1
@@ -1009,10 +989,6 @@ msgstr ""
 
 #: assets/admin/flex-message.js:1
 msgid "Horizontal alignment"
-msgstr ""
-
-#: assets/admin/flex-message.js:1
-msgid "Image format: JPEG or PNG, Max image size: 1024 x 1024 pixels, Max file size: 1 MB"
 msgstr ""
 
 #: assets/admin/flex-message.js:1
@@ -1077,4 +1053,48 @@ msgstr ""
 
 #: assets/admin/flex-message.js:1
 msgid "Clipboard text"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Value is required"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Only HTTPS protocol is allowed"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Invalid URL"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Unable to load image"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Invalid color"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Paste JSON here. Only bubble type is supported."
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Flex Message JSON copied to clipboard."
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Enter search keyword"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Loading..."
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "No matching message found"
+msgstr ""
+
+#: assets/admin/flex-message.js:1
+msgid "Search flex message"
 msgstr ""

@@ -27,6 +27,10 @@
             </th>
             <td id="flex-message">
                 <div class="ry-line-row">
+                    <div class="ry-line-col-auto">
+                        <div id="flex-message-preview"></div>
+                        <p class="description"><?php esc_html_e('NOT all properties options are supported.', 'ry-line'); ?></p>
+                    </div>
                     <div class="ry-line-col">
                         <div id="flex-message-tree-actions" class="ry-line-row">
                             <div class="ry-line-col-auto">

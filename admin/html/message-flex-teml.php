@@ -49,6 +49,7 @@
             <# if (data.description) { #>
                 <p class="description">{{ data.description }}</p>
             <# } #>
+            <p class="description verify-info"></p>
         </div>
     </div>
 </script>
@@ -61,11 +62,12 @@
             <# if (data.required) { #><span class="required">*</span><# } #>
         </label>
         <div class="flex-property-field-wrapper">
-            <input type="text" id="{{ data.id }}" value="{{ data.value || '' }}" data-property="{{ data.name }}" data-alpha-enabled="{{ data.alpha ? 'true' : 'false' }}"
+            <input type="text" id="{{ data.id }}" value="{{ data.value || '' }}" data-property="{{ data.name }}" data-alpha-enabled="{{ data.alpha ? 'true' : 'false' }}" data-alpha-custom-width="90"
                 <# if (data.required) { #> required <# } #> />
             <# if (data.description) { #>
                 <p class="description">{{ data.description }}</p>
             <# } #>
+            <p class="description verify-info"></p>
         </div>
     </div>
 </script>
@@ -83,6 +85,7 @@
             <# if (data.description) { #>
                 <p class="description">{{ data.description }}</p>
             <# } #>
+            <p class="description verify-info"></p>
         </div>
     </div>
 </script>
@@ -102,6 +105,7 @@
             <# if (data.description) { #>
                 <p class="description">{{ data.description }}</p>
             <# } #>
+            <p class="description verify-info"></p>
         </div>
     </div>
 </script>
@@ -126,6 +130,7 @@
             <# if (data.description) { #>
                 <p class="description">{{ data.description }}</p>
             <# } #>
+            <p class="description verify-info"></p>
         </div>
     </div>
 </script>

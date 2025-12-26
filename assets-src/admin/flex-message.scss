@@ -1,7 +1,9 @@
+@use "sass:map";
+
 // Flex Message 編輯器樣式
 #flex-message {
     .ry-line-row {
-        --ry-grid-space: 0.5rem;
+        --ry-grid-space: 0.4rem;
 
         &:first-of-type {
             margin-bottom: 0.75rem;
@@ -65,14 +67,27 @@
     display: block;
 }
 
+#flex-message-preview,
+#flex-message-tree,
+#flex-node-property {
+    box-sizing: border-box;
+    border: 1px solid #c3c4c7;
+    padding: 0.8rem;
+    overflow: auto;
+    min-width: 10rem;
+}
+
+// 預覽區域
+#flex-message-preview {
+    background-color: #849ebf;
+    width: 370px;
+    height: calc(62vh - 25px);
+}
+
 // 樹狀結構編輯器
 #flex-message-tree {
-    border: 1px solid #c3c4c7;
-    padding: 10px;
     background-color: #fafafa;
-    min-height: 30vh;
-    max-height: 60vh;
-    overflow: auto;
+    height: calc(62vh - 39px);
 
     .flex-tree-node {
         margin: 3px 0;
@@ -112,6 +127,16 @@
 
             .flex-tree-node-icon {
                 opacity: 0.8;
+            }
+        }
+
+        &.invalid {
+            border-color: #d63638;
+            border-width: 2px;
+            background-color: #fcf0f1;
+
+            &:hover {
+                background-color: #fae3e5;
             }
         }
     }
@@ -162,12 +187,8 @@
 
 // 屬性編輯器
 #flex-node-property {
-    border: 1px solid #c3c4c7;
-    padding: 0.8rem;
     background-color: #fff;
-    min-height: 30vh;
-    max-height: calc(60vh + 34px);
-    overflow: auto;
+    height: 62vh;
 
     .flex-property-editor {
         .flex-property-header {
@@ -218,6 +239,20 @@
         &.field-action {
             border-top: 1px solid #c3c4c7;
             padding-top: 0.75rem;
+        }
+
+        &.invalid {
+            label,
+            .verify-info {
+                color: #d63638;
+            }
+            input[type="text"],
+            input[type="number"],
+            select,
+            textarea {
+                background-color: #fcf0f1;
+                border-color: #d63638;
+            }
         }
     }
 
