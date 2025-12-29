@@ -274,7 +274,7 @@ msgstr "更新"
 msgid "Create menu"
 msgstr "建立選單"
 
-#: admin/ajax.php:296
+#: admin/ajax.php:317
 #: admin/html/richmenu-operate.php:31
 msgid "Unset default menu"
 msgstr "取消預設選單"
@@ -349,7 +349,7 @@ msgid "Deleted %d unused rich menu alias."
 msgid_plural "Deleted %d unused rich menu aliases."
 msgstr[0] "刪除 %d 個未使用的圖文選單代稱。"
 
-#: admin/ajax.php:296
+#: admin/ajax.php:317
 #: admin/html/richmenu-operate.php:31
 #: admin/richmenu.php:42
 msgid "Default menu"
@@ -662,8 +662,8 @@ msgstr "電子郵件地址"
 msgid "Use order"
 msgstr "使用順序"
 
-#: admin/ajax.php:206
-#: admin/ajax.php:386
+#: admin/ajax.php:227
+#: admin/ajax.php:407
 msgid "Test user ID is not set."
 msgstr "尚未設定測試使用者 ID。"
 

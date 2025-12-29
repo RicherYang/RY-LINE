@@ -1,6 +1,10 @@
 import $ from 'jquery';
 import { __ } from '@wordpress/i18n';
+
+import './../../lib/wp-color-picker-alpha/wp-color-picker-alpha.js';
+
 import './globals.d.ts';
+import flexPreview from './preview.ts';
 import type {
     NodeData,
     NodeInfo,
@@ -152,13 +156,22 @@ export class FlexEditor {
     private getNodeShowInfo(type: FlexNodeType, data: NodeData): NodeShowInfo {
         let label = '';
 
-        if (type === 'text') {
-            label = data.text || '';
-            label = label.substring(0, 20) + (label.length > 20 ? '...' : '');
-        } else if (type === 'button' && data.action && data.action.label) {
-            label = data.action.label.substring(0, 20) + (data.action.label.length > 20 ? '...' : '');
-        } else if (type === 'box' && data.layout) {
-            label = `[${data.layout}]`;
+        switch (type) {
+            case 'text':
+                if (!data.contents) {
+                    label = data.text || '';
+                }
+                break;
+            case 'span':
+                label = data.text || '';
+                break;
+            case 'button':
+                if (data.action && data.action.label) {
+                    label = data.action.label.substring(0, 15) + (data.action.label.length > 15 ? '...' : '');
+                }
+                break;
+            case 'box':
+                label = `[${data.layout}]`;
         }
 
         return {
@@ -490,7 +503,7 @@ export class FlexEditor {
     private async verifyPropertyValue(verifyType: string[], value: any): Promise<string> {
         // 依序執行驗證，只要有錯誤就停止後續驗證
         for (const type of verifyType) {
-            let error: string;
+            let error: string = '';
 
             switch (type) {
                 case 'required':
@@ -510,8 +523,6 @@ export class FlexEditor {
                 case 'color_alpha':
                     error = this.verifyColor(value, true);
                     break;
-                default:
-                    error = '';
             }
 
             // 如果驗證失敗，立即返回錯誤，不再執行後續驗證
@@ -792,7 +803,7 @@ export class FlexEditor {
      */
     public updateJsonOutput(): void {
         const jsonData = this.cleanJsonData(this.getJsonData());
-        flex2html('flex-message-preview', jsonData);
+        flexPreview('#flex-message-preview', jsonData);
         $('#flex-message-content').val(JSON.stringify(jsonData, null, 4)).trigger('input');
     }
 

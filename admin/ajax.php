@@ -25,6 +25,7 @@ final class RY_LINE_Admin_Ajax
                 'save-image-actions',
 
                 'get-flex',
+                'get-flex-preview',
                 'remote-message-testsend',
 
                 'remote-richmenu-create',
@@ -194,6 +195,26 @@ final class RY_LINE_Admin_Ajax
             'results' => $results,
             'next' => $page < $query->max_num_pages,
         ]);
+    }
+
+    public function get_flex_preview()
+    {
+        $asset_info = include RY_LINE_PLUGIN_DIR . 'assets/admin/flex-message.asset.php';
+        $style_url = esc_url(RY_LINE_PLUGIN_URL . 'assets/admin/flex-message.css?ver=' . $asset_info['version']);
+
+        echo <<<HTML
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{$style_url}" media="all" />
+</head>
+<body>
+    <div class="flex-message"></div>
+</body>
+</html>
+HTML;
+        wp_die();
     }
 
     public function remote_message_testsend()

@@ -28,7 +28,7 @@
             <td id="flex-message">
                 <div class="ry-line-row">
                     <div class="ry-line-col-auto">
-                        <div id="flex-message-preview"></div>
+                        <iframe id="flex-message-preview" src="<?php echo esc_url(admin_url('admin-ajax.php?action=ry-line/get-flex-preview')); ?>"></iframe>
                         <p class="description"><?php esc_html_e('NOT all properties options are supported.', 'ry-line'); ?></p>
                     </div>
                     <div class="ry-line-col">

@@ -109,8 +109,11 @@ final class RY_LINE_Template
         return $default;
     }
 
-    public function do_template_string($string, $template_info)
+    public function do_template_string($string, $template_info = null)
     {
+        if ($template_info === null) {
+            return $string;
+        }
         if (! str_contains($string, '{{')) {
             return $string;
         }

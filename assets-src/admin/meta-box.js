@@ -1004,7 +1004,7 @@ $(function () {
             const currentValue = $targetInput.val();
             const cursorPosition = targetElement.selectionStart || currentValue.length;
             const templateCode = ' ' + $(this).find('code').text() + ' ';
-            $targetInput.val(currentValue.slice(0, cursorPosition) + templateCode + currentValue.slice(cursorPosition));
+            $targetInput.val((currentValue.slice(0, cursorPosition).trim() + templateCode + currentValue.slice(cursorPosition).trim()).trim());
 
             const newCursorPosition = cursorPosition + templateCode.length;
             targetElement.setSelectionRange(newCursorPosition, newCursorPosition);
@@ -1027,14 +1027,17 @@ $(function () {
         });
 
         // 點擊樣板字串按鈕時，顯示樣板選擇對話框
-        $string.on('click', function (e) {
+        $string.on('click', function () {
             const $btn = $(this);
             const position = $btn.position();
-            const elementHeight = $btn.outerHeight();
             $targetInput = $($btn.data('target'));
             if ($targetInput.length == 0) {
                 return;
             }
+
+            // 加入表格欄位本身的相對位置
+            position.left += $btn.parent().position().left;
+            position.top += $btn.parent().position().top;
 
             // 設定對話框初始位置（按鈕右側）
             $dialog.css({
@@ -1045,8 +1048,7 @@ $(function () {
 
             // 如果對話框超出視窗右側，改顯示在按鈕左側
             const dialogRight = $dialog.position().left + $dialog.outerWidth();
-            const windowWidth = $(window).width();
-            if (dialogRight > windowWidth - 20) {
+            if (dialogRight > $(window).width() - 20) {
                 $dialog.css({
                     left: position.left - $dialog.outerWidth() - 20 + 'px'
                 });
@@ -1054,11 +1056,9 @@ $(function () {
 
             // 如果對話框超出視窗底部，調整垂直位置
             const dialogBottom = $dialog.position().top + $dialog.outerHeight();
-            const windowHeight = $(window).height();
-
-            if (dialogBottom > windowHeight - 20) {
+            if (dialogBottom > $(window).height() - 20) {
                 $dialog.css({
-                    top: Math.max(20, position.top - $dialog.outerHeight() + elementHeight) + 'px'
+                    top: Math.max(20, position.top - $dialog.outerHeight() + $btn.outerHeight(true)) + 'px'
                 });
             }
 

@@ -38,7 +38,7 @@ final class RY_LINE_Api
         }
     }
 
-    public static function build_message_object($posts, $template_info)
+    public static function build_message_object($posts, $template_info = null)
     {
         $message_object = [];
         foreach ($posts as $post) {

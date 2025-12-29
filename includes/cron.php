@@ -106,7 +106,7 @@ final class RY_LINE_Cron
                         ]);
 
                         wp_cache_delete($new_message_ID, 'posts');
-                        $message_object = RY_LINE_Api::build_message_object([get_post($new_message_ID)], []);
+                        $message_object = RY_LINE_Api::build_message_object([get_post($new_message_ID)]);
                         if ($message_object) {
                             $status = RY_LINE_Api::message_validate($message_object);
                             if (is_wp_error($status)) {
@@ -136,7 +136,7 @@ final class RY_LINE_Cron
                     update_post_meta($message->ID, 'ry_line_message_data', $message_data);
 
                     wp_cache_delete($message->ID, 'posts');
-                    $message_object = RY_LINE_Api::build_message_object([get_post($message->ID)], []);
+                    $message_object = RY_LINE_Api::build_message_object([get_post($message->ID)]);
                     if ($message_object) {
                         $status = RY_LINE_Api::message_validate($message_object);
                         if (is_wp_error($status)) {

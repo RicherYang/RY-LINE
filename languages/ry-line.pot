@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: RY LINE 0.6.2\n"
+"Project-Id-Version: RY LINE 0.6.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ry-line\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-26T16:41:52+08:00\n"
+"POT-Creation-Date: 2025-12-29T16:24:21+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ry-line\n"
@@ -39,18 +39,18 @@ msgstr ""
 msgid "https://richer.tw/"
 msgstr ""
 
-#: admin/ajax.php:206
-#: admin/ajax.php:386
+#: admin/ajax.php:227
+#: admin/ajax.php:407
 msgid "Test user ID is not set."
 msgstr ""
 
-#: admin/ajax.php:296
+#: admin/ajax.php:317
 #: admin/html/richmenu-operate.php:31
 #: admin/richmenu.php:42
 msgid "Default menu"
 msgstr ""
 
-#: admin/ajax.php:296
+#: admin/ajax.php:317
 #: admin/html/richmenu-operate.php:31
 msgid "Unset default menu"
 msgstr ""

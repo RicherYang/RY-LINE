@@ -1,11 +1,9 @@
 import $ from 'jquery';
 import { __ } from '@wordpress/i18n';
-import 'select2';
-import './../lib/wp-color-picker-alpha/wp-color-picker-alpha.js';
-import './../lib/flex2html/flex2html.js';
 
+import 'select2';
 import 'select2/dist/css/select2.css';
-import './../lib/flex2html/flex2html.scss';
+
 import './flex-message.scss';
 
 import './flex-message/globals.d.ts';
