@@ -138,7 +138,6 @@ function bubble_object(jsonData: FlexBubble): JQuery<HTMLElement> {
         }
     }
 
-
     for (const key in jsonData.hero) {
         if (key === 'type') {
             if (jsonData.hero[key as keyof FlexComponent] === 'box') {
@@ -177,7 +176,14 @@ function bubble_object(jsonData: FlexBubble): JQuery<HTMLElement> {
     return elem;
 }
 
-function add_global_style(jsonData: FlexComponent, classes: string[], styles: Record<string, string>): void {
+function add_global_style(jsonData: FlexComponent, classes: string[], styles: Record<string, string | number>): void {
+    if (jsonData.flex) {
+        if (jsonData.flex > 0) {
+            styles['flex-grow'] = jsonData.flex;
+        }
+        classes.push(`flex-${jsonData.flex}`);
+    }
+
     if (jsonData.margin) {
         if (['none', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'].includes(jsonData.margin)) {
             classes.push(`margin-${jsonData.margin}`);
@@ -265,17 +271,13 @@ function convert_object(layout: string, jsonData: FlexComponent): JQuery<HTMLEle
 }
 
 function box_object(jsonData: FlexComponent): JQuery<HTMLElement> {
-    const styles: Record<string, string> = {};
+    const styles: Record<string, string | number> = {};
     const classes: string[] = ['flex-type-box'];
 
     add_global_style(jsonData, classes, styles);
 
-    if (jsonData.layout === 'baseline') {
-        classes.push('layout-baseline', 'layout-horizontal');
-    } else if (jsonData.layout === 'horizontal') {
-        classes.push('layout-horizontal');
-    } else if (jsonData.layout === 'vertical') {
-        classes.push('layout-vertical');
+    if (jsonData.layout) {
+        classes.push(`layout-${jsonData.layout}`);
     }
 
     if (jsonData.backgroundColor) {
@@ -311,13 +313,6 @@ function box_object(jsonData: FlexComponent): JQuery<HTMLElement> {
     }
     if (jsonData.maxHeight) {
         styles['max-height'] = jsonData.maxHeight;
-    }
-
-    if (jsonData.flex) {
-        if (jsonData.flex > 0) {
-            styles['flex'] = `${jsonData.flex} 0 auto`;
-        }
-        classes.push(`flex-${jsonData.flex}`);
     }
 
     if (jsonData.justifyContent) {
@@ -374,7 +369,7 @@ function box_object(jsonData: FlexComponent): JQuery<HTMLElement> {
 }
 
 function button_object(jsonData: FlexComponent): JQuery<HTMLElement> {
-    const styles: Record<string, string> = {};
+    const styles: Record<string, string | number> = {};
     const styles2: Record<string, string> = {};
     const classes: string[] = ['flex-type-button'];
 
@@ -384,13 +379,6 @@ function button_object(jsonData: FlexComponent): JQuery<HTMLElement> {
         classes.push(`style-${jsonData.style}`);
     } else {
         classes.push('style-link');
-    }
-
-    if (jsonData.flex) {
-        if (jsonData.flex > 0) {
-            styles['flex'] = `${jsonData.flex} 0 auto`;
-        }
-        classes.push(`flex-${jsonData.flex}`);
     }
 
     if (jsonData.height) {
@@ -425,7 +413,7 @@ function button_object(jsonData: FlexComponent): JQuery<HTMLElement> {
 }
 
 function image_object(jsonData: FlexComponent): JQuery<HTMLElement> {
-    const styles: Record<string, string> = {};
+    const styles: Record<string, string | number> = {};
     const styles2: Record<string, string> = {};
     const classes: string[] = ['flex-type-image'];
     const styleimg: Record<string, string> = {
@@ -446,26 +434,19 @@ function image_object(jsonData: FlexComponent): JQuery<HTMLElement> {
     }
 
     if (jsonData.size) {
-        if (['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', '3xl', '4xl', '5xl'].includes(jsonData.size)) {
+        if (['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', '3xl', '4xl', '5xl', 'full'].includes(jsonData.size)) {
             classes.push(`size-${jsonData.size}`);
         } else {
             styles['width'] = jsonData.size;
         }
+    } else {
+        classes.push('size-md');
     }
 
-    let ratio: string | number = '100';
-    if (!jsonData.aspectRatio || jsonData.aspectRatio === '') {
-        ratio = '100';
-    } else {
+    let ratio: number = 100;
+    if (jsonData.aspectRatio) {
         const ratioParts = jsonData.aspectRatio.split(':');
         ratio = parseFloat(ratioParts[1]) * 100 / parseFloat(ratioParts[0]);
-    }
-
-    if (jsonData.flex) {
-        if (jsonData.flex > 0) {
-            styles['flex'] = `${jsonData.flex} 0 auto`;
-        }
-        classes.push(`flex-${jsonData.flex}`);
     }
 
     if (jsonData.align) {
@@ -487,7 +468,7 @@ function image_object(jsonData: FlexComponent): JQuery<HTMLElement> {
 }
 
 function icon_object(jsonData: FlexComponent): JQuery<HTMLElement> {
-    const styles: Record<string, string> = {};
+    const styles: Record<string, string | number> = {};
     const classes: string[] = ['flex-type-icon', 'flex-0'];
     const styleimg: Record<string, string> = {
         'background-image': `url('${jsonData.url}')`
@@ -501,6 +482,8 @@ function icon_object(jsonData: FlexComponent): JQuery<HTMLElement> {
         } else {
             styles['font-size'] = jsonData.size;
         }
+    } else {
+        classes.push('size-md');
     }
 
     if (!jsonData.aspectRatio || jsonData.aspectRatio === '') {
@@ -522,17 +505,10 @@ function icon_object(jsonData: FlexComponent): JQuery<HTMLElement> {
 }
 
 function text_object(jsonData: FlexComponent): JQuery<HTMLElement> {
-    const styles: Record<string, string> = {};
+    const styles: Record<string, string | number> = {};
     const classes: string[] = ['flex-type-text'];
 
     add_global_style(jsonData, classes, styles);
-
-    if (jsonData.flex) {
-        if (jsonData.flex > 0) {
-            styles['flex'] = `${jsonData.flex} 0 auto`;
-        }
-        classes.push(`flex-${jsonData.flex}`);
-    }
 
     if (jsonData.align) {
         classes.push(`align-${jsonData.align}`);
@@ -581,7 +557,7 @@ function text_object(jsonData: FlexComponent): JQuery<HTMLElement> {
 }
 
 function span_object(jsonData: FlexComponent): JQuery<HTMLElement> {
-    const styles: Record<string, string> = {};
+    const styles: Record<string, string | number> = {};
     const classes: string[] = ['flex-type-span'];
 
     add_global_style(jsonData, classes, styles);
@@ -615,7 +591,7 @@ function span_object(jsonData: FlexComponent): JQuery<HTMLElement> {
 }
 
 function separator_object(layout: string, jsonData: FlexComponent): JQuery<HTMLElement> {
-    const styles: Record<string, string> = {};
+    const styles: Record<string, string | number> = {};
     const classes: string[] = ['flex-type-separator', 'flex-0'];
 
     add_global_style(jsonData, classes, styles);

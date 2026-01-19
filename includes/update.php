@@ -12,8 +12,8 @@ final class RY_LINE_update
 
         if (version_compare($now_version, '0.5.5', '<')) {
             add_action('init', function () {
-                $query = new WP_Query();
-                $messages = $query->query([
+                $wp_query = new WP_Query();
+                $messages = $wp_query->query([
                     'post_type' => RY_LINE::POSTTYPE_MESSAGE,
                     'posts_per_page' => -1,
                     'fields' => 'ids',
@@ -33,8 +33,8 @@ final class RY_LINE_update
             RY_LINE::update_option('version', '0.5.5', true);
         }
 
-        if (version_compare($now_version, '0.6.3', '<')) {
-            RY_LINE::update_option('version', '0.6.3', true);
+        if (version_compare($now_version, '0.6.4', '<')) {
+            RY_LINE::update_option('version', '0.6.4', true);
         }
     }
 }

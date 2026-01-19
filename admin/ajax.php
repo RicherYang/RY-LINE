@@ -16,7 +16,7 @@ final class RY_LINE_Admin_Ajax
 
     protected function do_init(): void
     {
-        if (isset($_GET['action'])) {
+        if (isset($_GET['action'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $actions = [
                 'get-info',
 
@@ -173,7 +173,7 @@ final class RY_LINE_Admin_Ajax
             's' => $search,
             'posts_per_page' => $per_page,
             'paged' => $page,
-            'meta_query' => [
+            'meta_query' => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
                 [
                     'key' => 'ry_line_message_type',
                     'value' => 'flex',
@@ -182,9 +182,9 @@ final class RY_LINE_Admin_Ajax
         ];
 
         $results = [];
-        $query = new WP_Query($args);
-        while ($query->have_posts()) {
-            $query->the_post();
+        $wp_query = new WP_Query($args);
+        while ($wp_query->have_posts()) {
+            $wp_query->the_post();
             $results[] = [
                 'id' => get_the_ID(),
                 'text' => get_the_title(),
@@ -193,7 +193,7 @@ final class RY_LINE_Admin_Ajax
 
         wp_send_json_success([
             'results' => $results,
-            'next' => $page < $query->max_num_pages,
+            'next' => $page < $wp_query->max_num_pages,
         ]);
     }
 
@@ -202,6 +202,8 @@ final class RY_LINE_Admin_Ajax
         $asset_info = include RY_LINE_PLUGIN_DIR . 'assets/admin/flex-message.asset.php';
         $style_url = esc_url(RY_LINE_PLUGIN_URL . 'assets/admin/flex-message.css?ver=' . $asset_info['version']);
 
+        // phpcs:disable WordPress.Security.EscapeOutput.HeredocOutputNotEscaped , WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
+        // phpcs:ignore PluginCheck.CodeAnalysis.Heredoc.NotAllowed
         echo <<<HTML
 <!DOCTYPE html>
 <html>
@@ -214,6 +216,7 @@ final class RY_LINE_Admin_Ajax
 </body>
 </html>
 HTML;
+        // phpcs:enable WordPress.Security.EscapeOutput.HeredocOutputNotEscaped , WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
         wp_die();
     }
 
@@ -380,8 +383,8 @@ HTML;
             return;
         }
 
-        $query = new WP_Query();
-        $alias_posts = $query->query([
+        $wp_query = new WP_Query();
+        $alias_posts = $wp_query->query([
             'post_type' => RY_LINE::POSTTYPE_RICHERMENU,
             'meta_key' => 'ry_line_richmenu_richMenuAliasId', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
             'meta_value' => $alias, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value

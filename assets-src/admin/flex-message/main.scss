@@ -32,22 +32,22 @@
             background-repeat: no-repeat;
         }
         &#node-create:before {
-            background-image: url("../icon/plus.svg");
+            background-image: url("icon/plus.svg");
         }
         &#node-up:before {
-            background-image: url("../icon/angle-up.svg");
+            background-image: url("icon/angle-up.svg");
         }
         &#node-down:before {
-            background-image: url("../icon/angle-down.svg");
+            background-image: url("icon/angle-down.svg");
         }
         &#node-delete:before {
-            background-image: url("../icon/trash-can.svg");
+            background-image: url("icon/trash-can.svg");
         }
         &#json-import:before {
-            background-image: url("../icon/upload.svg");
+            background-image: url("icon/upload.svg");
         }
         &#json-export:before {
-            background-image: url("../icon/download.svg");
+            background-image: url("icon/download.svg");
         }
     }
 }
@@ -234,6 +234,23 @@
         }
         input[type="text"].wp-color-picker {
             width: 6em;
+        }
+
+        // selecttext 類型樣式：input 與 select 水平並列
+        .selecttext-container {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5rem;
+
+            input[type="text"] {
+                flex: 1;
+                min-width: 0;
+            }
+
+            select {
+                flex: 0 0 auto;
+                width: auto;
+            }
         }
 
         &.field-paddingAll,

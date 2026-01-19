@@ -139,12 +139,12 @@ final class RY_LINE_Webhook
             return;
         }
 
-        $query = new WP_Query();
-        $messages = $query->query([
+        $wp_query = new WP_Query();
+        $messages = $wp_query->query([
             'post_type' => RY_LINE::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
             'post_status' => 'publish',
-            'meta_query' => [
+            'meta_query' => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
                 [
                     'key' => 'ry_line_message_reply_type',
                     'value' => 'keyword',
@@ -158,11 +158,11 @@ final class RY_LINE_Webhook
             'order' => 'DESC',
         ]);
         if (empty($messages)) {
-            $messages = $query->query([
+            $messages = $wp_query->query([
                 'post_type' => RY_LINE::POSTTYPE_MESSAGE,
                 'posts_per_page' => -1,
                 'post_status' => 'publish',
-                'meta_query' => [
+                'meta_query' => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
                     [
                         'key' => 'ry_line_message_reply_type',
                         'value' => 'all-nokeyword',
@@ -323,7 +323,7 @@ final class RY_LINE_Webhook
 
     public function do_link_user()
     {
-        $link_token = sanitize_text_field(wp_unslash($_GET[self::LINK_QUERY] ?? ''));
+        $link_token = sanitize_text_field(wp_unslash($_GET[self::LINK_QUERY] ?? '')); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $user_ID = get_current_user_id();
         if ($user_ID === 0) {
             if (defined('WC_VERSION')) {
@@ -336,13 +336,14 @@ final class RY_LINE_Webhook
                     self::LINK_QUERY => $link_token,
                 ], RY_LINE_Webhook::get_webhook_url(RY_LINE_Webhook::ENDPOINT_USER_LINK)),
             ], $login_url);
-            wp_redirect($login_url);
+            wp_safe_redirect($login_url);
             return;
         }
 
         $iv = substr(wp_salt('nonce'), 0, openssl_cipher_iv_length('aes-128-cbc'));
         $nonce = openssl_encrypt($user_ID, 'aes-128-cbc', RY_LINE::get_option('channel_secret'), OPENSSL_RAW_DATA, $iv);
 
+        // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
         wp_redirect(add_query_arg([
             'linkToken' => $link_token,
             'nonce' => bin2hex($nonce),

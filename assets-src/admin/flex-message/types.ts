@@ -33,7 +33,8 @@ export type PropertyFieldType =
     | 'textarea'
     | 'number'
     | 'color'
-    | 'select';
+    | 'select'
+    | 'selecttext';
 
 /**
  * 屬性定義介面
@@ -115,6 +116,7 @@ export interface Templates {
     propertyTextarea: TemplateFunction;
     propertyNumber: TemplateFunction;
     propertySelect: TemplateFunction;
+    propertySelecttext: TemplateFunction;
 }
 
 /**

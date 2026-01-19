@@ -78,7 +78,7 @@ final class RY_LINE_Admin extends RY_Abstract_Admin
 
     public function goto_page()
     {
-        wp_safe_redirect(admin_url('admin.php?page=ry-line-option'));
+        echo '<script>location.href="' . esc_url(admin_url('admin.php?page=ry-line-option')) . '";</script>';
         exit;
     }
 }

@@ -28,9 +28,9 @@ function getCopyPatterns() {
 module.exports = {
     ...defaultConfig,
     entry: {
-        'admin/basic': path.join(srcPath, 'admin/basic.js'),
-        'admin/flex-message': path.join(srcPath, 'admin/flex-message.ts'),
-        'admin/meta-box': path.join(srcPath, 'admin/meta-box.js')
+        'admin/basic': path.join(srcPath, 'admin/basic.ts'),
+        'admin/flex-message': path.join(srcPath, 'admin/flex-message/main.ts'),
+        'admin/meta-box': path.join(srcPath, 'admin/meta-box.ts')
     },
     output: {
         ...defaultConfig.output,
@@ -51,6 +51,7 @@ module.exports = {
                         return svgToMiniDataURI(content);
                     },
                 },
+                use: ['svgo-loader']
             }
         ],
     },

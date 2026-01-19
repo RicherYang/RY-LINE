@@ -134,3 +134,31 @@
         </div>
     </div>
 </script>
+
+<!-- 屬性欄位模板 - 下拉選單或自訂輸入 -->
+<script type="text/html" id="tmpl-flex-property-selecttext">
+    <div class="flex-property-field property-selecttext field-{{ data.name }}">
+        <label>
+            {{ data.label }}
+            <# if (data.required) { #><span class="required">*</span><# } #>
+        </label>
+        <div class="flex-property-field-wrapper">
+            <div class="selecttext-container">
+                <input type="text" id="{{ data.id }}-input" value="{{ data.value || '' }}" data-property="{{ data.name }}" data-selecttext-type="input"
+                    <# if (data.required) { #>required<# } #> />
+                <select id="{{ data.id }}-select" data-property="{{ data.name }}" data-selecttext-type="select">
+                    <# _.each(data.options, function(option) { #>
+                        <option value="{{ option.value }}"
+                            <# if (data.value == option.value) { #>selected<# } #>>
+                            {{ option.label }}
+                        </option>
+                    <# }); #>
+                </select>
+            </div>
+            <# if (data.description) { #>
+                <p class="description">{{ data.description }}</p>
+            <# } #>
+            <p class="description verify-info"></p>
+        </div>
+    </div>
+</script>

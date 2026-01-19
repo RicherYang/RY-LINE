@@ -56,12 +56,12 @@ final class RY_LINE_Autosend
             ];
         }
 
-        $query = new WP_Query();
-        $messages = $query->query([
+        $wp_query = new WP_Query();
+        $messages = $wp_query->query([
             'post_type' => RY_LINE::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
             'post_status' => 'publish',
-            'meta_query' => [$meta_query],
+            'meta_query' => [$meta_query], // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             'orderby' => 'menu_order',
             'order' => 'DESC',
         ]);

@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { __ } from '@wordpress/i18n';
 
-import './../../lib/wp-color-picker-alpha/wp-color-picker-alpha.js';
+import './wp-color-picker-alpha/wp-color-picker-alpha.js';
 
 import './globals.d.ts';
 import flexPreview from './preview.ts';
@@ -44,6 +44,7 @@ export class FlexEditor {
             propertyTextarea: wp.template('flex-property-textarea'),
             propertyNumber: wp.template('flex-property-number'),
             propertySelect: wp.template('flex-property-select'),
+            propertySelecttext: wp.template('flex-property-selecttext'),
         };
 
         this.init();
@@ -166,8 +167,11 @@ export class FlexEditor {
                 label = data.text || '';
                 break;
             case 'button':
-                if (data.action && data.action.label) {
-                    label = data.action.label.substring(0, 15) + (data.action.label.length > 15 ? '...' : '');
+                if (data.action) {
+                    label = `[${data.action.type}]`;
+                    if (data.action.label) {
+                        label += ` ${data.action.label}`;
+                    }
                 }
                 break;
             case 'box':
@@ -334,7 +338,7 @@ export class FlexEditor {
 
         // 將物件轉換為陣列，並填入目前的值，同時保留屬性的鍵名
         const properties = Object.entries(propertiesObj).map(([key, prop]) => {
-            const property = { ...prop, name: key };
+            const property: PropertyDefinition & { name: string } = { ...prop, name: key };
 
             if (data[key] !== undefined) {
                 if (key === 'action') {
@@ -782,7 +786,7 @@ export class FlexEditor {
      * 沒有子節點的節點隱藏展開按鈕
      */
     public updateNodeToggle(): void {
-        $('.flex-tree-node').each(function (this: HTMLElement) {
+        $('.flex-tree-node').each(function () {
             const $node = $(this);
             const $toggle = $node.find('> .flex-tree-node-header .flex-tree-node-toggle');
             const $children = $node.find('> .flex-tree-node-children');

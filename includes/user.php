@@ -25,7 +25,7 @@ final class RY_LINE_User
     {
         foreach (self::MAYPE_USER_META_KEY as $meta_key) {
             $query = new WP_User_Query([
-                'meta_query' => [
+                'meta_query' => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
                     [
                         'key' => $meta_key,
                         'value' => $line_user_ID,

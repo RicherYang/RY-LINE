@@ -97,27 +97,28 @@ final class RY_LINE_Admin_Message
     public function change_post_data($data)
     {
         if ($data['post_type'] === RY_LINE::POSTTYPE_MESSAGE) {
-            if (isset($_POST['message-type'])) {
+            if (isset($_POST['message-type'])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
                 $data['post_content'] = '';
                 $data['post_excerpt'] = '';
-                $data['menu_order'] = intval($_POST['message-order'] ?? '');
+                $data['menu_order'] = intval($_POST['message-order'] ?? ''); // phpcs:ignore WordPress.Security.NonceVerification.Missing
                 $data['menu_order'] = $data['menu_order'] > 0 ? $data['menu_order'] : 0;
 
-                switch ($_POST['message-type']) {
+                switch ($_POST['message-type']) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
                     case 'text':
-                        $data['post_content'] = sanitize_textarea_field(wp_unslash($_POST['message-content']));
+                        $data['post_content'] = sanitize_textarea_field(wp_unslash($_POST['message-content'] ?? '')); // phpcs:ignore WordPress.Security.NonceVerification.Missing
                         break;
                     case 'flex':
-                        $data['post_content'] = sanitize_textarea_field(wp_unslash($_POST['flex-message-content']));
+                        $data['post_content'] = sanitize_textarea_field(wp_unslash($_POST['flex-message-content'] ?? '')); // phpcs:ignore WordPress.Security.NonceVerification.Missing
                         $data['post_content'] = json_decode($data['post_content']);
                         if ($data['post_content'] === null) {
                             $data['post_content'] = '';
+                            $data['post_content'] = '';
                         }
                         $data['post_content'] = maybe_serialize($data['post_content']);
-                        $data['post_excerpt'] = sanitize_textarea_field(wp_unslash($_POST['message-alt']));
+                        $data['post_excerpt'] = sanitize_textarea_field(wp_unslash($_POST['message-alt'] ?? '')); // phpcs:ignore WordPress.Security.NonceVerification.Missing
                         break;
                     case 'flexes':
-                        $data['post_excerpt'] = sanitize_textarea_field(wp_unslash($_POST['message-alt']));
+                        $data['post_excerpt'] = sanitize_textarea_field(wp_unslash($_POST['message-alt'] ?? '')); // phpcs:ignore WordPress.Security.NonceVerification.Missing
                         break;
                 }
             }
@@ -144,20 +145,20 @@ final class RY_LINE_Admin_Message
         }
 
         unset($message_data['error']);
-        $message_type = sanitize_key($_POST['message-type'] ?? '');
+        $message_type = sanitize_key($_POST['message-type'] ?? ''); // phpcs:ignore WordPress.Security.NonceVerification.Missing
         update_post_meta($post_ID, 'ry_line_message_type', $message_type);
 
-        $message_data['reply_from'] = array_map('sanitize_key', is_array($_POST['reply-from'] ?? '') ? $_POST['reply-from'] : []);
-        $message_data['send_cc_lineid'] = sanitize_locale_name($_POST['cc-user-id'] ?? '');
+        $message_data['reply_from'] = array_map('sanitize_key', is_array($_POST['reply-from'] ?? '') ? $_POST['reply-from'] : []); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+        $message_data['send_cc_lineid'] = sanitize_locale_name($_POST['cc-user-id'] ?? ''); // phpcs:ignore WordPress.Security.NonceVerification.Missing
         $message_data['reply_from'] = array_intersect($message_data['reply_from'], ['user', 'group', 'room']);
         if (count($message_data['reply_from']) === 3) {
             $message_data['reply_from'] = [];
         }
         switch ($message_type) {
             case 'flexes':
-                $message_data['use'] = array_map('intval', is_array($_POST['use-messages'] ?? '') ? $_POST['use-messages'] : []);
-                $query = new WP_Query();
-                $message_data['use'] = $query->query([
+                $message_data['use'] = array_map('intval', is_array($_POST['use-messages'] ?? '') ? $_POST['use-messages'] : []); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+                $wp_query = new WP_Query();
+                $message_data['use'] = $wp_query->query([
                     'post_type' => RY_LINE::POSTTYPE_MESSAGE,
                     'post__in' => $message_data['use'],
                     'orderby' => 'menu_order',
@@ -169,11 +170,11 @@ final class RY_LINE_Admin_Message
         }
         update_post_meta($post_ID, 'ry_line_message_data', $message_data);
 
-        $reply_type = sanitize_key($_POST['reply-type'] ?? '');
+        $reply_type = sanitize_key($_POST['reply-type'] ?? ''); // phpcs:ignore WordPress.Security.NonceVerification.Missing
         switch ($reply_type) {
             case 'keyword':
                 update_post_meta($post->ID, 'ry_line_message_reply_type', $reply_type);
-                update_post_meta($post_ID, 'ry_line_message_reply', sanitize_text_field(wp_unslash($_POST['reply-keyword'] ?? '')));
+                update_post_meta($post_ID, 'ry_line_message_reply', sanitize_text_field(wp_unslash($_POST['reply-keyword'] ?? ''))); // phpcs:ignore WordPress.Security.NonceVerification.Missing
                 break;
             case 'all-nokeyword':
                 update_post_meta($post->ID, 'ry_line_message_reply_type', $reply_type);
@@ -185,7 +186,7 @@ final class RY_LINE_Admin_Message
                 break;
         }
 
-        $post_event = array_map('sanitize_text_field', is_array($_POST['autosend-event'] ?? '') ? $_POST['autosend-event'] : []);
+        $post_event = array_map('sanitize_text_field', wp_unslash(is_array($_POST['autosend-event'] ?? '') ? $_POST['autosend-event'] : [])); // phpcs:ignore WordPress.Security.NonceVerification.Missing
         $pre_autosend = get_post_meta($post_ID, 'ry_line_message_autosend');
         $pre_autosend = array_fill_keys($pre_autosend, true);
         $autosend_hooks = RY_LINE::get_option('autosend_hooks', []);
@@ -239,14 +240,14 @@ final class RY_LINE_Admin_Message
                 update_post_meta($post_ID, 'ry_line_message_data', $message_data);
             } else {
                 if ($post->post_status !== 'publish') {
-                    $wpdb->update($wpdb->posts, ['post_status' => 'publish'], ['ID' => $post_ID]);
+                    $wpdb->update($wpdb->posts, ['post_status' => 'publish'], ['ID' => $post_ID]); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery , WordPress.DB.DirectDatabaseQuery.NoCaching
                     wp_transition_post_status('publish', $post->post_status, $post);
                 }
                 return;
             }
         }
         if ($post->post_status !== 'draft') {
-            $wpdb->update($wpdb->posts, ['post_status' => 'draft'], ['ID' => $post_ID]);
+            $wpdb->update($wpdb->posts, ['post_status' => 'draft'], ['ID' => $post_ID]); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery , WordPress.DB.DirectDatabaseQuery.NoCaching
             wp_transition_post_status('draft', $post->post_status, $post);
         }
     }

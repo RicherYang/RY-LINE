@@ -22,7 +22,7 @@
                 <input name="reply-keyword" id="reply-keyword" type="text" class="long-text" value="<?php echo esc_attr($reply_keyword); ?>">
             </td>
         </tr>
-        <tr class="reply-info reply-info-keyword reply-info-all">
+        <tr class="reply-info reply-info-keyword reply-info-all-nokeyword">
             <th><?php esc_html_e('Reply Source', 'ry-line'); ?></th>
             <td>
                 <div class="ry-line-row">

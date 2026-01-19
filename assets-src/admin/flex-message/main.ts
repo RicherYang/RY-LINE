@@ -4,10 +4,10 @@ import { __ } from '@wordpress/i18n';
 import 'select2';
 import 'select2/dist/css/select2.css';
 
-import './flex-message.scss';
+import './main.scss';
 
-import './flex-message/globals.d.ts';
-import { FlexEditor } from './flex-message/editor.ts';
+import './globals.d.ts';
+import { FlexEditor } from './editor.ts';
 
 /**
  * 全域 Flex 編輯器實例
@@ -196,9 +196,25 @@ function handleTreeNodeToggle(e: JQuery.ClickEvent): void {
  */
 function handlePropertyChange(this: HTMLElement): void {
     if (flexEditor) {
-        flexEditor.updateNodeProperty($(this));
-        if ($(this).data('property') === 'action') {
-            flexEditor.renderActionPropertyEditor($(this));
+        const $el = $(this);
+        const $field = $el.closest('.flex-property-field');
+
+        if ($field.hasClass('property-selecttext')) {
+            const selecttextType = $el.data('selecttext-type');
+
+            // 處理 selecttext 類型的下拉選單變更：將選擇的值帶入 input
+            if (selecttextType === 'select') {
+                // 將 select 選擇的值帶入 input，並觸發 input 的 change 事件更新屬性
+                $field.find('input').val($el.val() as string).trigger('change');
+                return;
+            }
+
+            $field.find('select').val($el.val() as string);
+        }
+
+        flexEditor.updateNodeProperty($el);
+        if ($el.data('property') === 'action') {
+            flexEditor.renderActionPropertyEditor($el);
         }
     }
 }

@@ -48,14 +48,14 @@ final class RY_Line_Admin_Tools extends RY_Abstract_Admin_Page
 
         $do = sanitize_key($_POST['do'] ?? '');
         if ($do === 'reload-richmenu') {
-            $get_posts = new WP_Query();
+            $wp_query = new WP_Query();
 
             $list = RY_LINE_Api::richmenu_list();
             $alias_list = RY_LINE_Api::richmenu_alias_list();
             $alias_list = is_wp_error($alias_list) ? [] : array_column($alias_list->aliases, 'richMenuAliasId', 'richMenuId');
             if (!is_wp_error($list)) {
                 foreach ($list->richmenus as $richmenu) {
-                    $posts = $get_posts->query([
+                    $posts = $wp_query->query([
                         'post_type' => RY_LINE::POSTTYPE_RICHERMENU,
                         'meta_key' => 'ry_line_richmenu_richMenuId', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
                         'meta_value' => $richmenu->richMenuId, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
@@ -122,7 +122,7 @@ final class RY_Line_Admin_Tools extends RY_Abstract_Admin_Page
 
             $default = RY_LINE_Api::richmenu_get_default();
             if (!is_wp_error($default)) {
-                $posts = $get_posts->query([
+                $posts = $wp_query->query([
                     'post_type' => RY_LINE::POSTTYPE_RICHERMENU,
                     'meta_key' => 'ry_line_richmenu_richMenuId', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
                     'meta_value' => $default->richMenuId, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value

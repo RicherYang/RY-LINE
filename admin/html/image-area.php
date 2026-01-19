@@ -85,8 +85,8 @@
 </script>
 
 <?php
-$query = new WP_Query();
-        $messages = $query->query([
+$wp_query = new WP_Query();
+        $messages = $wp_query->query([
             'post_type' => RY_LINE::POSTTYPE_MESSAGE,
             'posts_per_page' => 999,
             'post_status' => 'publish',
