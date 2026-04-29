@@ -65,7 +65,7 @@ final class RY_LINE_Admin extends RY_Abstract_Admin
         include_once RY_LINE_PLUGIN_DIR . 'admin/meta-boxes.php';
     }
 
-    public function add_menu($menu_list)
+    public function add_menu(array $menu_list): array
     {
         $menu_list[] = [
             'name' => 'LINE',

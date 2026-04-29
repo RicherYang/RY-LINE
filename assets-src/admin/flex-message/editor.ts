@@ -807,8 +807,12 @@ export class FlexEditor {
      */
     public updateJsonOutput(): void {
         const jsonData = this.cleanJsonData(this.getJsonData());
+        const $content = $('#flex-message-content');
+
         flexPreview('#flex-message-preview', jsonData);
-        $('#flex-message-content').val(JSON.stringify(jsonData, null, 4)).trigger('input');
+        $content.val(JSON.stringify(jsonData, null, 4));
+        $content.height('auto');
+        $content.height(Math.min(400, $content.prop('scrollHeight') + 10));
     }
 
     /**

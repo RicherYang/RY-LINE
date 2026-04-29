@@ -4,7 +4,7 @@ include_once RY_LINE_PLUGIN_DIR . 'includes/ry-global/abstract-license.php';
 
 final class RY_LINE_License extends RY_Abstract_License
 {
-    public static $main_class = RY_LINE::class;
+    public static string $main_class = RY_LINE::class;
 
     protected static $_instance = null;
 

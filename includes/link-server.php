@@ -6,7 +6,7 @@ final class RY_LINE_LinkServer extends RY_Abstract_Link_Server
 {
     protected static $_instance = null;
 
-    protected $plugin_slug = 'ry-line';
+    protected string $plugin_slug = 'ry-line';
 
     public static function instance(): RY_LINE_LinkServer
     {

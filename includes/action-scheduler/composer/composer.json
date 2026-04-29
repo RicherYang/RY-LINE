@@ -1,6 +1,6 @@
 {
     "require": {
-        "woocommerce/action-scheduler": "^3.9.0"
+        "woocommerce/action-scheduler": "^3.9"
     },
     "config": {
         "optimize-autoloader": true,
