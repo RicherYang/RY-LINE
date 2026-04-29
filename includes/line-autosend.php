@@ -1,8 +1,10 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 final class RY_LINE_Autosend
 {
-    protected static $_instance = null;
+    protected static ?RY_LINE_Autosend $_instance = null;
 
     public static function instance(): RY_LINE_Autosend
     {

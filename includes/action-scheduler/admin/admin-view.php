@@ -1,6 +1,8 @@
 <?php
 
-class RY_ActionScheduler_AdminView extends ActionScheduler_AdminView
+defined('ABSPATH') or exit;
+
+final class RY_ActionScheduler_AdminView extends ActionScheduler_AdminView
 {
     protected function get_list_table()
     {

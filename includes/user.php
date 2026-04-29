@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 final class RY_LINE_User
 {
     public const MAYPE_USER_META_KEY = [
@@ -7,7 +9,7 @@ final class RY_LINE_User
         'wc_notify_line_user_id', // OrderNotify for WooCommerce
     ];
 
-    protected static $_instance = null;
+    protected static ?RY_LINE_User $_instance = null;
 
     public static function instance(): RY_LINE_User
     {

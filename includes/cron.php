@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 final class RY_LINE_Cron
 {
     public static function add_action(): void

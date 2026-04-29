@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 final class RY_LINE_Admin_Ajax
 {
     protected static $_instance = null;

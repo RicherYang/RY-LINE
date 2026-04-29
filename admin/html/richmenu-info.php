@@ -1,3 +1,5 @@
+<?php defined('ABSPATH') or exit; ?>
+
 <table class="form-table">
     <tbody>
         <tr>

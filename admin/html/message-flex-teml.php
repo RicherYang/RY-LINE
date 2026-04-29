@@ -1,3 +1,5 @@
+<?php defined('ABSPATH') or exit; ?>
+
 <!-- 樹狀節點模板 -->
 <script type="text/html" id="tmpl-flex-tree-node">
     <div class="flex-tree-node" data-node-id="{{ data.id }}" data-node-type="{{ data.type }}">

@@ -1,15 +1,17 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 if (!class_exists('RY_ActionScheduler')) {
     include_once __DIR__ . '/composer/vendor/woocommerce/action-scheduler/action-scheduler.php';
 
-    class RY_ActionScheduler
+    final class RY_ActionScheduler
     {
-        protected static $_instance = null;
+        protected static ?RY_ActionScheduler $_instance = null;
 
-        private static $action_id = null;
+        private static ?int $action_id = null;
 
-        public static function instance()
+        public static function instance(): RY_ActionScheduler
         {
             if (null === self::$_instance) {
                 self::$_instance = new self();
@@ -39,7 +41,7 @@ if (!class_exists('RY_ActionScheduler')) {
             }
         }
 
-        public function set_action_id($action_id): void
+        public function set_action_id(int $action_id): void
         {
             self::$action_id = $action_id;
         }

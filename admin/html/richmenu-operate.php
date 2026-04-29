@@ -1,3 +1,5 @@
+<?php defined('ABSPATH') or exit; ?>
+
 <div class="submitbox">
     <div class="misc-pub-section">
         <?php esc_html_e('Please save data before performing any LINE operations.', 'ry-line'); ?>

@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 final class RY_LINE_Admin_Meta_Box
 {
     public static function init_metabox()

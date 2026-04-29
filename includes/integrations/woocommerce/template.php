@@ -1,8 +1,10 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 final class RY_LINE_Integration_WooCommerce_Template
 {
-    protected static $_instance = null;
+    protected static ?RY_LINE_Integration_WooCommerce_Template $_instance = null;
 
     public static function instance(): RY_LINE_Integration_WooCommerce_Template
     {

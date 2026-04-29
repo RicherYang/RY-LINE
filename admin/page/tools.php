@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 final class RY_Line_Admin_Tools extends RY_Abstract_Admin_Page
 {
     protected static $_instance = null;

@@ -1,10 +1,12 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 final class RY_ActionScheduler_Dashboard
 {
-    protected static $_instance = null;
+    protected static ?RY_ActionScheduler_Dashboard $_instance = null;
 
-    public static function instance()
+    public static function instance(): RY_ActionScheduler_Dashboard
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -29,6 +31,7 @@ final class RY_ActionScheduler_Dashboard
         $store = ActionScheduler::store();
         $counts = $store->action_counts() + $store->extra_action_counts();
 
+        $status_list_items = [];
         foreach ($counts as $status_name => $count) {
             if (0 === $count) {
                 continue;
@@ -41,9 +44,11 @@ final class RY_ActionScheduler_Dashboard
             $status_list_items[] = sprintf('<li><a href="%s">%s</a> ( %d )</li>', esc_url($status_url), esc_html(ucfirst($status_name)), absint($count));
         }
 
-        echo '<ul class="subsubsub" style="float:none">';
-        echo implode(' | ', $status_list_items); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo '</ul>';
+        if (count($status_list_items)) {
+            echo '<ul class="subsubsub" style="float:none">';
+            echo implode(' | ', $status_list_items); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '</ul>';
+        }
     }
 }
 

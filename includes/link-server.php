@@ -1,10 +1,12 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 include_once RY_LINE_PLUGIN_DIR . 'includes/ry-global/abstract-link-server.php';
 
 final class RY_LINE_LinkServer extends RY_Abstract_Link_Server
 {
-    protected static $_instance = null;
+    protected static ?RY_LINE_LinkServer $_instance = null;
 
     protected string $plugin_slug = 'ry-line';
 

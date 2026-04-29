@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 final class RY_LINE_update
 {
     public static function update()
@@ -33,8 +35,8 @@ final class RY_LINE_update
             RY_LINE::update_option('version', '0.5.5', true);
         }
 
-        if (version_compare($now_version, '0.6.4', '<')) {
-            RY_LINE::update_option('version', '0.6.4', true);
+        if (version_compare($now_version, '0.6.5', '<')) {
+            RY_LINE::update_option('version', '0.6.5', true);
         }
     }
 }

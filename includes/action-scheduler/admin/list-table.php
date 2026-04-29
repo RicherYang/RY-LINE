@@ -1,8 +1,10 @@
 <?php
 
-class RY_ActionScheduler_ListTable extends ActionScheduler_ListTable
+defined('ABSPATH') or exit;
+
+final class RY_ActionScheduler_ListTable extends ActionScheduler_ListTable
 {
-    protected $timezone;
+    protected DateTimeZone $timezone;
 
     public function __construct(ActionScheduler_Store $store, ActionScheduler_Logger $logger, ActionScheduler_QueueRunner $runner)
     {

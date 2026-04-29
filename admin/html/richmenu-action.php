@@ -1,3 +1,5 @@
+<?php defined('ABSPATH') or exit; ?>
+
 <div class="submitbox">
     <?php if (empty($richMenuId)) { ?>
     <div id="major-publishing-actions">

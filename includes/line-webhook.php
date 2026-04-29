@@ -1,12 +1,14 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 final class RY_LINE_Webhook
 {
     public const ENDPOINT_USER_LINK = 'user-link';
 
     public const LINK_QUERY = 'line-token';
 
-    protected static $_instance = null;
+    protected static ?RY_LINE_Webhook $_instance = null;
 
     public static function instance(): RY_LINE_Webhook
     {

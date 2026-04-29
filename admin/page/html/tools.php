@@ -1,3 +1,5 @@
+<?php defined('ABSPATH') or exit; ?>
+
 <style>
     table#ry-line-tools td {
         padding: 1.5em;

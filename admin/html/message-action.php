@@ -1,3 +1,5 @@
+<?php defined('ABSPATH') or exit; ?>
+
 <div class="submitbox">
     <div id="major-actions">
         <div class="misc-pub-section">

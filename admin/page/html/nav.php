@@ -1,3 +1,5 @@
+<?php defined('ABSPATH') or exit; ?>
+
 <nav class="nav-tab-wrapper wp-clearfix">
     <?php printf(
         '<a href="%1$s" class="nav-tab %2$s">%3$s</a>',

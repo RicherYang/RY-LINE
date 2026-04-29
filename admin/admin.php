@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 include_once RY_LINE_PLUGIN_DIR . 'includes/ry-global/abstract-admin.php';
 
 final class RY_LINE_Admin extends RY_Abstract_Admin

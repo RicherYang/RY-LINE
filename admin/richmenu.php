@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 final class RY_LINE_Admin_Richmenu
 {
     protected static $_instance = null;

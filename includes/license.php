@@ -1,12 +1,14 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 include_once RY_LINE_PLUGIN_DIR . 'includes/ry-global/abstract-license.php';
 
 final class RY_LINE_License extends RY_Abstract_License
 {
     public static string $main_class = RY_LINE::class;
 
-    protected static $_instance = null;
+    protected static ?RY_LINE_License $_instance = null;
 
     public static function instance(): RY_LINE_License
     {

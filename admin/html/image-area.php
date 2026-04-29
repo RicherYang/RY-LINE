@@ -1,3 +1,5 @@
+<?php defined('ABSPATH') or exit; ?>
+
 <div class="ry-line-row">
     <div class="ry-line-col-auto image-area">
         <svg id="image-area-svg" xmlns="http://www.w3.org/2000/svg" data-bg="<?php echo esc_url($thumbnail_src[0]); ?>" data-width="<?php echo esc_attr($thumbnail_src[1]); ?>" data-height="<?php echo esc_attr($thumbnail_src[2]); ?>">
@@ -86,13 +88,13 @@
 
 <?php
 $wp_query = new WP_Query();
-        $messages = $wp_query->query([
-            'post_type' => RY_LINE::POSTTYPE_MESSAGE,
-            'posts_per_page' => 999,
-            'post_status' => 'publish',
-            'orderby' => 'menu_order',
-            'order' => 'DESC',
-        ]); ?>
+$messages = $wp_query->query([
+    'post_type' => RY_LINE::POSTTYPE_MESSAGE,
+    'posts_per_page' => 999,
+    'post_status' => 'publish',
+    'orderby' => 'menu_order',
+    'order' => 'DESC',
+]); ?>
 
 <script type="text/html" id="tmpl-action-settings">
     <tr>

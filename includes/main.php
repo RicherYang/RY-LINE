@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or exit;
+
 include_once RY_LINE_PLUGIN_DIR . 'includes/ry-global/abstract-basic.php';
 
 final class RY_LINE extends RY_Abstract_Basic
@@ -12,7 +14,7 @@ final class RY_LINE extends RY_Abstract_Basic
 
     public const POSTTYPE_MESSAGE = 'ry-line-message';
 
-    protected static $_instance = null;
+    protected static ?RY_LINE $_instance = null;
 
     public static function instance(): RY_LINE
     {

@@ -1,5 +1,6 @@
-<h2><?php esc_html_e('Messaging API', 'ry-line'); ?></h2>
+<?php defined('ABSPATH') or exit; ?>
 
+<h2><?php esc_html_e('Messaging API', 'ry-line'); ?></h2>
 <table class="form-table">
     <tbody>
         <tr>
