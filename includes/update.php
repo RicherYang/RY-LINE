@@ -35,8 +35,8 @@ final class RY_LINE_update
             RY_LINE::update_option('version', '0.5.5', true);
         }
 
-        if (version_compare($now_version, '0.6.5', '<')) {
-            RY_LINE::update_option('version', '0.6.5', true);
+        if (version_compare($now_version, '0.6.6', '<')) {
+            RY_LINE::update_option('version', '0.6.6', true);
         }
     }
 }
