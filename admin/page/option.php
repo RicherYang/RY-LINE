@@ -4,7 +4,7 @@ defined('ABSPATH') or exit;
 
 final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
 {
-    protected static ?self $_instance = null;
+    protected static $_instance = null;
 
     public static function init_menu(): void
     {
