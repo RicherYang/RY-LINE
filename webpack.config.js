@@ -1,7 +1,6 @@
 const path = require('path');
 const glob = require('glob');
 const CopyWebpackPlugin = require('copy-webpack-plugin', true);
-const { CleanWebpackPlugin } = require('clean-webpack-plugin', true);
 const svgToMiniDataURI = require('mini-svg-data-uri', true);
 
 const defaultConfig = require('@wordpress/scripts/config/webpack.config', true);
@@ -56,13 +55,7 @@ module.exports = {
         ],
     },
     plugins: [
-        ...defaultConfig.plugins.filter((plugin) => plugin.constructor.name !== 'CleanWebpackPlugin'),
-        new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: [
-                path.join(distPath)
-            ],
-            cleanStaleWebpackAssets: false,
-        }),
+        ...defaultConfig.plugins,
         //new CopyWebpackPlugin({
         //    patterns: getCopyPatterns()
         //})
