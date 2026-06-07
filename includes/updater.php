@@ -29,14 +29,7 @@ final class RY_LINE_Updater
             return $update;
         }
 
-        $update = RY_LINE_LinkServer::instance()->check_version();
-        if (is_array($update)) {
-            $update['id'] = 'https://ry-plugin.com/ry-line';
-            $update['url'] = 'https://ry-plugin.com/ry-line';
-            $update['slug'] = 'ry-line';
-        }
-
-        return $update;
+        return RY_LINE_LinkServer::instance()->check_version();
     }
 
     public static function modify_plugin_details($result, $action, $args)
