@@ -65,7 +65,7 @@ final class RY_LINE_Webhook
     {
         global $wp;
 
-        if (isset($_GET['ry-line-webhook'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if (isset($_GET['ry-line-webhook'])) {
             $wp->query_vars['ry-line-webhook'] = '';
         }
 
@@ -146,7 +146,7 @@ final class RY_LINE_Webhook
             'post_type' => RY_LINE::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
             'post_status' => 'publish',
-            'meta_query' => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+            'meta_query' => [
                 [
                     'key' => 'ry_line_message_reply_type',
                     'value' => 'keyword',
@@ -164,7 +164,7 @@ final class RY_LINE_Webhook
                 'post_type' => RY_LINE::POSTTYPE_MESSAGE,
                 'posts_per_page' => -1,
                 'post_status' => 'publish',
-                'meta_query' => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+                'meta_query' => [
                     [
                         'key' => 'ry_line_message_reply_type',
                         'value' => 'all-nokeyword',
@@ -325,7 +325,7 @@ final class RY_LINE_Webhook
 
     public function do_link_user()
     {
-        $link_token = sanitize_text_field(wp_unslash($_GET[self::LINK_QUERY] ?? '')); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $link_token = sanitize_text_field(wp_unslash($_GET[self::LINK_QUERY] ?? ''));
         $user_ID = get_current_user_id();
         if ($user_ID === 0) {
             if (defined('WC_VERSION')) {
@@ -345,7 +345,6 @@ final class RY_LINE_Webhook
         $iv = substr(wp_salt('nonce'), 0, openssl_cipher_iv_length('aes-128-cbc'));
         $nonce = openssl_encrypt($user_ID, 'aes-128-cbc', RY_LINE::get_option('channel_secret'), OPENSSL_RAW_DATA, $iv);
 
-        // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
         wp_redirect(add_query_arg([
             'linkToken' => $link_token,
             'nonce' => bin2hex($nonce),

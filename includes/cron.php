@@ -27,7 +27,7 @@ final class RY_LINE_Cron
             'post_type' => RY_LINE::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
             'post_status' => 'publish',
-            'meta_query' => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+            'meta_query' => [
                 [
                     'key' => 'ry_line_message_autosend',
                     'compare' => 'EXISTS',
@@ -72,14 +72,14 @@ final class RY_LINE_Cron
     {
         global $wpdb;
 
-        @set_time_limit(60); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
+        @set_time_limit(60);
 
         $start = time();
         $wp_query = new WP_Query();
         $messages = $wp_query->query([
             'post_type' => RY_LINE::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
-            'meta_query' => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+            'meta_query' => [
                 [
                     'key' => 'ry_line_message_type',
                     'value' => 'flex',
@@ -120,7 +120,7 @@ final class RY_LINE_Cron
                                 }
                                 update_post_meta($new_message_ID, 'ry_line_message_data', $message_data);
                             } else {
-                                $wpdb->update($wpdb->posts, ['post_status' => 'publish'], ['ID' => $new_message_ID]); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+                                $wpdb->update($wpdb->posts, ['post_status' => 'publish'], ['ID' => $new_message_ID]);
                                 wp_transition_post_status('publish', 'draft', get_post($new_message_ID));
                             }
                         }
@@ -150,7 +150,7 @@ final class RY_LINE_Cron
                             }
                             update_post_meta($message->ID, 'ry_line_message_data', $message_data);
                         } else {
-                            $wpdb->update($wpdb->posts, ['post_status' => 'publish'], ['ID' => $message->ID]); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+                            $wpdb->update($wpdb->posts, ['post_status' => 'publish'], ['ID' => $message->ID]);
                             wp_transition_post_status('publish', 'draft', get_post($message->ID));
                         }
                     }

@@ -18,7 +18,7 @@ final class RY_LINE_Admin_Ajax
 
     protected function do_init(): void
     {
-        if (isset($_GET['action'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if (isset($_GET['action'])) {
             $actions = [
                 'get-info',
 
@@ -175,7 +175,7 @@ final class RY_LINE_Admin_Ajax
             's' => $search,
             'posts_per_page' => $per_page,
             'paged' => $page,
-            'meta_query' => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+            'meta_query' => [
                 [
                     'key' => 'ry_line_message_type',
                     'value' => 'flex',
@@ -218,7 +218,7 @@ final class RY_LINE_Admin_Ajax
 </body>
 </html>
 HTML;
-        // phpcs:enable WordPress.Security.EscapeOutput.HeredocOutputNotEscaped , WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
+        // phpcs:enable
         wp_die();
     }
 
@@ -388,8 +388,8 @@ HTML;
         $wp_query = new WP_Query();
         $alias_posts = $wp_query->query([
             'post_type' => RY_LINE::POSTTYPE_RICHERMENU,
-            'meta_key' => 'ry_line_richmenu_richMenuAliasId', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-            'meta_value' => $alias, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+            'meta_key' => 'ry_line_richmenu_richMenuAliasId',
+            'meta_value' => $alias,
             'posts_per_page' => -1,
             'fields' => 'ids',
         ]);

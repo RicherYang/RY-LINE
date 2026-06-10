@@ -100,7 +100,7 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
             return;
         }
 
-        if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', 'ry/admin-line-option')) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash , WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+        if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', 'ry/admin-line-option')) {
             wp_die('Invalid nonce');
         }
 

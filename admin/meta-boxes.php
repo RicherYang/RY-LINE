@@ -131,7 +131,7 @@ final class RY_LINE_Admin_Meta_Box
     public static function display_richmenu_operate($post)
     {
         if (!RY_LINE_License::instance()->is_activated()) {
-            $link = sprintf('<a href="%1$s">%2$s</a>', admin_url('admin.php?page=ry-license'), esc_html__('license key', 'ry-line'));
+            $link = sprintf('<a href="%1$s">%2$s</a>', esc_url(admin_url('admin.php?page=ry-license')), esc_html__('license key', 'ry-line'));
             /* translators: %s: license key link */
             echo '<div class="misc-pub-section">' . sprintf(esc_html__('Please activate %s to use this feature.', 'ry-line'), $link) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             return;

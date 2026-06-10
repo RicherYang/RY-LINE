@@ -63,7 +63,7 @@ final class RY_LINE_Autosend
             'post_type' => RY_LINE::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
             'post_status' => 'publish',
-            'meta_query' => [$meta_query], // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+            'meta_query' => [$meta_query],
             'orderby' => 'menu_order',
             'order' => 'DESC',
         ]);
