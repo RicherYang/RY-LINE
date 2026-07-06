@@ -2,7 +2,7 @@
 
 defined('ABSPATH') or exit;
 
-include_once RY_LINE_PLUGIN_DIR . 'includes/ry-global/abstract-admin.php';
+include_once RY_LINE_PLUGIN_DIR . 'includes/ry-general/abstract-admin.php';
 
 final class RY_LINE_Admin extends RY_Abstract_Admin
 {
@@ -37,6 +37,7 @@ final class RY_LINE_Admin extends RY_Abstract_Admin
 
         if ($this->license->is_activated()) {
             $this->license->check_expire_cron();
+
             include_once RY_LINE_PLUGIN_DIR . 'admin/page/option.php';
             include_once RY_LINE_PLUGIN_DIR . 'admin/page/tools.php';
 

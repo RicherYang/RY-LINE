@@ -96,7 +96,7 @@ final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
 
     public function do_admin_action(string $action): void
     {
-        if ($action !== 'ry/admin-line-option') {
+        if ('ry/admin-line-option' !== $action) {
             return;
         }
 

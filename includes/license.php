@@ -2,7 +2,7 @@
 
 defined('ABSPATH') or exit;
 
-include_once RY_LINE_PLUGIN_DIR . 'includes/ry-global/abstract-license.php';
+include_once RY_LINE_PLUGIN_DIR . 'includes/ry-paid/abstract-license.php';
 
 final class RY_LINE_License extends RY_Abstract_License
 {

@@ -2,7 +2,7 @@
 
 defined('ABSPATH') or exit;
 
-include_once RY_LINE_PLUGIN_DIR . 'includes/ry-global/abstract-link-server.php';
+include_once RY_LINE_PLUGIN_DIR . 'includes/ry-paid/abstract-link-server.php';
 
 final class RY_LINE_LinkServer extends RY_Abstract_Link_Server
 {

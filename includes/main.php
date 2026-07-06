@@ -2,7 +2,7 @@
 
 defined('ABSPATH') or exit;
 
-include_once RY_LINE_PLUGIN_DIR . 'includes/ry-global/abstract-basic.php';
+include_once RY_LINE_PLUGIN_DIR . 'includes/ry-general/abstract-basic.php';
 
 final class RY_LINE extends RY_Abstract_Basic
 {
@@ -29,8 +29,10 @@ final class RY_LINE extends RY_Abstract_Basic
     protected function do_init(): void
     {
         load_plugin_textdomain('ry-line', false, plugin_basename(dirname(__DIR__)) . '/languages');
+        include_once RY_LINE_PLUGIN_DIR . 'includes/composer/vendor/woocommerce/action-scheduler/action-scheduler.php';
+        include_once RY_LINE_PLUGIN_DIR . 'includes/ry-general/logs.php';
+
         include_once RY_LINE_PLUGIN_DIR . 'includes/cron.php';
-        include_once RY_LINE_PLUGIN_DIR . 'includes/action-scheduler/action-scheduler.php';
 
         if (is_admin()) {
             include_once RY_LINE_PLUGIN_DIR . 'includes/update.php';
@@ -50,7 +52,8 @@ final class RY_LINE extends RY_Abstract_Basic
         $this->register_post_type();
 
         if (is_admin()) {
-            include_once RY_LINE_PLUGIN_DIR . 'includes/ry-global/admin-license.php';
+            include_once RY_LINE_PLUGIN_DIR . 'includes/ry-paid/admin-license.php';
+            include_once RY_LINE_PLUGIN_DIR . 'includes/ry-general/admin-logs.php';
             include_once RY_LINE_PLUGIN_DIR . 'admin/admin.php';
             RY_LINE_Admin::instance();
         }

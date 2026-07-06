@@ -1,4 +1,4 @@
 .npmrc
 node_modules
 package-lock.json
-/includes/action-scheduler/composer/vendor
+/includes/composer/vendor

@@ -10,7 +10,6 @@
  * Author: Richer Yang
  * Author URI: https://richer.tw/
  * License: GPLv3
- * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  * Update URI: https://ry-plugin.com/ry-line
  *
  * Text Domain: ry-line

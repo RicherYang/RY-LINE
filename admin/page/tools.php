@@ -40,7 +40,7 @@ final class RY_Line_Admin_Tools extends RY_Abstract_Admin_Page
 
     public function do_admin_action(string $action): void
     {
-        if ($action !== 'ry/admin-line-tools') {
+        if ('ry/admin-line-tools' !== $action) {
             return;
         }
 

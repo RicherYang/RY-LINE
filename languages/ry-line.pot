@@ -9,7 +9,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-06T12:17:00+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ry-line\n"
@@ -789,66 +788,111 @@ msgstr ""
 msgid "Sorry!\\nLink account failed."
 msgstr ""
 
-#: includes/main.php:79
+#: includes/main.php:82
 msgctxt "post type general name"
 msgid "LINE message"
 msgstr ""
 
-#: includes/main.php:80
+#: includes/main.php:83
 msgid "Add message"
 msgstr ""
 
-#: includes/main.php:81
+#: includes/main.php:84
 msgid "Edit message"
 msgstr ""
 
-#: includes/main.php:82
+#: includes/main.php:85
 msgid "Search message"
 msgstr ""
 
-#: includes/main.php:83
-msgid "Uploaded to this message"
-msgstr ""
-
-#: includes/main.php:84
-#: includes/main.php:109
-msgid "Show image"
-msgstr ""
-
-#: includes/main.php:85
-#: includes/main.php:110
-msgid "Set show image"
-msgstr ""
-
 #: includes/main.php:86
-#: includes/main.php:111
-msgid "Remove show image"
+msgid "Uploaded to this message"
 msgstr ""
 
 #: includes/main.php:87
 #: includes/main.php:112
+msgid "Show image"
+msgstr ""
+
+#: includes/main.php:88
+#: includes/main.php:113
+msgid "Set show image"
+msgstr ""
+
+#: includes/main.php:89
+#: includes/main.php:114
+msgid "Remove show image"
+msgstr ""
+
+#: includes/main.php:90
+#: includes/main.php:115
 msgid "Use as show image"
 msgstr ""
 
-#: includes/main.php:104
+#: includes/main.php:107
 msgctxt "post type general name"
 msgid "LINE rich menu"
 msgstr ""
 
-#: includes/main.php:105
+#: includes/main.php:108
 msgid "Add rich menu"
 msgstr ""
 
-#: includes/main.php:106
+#: includes/main.php:109
 msgid "Edit rich menu"
 msgstr ""
 
-#: includes/main.php:107
+#: includes/main.php:110
 msgid "Search rich menu"
 msgstr ""
 
-#: includes/main.php:108
+#: includes/main.php:111
 msgid "Uploaded to this rich menu"
+msgstr ""
+
+#. translators: %1$s: Plugin name, %2$s: License URL
+#: includes/ry-general/abstract-admin.php:49
+#, php-format
+msgid "%1$s: Your <a href=\"%2$s\">license</a> is not activated yet!"
+msgstr ""
+
+#: includes/ry-general/admin-logs.php:25
+#: includes/ry-general/admin-logs.php:96
+msgid "Logs"
+msgstr ""
+
+#: includes/ry-general/admin-logs.php:141
+msgid "Delete successful."
+msgstr ""
+
+#: includes/ry-general/admin-logs.php:148
+msgid "Delete failed."
+msgstr ""
+
+#. translators: %s: Path of log file
+#: includes/ry-general/html/log-info.php:5
+#, php-format
+msgid "Viewing log file %s"
+msgstr ""
+
+#: includes/ry-general/html/log-info.php:36
+msgid "Details"
+msgstr ""
+
+#: includes/ry-general/html/log-info.php:63
+msgid "Download"
+msgstr ""
+
+#: includes/ry-general/html/log-info.php:71
+msgid "Delete Permanently"
+msgstr ""
+
+#: includes/ry-general/html/logs-select.php:3
+msgid "Log Categories"
+msgstr ""
+
+#: includes/ry-general/html/logs-select.php:19
+msgid "Log Files"
 msgstr ""
 
 #: assets/admin/flex-message.js:1

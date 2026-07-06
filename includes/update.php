@@ -12,6 +12,11 @@ final class RY_LINE_update
             return;
         }
 
+        if ($now_version === '0.0.0') {
+            RY_LINE::update_option('version', RY_LINE_VERSION, true);
+            return;
+        }
+
         if (version_compare($now_version, '0.5.5', '<')) {
             add_action('init', function () {
                 $wp_query = new WP_Query();
