@@ -6,7 +6,7 @@ use RY\Paid\AbstractLinkServer;
 
 final class RY_LINE_LinkServer extends AbstractLinkServer
 {
-    protected static ?self $_instance = null;
+    private static ?self $_instance = null;
 
     protected string $plugin_slug = 'ry-line';
 
