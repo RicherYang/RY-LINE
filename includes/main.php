@@ -2,9 +2,9 @@
 
 defined('ABSPATH') or exit;
 
-include_once RY_LINE_PLUGIN_DIR . 'includes/ry-general/abstract-basic.php';
+use RY\General\AbstractBasic;
 
-final class RY_LINE extends RY_Abstract_Basic
+final class RY_LINE extends AbstractBasic
 {
     public const OPTION_PREFIX = 'RY_LINE_';
 
@@ -29,20 +29,19 @@ final class RY_LINE extends RY_Abstract_Basic
     protected function do_init(): void
     {
         load_plugin_textdomain('ry-line', false, plugin_basename(dirname(__DIR__)) . '/languages');
-        include_once RY_LINE_PLUGIN_DIR . 'includes/composer/vendor/woocommerce/action-scheduler/action-scheduler.php';
-        include_once RY_LINE_PLUGIN_DIR . 'includes/ry-general/logs.php';
+        include_once RY_LINE_PLUGIN_DIR . 'includes/vendor/woocommerce/action-scheduler/action-scheduler.php';
 
         include_once RY_LINE_PLUGIN_DIR . 'includes/cron.php';
 
         if (is_admin()) {
             include_once RY_LINE_PLUGIN_DIR . 'includes/update.php';
-            RY_LINE_update::update();
+            RY_LINE_Update::update();
         }
 
-        add_action('init', [$this, 'real_init']);
+        add_action('init', [$this, 'do_wp_init'], 9);
     }
 
-    public function real_init(): void
+    public function do_wp_init(): void
     {
         include_once RY_LINE_PLUGIN_DIR . 'includes/license.php';
         include_once RY_LINE_PLUGIN_DIR . 'includes/link-server.php';
@@ -52,8 +51,6 @@ final class RY_LINE extends RY_Abstract_Basic
         $this->register_post_type();
 
         if (is_admin()) {
-            include_once RY_LINE_PLUGIN_DIR . 'includes/ry-paid/admin-license.php';
-            include_once RY_LINE_PLUGIN_DIR . 'includes/ry-general/admin-logs.php';
             include_once RY_LINE_PLUGIN_DIR . 'admin/admin.php';
             RY_LINE_Admin::instance();
         }
@@ -95,9 +92,7 @@ final class RY_LINE extends RY_Abstract_Basic
             'show_in_menu' => 'ry-line',
             'show_in_rest' => false,
             'capability_type' => self::POSTTYPE_MESSAGE,
-            'rewrite' => [
-                'with_front' => false,
-            ],
+            'rewrite' => false,
             'delete_with_user' => false,
             'supports' => ['title', 'author', 'thumbnail'],
         ]);
@@ -120,9 +115,7 @@ final class RY_LINE extends RY_Abstract_Basic
             'show_in_menu' => 'ry-line',
             'show_in_rest' => false,
             'capability_type' => self::POSTTYPE_RICHERMENU,
-            'rewrite' => [
-                'with_front' => false,
-            ],
+            'rewrite' => false,
             'delete_with_user' => false,
             'supports' => ['title', 'author', 'thumbnail'],
         ]);

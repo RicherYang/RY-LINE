@@ -2,10 +2,10 @@
 
 defined('ABSPATH') or exit;
 
-final class RY_Line_Admin_Option extends RY_Abstract_Admin_Page
-{
-    protected static $_instance = null;
+use RY\General\AbstractAdminPage;
 
+final class RY_Line_Admin_Option extends AbstractAdminPage
+{
     public static function init_menu(): void
     {
         add_submenu_page('', __('LINE options', 'ry-line'), '', 'manage_options', 'ry-line-option', [__CLASS__, 'pre_show_page']);

@@ -2,7 +2,7 @@
 
 defined('ABSPATH') or exit;
 
-final class RY_LINE_update
+final class RY_LINE_Update
 {
     public static function update()
     {

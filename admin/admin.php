@@ -2,11 +2,14 @@
 
 defined('ABSPATH') or exit;
 
-include_once RY_LINE_PLUGIN_DIR . 'includes/ry-general/abstract-admin.php';
+use RY\General\AbstractAdmin;
+use RY\Paid\Page\License;
 
-final class RY_LINE_Admin extends RY_Abstract_Admin
+final class RY_LINE_Admin extends AbstractAdmin
 {
     protected static ?self $_instance = null;
+
+    protected RY_LINE_License $license;
 
     public static function instance(): RY_LINE_Admin
     {
@@ -20,6 +23,8 @@ final class RY_LINE_Admin extends RY_Abstract_Admin
 
     protected function do_init(): void
     {
+        License::init_menu();
+
         parent::do_init();
 
         $this->license = RY_LINE_License::instance();

@@ -2,11 +2,11 @@
 
 defined('ABSPATH') or exit;
 
-include_once RY_LINE_PLUGIN_DIR . 'includes/ry-paid/abstract-link-server.php';
+use RY\Paid\AbstractLinkServer;
 
-final class RY_LINE_LinkServer extends RY_Abstract_Link_Server
+final class RY_LINE_LinkServer extends AbstractLinkServer
 {
-    protected static ?RY_LINE_LinkServer $_instance = null;
+    protected static ?self $_instance = null;
 
     protected string $plugin_slug = 'ry-line';
 
@@ -21,23 +21,18 @@ final class RY_LINE_LinkServer extends RY_Abstract_Link_Server
 
     protected function get_base_info(): array
     {
-        $base_info = [
+        $info = [
             'plugin' => RY_LINE_VERSION,
             'php' => PHP_VERSION,
             'wp' => get_bloginfo('version'),
         ];
         if (defined('WC_VERSION')) {
-            $base_info['wc'] = WC_VERSION;
+            $info['wc'] = WC_VERSION;
         }
-        return $base_info;
-    }
+        if (defined('TUTOR_VERSION')) {
+            $info['tt'] = TUTOR_VERSION;
+        }
 
-    protected function get_user_agent()
-    {
-        return sprintf(
-            'RY_LINE %s (WordPress/%s)',
-            RY_LINE_VERSION,
-            get_bloginfo('version'),
-        );
+        return $info;
     }
 }

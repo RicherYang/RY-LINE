@@ -1,0 +1,19 @@
+{
+    "name": "ry/line",
+    "require": {
+        "woocommerce/action-scheduler": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "RY\\General\\": "includes/ry-general",
+            "RY\\Paid\\": "includes/ry-paid"
+        }
+    },
+    "config": {
+        "vendor-dir": "includes/vendor",
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.2"
+        }
+    }
+}
