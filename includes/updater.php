@@ -4,7 +4,7 @@ defined('ABSPATH') or exit;
 
 final class RY_LINE_Updater
 {
-    protected static ?RY_LINE_Updater $_instance = null;
+    private static ?self $_instance = null;
 
     public static function instance(): RY_LINE_Updater
     {

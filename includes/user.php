@@ -9,7 +9,7 @@ final class RY_LINE_User
         'wc_notify_line_user_id', // OrderNotify for WooCommerce
     ];
 
-    protected static ?RY_LINE_User $_instance = null;
+    private static ?self $_instance = null;
 
     public static function instance(): RY_LINE_User
     {

@@ -8,7 +8,7 @@ final class RY_LINE_Webhook
 
     public const LINK_QUERY = 'line-token';
 
-    protected static ?RY_LINE_Webhook $_instance = null;
+    private static ?self $_instance = null;
 
     public static function instance(): RY_LINE_Webhook
     {

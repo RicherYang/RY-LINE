@@ -14,7 +14,7 @@ final class RY_LINE extends AbstractBasic
 
     public const POSTTYPE_MESSAGE = 'ry-line-message';
 
-    protected static ?RY_LINE $_instance = null;
+    private static ?self $_instance = null;
 
     public static function instance(): RY_LINE
     {

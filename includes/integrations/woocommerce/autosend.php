@@ -4,7 +4,7 @@ defined('ABSPATH') or exit;
 
 final class RY_LINE_Integration_WooCommerce_Autosend
 {
-    protected static ?RY_LINE_Integration_WooCommerce_Autosend $_instance = null;
+    private static ?self $_instance = null;
 
     public static function instance(): RY_LINE_Integration_WooCommerce_Autosend
     {

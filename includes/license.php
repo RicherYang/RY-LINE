@@ -8,7 +8,7 @@ final class RY_LINE_License extends AbstractLicense
 {
     public static string $main_class = RY_LINE::class;
 
-    protected static ?RY_LINE_License $_instance = null;
+    private static ?self $_instance = null;
 
     public static function instance(): RY_LINE_License
     {
