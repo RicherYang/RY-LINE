@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RY LINE\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-02T11:52:45+08:00\n"
+"PO-Revision-Date: 2026-07-16 09:48+0800\n"
 "Last-Translator: Richer Yang\n"
 "Language-Team: \n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-02T11:52:45+08:00\n"
-"PO-Revision-Date: 2026-07-06 11:41+0800\n"
-"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: .\n"
@@ -43,8 +43,7 @@ msgstr "https://ry-plugin.com/ry-line"
 msgid "LINE support"
 msgstr "LINE support"
 
-#: admin/page/option.php:118
-#: admin/page/option.php:151
+#: admin/page/option.php:118 admin/page/option.php:151
 msgid "Settings saved."
 msgstr "設定已儲存。"
 
@@ -68,34 +67,32 @@ msgstr "Channel ID"
 msgid "Channel secret"
 msgstr "Channel secret"
 
-#: includes/main.php:107
+#: includes/main.php:102
 msgctxt "post type general name"
 msgid "LINE rich menu"
 msgstr "LINE 圖文選單"
 
-#: includes/main.php:108
+#: includes/main.php:103
 msgid "Add rich menu"
 msgstr "新增圖文選單"
 
-#: includes/main.php:109
+#: includes/main.php:104
 msgid "Edit rich menu"
 msgstr "編輯圖文選單"
 
-#: includes/main.php:110
+#: includes/main.php:105
 msgid "Search rich menu"
 msgstr "搜尋圖文選單"
 
-#: includes/main.php:111
+#: includes/main.php:106
 msgid "Uploaded to this rich menu"
 msgstr "已關聯至這圖文選單"
 
-#: admin/meta-boxes.php:17
-#: admin/meta-boxes.php:54
+#: admin/meta-boxes.php:17 admin/meta-boxes.php:54
 msgid "Action area"
 msgstr "操作區域"
 
-#: admin/media.php:46
-#: admin/media.php:60
+#: admin/media.php:46 admin/media.php:60
 msgid "Image must be JPEG or PNG format"
 msgstr "圖片必須為 JPEG 或 PNG 格式"
 
@@ -119,8 +116,7 @@ msgstr "手機顯示大小以寬度 360 像素計算。建議區域大小超過 
 msgid "Phone display size"
 msgstr "手機顯示大小"
 
-#: admin/html/image-area.php:38
-#: admin/html/image-area.php:60
+#: admin/html/image-area.php:38 admin/html/image-area.php:60
 msgid "No"
 msgstr "編號"
 
@@ -150,13 +146,11 @@ msgstr "圖片尺寸：%1$d x %2$d 像素"
 msgid "Reset area"
 msgstr "重設區域"
 
-#: admin/html/image-area.php:40
-#: admin/html/image-area.php:103
+#: admin/html/image-area.php:40 admin/html/image-area.php:103
 msgid "Start"
 msgstr "起點"
 
-#: admin/html/image-area.php:41
-#: admin/html/image-area.php:104
+#: admin/html/image-area.php:41 admin/html/image-area.php:104
 #: assets/admin/flex-message.js:1
 msgid "Size"
 msgstr "大小"
@@ -165,8 +159,7 @@ msgstr "大小"
 msgid "Save area position"
 msgstr "儲存區域位置"
 
-#: admin/html/image-area.php:61
-#: assets/admin/flex-message.js:1
+#: admin/html/image-area.php:61 assets/admin/flex-message.js:1
 msgid "Position"
 msgstr "位置"
 
@@ -183,26 +176,22 @@ msgctxt "action type"
 msgid "None"
 msgstr "無"
 
-#: admin/html/image-area.php:109
-#: admin/richmenu.php:74
+#: admin/html/image-area.php:109 admin/richmenu.php:74
 msgctxt "action type"
 msgid "Link"
 msgstr "連結"
 
-#: admin/html/image-area.php:110
-#: admin/richmenu.php:78
+#: admin/html/image-area.php:110 admin/richmenu.php:78
 msgctxt "action type"
 msgid "Text"
 msgstr "文字"
 
-#: admin/html/image-area.php:112
-#: admin/richmenu.php:86
+#: admin/html/image-area.php:112 admin/richmenu.php:86
 msgctxt "action type"
 msgid "Switch menu"
 msgstr "切換選單"
 
-#: admin/html/image-area.php:118
-#: assets/admin/flex-message.js:1
+#: admin/html/image-area.php:118 assets/admin/flex-message.js:1
 msgid "URL"
 msgstr "網址"
 
@@ -210,8 +199,7 @@ msgstr "網址"
 msgid "Enter url"
 msgstr "輸入網址"
 
-#: admin/html/image-area.php:134
-#: assets/admin/flex-message.js:1
+#: admin/html/image-area.php:134 assets/admin/flex-message.js:1
 msgid "Message text"
 msgstr "訊息文字"
 
@@ -219,14 +207,12 @@ msgstr "訊息文字"
 msgid "Enter message text"
 msgstr "輸入訊息文字"
 
-#: admin/html/image-area.php:140
-#: admin/html/richmenu-operate.php:19
+#: admin/html/image-area.php:140 admin/html/richmenu-operate.php:19
 #: admin/richmenu.php:55
 msgid "Menu alias"
 msgstr "選單代稱"
 
-#: admin/html/image-area.php:142
-#: admin/html/richmenu-operate.php:20
+#: admin/html/image-area.php:142 admin/html/richmenu-operate.php:20
 msgid "Enter menu alias"
 msgstr "輸入選單代稱"
 
@@ -260,13 +246,11 @@ msgstr "授權金鑰"
 msgid "Please activate %s to use this feature."
 msgstr "請先啟用 %s 再使用本功能。"
 
-#: admin/html/message-action.php:27
-#: admin/html/richmenu-action.php:8
+#: admin/html/message-action.php:27 admin/html/richmenu-action.php:8
 msgid "Move to Trash"
 msgstr "移至回收桶"
 
-#: admin/html/message-action.php:31
-#: admin/html/richmenu-action.php:12
+#: admin/html/message-action.php:31 admin/html/richmenu-action.php:12
 msgid "Update"
 msgstr "更新"
 
@@ -274,8 +258,7 @@ msgstr "更新"
 msgid "Create menu"
 msgstr "建立選單"
 
-#: admin/ajax.php:322
-#: admin/html/richmenu-operate.php:33
+#: admin/ajax.php:322 admin/html/richmenu-operate.php:33
 msgid "Unset default menu"
 msgstr "取消預設選單"
 
@@ -291,8 +274,7 @@ msgstr "已上傳至 LINE 的選單無法進行編輯。"
 msgid "Set menu alias"
 msgstr "設定選單代稱"
 
-#: admin/page/html/nav.php:8
-#: admin/page/tools.php:36
+#: admin/page/html/nav.php:8 admin/page/tools.php:36
 msgid "Tools"
 msgstr "工具"
 
@@ -308,8 +290,7 @@ msgstr "LINE 設定"
 msgid "LINE tools"
 msgstr "LINE 工具"
 
-#: admin/page/html/tools.php:17
-#: admin/page/html/tools.php:24
+#: admin/page/html/tools.php:17 admin/page/html/tools.php:24
 msgid "Reload rich menu"
 msgstr "重新載入圖文選單"
 
@@ -329,8 +310,7 @@ msgstr "預設顯示圖文選單"
 msgid "Chat button text"
 msgstr "聊天室按鈕文字"
 
-#: admin/html/richmenu-info.php:7
-#: admin/richmenu.php:129
+#: admin/html/richmenu-info.php:7 admin/richmenu.php:129
 msgid "Open menu"
 msgstr "開啟選單"
 
@@ -349,9 +329,7 @@ msgid "Deleted %d unused rich menu alias."
 msgid_plural "Deleted %d unused rich menu aliases."
 msgstr[0] "刪除 %d 個未使用的圖文選單代稱。"
 
-#: admin/ajax.php:322
-#: admin/html/richmenu-operate.php:33
-#: admin/richmenu.php:44
+#: admin/ajax.php:322 admin/html/richmenu-operate.php:33 admin/richmenu.php:44
 msgid "Default menu"
 msgstr "預設選單"
 
@@ -387,8 +365,7 @@ msgstr "成功移除連結至測試使用者的圖文選單。"
 msgid "Image height must be more than 250 pixels"
 msgstr "圖片高度必須大於 250 像素"
 
-#: admin/html/image-area.php:113
-#: admin/richmenu.php:90
+#: admin/html/image-area.php:113 admin/richmenu.php:90
 msgctxt "action type"
 msgid "Account link"
 msgstr "綁定帳號"
@@ -421,13 +398,11 @@ msgstr "啟用"
 msgid "Disabled"
 msgstr "停用"
 
-#: admin/page/option.php:113
-#: admin/page/option.php:115
+#: admin/page/option.php:113 admin/page/option.php:115
 msgid "Settings failed."
 msgstr "設定失敗。"
 
-#: admin/page/option.php:129
-#: admin/page/option.php:131
+#: admin/page/option.php:129 admin/page/option.php:131
 #: admin/page/option.php:137
 msgid "Test failed."
 msgstr "測試失敗。"
@@ -444,8 +419,7 @@ msgstr "請點擊以下按鈕"
 msgid "Unlink account"
 msgstr "取消綁定帳號"
 
-#: includes/line-webhook.php:234
-#: includes/line-webhook.php:243
+#: includes/line-webhook.php:234 includes/line-webhook.php:243
 msgid "Link account"
 msgstr "綁定帳號"
 
@@ -463,8 +437,7 @@ msgstr ""
 "抱歉！\n"
 "綁定帳號失敗。"
 
-#: includes/line-webhook.php:213
-#: includes/line-webhook.php:257
+#: includes/line-webhook.php:213 includes/line-webhook.php:257
 #: includes/line-webhook.php:287
 msgid "Account link action can only do at one-by-one chat."
 msgstr "綁定帳號只可以在一對一聊天室中進行。"
@@ -483,44 +456,40 @@ msgstr ""
 "歡迎 %s\n"
 "帳號綁定成功。"
 
-#: includes/main.php:82
+#: includes/main.php:79
 msgctxt "post type general name"
 msgid "LINE message"
 msgstr "LINE 訊息"
 
-#: includes/main.php:83
+#: includes/main.php:80
 msgid "Add message"
 msgstr "新增訊息"
 
-#: includes/main.php:84
+#: includes/main.php:81
 msgid "Edit message"
 msgstr "編輯訊息"
 
-#: includes/main.php:85
+#: includes/main.php:82
 msgid "Search message"
 msgstr "搜尋訊息"
 
-#: includes/main.php:86
+#: includes/main.php:83
 msgid "Uploaded to this message"
 msgstr "已關聯至這訊息"
 
-#: includes/main.php:87
-#: includes/main.php:112
+#: includes/main.php:84 includes/main.php:107
 msgid "Show image"
 msgstr "顯示圖片"
 
-#: includes/main.php:88
-#: includes/main.php:113
+#: includes/main.php:85 includes/main.php:108
 msgid "Set show image"
 msgstr "設定顯示圖片"
 
-#: includes/main.php:89
-#: includes/main.php:114
+#: includes/main.php:86 includes/main.php:109
 msgid "Remove show image"
 msgstr "移除顯示圖片"
 
-#: includes/main.php:90
-#: includes/main.php:115
+#: includes/main.php:87 includes/main.php:110
 msgid "Use as show image"
 msgstr "設定為顯示圖片"
 
@@ -528,8 +497,7 @@ msgstr "設定為顯示圖片"
 msgid "Menu content"
 msgstr "選單內容"
 
-#: admin/meta-boxes.php:141
-#: admin/meta-boxes.php:164
+#: admin/meta-boxes.php:141 admin/meta-boxes.php:164
 msgid "Please set show image first."
 msgstr "請先設定顯示圖片。"
 
@@ -537,20 +505,17 @@ msgstr "請先設定顯示圖片。"
 msgid "Image action area"
 msgstr "圖片動作區域"
 
-#: admin/html/message-info.php:9
-#: admin/message.php:58
+#: admin/html/message-info.php:9 admin/message.php:58
 msgctxt "message type"
 msgid "Text"
 msgstr "文字"
 
-#: admin/html/message-info.php:10
-#: admin/message.php:61
+#: admin/html/message-info.php:10 admin/message.php:61
 msgctxt "message type"
 msgid "Image"
 msgstr "圖片"
 
-#: admin/html/message-info.php:18
-#: admin/html/message-info.php:27
+#: admin/html/message-info.php:18 admin/html/message-info.php:27
 #: admin/html/message-info.php:74
 msgid "Content"
 msgstr "內容"
@@ -591,8 +556,7 @@ msgstr "發送至測試使用者"
 msgid "Reply Source"
 msgstr "回應來源"
 
-#: admin/html/message-autosend.php:32
-#: includes/line-template.php:57
+#: admin/html/message-autosend.php:32 includes/line-template.php:57
 msgid "User"
 msgstr "使用者"
 
@@ -604,8 +568,7 @@ msgstr "群組"
 msgid "Room"
 msgstr "會議室"
 
-#: admin/html/image-area.php:111
-#: admin/richmenu.php:82
+#: admin/html/image-area.php:111 admin/richmenu.php:82
 msgctxt "action type"
 msgid "Customized message"
 msgstr "客製訊息"
@@ -662,8 +625,7 @@ msgstr "電子郵件地址"
 msgid "Use order"
 msgstr "使用順序"
 
-#: admin/ajax.php:232
-#: admin/ajax.php:412
+#: admin/ajax.php:232 admin/ajax.php:412
 msgid "Test user ID is not set."
 msgstr "尚未設定測試使用者 ID。"
 
@@ -671,8 +633,7 @@ msgstr "尚未設定測試使用者 ID。"
 msgid "Menu actions"
 msgstr "選單動作"
 
-#: admin/html/message-info.php:6
-#: admin/message.php:42
+#: admin/html/message-info.php:6 admin/message.php:42
 msgid "Message type"
 msgstr "訊息類型"
 
@@ -680,8 +641,7 @@ msgstr "訊息類型"
 msgid "Event action"
 msgstr "事件動作"
 
-#: admin/message.php:43
-#: admin/meta-boxes.php:19
+#: admin/message.php:43 admin/meta-boxes.php:19
 msgid "Automatic send"
 msgstr "自動發送"
 
@@ -789,8 +749,7 @@ msgstr "無"
 msgid "Keyword"
 msgstr "關鍵字"
 
-#: admin/html/message-autosend.php:16
-#: admin/message.php:80
+#: admin/html/message-autosend.php:16 admin/message.php:80
 msgid "Reply all without keyword"
 msgstr "回覆所有非關鍵字"
 
@@ -814,14 +773,12 @@ msgstr "LINE 設定"
 msgid "User login"
 msgstr "使用者登入"
 
-#: admin/html/message-info.php:11
-#: admin/message.php:64
+#: admin/html/message-info.php:11 admin/message.php:64
 msgctxt "message type"
 msgid "Flex single"
 msgstr "Flex ( 單一 )"
 
-#: admin/html/message-info.php:12
-#: admin/message.php:67
+#: admin/html/message-info.php:12 admin/message.php:67
 msgctxt "message type"
 msgid "Flex multiple"
 msgstr "Flex ( 多個 )"
@@ -1107,46 +1064,49 @@ msgid "Invalid color"
 msgstr "無效的色彩"
 
 #. translators: %1$s: Plugin name, %2$s: License URL
-#: includes/ry-general/abstract-admin.php:49
+#: includes/ry-general/AbstractAdmin.php:52
 #, php-format
 msgid "%1$s: Your <a href=\"%2$s\">license</a> is not activated yet!"
 msgstr "%1$s: 你的<a href=\"%2$s\">授權</a>尚未啟用！"
 
-#: includes/ry-general/admin-logs.php:25
-#: includes/ry-general/admin-logs.php:96
+#: includes/ry-general/Page/Logs.php:24 includes/ry-general/Page/Logs.php:85
 msgid "Logs"
 msgstr "紀錄"
 
-#: includes/ry-general/admin-logs.php:141
+#: includes/ry-general/Page/Logs.php:145
 msgid "Delete successful."
 msgstr "刪除成功。"
 
-#: includes/ry-general/admin-logs.php:148
+#: includes/ry-general/Page/Logs.php:152
 msgid "Delete failed."
 msgstr "刪除失敗。"
 
 #. translators: %s: Path of log file
-#: includes/ry-general/html/log-info.php:5
+#: includes/ry-general/Page/html/log-info.php:5
 #, php-format
 msgid "Viewing log file %s"
 msgstr "檢視紀錄檔 %s"
 
-#: includes/ry-general/html/log-info.php:36
+#: includes/ry-general/Page/html/log-info.php:36
 msgid "Details"
 msgstr "詳細資訊"
 
-#: includes/ry-general/html/log-info.php:63
+#: includes/ry-general/Page/html/log-info.php:63
 msgid "Download"
 msgstr "下載"
 
-#: includes/ry-general/html/log-info.php:71
+#: includes/ry-general/Page/html/log-info.php:71
 msgid "Delete Permanently"
 msgstr "永久刪除"
 
-#: includes/ry-general/html/logs-select.php:3
+#: includes/ry-general/Page/html/logs-select.php:3
 msgid "Log Categories"
 msgstr "紀錄類別"
 
-#: includes/ry-general/html/logs-select.php:19
+#: includes/ry-general/Page/html/logs-select.php:19
 msgid "Log Files"
 msgstr "紀錄檔案"
+
+#: includes/ry-general/Page/Logs.php:87
+msgid "No logs found."
+msgstr "没有紀錄檔案。"

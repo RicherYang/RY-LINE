@@ -38,7 +38,7 @@ final class RY_LINE extends AbstractBasic
             RY_LINE_Update::update();
         }
 
-        add_action('init', [$this, 'do_wp_init'], 9);
+        add_action('init', [$this, 'do_wp_init'], 8);
     }
 
     public function do_wp_init(): void
