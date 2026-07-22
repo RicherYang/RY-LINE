@@ -3,6 +3,7 @@
 defined('ABSPATH') or exit;
 
 use RY\General\AbstractBasic;
+use RY\General\ActionScheduler;
 
 final class RY_LINE extends AbstractBasic
 {
@@ -30,6 +31,7 @@ final class RY_LINE extends AbstractBasic
     {
         load_plugin_textdomain('ry-line', false, plugin_basename(dirname(__DIR__)) . '/languages');
         include_once RY_LINE_PLUGIN_DIR . 'includes/vendor/woocommerce/action-scheduler/action-scheduler.php';
+        ActionScheduler::instance();
 
         include_once RY_LINE_PLUGIN_DIR . 'includes/cron.php';
 
