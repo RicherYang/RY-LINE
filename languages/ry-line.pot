@@ -788,72 +788,82 @@ msgstr ""
 msgid "Sorry!\\nLink account failed."
 msgstr ""
 
-#: includes/main.php:79
+#: includes/main.php:81
 msgctxt "post type general name"
 msgid "LINE message"
 msgstr ""
 
-#: includes/main.php:80
+#: includes/main.php:82
 msgid "Add message"
 msgstr ""
 
-#: includes/main.php:81
+#: includes/main.php:83
 msgid "Edit message"
 msgstr ""
 
-#: includes/main.php:82
+#: includes/main.php:84
 msgid "Search message"
 msgstr ""
 
-#: includes/main.php:83
-msgid "Uploaded to this message"
-msgstr ""
-
-#: includes/main.php:84
-#: includes/main.php:107
-msgid "Show image"
-msgstr ""
-
 #: includes/main.php:85
-#: includes/main.php:108
-msgid "Set show image"
+msgid "Uploaded to this message"
 msgstr ""
 
 #: includes/main.php:86
 #: includes/main.php:109
-msgid "Remove show image"
+msgid "Show image"
 msgstr ""
 
 #: includes/main.php:87
 #: includes/main.php:110
+msgid "Set show image"
+msgstr ""
+
+#: includes/main.php:88
+#: includes/main.php:111
+msgid "Remove show image"
+msgstr ""
+
+#: includes/main.php:89
+#: includes/main.php:112
 msgid "Use as show image"
 msgstr ""
 
-#: includes/main.php:102
+#: includes/main.php:104
 msgctxt "post type general name"
 msgid "LINE rich menu"
 msgstr ""
 
-#: includes/main.php:103
+#: includes/main.php:105
 msgid "Add rich menu"
 msgstr ""
 
-#: includes/main.php:104
+#: includes/main.php:106
 msgid "Edit rich menu"
 msgstr ""
 
-#: includes/main.php:105
+#: includes/main.php:107
 msgid "Search rich menu"
 msgstr ""
 
-#: includes/main.php:106
+#: includes/main.php:108
 msgid "Uploaded to this rich menu"
 msgstr ""
 
-#. translators: %1$s: Plugin name, %2$s: License URL
-#: includes/ry-general/AbstractAdmin.php:52
+#: includes/ry-general/ActionScheduler/ListTable.php:30
+msgid "async"
+msgstr ""
+
+#. translators: %s: date interval
+#: includes/ry-general/ActionScheduler/ListTable.php:45
 #, php-format
-msgid "%1$s: Your <a href=\"%2$s\">license</a> is not activated yet!"
+msgid " (%s ago)"
+msgstr ""
+
+#. translators: %s: date interval
+#: includes/ry-general/ActionScheduler/ListTable.php:48
+#, php-format
+msgid " (%s)"
 msgstr ""
 
 #. translators: %s: Path of log file
@@ -874,29 +884,45 @@ msgstr ""
 msgid "Delete Permanently"
 msgstr ""
 
+#. translators: %d: Number of days
+#: includes/ry-general/Page/html/log-info.php:75
+#, php-format
+msgid "Log file will delete after %d days"
+msgstr ""
+
 #: includes/ry-general/Page/html/logs-select.php:3
 msgid "Log Categories"
 msgstr ""
 
-#: includes/ry-general/Page/html/logs-select.php:19
+#: includes/ry-general/Page/html/logs-select.php:18
 msgid "Log Files"
 msgstr ""
 
-#: includes/ry-general/Page/Logs.php:24
-#: includes/ry-general/Page/Logs.php:85
+#: includes/ry-general/Page/html/logs-select.php:35
+msgid "Dir size:"
+msgstr ""
+
+#: includes/ry-general/Page/Logs.php:27
+#: includes/ry-general/Page/Logs.php:73
 msgid "Logs"
 msgstr ""
 
-#: includes/ry-general/Page/Logs.php:87
+#: includes/ry-general/Page/Logs.php:75
 msgid "No logs found."
 msgstr ""
 
-#: includes/ry-general/Page/Logs.php:145
+#: includes/ry-general/Page/Logs.php:134
 msgid "Delete successful."
 msgstr ""
 
-#: includes/ry-general/Page/Logs.php:152
+#: includes/ry-general/Page/Logs.php:141
 msgid "Delete failed."
+msgstr ""
+
+#. translators: %1$s: Plugin name, %2$s: License URL
+#: includes/ry-paid/AbstractAdmin.php:33
+#, php-format
+msgid "%1$s: Your <a href=\"%2$s\">license</a> is not activated yet!"
 msgstr ""
 
 #: assets/admin/flex-message.js:1

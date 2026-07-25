@@ -2,8 +2,7 @@
 
 defined('ABSPATH') or exit;
 
-use RY\General\AbstractAdmin;
-use RY\Paid\Page\License;
+use RY\Paid\V20260724\AbstractAdmin;
 
 final class RY_LINE_Admin extends AbstractAdmin
 {
@@ -23,8 +22,6 @@ final class RY_LINE_Admin extends AbstractAdmin
 
     protected function do_init(): void
     {
-        License::init_menu();
-
         parent::do_init();
 
         $this->license = RY_LINE_License::instance();
