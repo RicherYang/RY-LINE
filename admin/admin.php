@@ -75,15 +75,38 @@ final class RY_LINE_Admin extends AbstractAdmin
         $menu_list[] = [
             'name' => 'LINE',
             'slug' => 'ry-line',
-            'function' => [$this, 'goto_page'],
+            'function' => [$this, 'show_page'],
         ];
 
         return $menu_list;
     }
 
-    public function goto_page()
+    public function show_page(): void
     {
-        echo '<script>location.href="' . esc_url(admin_url('admin.php?page=ry-line-option')) . '";</script>';
-        exit;
+        $navs = apply_filters('ry_line-navs', []);
+        $show_type = wp_unslash($_GET['type'] ?? 'tools');
+        if ($show_type !== sanitize_key($show_type)) {
+            $show_type = '';
+        }
+
+        echo '<div class="wrap">';
+
+        echo '<nav class="nav-tab-wrapper wp-clearfix">';
+        foreach ($navs as $nav) {
+            printf(
+                '<a href="%1$s" class="nav-tab %2$s">%3$s</a>',
+                esc_url(add_query_arg([
+                    'page' => 'ry-line',
+                    'type' => $nav['type'],
+                ], admin_url('admin.php'))),
+                $show_type === $nav['type'] ? 'nav-tab-active' : '',
+                esc_html($nav['name'])
+            );
+        }
+        echo '</nav>';
+
+        do_action('ry_line-show_page-' . $show_type);
+
+        echo '</div>';
     }
 }

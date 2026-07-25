@@ -8,21 +8,22 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
 {
     public static function init_menu(): void
     {
-        add_submenu_page('', __('LINE options', 'ry-line'), '', 'manage_options', 'ry-line-option', [__CLASS__, 'pre_show_page']);
-        add_action('load-admin_page_ry-line-option', [__CLASS__, 'instance']);
-        add_action('admin_post_ry/admin-line-option', [__CLASS__, 'admin_action']);
+        add_filter('ry_line-navs', [__CLASS__, 'add_nav']);
+        add_action('ry_line-show_page-option', [__CLASS__, 'pre_show_page']);
+        add_action('admin_post_ry-line-option', [__CLASS__, 'admin_action']);
     }
 
-    protected function do_init(): void
+    public static function add_nav(array $navs): array
     {
-        global $_wp_menu_nopriv, $_wp_real_parent_file, $submenu_file;
+        $navs[] = [
+            'name' => __('Options', 'ry-line'),
+            'type' => 'option',
+        ];
 
-        if ($_wp_menu_nopriv) {
-            $_wp_menu_nopriv['ry-line-option'] = true;
-            $_wp_real_parent_file['ry-line-option'] = RY_LINE_Admin::instance()->main_slug;
-            $submenu_file = 'ry-line';
-        }
+        return $navs;
     }
+
+    protected function do_init(): void {}
 
     public function output_page(): void
     {
@@ -76,14 +77,10 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
             }
         }
 
-        echo '<div class="wrap">';
-        $show_type = 'ry-line-option';
-        include __DIR__ . '/html/nav.php';
-        echo '<h1>' . esc_html__('LINE setting', 'ry-line') . '</h1>';
         echo '<form method="post" action="admin-post.php">';
-        echo '<input type="hidden" name="action" value="ry/admin-line-option">';
+        echo '<input type="hidden" name="action" value="ry-line-option">';
         echo '<input type="hidden" name="do" value="save-option">';
-        wp_nonce_field('ry/admin-line-option');
+        wp_nonce_field('ry-line-option');
         include __DIR__ . '/html/option.php';
         submit_button();
         echo '</form>';
@@ -91,16 +88,15 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
         if (!empty($bot_info)) {
             include __DIR__ . '/html/option-webhook.php';
         }
-        echo '</div>';
     }
 
     public function do_admin_action(string $action): void
     {
-        if ('ry/admin-line-option' !== $action) {
+        if ('ry-line-option' !== $action) {
             return;
         }
 
-        if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', 'ry/admin-line-option')) {
+        if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', 'ry-line-option')) {
             wp_die('Invalid nonce');
         }
 
@@ -154,7 +150,7 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
             }
         }
 
-        wp_safe_redirect(admin_url('admin.php?page=ry-line-option'));
+        wp_safe_redirect(admin_url('admin.php?page=ry-line&type=option'));
     }
 }
 

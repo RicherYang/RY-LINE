@@ -8,21 +8,22 @@ final class RY_Line_Admin_Tools extends AbstractAdminPage
 {
     public static function init_menu(): void
     {
-        add_submenu_page('', __('LINE tools', 'ry-line'), '', 'manage_options', 'ry-line-tools', [__CLASS__, 'pre_show_page']);
-        add_action('load-admin_page_ry-line-tools', [__CLASS__, 'instance']);
-        add_action('admin_post_ry/admin-line-tools', [__CLASS__, 'admin_action']);
+        add_filter('ry_line-navs', [__CLASS__, 'add_nav']);
+        add_action('ry_line-show_page-tools', [__CLASS__, 'pre_show_page']);
+        add_action('admin_post_ry-line-tools', [__CLASS__, 'admin_action']);
     }
 
-    protected function do_init(): void
+    public static function add_nav(array $navs): array
     {
-        global $_wp_menu_nopriv, $_wp_real_parent_file, $submenu_file;
+        $navs[] = [
+            'name' => __('Tools', 'ry-line'),
+            'type' => 'tools',
+        ];
 
-        if ($_wp_menu_nopriv) {
-            $_wp_menu_nopriv['ry-line-tools'] = true;
-            $_wp_real_parent_file['ry-line-tools'] = RY_LINE_Admin::instance()->main_slug;
-            $submenu_file = 'ry-line';
-        }
+        return $navs;
     }
+
+    protected function do_init(): void {}
 
     public function output_page(): void
     {
@@ -30,21 +31,16 @@ final class RY_Line_Admin_Tools extends AbstractAdminPage
 
         $line_user_ID = RY_LINE::get_option('test_user_id');
 
-        echo '<div class="wrap">';
-        $show_type = 'ry-line-tools';
-        include __DIR__ . '/html/nav.php';
-        echo '<h1>' . esc_html__('Tools', 'ry-line') . '</h1>';
         include __DIR__ . '/html/tools.php';
-        echo '</div>';
     }
 
     public function do_admin_action(string $action): void
     {
-        if ('ry/admin-line-tools' !== $action) {
+        if ('ry-line-tools' !== $action) {
             return;
         }
 
-        if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', 'ry/admin-line-tools')) {
+        if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', 'ry-line-tools')) {
             wp_die('Invalid nonce');
         }
 
@@ -164,7 +160,7 @@ final class RY_Line_Admin_Tools extends AbstractAdminPage
             $this->add_notice('success', sprintf(__('Unlink test user rich menu successfully.', 'ry-line'), 1));
         }
 
-        wp_safe_redirect(admin_url('admin.php?page=ry-line-tools'));
+        wp_safe_redirect(admin_url('admin.php?page=ry-line&type=tools'));
     }
 }
 
