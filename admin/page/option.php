@@ -2,7 +2,7 @@
 
 defined('ABSPATH') or exit;
 
-use RY\General\V20260724\AbstractAdminPage;
+use RY\General\V20260727\AbstractAdminPage;
 
 final class RY_Line_Admin_Option extends AbstractAdminPage
 {
@@ -36,17 +36,20 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
 
         $bot_info = RY_LINE::get_transient('bot_info');
         if (empty($bot_info)) {
-            $bot_info = RY_LINE_Api::get_bot_info();
-            if (is_wp_error($bot_info)) {
+            $remote_bot_info = RY_LINE_Api::get_bot_info();
+            if (is_wp_error($remote_bot_info)) {
                 $bot_info = [];
             } else {
                 $bot_info = [
-                    'id' => $bot_info->basicId,
-                    'name' => $bot_info->displayName,
-                    'icon' => $bot_info->pictureUrl ?? '',
+                    'id' => $remote_bot_info->basicId,
+                    'name' => $remote_bot_info->displayName,
+                    'icon' => $remote_bot_info->pictureUrl ?? '',
                     'webhook-url' => '',
                     'webhook-status' => false,
                 ];
+                if (isset($remote_bot_info->premiumId) && !empty($remote_bot_info->premiumId)) {
+                    $bot_info['id'] .= ' (' . $remote_bot_info->premiumId . ')';
+                }
 
                 $webhook_info = RY_LINE_Api::get_webhook_info();
                 if (!is_wp_error($webhook_info)) {

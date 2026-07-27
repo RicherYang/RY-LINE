@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: RY LINE 0.6.8\n"
+"Project-Id-Version: RY LINE 2026.7.27\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ry-line\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,6 +36,11 @@ msgstr ""
 #. Author URI of the plugin
 #: ry-line.php
 msgid "https://richer.tw/"
+msgstr ""
+
+#: admin/admin.php:76
+#: admin/admin.php:94
+msgid "LINE"
 msgstr ""
 
 #: admin/ajax.php:232
@@ -475,15 +480,6 @@ msgstr ""
 msgid "Please set show image first."
 msgstr ""
 
-#: admin/page/html/nav.php:8
-#: admin/page/tools.php:36
-msgid "Tools"
-msgstr ""
-
-#: admin/page/html/nav.php:14
-msgid "Options"
-msgstr ""
-
 #: admin/page/html/option-webhook.php:3
 msgid "Webhook"
 msgstr ""
@@ -552,76 +548,76 @@ msgstr ""
 msgid "Language: "
 msgstr ""
 
-#: admin/page/html/tools.php:17
-#: admin/page/html/tools.php:24
+#: admin/page/html/tools.php:3
+#: admin/page/tools.php:19
+msgid "Tools"
+msgstr ""
+
+#: admin/page/html/tools.php:19
+#: admin/page/html/tools.php:26
 msgid "Reload rich menu"
 msgstr ""
 
-#: admin/page/html/tools.php:30
+#: admin/page/html/tools.php:32
 msgid "Clear unused rich menu alias"
 msgstr ""
 
-#: admin/page/html/tools.php:37
+#: admin/page/html/tools.php:39
 msgid "Clear alias"
 msgstr ""
 
-#: admin/page/html/tools.php:44
+#: admin/page/html/tools.php:46
 msgid "Unlink test user rich menu"
 msgstr ""
 
-#: admin/page/html/tools.php:51
+#: admin/page/html/tools.php:53
 msgid "Unlink test user"
 msgstr ""
 
-#: admin/page/option.php:11
-msgid "LINE options"
+#: admin/page/option.php:19
+#: includes/ry-general/Page/Option.php:21
+#: includes/ry-general/Page/Option.php:35
+msgid "Options"
 msgstr ""
 
-#: admin/page/option.php:82
-msgid "LINE setting"
-msgstr ""
-
-#: admin/page/option.php:113
-#: admin/page/option.php:115
+#: admin/page/option.php:112
+#: admin/page/option.php:114
 msgid "Settings failed."
 msgstr ""
 
-#: admin/page/option.php:118
-#: admin/page/option.php:151
+#: admin/page/option.php:117
+#: admin/page/option.php:150
+#: includes/ry-general/Page/Option.php:64
 msgid "Settings saved."
 msgstr ""
 
-#: admin/page/option.php:129
-#: admin/page/option.php:131
-#: admin/page/option.php:137
+#: admin/page/option.php:128
+#: admin/page/option.php:130
+#: admin/page/option.php:136
 msgid "Test failed."
 msgstr ""
 
-#: admin/page/option.php:135
+#: admin/page/option.php:134
 msgid "Test success."
 msgstr ""
 
-#: admin/page/option.php:153
+#: admin/page/option.php:152
 msgid "Error channel ID or channel secret."
 msgstr ""
 
-#: admin/page/tools.php:11
-msgid "LINE tools"
-msgstr ""
-
-#: admin/page/tools.php:140
+#: admin/page/tools.php:136
 msgid "Reloaded successfully."
 msgstr ""
 
 #. translators: %d: number of deleted aliases
-#: admin/page/tools.php:157
+#: admin/page/tools.php:153
 #, php-format
 msgid "Deleted %d unused rich menu alias."
 msgid_plural "Deleted %d unused rich menu aliases."
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/page/tools.php:164
+#: admin/page/tools.php:160
 msgid "Unlink test user rich menu successfully."
 msgstr ""
 
@@ -788,65 +784,65 @@ msgstr ""
 msgid "Sorry!\\nLink account failed."
 msgstr ""
 
-#: includes/main.php:81
+#: includes/main.php:78
 msgctxt "post type general name"
 msgid "LINE message"
 msgstr ""
 
-#: includes/main.php:82
+#: includes/main.php:79
 msgid "Add message"
 msgstr ""
 
-#: includes/main.php:83
+#: includes/main.php:80
 msgid "Edit message"
 msgstr ""
 
-#: includes/main.php:84
+#: includes/main.php:81
 msgid "Search message"
 msgstr ""
 
-#: includes/main.php:85
+#: includes/main.php:82
 msgid "Uploaded to this message"
+msgstr ""
+
+#: includes/main.php:83
+#: includes/main.php:106
+msgid "Show image"
+msgstr ""
+
+#: includes/main.php:84
+#: includes/main.php:107
+msgid "Set show image"
+msgstr ""
+
+#: includes/main.php:85
+#: includes/main.php:108
+msgid "Remove show image"
 msgstr ""
 
 #: includes/main.php:86
 #: includes/main.php:109
-msgid "Show image"
-msgstr ""
-
-#: includes/main.php:87
-#: includes/main.php:110
-msgid "Set show image"
-msgstr ""
-
-#: includes/main.php:88
-#: includes/main.php:111
-msgid "Remove show image"
-msgstr ""
-
-#: includes/main.php:89
-#: includes/main.php:112
 msgid "Use as show image"
 msgstr ""
 
-#: includes/main.php:104
+#: includes/main.php:101
 msgctxt "post type general name"
 msgid "LINE rich menu"
 msgstr ""
 
-#: includes/main.php:105
+#: includes/main.php:102
 msgid "Add rich menu"
 msgstr ""
 
-#: includes/main.php:106
+#: includes/main.php:103
 msgid "Edit rich menu"
 msgstr ""
 
-#: includes/main.php:107
+#: includes/main.php:104
 msgid "Search rich menu"
 msgstr ""
 
-#: includes/main.php:108
+#: includes/main.php:105
 msgid "Uploaded to this rich menu"
 msgstr ""
 
@@ -902,20 +898,34 @@ msgstr ""
 msgid "Dir size:"
 msgstr ""
 
+#: includes/ry-general/Page/html/options.php:10
+#: includes/ry-general/Page/html/options.php:13
+msgid "Enable tracking"
+msgstr ""
+
+#: includes/ry-general/Page/html/options.php:15
+msgid "Allow usage of RY Plugin to be tracked"
+msgstr ""
+
+#: includes/ry-general/Page/html/options.php:18
+#, php-format
+msgid "Read about what usage data is tracked at: %s ."
+msgstr ""
+
 #: includes/ry-general/Page/Logs.php:27
-#: includes/ry-general/Page/Logs.php:73
+#: includes/ry-general/Page/Logs.php:75
 msgid "Logs"
 msgstr ""
 
-#: includes/ry-general/Page/Logs.php:75
+#: includes/ry-general/Page/Logs.php:77
 msgid "No logs found."
 msgstr ""
 
-#: includes/ry-general/Page/Logs.php:134
+#: includes/ry-general/Page/Logs.php:136
 msgid "Delete successful."
 msgstr ""
 
-#: includes/ry-general/Page/Logs.php:141
+#: includes/ry-general/Page/Logs.php:143
 msgid "Delete failed."
 msgstr ""
 

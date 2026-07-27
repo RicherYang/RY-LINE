@@ -2,8 +2,7 @@
 
 defined('ABSPATH') or exit;
 
-use RY\General\V20260724\AbstractBasic;
-use RY\General\V20260724\ActionScheduler;
+use RY\General\V20260727\AbstractBasic;
 
 final class RY_LINE extends AbstractBasic
 {
@@ -30,8 +29,6 @@ final class RY_LINE extends AbstractBasic
     protected function do_init(): void
     {
         load_plugin_textdomain('ry-line', false, plugin_basename(dirname(__DIR__)) . '/languages');
-        include_once RY_LINE_PLUGIN_DIR . 'includes/vendor/woocommerce/action-scheduler/action-scheduler.php';
-        ActionScheduler::instance();
 
         include_once RY_LINE_PLUGIN_DIR . 'includes/cron.php';
 
@@ -144,12 +141,21 @@ final class RY_LINE extends AbstractBasic
         }
     }
 
-    public static function plugin_activation()
+    public static function usage_tracking(): void
+    {
+        if (get_option('RY_General_tracking', 'yes') !== 'yes') {
+            return;
+        }
+
+        RY_LINE_LinkServer::instance()->send_tracking();
+    }
+
+    public static function plugin_activation(): void
     {
         self::create_roles();
     }
 
-    public static function plugin_deactivation()
+    public static function plugin_deactivation(): void
     {
         wp_unschedule_hook(self::OPTION_PREFIX . 'check_expire');
         wp_unschedule_hook(self::OPTION_PREFIX . 'check_update');

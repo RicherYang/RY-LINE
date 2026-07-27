@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-03-02T11:52:45+08:00\n"
-"PO-Revision-Date: 2026-07-24 12:06+0800\n"
+"PO-Revision-Date: 2026-07-26 23:12+0800\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
@@ -43,8 +43,9 @@ msgstr "https://ry-plugin.com/ry-line"
 msgid "LINE support"
 msgstr "LINE support"
 
-#: admin/page/option.php:118
-#: admin/page/option.php:151
+#: admin/page/option.php:117
+#: admin/page/option.php:150
+#: includes/ry-general/Page/Option.php:64
 msgid "Settings saved."
 msgstr "設定已儲存。"
 
@@ -56,7 +57,7 @@ msgstr "專屬 ID："
 msgid "Channel name: "
 msgstr "帳號名稱："
 
-#: admin/page/option.php:153
+#: admin/page/option.php:152
 msgid "Error channel ID or channel secret."
 msgstr "錯誤的 channel ID 或是 channel secret。"
 
@@ -68,24 +69,24 @@ msgstr "Channel ID"
 msgid "Channel secret"
 msgstr "Channel secret"
 
-#: includes/main.php:104
+#: includes/main.php:101
 msgctxt "post type general name"
 msgid "LINE rich menu"
 msgstr "LINE 圖文選單"
 
-#: includes/main.php:105
+#: includes/main.php:102
 msgid "Add rich menu"
 msgstr "新增圖文選單"
 
-#: includes/main.php:106
+#: includes/main.php:103
 msgid "Edit rich menu"
 msgstr "編輯圖文選單"
 
-#: includes/main.php:107
+#: includes/main.php:104
 msgid "Search rich menu"
 msgstr "搜尋圖文選單"
 
-#: includes/main.php:108
+#: includes/main.php:105
 msgid "Uploaded to this rich menu"
 msgstr "已關聯至這圖文選單"
 
@@ -291,29 +292,23 @@ msgstr "已上傳至 LINE 的選單無法進行編輯。"
 msgid "Set menu alias"
 msgstr "設定選單代稱"
 
-#: admin/page/html/nav.php:8
-#: admin/page/tools.php:36
+#: admin/page/html/tools.php:3
+#: admin/page/tools.php:19
 msgid "Tools"
 msgstr "工具"
 
-#: admin/page/html/nav.php:14
+#: admin/page/option.php:19
+#: includes/ry-general/Page/Option.php:21
+#: includes/ry-general/Page/Option.php:35
 msgid "Options"
 msgstr "設定"
 
-#: admin/page/option.php:11
-msgid "LINE options"
-msgstr "LINE 設定"
-
-#: admin/page/tools.php:11
-msgid "LINE tools"
-msgstr "LINE 工具"
-
-#: admin/page/html/tools.php:17
-#: admin/page/html/tools.php:24
+#: admin/page/html/tools.php:19
+#: admin/page/html/tools.php:26
 msgid "Reload rich menu"
 msgstr "重新載入圖文選單"
 
-#: admin/page/tools.php:140
+#: admin/page/tools.php:136
 msgid "Reloaded successfully."
 msgstr "重新載入成功。"
 
@@ -334,16 +329,16 @@ msgstr "聊天室按鈕文字"
 msgid "Open menu"
 msgstr "開啟選單"
 
-#: admin/page/html/tools.php:30
+#: admin/page/html/tools.php:32
 msgid "Clear unused rich menu alias"
 msgstr "清除未使用的圖文選單代稱"
 
-#: admin/page/html/tools.php:37
+#: admin/page/html/tools.php:39
 msgid "Clear alias"
 msgstr "清除代稱"
 
 #. translators: %d: number of deleted aliases
-#: admin/page/tools.php:157
+#: admin/page/tools.php:153
 #, php-format
 msgid "Deleted %d unused rich menu alias."
 msgid_plural "Deleted %d unused rich menu aliases."
@@ -371,15 +366,15 @@ msgstr "使用者名稱："
 msgid "Language: "
 msgstr "語言："
 
-#: admin/page/html/tools.php:44
+#: admin/page/html/tools.php:46
 msgid "Unlink test user rich menu"
 msgstr "移除連結至測試使用者的圖文選單"
 
-#: admin/page/html/tools.php:51
+#: admin/page/html/tools.php:53
 msgid "Unlink test user"
 msgstr "移除連結至測試使用者"
 
-#: admin/page/tools.php:164
+#: admin/page/tools.php:160
 msgid "Unlink test user rich menu successfully."
 msgstr "成功移除連結至測試使用者的圖文選單。"
 
@@ -421,18 +416,18 @@ msgstr "啟用"
 msgid "Disabled"
 msgstr "停用"
 
-#: admin/page/option.php:113
-#: admin/page/option.php:115
+#: admin/page/option.php:112
+#: admin/page/option.php:114
 msgid "Settings failed."
 msgstr "設定失敗。"
 
-#: admin/page/option.php:129
-#: admin/page/option.php:131
-#: admin/page/option.php:137
+#: admin/page/option.php:128
+#: admin/page/option.php:130
+#: admin/page/option.php:136
 msgid "Test failed."
 msgstr "測試失敗。"
 
-#: admin/page/option.php:135
+#: admin/page/option.php:134
 msgid "Test success."
 msgstr "測試成功。"
 
@@ -483,44 +478,44 @@ msgstr ""
 "歡迎 %s\n"
 "帳號綁定成功。"
 
-#: includes/main.php:81
+#: includes/main.php:78
 msgctxt "post type general name"
 msgid "LINE message"
 msgstr "LINE 訊息"
 
-#: includes/main.php:82
+#: includes/main.php:79
 msgid "Add message"
 msgstr "新增訊息"
 
-#: includes/main.php:83
+#: includes/main.php:80
 msgid "Edit message"
 msgstr "編輯訊息"
 
-#: includes/main.php:84
+#: includes/main.php:81
 msgid "Search message"
 msgstr "搜尋訊息"
 
-#: includes/main.php:85
+#: includes/main.php:82
 msgid "Uploaded to this message"
 msgstr "已關聯至這訊息"
 
-#: includes/main.php:86
-#: includes/main.php:109
+#: includes/main.php:83
+#: includes/main.php:106
 msgid "Show image"
 msgstr "顯示圖片"
 
-#: includes/main.php:87
-#: includes/main.php:110
+#: includes/main.php:84
+#: includes/main.php:107
 msgid "Set show image"
 msgstr "設定顯示圖片"
 
-#: includes/main.php:88
-#: includes/main.php:111
+#: includes/main.php:85
+#: includes/main.php:108
 msgid "Remove show image"
 msgstr "移除顯示圖片"
 
-#: includes/main.php:89
-#: includes/main.php:112
+#: includes/main.php:86
+#: includes/main.php:109
 msgid "Use as show image"
 msgstr "設定為顯示圖片"
 
@@ -805,10 +800,6 @@ msgstr "請輸入 LINE 使用者 ID。"
 #: admin/page/html/option.php:3
 msgid "Messaging API"
 msgstr "Messaging API"
-
-#: admin/page/option.php:82
-msgid "LINE setting"
-msgstr "LINE 設定"
 
 #: includes/line-autosend.php:123
 msgid "User login"
@@ -1113,15 +1104,15 @@ msgid "%1$s: Your <a href=\"%2$s\">license</a> is not activated yet!"
 msgstr "%1$s: 你的<a href=\"%2$s\">授權</a>尚未啟用！"
 
 #: includes/ry-general/Page/Logs.php:27
-#: includes/ry-general/Page/Logs.php:73
+#: includes/ry-general/Page/Logs.php:75
 msgid "Logs"
 msgstr "紀錄"
 
-#: includes/ry-general/Page/Logs.php:134
+#: includes/ry-general/Page/Logs.php:136
 msgid "Delete successful."
 msgstr "刪除成功。"
 
-#: includes/ry-general/Page/Logs.php:141
+#: includes/ry-general/Page/Logs.php:143
 msgid "Delete failed."
 msgstr "刪除失敗。"
 
@@ -1151,7 +1142,7 @@ msgstr "紀錄類別"
 msgid "Log Files"
 msgstr "紀錄檔案"
 
-#: includes/ry-general/Page/Logs.php:75
+#: includes/ry-general/Page/Logs.php:77
 msgid "No logs found."
 msgstr "没有紀錄檔案。"
 
@@ -1180,3 +1171,22 @@ msgstr "紀錄檔案將在 %d 天後刪除"
 #: includes/ry-general/Page/html/logs-select.php:35
 msgid "Dir size:"
 msgstr "目錄大小："
+
+#: admin/admin.php:76
+#: admin/admin.php:94
+msgid "LINE"
+msgstr ""
+
+#: includes/ry-general/Page/html/options.php:10
+#: includes/ry-general/Page/html/options.php:13
+msgid "Enable tracking"
+msgstr "啟用追蹤"
+
+#: includes/ry-general/Page/html/options.php:15
+msgid "Allow usage of RY Plugin to be tracked"
+msgstr "允許 RY Plugin 追蹤使用情況"
+
+#: includes/ry-general/Page/html/options.php:18
+#, php-format
+msgid "Read about what usage data is tracked at: %s ."
+msgstr "閱讀 %s 以理解我們追蹤那些數據。"

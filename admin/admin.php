@@ -2,7 +2,7 @@
 
 defined('ABSPATH') or exit;
 
-use RY\Paid\V20260724\AbstractAdmin;
+use RY\Paid\V20260727\AbstractAdmin;
 
 final class RY_LINE_Admin extends AbstractAdmin
 {
@@ -73,8 +73,9 @@ final class RY_LINE_Admin extends AbstractAdmin
     public function add_menu(array $menu_list): array
     {
         $menu_list[] = [
-            'name' => 'LINE',
+            'name' => __('LINE', 'ry-line'),
             'slug' => 'ry-line',
+            'capability' => 'manage_options',
             'function' => [$this, 'show_page'],
         ];
 
@@ -90,6 +91,7 @@ final class RY_LINE_Admin extends AbstractAdmin
         }
 
         echo '<div class="wrap">';
+        echo '<h1 class="wp-heading">' . esc_html__('LINE', 'ry-line') . '</h1>';
 
         echo '<nav class="nav-tab-wrapper wp-clearfix">';
         foreach ($navs as $nav) {

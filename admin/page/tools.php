@@ -2,7 +2,7 @@
 
 defined('ABSPATH') or exit;
 
-use RY\General\V20260724\AbstractAdminPage;
+use RY\General\V20260727\AbstractAdminPage;
 
 final class RY_Line_Admin_Tools extends AbstractAdminPage
 {

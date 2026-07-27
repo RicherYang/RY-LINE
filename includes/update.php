@@ -2,7 +2,7 @@
 
 defined('ABSPATH') or exit;
 
-use RY\General\V20260724\Logs;
+use RY\General\V20260727\Logs;
 
 final class RY_LINE_Update
 {
@@ -42,7 +42,7 @@ final class RY_LINE_Update
             RY_LINE::update_option('version', '0.5.5', true);
         }
 
-        if (version_compare($now_version, '0.6.8', '<')) {
+        if (version_compare($now_version, '2026.7.27', '<')) {
             $old_dir = WP_CONTENT_DIR . '/ry-logs';
             if (is_dir($old_dir)) {
                 $new_dir = Logs::get_log_directory();
@@ -53,7 +53,7 @@ final class RY_LINE_Update
             }
             add_action('init', [Logs::class, 'set_cron_job']);
 
-            RY_LINE::update_option('version', '0.6.8', true);
+            RY_LINE::update_option('version', '2026.7.27', true);
         }
     }
 }
