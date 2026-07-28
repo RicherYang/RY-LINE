@@ -4,9 +4,6 @@ namespace RY\Line;
 
 defined('ABSPATH') or exit;
 
-use RY\Line\LineApi;
-use RY\Line\User;
-
 final class Autosend
 {
     private static ?self $_instance = null;
@@ -23,7 +20,7 @@ final class Autosend
 
     protected function do_init(): void
     {
-        $autosend_hooks = \RY_LINE::get_option('autosend_hooks', []);
+        $autosend_hooks = Main::get_option('autosend_hooks', []);
         foreach ($autosend_hooks as $hook_name => $hook_info) {
             add_action($hook_name, [$this, 'do_autosend_event'], $hook_info['priority'] ?? 20, $hook_info['args'] ?? 1);
         }
@@ -44,7 +41,7 @@ final class Autosend
 
     public function do_autosend_event(...$args): void
     {
-        $autosend_hooks = \RY_LINE::get_option('autosend_hooks', []);
+        $autosend_hooks = Main::get_option('autosend_hooks', []);
         $hook_name = current_filter();
         if (!isset($autosend_hooks[$hook_name])) {
             return;
@@ -65,7 +62,7 @@ final class Autosend
 
         $wp_query = new \WP_Query();
         $messages = $wp_query->query([
-            'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
+            'post_type' => Main::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
             'post_status' => 'publish',
             'meta_query' => [$meta_query],

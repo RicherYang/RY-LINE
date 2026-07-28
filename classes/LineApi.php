@@ -8,10 +8,10 @@ final class LineApi
 {
     public static function get_access_token()
     {
-        $token = \RY_LINE::get_transient('access_token');
+        $token = Main::get_transient('access_token');
         if (empty($token)) {
-            $client_id = \RY_LINE::get_option('channel_id');
-            $client_secret = \RY_LINE::get_option('channel_secret');
+            $client_id = Main::get_option('channel_id');
+            $client_secret = Main::get_option('channel_secret');
             if (!empty($client_id) && !empty($client_secret)) {
                 $remote = self::do_remote_request('https://api.line.me/v2/oauth/accessToken', 'POST', http_build_query([
                     'grant_type' => 'client_credentials',
@@ -24,7 +24,7 @@ final class LineApi
                 }
                 if (isset($remote->access_token)) {
                     $token = $remote->access_token;
-                    \RY_LINE::set_transient('access_token', $token, $remote->expires_in / 2);
+                    Main::set_transient('access_token', $token, $remote->expires_in / 2);
                 }
             }
         }
@@ -34,7 +34,7 @@ final class LineApi
 
     public static function revoke_access_token()
     {
-        $token = \RY_LINE::get_transient('access_token');
+        $token = Main::get_transient('access_token');
         if (!empty($token)) {
             self::do_remote_request('https://api.line.me/v2/oauth/revoke', 'POST', http_build_query([
                 'access_token' => $token,
@@ -46,7 +46,7 @@ final class LineApi
     {
         $message_object = [];
         foreach ($posts as $post) {
-            if (get_post_type($post) !== \RY_LINE::POSTTYPE_MESSAGE) {
+            if (get_post_type($post) !== Main::POSTTYPE_MESSAGE) {
                 continue;
             }
 
@@ -78,7 +78,7 @@ final class LineApi
                     $flex_contents = [];
                     foreach ($use_messages as $message_ID) {
                         $flex_post = get_post($message_ID);
-                        if (get_post_type($flex_post) !== \RY_LINE::POSTTYPE_MESSAGE) {
+                        if (get_post_type($flex_post) !== Main::POSTTYPE_MESSAGE) {
                             continue;
                         }
                         $content = maybe_unserialize($flex_post->post_content);
@@ -106,7 +106,7 @@ final class LineApi
     public static function build_richmenu_object($post_ID)
     {
         $richmenu_object = [];
-        if (get_post_type($post_ID) == \RY_LINE::POSTTYPE_RICHERMENU) {
+        if (get_post_type($post_ID) == Main::POSTTYPE_RICHERMENU) {
             $post = get_post($post_ID);
             $richmenu_object = get_post_meta($post->ID, 'ry_line_richmenu_data', true);
             $richmenu_object['name'] = $post->post_title;
@@ -397,7 +397,7 @@ final class LineApi
             return [wp_remote_retrieve_header($response, 'content-type'), wp_remote_retrieve_body($response)];
         }
         if (wp_remote_retrieve_response_code($response) == 401) {
-            \RY_LINE::delete_transient('access_token');
+            Main::delete_transient('access_token');
             if ($retry) {
                 return self::do_remote_request($url, $method, $content, false);
             }

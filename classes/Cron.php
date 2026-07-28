@@ -4,18 +4,15 @@ namespace RY\Line;
 
 defined('ABSPATH') or exit;
 
-use RY\Line\License;
-use RY\Line\LineApi;
-
 final class Cron
 {
     public static function add_action(): void
     {
-        add_action(\RY_LINE::OPTION_PREFIX . 'check_expire', [__CLASS__, 'check_expire']);
+        add_action(Main::OPTION_PREFIX . 'check_expire', [__CLASS__, 'check_expire']);
 
-        add_action(\RY_LINE::OPTION_PREFIX . 'check_autosend_hooks', [__CLASS__, 'check_autosend_hooks']);
+        add_action(Main::OPTION_PREFIX . 'check_autosend_hooks', [__CLASS__, 'check_autosend_hooks']);
 
-        add_action(\RY_LINE::OPTION_PREFIX . 'update_0_5_5', [__CLASS__, 'update_0_5_5']);
+        add_action(Main::OPTION_PREFIX . 'update_0_5_5', [__CLASS__, 'update_0_5_5']);
     }
 
     public static function check_expire(): void
@@ -29,7 +26,7 @@ final class Cron
 
         $wp_query = new \WP_Query();
         $messages = $wp_query->query([
-            'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
+            'post_type' => Main::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
             'post_status' => 'publish',
             'meta_query' => [
@@ -70,7 +67,7 @@ final class Cron
                 }
             }
         }
-        \RY_LINE::update_option('autosend_hooks', $autosend_hooks, true);
+        Main::update_option('autosend_hooks', $autosend_hooks, true);
     }
 
     public static function update_0_5_5(): void
@@ -82,7 +79,7 @@ final class Cron
         $start = time();
         $wp_query = new \WP_Query();
         $messages = $wp_query->query([
-            'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
+            'post_type' => Main::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
             'meta_query' => [
                 [
@@ -99,7 +96,7 @@ final class Cron
                     $use_messages = [];
                     foreach ($message->post_content->contents as $content) {
                         $new_message_ID = wp_insert_post([
-                            'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
+                            'post_type' => Main::POSTTYPE_MESSAGE,
                             'post_title' => $message->post_title . ' - ' . (count($use_messages) + 1),
                             'post_status' => 'draft',
                             'post_content' => maybe_serialize($content),
@@ -161,7 +158,7 @@ final class Cron
                     }
 
                     if ($start - time() > 5) {
-                        as_schedule_single_action(time(), \RY_LINE::OPTION_PREFIX . 'update_0_5_5', [], 'ry-line', true);
+                        as_schedule_single_action(time(), Main::OPTION_PREFIX . 'update_0_5_5', [], 'ry-line', true);
                         break;
                     }
                 }

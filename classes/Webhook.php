@@ -4,9 +4,6 @@ namespace RY\Line;
 
 defined('ABSPATH') or exit;
 
-use RY\Line\LineApi;
-use RY\Line\User;
-
 final class Webhook
 {
     public const ENDPOINT_USER_LINK = 'user-link';
@@ -85,7 +82,7 @@ final class Webhook
 
         $api_signature = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_LINE_SIGNATURE'] ?? ''));
         $data = file_get_contents('php://input');
-        $client_secret = \RY_LINE::get_option('channel_secret');
+        $client_secret = Main::get_option('channel_secret');
         $hash = hash_hmac('sha256', $data, $client_secret, true);
         $signature = base64_encode($hash);
         if (hash_equals($signature, $api_signature)) {
@@ -127,7 +124,7 @@ final class Webhook
     {
         $params = explode('/', $event_data);
         $message_ID = intval($params[2] ?? '');
-        if (get_post_type($message_ID) !== \RY_LINE::POSTTYPE_MESSAGE) {
+        if (get_post_type($message_ID) !== Main::POSTTYPE_MESSAGE) {
             return;
         }
 
@@ -148,7 +145,7 @@ final class Webhook
 
         $wp_query = new \WP_Query();
         $messages = $wp_query->query([
-            'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
+            'post_type' => Main::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
             'post_status' => 'publish',
             'meta_query' => [
@@ -166,7 +163,7 @@ final class Webhook
         ]);
         if (empty($messages)) {
             $messages = $wp_query->query([
-                'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
+                'post_type' => Main::POSTTYPE_MESSAGE,
                 'posts_per_page' => -1,
                 'post_status' => 'publish',
                 'meta_query' => [
@@ -298,7 +295,7 @@ final class Webhook
             $nonce = sanitize_key($link->nonce);
             $nonce = hex2bin($nonce);
             $iv = substr(wp_salt('nonce'), 0, openssl_cipher_iv_length('aes-128-cbc'));
-            $user_ID = openssl_decrypt($nonce, 'aes-128-cbc', \RY_LINE::get_option('channel_secret'), OPENSSL_RAW_DATA, $iv);
+            $user_ID = openssl_decrypt($nonce, 'aes-128-cbc', Main::get_option('channel_secret'), OPENSSL_RAW_DATA, $iv);
             if ($user_ID === sanitize_key($user_ID)) {
                 $user_ID = intval($user_ID);
                 if ($user_ID > 0) {
@@ -348,7 +345,7 @@ final class Webhook
         }
 
         $iv = substr(wp_salt('nonce'), 0, openssl_cipher_iv_length('aes-128-cbc'));
-        $nonce = openssl_encrypt($user_ID, 'aes-128-cbc', \RY_LINE::get_option('channel_secret'), OPENSSL_RAW_DATA, $iv);
+        $nonce = openssl_encrypt($user_ID, 'aes-128-cbc', Main::get_option('channel_secret'), OPENSSL_RAW_DATA, $iv);
 
         wp_redirect(add_query_arg([
             'linkToken' => $link_token,

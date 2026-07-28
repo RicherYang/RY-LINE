@@ -1,22 +1,15 @@
 <?php
 
+namespace RY\Line;
+
 defined('ABSPATH') or exit;
 
 use RY\General\V20260727\AbstractBasic;
 use RY\Line\Admin\Admin;
-use RY\Line\Autosend;
-use RY\Line\Cron;
-use RY\Line\License;
-use RY\Line\LinkServer;
-use RY\Line\Template;
-use RY\Line\Update;
-use RY\Line\Updater;
-use RY\Line\User;
-use RY\Line\Webhook;
 use RY\Line\WooCommerce\Autosend as WooCommerceAutosend;
 use RY\Line\WooCommerce\Template as WooCommerceTemplate;
 
-final class RY_LINE extends AbstractBasic
+final class Main extends AbstractBasic
 {
     public const OPTION_PREFIX = 'RY_LINE_';
 
@@ -28,7 +21,7 @@ final class RY_LINE extends AbstractBasic
 
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE
+    public static function instance(): Main
     {
         if (null === self::$_instance) {
             self::$_instance = new self();

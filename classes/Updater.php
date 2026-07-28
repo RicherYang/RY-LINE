@@ -4,8 +4,6 @@ namespace RY\Line;
 
 defined('ABSPATH') or exit;
 
-use RY\Line\LinkServer;
-
 final class Updater
 {
     private static ?self $_instance = null;

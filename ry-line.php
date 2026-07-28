@@ -18,6 +18,8 @@
 
 defined('ABSPATH') or exit;
 
+use RY\Line\Main;
+
 define('RY_LINE_VERSION', '2026.7.27');
 define('RY_LINE_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('RY_LINE_PLUGIN_DIR', plugin_dir_path(__FILE__));
@@ -25,14 +27,8 @@ define('RY_LINE_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('RY_LINE_PLUGIN_LANGUAGES_DIR', plugin_dir_path(__FILE__) . '/languages');
 
 require_once RY_LINE_PLUGIN_DIR . 'includes/vendor/autoload.php';
-require_once RY_LINE_PLUGIN_DIR . 'includes/main.php';
 
-register_activation_hook(__FILE__, ['RY_LINE', 'plugin_activation']);
-register_deactivation_hook(__FILE__, ['RY_LINE', 'plugin_deactivation']);
+register_activation_hook(__FILE__, [Main::class, 'plugin_activation']);
+register_deactivation_hook(__FILE__, [Main::class, 'plugin_deactivation']);
 
-function RY_LINE(): RY_LINE
-{
-    return RY_LINE::instance();
-}
-
-RY_LINE();
+Main::instance();
