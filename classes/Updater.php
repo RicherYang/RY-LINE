@@ -1,12 +1,16 @@
 <?php
 
+namespace RY\Line;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_Updater
+use RY\Line\LinkServer;
+
+final class Updater
 {
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE_Updater
+    public static function instance(): Updater
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -29,7 +33,7 @@ final class RY_LINE_Updater
             return $update;
         }
 
-        return RY_LINE_LinkServer::instance()->check_version();
+        return LinkServer::instance()->check_version();
     }
 
     public static function modify_plugin_details($result, $action, $args)
@@ -42,7 +46,7 @@ final class RY_LINE_Updater
             return $result;
         }
 
-        $response = RY_LINE_LinkServer::instance()->get_info();
+        $response = LinkServer::instance()->get_info();
         if (!empty($response)) {
             return (object) $response;
         }

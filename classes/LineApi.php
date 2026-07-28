@@ -1,15 +1,17 @@
 <?php
 
+namespace RY\Line;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_Api
+final class LineApi
 {
     public static function get_access_token()
     {
-        $token = RY_LINE::get_transient('access_token');
+        $token = \RY_LINE::get_transient('access_token');
         if (empty($token)) {
-            $client_id = RY_LINE::get_option('channel_id');
-            $client_secret = RY_LINE::get_option('channel_secret');
+            $client_id = \RY_LINE::get_option('channel_id');
+            $client_secret = \RY_LINE::get_option('channel_secret');
             if (!empty($client_id) && !empty($client_secret)) {
                 $remote = self::do_remote_request('https://api.line.me/v2/oauth/accessToken', 'POST', http_build_query([
                     'grant_type' => 'client_credentials',
@@ -22,7 +24,7 @@ final class RY_LINE_Api
                 }
                 if (isset($remote->access_token)) {
                     $token = $remote->access_token;
-                    RY_LINE::set_transient('access_token', $token, $remote->expires_in / 2);
+                    \RY_LINE::set_transient('access_token', $token, $remote->expires_in / 2);
                 }
             }
         }
@@ -32,7 +34,7 @@ final class RY_LINE_Api
 
     public static function revoke_access_token()
     {
-        $token = RY_LINE::get_transient('access_token');
+        $token = \RY_LINE::get_transient('access_token');
         if (!empty($token)) {
             self::do_remote_request('https://api.line.me/v2/oauth/revoke', 'POST', http_build_query([
                 'access_token' => $token,
@@ -44,7 +46,7 @@ final class RY_LINE_Api
     {
         $message_object = [];
         foreach ($posts as $post) {
-            if (get_post_type($post) !== RY_LINE::POSTTYPE_MESSAGE) {
+            if (get_post_type($post) !== \RY_LINE::POSTTYPE_MESSAGE) {
                 continue;
             }
 
@@ -53,7 +55,7 @@ final class RY_LINE_Api
             switch ($message_type) {
                 case 'text':
                     $message_data['type'] = 'textV2';
-                    $message_data['text'] = RY_LINE_Template::instance()->do_template_string($post->post_content, $template_info);
+                    $message_data['text'] = Template::instance()->do_template_string($post->post_content, $template_info);
                     break;
                 case 'image':
                     $thumbnail_ID = get_post_thumbnail_id($post);
@@ -67,8 +69,8 @@ final class RY_LINE_Api
                     $content = maybe_unserialize($post->post_content);
                     if (is_object($content)) {
                         $message_data['type'] = 'flex';
-                        $message_data['altText'] = RY_LINE_Template::instance()->do_template_string($post->post_excerpt, $template_info);
-                        $message_data['contents'] = json_decode(RY_LINE_Template::instance()->do_template_string(wp_json_encode($content), $template_info), true);
+                        $message_data['altText'] = Template::instance()->do_template_string($post->post_excerpt, $template_info);
+                        $message_data['contents'] = json_decode(Template::instance()->do_template_string(wp_json_encode($content), $template_info), true);
                     }
                     break;
                 case 'flexes':
@@ -76,19 +78,19 @@ final class RY_LINE_Api
                     $flex_contents = [];
                     foreach ($use_messages as $message_ID) {
                         $flex_post = get_post($message_ID);
-                        if (get_post_type($flex_post) !== RY_LINE::POSTTYPE_MESSAGE) {
+                        if (get_post_type($flex_post) !== \RY_LINE::POSTTYPE_MESSAGE) {
                             continue;
                         }
                         $content = maybe_unserialize($flex_post->post_content);
                         if (is_object($content)) {
-                            $flex_contents[] = json_decode(RY_LINE_Template::instance()->do_template_string(wp_json_encode($content), $template_info), true);
+                            $flex_contents[] = json_decode(Template::instance()->do_template_string(wp_json_encode($content), $template_info), true);
                             if (count($flex_contents) > 12) {
                                 break;
                             }
                         }
                     }
                     $message_data['type'] = 'flex';
-                    $message_data['altText'] = RY_LINE_Template::instance()->do_template_string($post->post_excerpt, $template_info);
+                    $message_data['altText'] = Template::instance()->do_template_string($post->post_excerpt, $template_info);
                     $message_data['contents'] = [
                         'type' => 'carousel',
                         'contents' => $flex_contents,
@@ -104,7 +106,7 @@ final class RY_LINE_Api
     public static function build_richmenu_object($post_ID)
     {
         $richmenu_object = [];
-        if (get_post_type($post_ID) == RY_LINE::POSTTYPE_RICHERMENU) {
+        if (get_post_type($post_ID) == \RY_LINE::POSTTYPE_RICHERMENU) {
             $post = get_post($post_ID);
             $richmenu_object = get_post_meta($post->ID, 'ry_line_richmenu_data', true);
             $richmenu_object['name'] = $post->post_title;
@@ -395,12 +397,12 @@ final class RY_LINE_Api
             return [wp_remote_retrieve_header($response, 'content-type'), wp_remote_retrieve_body($response)];
         }
         if (wp_remote_retrieve_response_code($response) == 401) {
-            RY_LINE::delete_transient('access_token');
+            \RY_LINE::delete_transient('access_token');
             if ($retry) {
                 return self::do_remote_request($url, $method, $content, false);
             }
         }
 
-        return new WP_Error('line_error', wp_remote_retrieve_response_code($response), json_decode(wp_remote_retrieve_body($response)));
+        return new \WP_Error('line_error', wp_remote_retrieve_response_code($response), json_decode(wp_remote_retrieve_body($response)));
     }
 }

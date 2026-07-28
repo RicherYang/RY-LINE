@@ -1,16 +1,19 @@
 <?php
 
+namespace RY\Line;
+
 defined('ABSPATH') or exit;
 
+use RY\Line\LinkServer;
 use RY\Paid\V20260727\AbstractLicense;
 
-final class RY_LINE_License extends AbstractLicense
+final class License extends AbstractLicense
 {
-    public static string $main_class = RY_LINE::class;
+    public static string $main_class = \RY_LINE::class;
 
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE_License
+    public static function instance(): License
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -27,16 +30,16 @@ final class RY_LINE_License extends AbstractLicense
 
     public function activate_key()
     {
-        return RY_LINE_LinkServer::instance()->activate_key($this->get_license_key());
+        return LinkServer::instance()->activate_key($this->get_license_key());
     }
 
     public function get_version_info()
     {
-        $version_info = RY_LINE::get_transient('version_info');
+        $version_info = \RY_LINE::get_transient('version_info');
         if (empty($version_info)) {
-            $version_info = RY_LINE_LinkServer::instance()->check_version();
+            $version_info = LinkServer::instance()->check_version();
             if ($version_info) {
-                RY_LINE::set_transient('version_info', $version_info, HOUR_IN_SECONDS);
+                \RY_LINE::set_transient('version_info', $version_info, HOUR_IN_SECONDS);
             }
         }
 
@@ -45,12 +48,12 @@ final class RY_LINE_License extends AbstractLicense
 
     public function check_expire(): void
     {
-        $json = RY_LINE_LinkServer::instance()->expire_data();
+        $json = LinkServer::instance()->expire_data();
         if (is_array($json) && isset($json['data'])) {
             $this->set_license_data($json['data']);
-            RY_LINE::delete_transient('expire_link_error');
+            \RY_LINE::delete_transient('expire_link_error');
         } elseif (false === $json) {
-            $link_error = (int) RY_LINE::get_transient('expire_link_error');
+            $link_error = (int) \RY_LINE::get_transient('expire_link_error');
             if ($link_error > 3) {
                 $this->delete_license();
             } else {
@@ -58,7 +61,7 @@ final class RY_LINE_License extends AbstractLicense
                     $link_error = 0;
                 }
                 $link_error += 1;
-                RY_LINE::set_transient('expire_link_error', $link_error);
+                \RY_LINE::set_transient('expire_link_error', $link_error);
             }
         } else {
             $this->delete_license();

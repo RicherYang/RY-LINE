@@ -1,12 +1,14 @@
 <?php
 
+namespace RY\Line\Admin;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_Admin_Richmenu
+final class Richmenu
 {
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE_Admin_Richmenu
+    public static function instance(): Richmenu
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -20,14 +22,14 @@ final class RY_LINE_Admin_Richmenu
     {
         add_filter('quick_edit_enabled_for_post_type', [$this, 'skip_quick_edit'], 10, 2);
         add_filter('display_post_states', [$this, 'add_post_states'], 10, 2);
-        add_filter('manage_' . RY_LINE::POSTTYPE_RICHERMENU . '_posts_columns', [$this, 'add_columns']);
-        add_filter('manage_' . RY_LINE::POSTTYPE_RICHERMENU . '_posts_custom_column', [$this, 'show_columns'], 10, 2);
-        add_action('save_post_' . RY_LINE::POSTTYPE_RICHERMENU, [$this, 'save_date'], 10, 2);
+        add_filter('manage_' . \RY_LINE::POSTTYPE_RICHERMENU . '_posts_columns', [$this, 'add_columns']);
+        add_filter('manage_' . \RY_LINE::POSTTYPE_RICHERMENU . '_posts_custom_column', [$this, 'show_columns'], 10, 2);
+        add_action('save_post_' . \RY_LINE::POSTTYPE_RICHERMENU, [$this, 'save_date'], 10, 2);
     }
 
     public function skip_quick_edit($enabled, $post_type)
     {
-        if ($post_type === RY_LINE::POSTTYPE_RICHERMENU) {
+        if ($post_type === \RY_LINE::POSTTYPE_RICHERMENU) {
             return false;
         }
 
@@ -36,11 +38,11 @@ final class RY_LINE_Admin_Richmenu
 
     public function add_post_states($post_states, $post)
     {
-        if ($post->post_type !== RY_LINE::POSTTYPE_RICHERMENU) {
+        if ($post->post_type !== \RY_LINE::POSTTYPE_RICHERMENU) {
             return $post_states;
         }
 
-        if ($post->ID == RY_LINE::get_option('richmenu_default')) {
+        if ($post->ID == \RY_LINE::get_option('richmenu_default')) {
             $post_states[] = __('Default menu', 'ry-line');
         }
 
@@ -133,5 +135,3 @@ final class RY_LINE_Admin_Richmenu
         update_post_meta($post_ID, 'ry_line_richmenu_data', $richmenu_data);
     }
 }
-
-RY_LINE_Admin_Richmenu::instance();

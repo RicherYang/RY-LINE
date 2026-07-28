@@ -1,8 +1,13 @@
 <?php
 
+namespace RY\Line;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_Webhook
+use RY\Line\LineApi;
+use RY\Line\User;
+
+final class Webhook
 {
     public const ENDPOINT_USER_LINK = 'user-link';
 
@@ -10,7 +15,7 @@ final class RY_LINE_Webhook
 
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE_Webhook
+    public static function instance(): Webhook
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -80,7 +85,7 @@ final class RY_LINE_Webhook
 
         $api_signature = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_LINE_SIGNATURE'] ?? ''));
         $data = file_get_contents('php://input');
-        $client_secret = RY_LINE::get_option('channel_secret');
+        $client_secret = \RY_LINE::get_option('channel_secret');
         $hash = hash_hmac('sha256', $data, $client_secret, true);
         $signature = base64_encode($hash);
         if (hash_equals($signature, $api_signature)) {
@@ -122,7 +127,7 @@ final class RY_LINE_Webhook
     {
         $params = explode('/', $event_data);
         $message_ID = intval($params[2] ?? '');
-        if (get_post_type($message_ID) !== RY_LINE::POSTTYPE_MESSAGE) {
+        if (get_post_type($message_ID) !== \RY_LINE::POSTTYPE_MESSAGE) {
             return;
         }
 
@@ -141,9 +146,9 @@ final class RY_LINE_Webhook
             return;
         }
 
-        $wp_query = new WP_Query();
+        $wp_query = new \WP_Query();
         $messages = $wp_query->query([
-            'post_type' => RY_LINE::POSTTYPE_MESSAGE,
+            'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
             'post_status' => 'publish',
             'meta_query' => [
@@ -161,7 +166,7 @@ final class RY_LINE_Webhook
         ]);
         if (empty($messages)) {
             $messages = $wp_query->query([
-                'post_type' => RY_LINE::POSTTYPE_MESSAGE,
+                'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
                 'posts_per_page' => -1,
                 'post_status' => 'publish',
                 'meta_query' => [
@@ -186,9 +191,9 @@ final class RY_LINE_Webhook
         $message_data = [];
         $message_reply = [];
         $template_info = (object) [
-            'wp_user' => RY_LINE_User::instance()->get_wp_user($source->userId),
+            'wp_user' => User::instance()->get_wp_user($source->userId),
         ];
-        $message_object = RY_LINE_Api::build_message_object($messages, $template_info);
+        $message_object = LineApi::build_message_object($messages, $template_info);
         foreach ($message_object as $message_ID => $message) {
             $message_data[$message_ID] = get_post_meta($message_ID, 'ry_line_message_data', true);
             $message_reply[$message_ID] = get_post_meta($message_ID, 'ry_line_message_reply', true);
@@ -202,13 +207,13 @@ final class RY_LINE_Webhook
             return;
         }
 
-        RY_LINE_Api::message_reply($message_object, $reply_token);
+        LineApi::message_reply($message_object, $reply_token);
     }
 
     public function show_link_button($event_data, $source, $reply_token): void
     {
         if ($source->type !== 'user') {
-            RY_LINE_Api::reply_message($reply_token, [[
+            LineApi::reply_message($reply_token, [[
                 'type' => 'textV2',
                 'text' => __('Account link action can only do at one-by-one chat.', 'ry-line'),
             ]]);
@@ -218,7 +223,7 @@ final class RY_LINE_Webhook
         $text = __('Please click below button', 'ry-line');
         $actions = [];
 
-        $wp_user = RY_LINE_User::instance()->get_wp_user($source->userId);
+        $wp_user = User::instance()->get_wp_user($source->userId);
         if ($wp_user) {
             /* translators: %s: user display name */
             $text = sprintf(__('Linked account: %s', 'ry-line'), $wp_user->display_name) . "\n" . $text;
@@ -228,17 +233,17 @@ final class RY_LINE_Webhook
                 'data' => 'ry/account-unlink',
             ];
         } else {
-            $link_token = RY_LINE_Api::get_user_linktoken($source->userId);
+            $link_token = LineApi::get_user_linktoken($source->userId);
             $actions[] = [
                 'type' => 'uri',
                 'label' => __('Link account', 'ry-line'),
                 'uri' => add_query_arg([
                     self::LINK_QUERY => $link_token->linkToken,
-                ], RY_LINE_Webhook::get_webhook_url(RY_LINE_Webhook::ENDPOINT_USER_LINK)),
+                ], self::get_webhook_url(self::ENDPOINT_USER_LINK)),
             ];
         }
 
-        RY_LINE_Api::reply_message($reply_token, [[
+        LineApi::reply_message($reply_token, [[
             'type' => 'template',
             'altText' => __('Link account', 'ry-line'),
             'template' => [
@@ -252,20 +257,20 @@ final class RY_LINE_Webhook
     public function unlink_user($event_data, $source, $reply_token): void
     {
         if ($source->type !== 'user') {
-            RY_LINE_Api::reply_message($reply_token, [[
+            LineApi::reply_message($reply_token, [[
                 'type' => 'textV2',
                 'text' => __('Account link action can only do at one-by-one chat.', 'ry-line'),
             ]]);
             return;
         }
 
-        $wp_user = RY_LINE_User::instance()->get_wp_user($source->userId);
+        $wp_user = User::instance()->get_wp_user($source->userId);
         if ($wp_user) {
-            foreach (RY_LINE_User::MAYPE_USER_META_KEY as $meta_key) {
+            foreach (User::MAYPE_USER_META_KEY as $meta_key) {
                 delete_user_meta($wp_user->ID, $meta_key);
             }
         } else {
-            RY_LINE_Api::reply_message($reply_token, [[
+            LineApi::reply_message($reply_token, [[
                 'type' => 'textV2',
                 'text' => __('No linked account found.', 'ry-line'),
             ]]);
@@ -273,7 +278,7 @@ final class RY_LINE_Webhook
         }
 
         do_action('ry/line_account_unlinked', $wp_user, $source->userId, $reply_token);
-        RY_LINE_Api::reply_message($reply_token, [[
+        LineApi::reply_message($reply_token, [[
             'type' => 'textV2',
             'text' => __('Unlink account success.', 'ry-line'),
         ]]);
@@ -282,7 +287,7 @@ final class RY_LINE_Webhook
     public function link_user($link, $source, $reply_token): void
     {
         if ($source->type !== 'user') {
-            RY_LINE_Api::reply_message($reply_token, [[
+            LineApi::reply_message($reply_token, [[
                 'type' => 'textV2',
                 'text' => __('Account link action can only do at one-by-one chat.', 'ry-line'),
             ]]);
@@ -293,21 +298,21 @@ final class RY_LINE_Webhook
             $nonce = sanitize_key($link->nonce);
             $nonce = hex2bin($nonce);
             $iv = substr(wp_salt('nonce'), 0, openssl_cipher_iv_length('aes-128-cbc'));
-            $user_ID = openssl_decrypt($nonce, 'aes-128-cbc', RY_LINE::get_option('channel_secret'), OPENSSL_RAW_DATA, $iv);
+            $user_ID = openssl_decrypt($nonce, 'aes-128-cbc', \RY_LINE::get_option('channel_secret'), OPENSSL_RAW_DATA, $iv);
             if ($user_ID === sanitize_key($user_ID)) {
                 $user_ID = intval($user_ID);
                 if ($user_ID > 0) {
-                    $wp_user = RY_LINE_User::instance()->get_wp_user($source->userId);
+                    $wp_user = User::instance()->get_wp_user($source->userId);
                     if ($wp_user->ID != $user_ID) {
-                        foreach (RY_LINE_User::MAYPE_USER_META_KEY as $meta_key) {
+                        foreach (User::MAYPE_USER_META_KEY as $meta_key) {
                             delete_user_meta($wp_user->ID, $meta_key);
                         }
                     }
 
-                    update_user_meta($user_ID, RY_LINE_User::MAYPE_USER_META_KEY[0], $source->userId);
+                    update_user_meta($user_ID, User::MAYPE_USER_META_KEY[0], $source->userId);
                     $wp_user = get_user_by('id', $user_ID);
                     do_action('ry/line_account_linked', $wp_user, $source->userId, $reply_token);
-                    RY_LINE_Api::reply_message($reply_token, [[
+                    LineApi::reply_message($reply_token, [[
                         'type' => 'textV2',
                         /* translators: %s: user display name */
                         'text' => sprintf(__('Welcome %s\nLink account success.', 'ry-line'), $wp_user->display_name),
@@ -317,7 +322,7 @@ final class RY_LINE_Webhook
             }
         }
 
-        RY_LINE_Api::reply_message($reply_token, [[
+        LineApi::reply_message($reply_token, [[
             'type' => 'textV2',
             'text' => __('Sorry!\nLink account failed.', 'ry-line'),
         ]]);
@@ -336,14 +341,14 @@ final class RY_LINE_Webhook
             $login_url = add_query_arg([
                 'redirect_to' => add_query_arg([
                     self::LINK_QUERY => $link_token,
-                ], RY_LINE_Webhook::get_webhook_url(RY_LINE_Webhook::ENDPOINT_USER_LINK)),
+                ], self::get_webhook_url(self::ENDPOINT_USER_LINK)),
             ], $login_url);
             wp_safe_redirect($login_url);
             return;
         }
 
         $iv = substr(wp_salt('nonce'), 0, openssl_cipher_iv_length('aes-128-cbc'));
-        $nonce = openssl_encrypt($user_ID, 'aes-128-cbc', RY_LINE::get_option('channel_secret'), OPENSSL_RAW_DATA, $iv);
+        $nonce = openssl_encrypt($user_ID, 'aes-128-cbc', \RY_LINE::get_option('channel_secret'), OPENSSL_RAW_DATA, $iv);
 
         wp_redirect(add_query_arg([
             'linkToken' => $link_token,
@@ -351,5 +356,3 @@ final class RY_LINE_Webhook
         ], 'https://access.line.me/dialog/bot/accountLink'));
     }
 }
-
-RY_LINE_Webhook::instance();

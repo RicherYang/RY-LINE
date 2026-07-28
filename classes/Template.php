@@ -1,12 +1,14 @@
 <?php
 
+namespace RY\Line;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_Template
+final class Template
 {
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE_Template
+    public static function instance(): Template
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -145,5 +147,3 @@ final class RY_LINE_Template
         return apply_filters('ry/line_template_replace-' . $group, $default, $key, $template_info, $default);
     }
 }
-
-RY_LINE_Template::instance();

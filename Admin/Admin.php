@@ -1,16 +1,27 @@
 <?php
 
+namespace RY\Line\Admin;
+
 defined('ABSPATH') or exit;
 
+use RY\Line\Admin\Ajax;
+use RY\Line\Admin\Media;
+use RY\Line\Admin\Message;
+use RY\Line\Admin\MetaBoxes\Message as MetaBoxMessage;
+use RY\Line\Admin\MetaBoxes\Richmenu as MetaBoxRichmenu;
+use RY\Line\Admin\Page\Option as PageOption;
+use RY\Line\Admin\Page\Tools as PageTools;
+use RY\Line\Admin\Richmenu;
+use RY\Line\License;
 use RY\Paid\V20260727\AbstractAdmin;
 
-final class RY_LINE_Admin extends AbstractAdmin
+final class Admin extends AbstractAdmin
 {
     private static ?self $_instance = null;
 
-    protected RY_LINE_License $license;
+    protected License $license;
 
-    public static function instance(): RY_LINE_Admin
+    public static function instance(): Admin
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -24,24 +35,25 @@ final class RY_LINE_Admin extends AbstractAdmin
     {
         parent::do_init();
 
-        $this->license = RY_LINE_License::instance();
+        $this->license = License::instance();
         add_filter('ry-plugin/license_list', [$this, 'add_license']);
 
         add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
-        add_action('add_meta_boxes', [$this, 'load_meta_boxes']);
-        include_once RY_LINE_PLUGIN_DIR . 'admin/media.php';
+        add_action('add_meta_boxes', [$this, 'add_meta_boxes']);
         include_once RY_LINE_PLUGIN_DIR . 'admin/message.php';
         include_once RY_LINE_PLUGIN_DIR . 'admin/richmenu.php';
 
-        if (defined('DOING_AJAX') && DOING_AJAX) {
-            include_once RY_LINE_PLUGIN_DIR . 'admin/ajax.php';
-        }
+        Ajax::init_ajax();
 
         if ($this->license->is_activated()) {
             $this->license->check_expire_cron();
 
-            include_once RY_LINE_PLUGIN_DIR . 'admin/page/option.php';
-            include_once RY_LINE_PLUGIN_DIR . 'admin/page/tools.php';
+            PageOption::init_menu();
+            PageTools::init_menu();
+
+            Media::instance();
+            Message::instance();
+            Richmenu::instance();
 
             add_filter('ry-plugin/menu_list', [$this, 'add_menu']);
         }
@@ -65,9 +77,10 @@ final class RY_LINE_Admin extends AbstractAdmin
         wp_register_script('ry-line-admin', RY_LINE_PLUGIN_URL . 'assets/admin/basic.js', $asset_info['dependencies'], $asset_info['version'], true);
     }
 
-    public function load_meta_boxes()
+    public function add_meta_boxes()
     {
-        include_once RY_LINE_PLUGIN_DIR . 'admin/meta-boxes.php';
+        MetaBoxMessage::init_meta_boxes();
+        MetaBoxRichmenu::init_meta_boxes();
     }
 
     public function add_menu(array $menu_list): array

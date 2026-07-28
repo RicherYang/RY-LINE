@@ -1,12 +1,14 @@
 <?php
 
+namespace RY\Line\WooCommerce;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_Integration_WooCommerce_Autosend
+final class Autosend
 {
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE_Integration_WooCommerce_Autosend
+    public static function instance(): Autosend
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -21,6 +23,7 @@ final class RY_LINE_Integration_WooCommerce_Autosend
         add_filter('ry/line_autosend_events', [$this, 'add_autosend_events']);
         add_filter('ry/line_autosend_info-woocommerce_new_order', [$this, 'set_new_info']);
         add_filter('ry/line_autosend_info-woocommerce_completed_order', [$this, 'set_completed_info']);
+
         foreach (['woocommerce_new_order', 'woocommerce_completed_order'] as $autosend_key) {
             add_filter('ry/line_autosend_args-' . $autosend_key, [$this, 'set_order_args']);
             add_filter('ry/line_autosend_template-' . $autosend_key, [$this, 'set_order_template'], 10, 2);
@@ -74,5 +77,3 @@ final class RY_LINE_Integration_WooCommerce_Autosend
         return (int) $order->get_user_id();
     }
 }
-
-RY_LINE_Integration_WooCommerce_Autosend::instance();

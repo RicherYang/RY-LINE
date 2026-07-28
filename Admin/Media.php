@@ -1,12 +1,14 @@
 <?php
 
+namespace RY\Line\Admin;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_Admin_Media
+final class Media
 {
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE_Admin_Media
+    public static function instance(): Media
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -24,10 +26,10 @@ final class RY_LINE_Admin_Media
 
     public function size_for_richmenu($size, $thumbnail_ID, $post)
     {
-        if ($post->post_type === RY_LINE::POSTTYPE_MESSAGE) {
+        if ($post->post_type === \RY_LINE::POSTTYPE_MESSAGE) {
             $size = [300, 0];
         }
-        if ($post->post_type === RY_LINE::POSTTYPE_RICHERMENU) {
+        if ($post->post_type === \RY_LINE::POSTTYPE_RICHERMENU) {
             $size = [300, 0];
         }
 
@@ -37,7 +39,7 @@ final class RY_LINE_Admin_Media
     public function check_for_richmenu($content, $post_ID, $thumbnail_ID)
     {
         $add_info = [];
-        if (get_post_type($post_ID) === RY_LINE::POSTTYPE_MESSAGE) {
+        if (get_post_type($post_ID) === \RY_LINE::POSTTYPE_MESSAGE) {
             if (str_contains($content, 'remove-post-thumbnail')) {
                 $image_meta = wp_get_attachment_metadata($thumbnail_ID);
                 $mime_type = get_post_mime_type($thumbnail_ID);
@@ -51,7 +53,7 @@ final class RY_LINE_Admin_Media
             }
         }
 
-        if (get_post_type($post_ID) === RY_LINE::POSTTYPE_RICHERMENU) {
+        if (get_post_type($post_ID) === \RY_LINE::POSTTYPE_RICHERMENU) {
             if (str_contains($content, 'remove-post-thumbnail')) {
                 $image_meta = wp_get_attachment_metadata($thumbnail_ID);
                 $mime_type = get_post_mime_type($thumbnail_ID);
@@ -91,5 +93,3 @@ final class RY_LINE_Admin_Media
         return $content;
     }
 }
-
-RY_LINE_Admin_Media::instance();

@@ -1,29 +1,31 @@
 <?php
 
+namespace RY\Line;
+
 defined('ABSPATH') or exit;
 
 use RY\General\V20260727\Logs;
 
-final class RY_LINE_Update
+final class Update
 {
     public static function update()
     {
-        $now_version = RY_LINE::get_option('version', '0.0.0');
+        $now_version = \RY_LINE::get_option('version', '0.0.0');
 
         if (RY_LINE_VERSION === $now_version) {
             return;
         }
 
         if ($now_version === '0.0.0') {
-            RY_LINE::update_option('version', RY_LINE_VERSION, true);
+            \RY_LINE::update_option('version', RY_LINE_VERSION, true);
             return;
         }
 
         if (version_compare($now_version, '0.5.5', '<')) {
             add_action('init', function () {
-                $wp_query = new WP_Query();
+                $wp_query = new \WP_Query();
                 $messages = $wp_query->query([
-                    'post_type' => RY_LINE::POSTTYPE_MESSAGE,
+                    'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
                     'posts_per_page' => -1,
                     'fields' => 'ids',
                 ]);
@@ -36,10 +38,10 @@ final class RY_LINE_Update
                     }
                 }
 
-                as_enqueue_async_action(RY_LINE::OPTION_PREFIX . 'update_0_5_5', [], 'ry-line', true);
+                as_enqueue_async_action(\RY_LINE::OPTION_PREFIX . 'update_0_5_5', [], 'ry-line', true);
             });
 
-            RY_LINE::update_option('version', '0.5.5', true);
+            \RY_LINE::update_option('version', '0.5.5', true);
         }
 
         if (version_compare($now_version, '2026.7.27', '<')) {
@@ -53,7 +55,7 @@ final class RY_LINE_Update
             }
             add_action('init', [Logs::class, 'set_cron_job']);
 
-            RY_LINE::update_option('version', '2026.7.27', true);
+            \RY_LINE::update_option('version', '2026.7.27', true);
         }
     }
 }

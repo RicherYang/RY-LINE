@@ -1,10 +1,13 @@
 <?php
 
+namespace RY\Line\Admin\Page;
+
 defined('ABSPATH') or exit;
 
 use RY\General\V20260727\AbstractAdminPage;
+use RY\Line\LineApi;
 
-final class RY_Line_Admin_Tools extends AbstractAdminPage
+final class Tools extends AbstractAdminPage
 {
     public static function init_menu(): void
     {
@@ -29,7 +32,7 @@ final class RY_Line_Admin_Tools extends AbstractAdminPage
     {
         wp_enqueue_script('ry-line-admin');
 
-        $line_user_ID = RY_LINE::get_option('test_user_id');
+        $line_user_ID = \RY_LINE::get_option('test_user_id');
 
         include __DIR__ . '/html/tools.php';
     }
@@ -46,15 +49,15 @@ final class RY_Line_Admin_Tools extends AbstractAdminPage
 
         $do = sanitize_key($_POST['do'] ?? '');
         if ($do === 'reload-richmenu') {
-            $wp_query = new WP_Query();
+            $wp_query = new \WP_Query();
 
-            $list = RY_LINE_Api::richmenu_list();
-            $alias_list = RY_LINE_Api::richmenu_alias_list();
+            $list = LineApi::richmenu_list();
+            $alias_list = LineApi::richmenu_alias_list();
             $alias_list = is_wp_error($alias_list) ? [] : array_column($alias_list->aliases, 'richMenuAliasId', 'richMenuId');
             if (!is_wp_error($list)) {
                 foreach ($list->richmenus as $richmenu) {
                     $posts = $wp_query->query([
-                        'post_type' => RY_LINE::POSTTYPE_RICHERMENU,
+                        'post_type' => \RY_LINE::POSTTYPE_RICHERMENU,
                         'meta_key' => 'ry_line_richmenu_richMenuId',
                         'meta_value' => $richmenu->richMenuId,
                         'posts_per_page' => -1,
@@ -62,7 +65,7 @@ final class RY_Line_Admin_Tools extends AbstractAdminPage
                     ]);
                     if (empty($posts)) {
                         $post_ID = wp_insert_post([
-                            'post_type' => RY_LINE::POSTTYPE_RICHERMENU,
+                            'post_type' => \RY_LINE::POSTTYPE_RICHERMENU,
                             'meta_input' => [
                                 'ry_line_richmenu_richMenuId' => $richmenu->richMenuId,
                             ],
@@ -90,7 +93,7 @@ final class RY_Line_Admin_Tools extends AbstractAdminPage
                     update_post_meta($post_ID, 'ry_line_richmenu_data', $richmenu_data);
                     update_post_meta($post_ID, 'ry_line_richmenu_richMenuAliasId', $alias_list[$richmenu->richMenuId] ?? '');
 
-                    $image = RY_LINE_Api::richmenu_image($richmenu->richMenuId);
+                    $image = LineApi::richmenu_image($richmenu->richMenuId);
                     if (!is_wp_error($image)) {
                         $tmp_name = wp_tempnam($richmenu->richMenuId);
                         @file_put_contents($tmp_name, $image[1]);
@@ -118,10 +121,10 @@ final class RY_Line_Admin_Tools extends AbstractAdminPage
                 }
             }
 
-            $default = RY_LINE_Api::richmenu_get_default();
+            $default = LineApi::richmenu_get_default();
             if (!is_wp_error($default)) {
                 $posts = $wp_query->query([
-                    'post_type' => RY_LINE::POSTTYPE_RICHERMENU,
+                    'post_type' => \RY_LINE::POSTTYPE_RICHERMENU,
                     'meta_key' => 'ry_line_richmenu_richMenuId',
                     'meta_value' => $default->richMenuId,
                     'posts_per_page' => -1,
@@ -129,7 +132,7 @@ final class RY_Line_Admin_Tools extends AbstractAdminPage
                 ]);
 
                 if (!empty($posts)) {
-                    RY_LINE::update_option('richmenu_default', $posts[0]);
+                    \RY_LINE::update_option('richmenu_default', $posts[0]);
                 }
             }
 
@@ -138,14 +141,14 @@ final class RY_Line_Admin_Tools extends AbstractAdminPage
 
         if ($do === 'clear-unused-rich-aliases') {
             $count = 0;
-            $list = RY_LINE_Api::richmenu_list();
-            $alias_list = RY_LINE_Api::richmenu_alias_list();
+            $list = LineApi::richmenu_list();
+            $alias_list = LineApi::richmenu_alias_list();
             if (!is_wp_error($list) && !is_wp_error($alias_list)) {
                 $list = array_column($list->richmenus, 'richMenuId');
                 foreach ($alias_list->aliases as $alias) {
                     if (!in_array($alias->richMenuId, $list, true)) {
                         $count += 1;
-                        RY_LINE_Api::richmenu_alias_delete($alias->richMenuAliasId);
+                        LineApi::richmenu_alias_delete($alias->richMenuAliasId);
                     }
                 }
             }
@@ -155,13 +158,11 @@ final class RY_Line_Admin_Tools extends AbstractAdminPage
 
         if ($do === 'clear-test-user-rich-menu') {
             $count = 0;
-            $line_user_ID = RY_LINE::get_option('test_user_id');
-            RY_LINE_Api::richmenu_unlink_user($line_user_ID);
+            $line_user_ID = \RY_LINE::get_option('test_user_id');
+            LineApi::richmenu_unlink_user($line_user_ID);
             $this->add_notice('success', sprintf(__('Unlink test user rich menu successfully.', 'ry-line'), 1));
         }
 
         wp_safe_redirect(admin_url('admin.php?page=ry-line&type=tools'));
     }
 }
-
-RY_Line_Admin_Tools::init_menu();

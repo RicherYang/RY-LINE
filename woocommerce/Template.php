@@ -1,12 +1,14 @@
 <?php
 
+namespace RY\Line\WooCommerce;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_Integration_WooCommerce_Template
+final class Template
 {
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE_Integration_WooCommerce_Template
+    public static function instance(): Template
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -142,5 +144,3 @@ final class RY_LINE_Integration_WooCommerce_Template
         return $default;
     }
 }
-
-RY_LINE_Integration_WooCommerce_Template::instance();

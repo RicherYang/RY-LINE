@@ -1,10 +1,14 @@
 <?php
 
+namespace RY\Line\Admin\Page;
+
 defined('ABSPATH') or exit;
 
 use RY\General\V20260727\AbstractAdminPage;
+use RY\Line\LineApi;
+use RY\Line\Webhook;
 
-final class RY_Line_Admin_Option extends AbstractAdminPage
+final class Option extends AbstractAdminPage
 {
     public static function init_menu(): void
     {
@@ -34,9 +38,9 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
             ],
         ]);
 
-        $bot_info = RY_LINE::get_transient('bot_info');
+        $bot_info = \RY_LINE::get_transient('bot_info');
         if (empty($bot_info)) {
-            $remote_bot_info = RY_LINE_Api::get_bot_info();
+            $remote_bot_info = LineApi::get_bot_info();
             if (is_wp_error($remote_bot_info)) {
                 $bot_info = [];
             } else {
@@ -51,21 +55,21 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
                     $bot_info['id'] .= ' (' . $remote_bot_info->premiumId . ')';
                 }
 
-                $webhook_info = RY_LINE_Api::get_webhook_info();
+                $webhook_info = LineApi::get_webhook_info();
                 if (!is_wp_error($webhook_info)) {
                     $bot_info['webhook-url'] = $webhook_info->endpoint;
                     $bot_info['webhook-status'] = $webhook_info->active;
                 }
 
-                RY_LINE::set_transient('bot_info', $bot_info, DAY_IN_SECONDS);
+                \RY_LINE::set_transient('bot_info', $bot_info, DAY_IN_SECONDS);
             }
         }
 
-        $user_info = RY_LINE::get_transient('user_info');
+        $user_info = \RY_LINE::get_transient('user_info');
         if (empty($user_info)) {
-            $line_user_ID = RY_LINE::get_option('test_user_id');
+            $line_user_ID = \RY_LINE::get_option('test_user_id');
             if (!empty($line_user_ID)) {
-                $user_info = RY_LINE_Api::get_user_info($line_user_ID);
+                $user_info = LineApi::get_user_info($line_user_ID);
                 if (is_wp_error($user_info)) {
                     $user_info = [];
                 } else {
@@ -75,7 +79,7 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
                         'lang' => $user_info->language ?? '',
                     ];
 
-                    RY_LINE::set_transient('user_info', $user_info, DAY_IN_SECONDS);
+                    \RY_LINE::set_transient('user_info', $user_info, DAY_IN_SECONDS);
                 }
             }
         }
@@ -105,8 +109,8 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
 
         $do = sanitize_key($_POST['do'] ?? '');
         if ($do === 'set-webhook') {
-            $webhook_url = RY_LINE_Webhook::get_webhook_url();
-            $set_status = RY_LINE_Api::webhook_url($webhook_url);
+            $webhook_url = Webhook::get_webhook_url();
+            $set_status = LineApi::webhook_url($webhook_url);
             if (is_wp_error($set_status)) {
                 if ($set_status->get_error_code() === 'line_error') {
                     $this->add_notice('error', __('Settings failed.', 'ry-line') . ' ' . $set_status->get_error_data()->message);
@@ -117,12 +121,12 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
                 $this->add_notice('success', __('Settings saved.', 'ry-line'));
             }
 
-            RY_LINE::set_transient('bot_info', []);
+            \RY_LINE::set_transient('bot_info', []);
             flush_rewrite_rules();
         }
 
         if ($do === 'test-webhook') {
-            $webhook_status = RY_LINE_Api::test_webhook();
+            $webhook_status = LineApi::test_webhook();
             if (is_wp_error($webhook_status)) {
                 if ($webhook_status->get_error_code() === 'line_error') {
                     $this->add_notice('error', __('Test failed.', 'ry-line') . ' ' . $webhook_status->get_error_data()->message);
@@ -139,14 +143,14 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
         }
 
         if ($do === 'save-option') {
-            RY_LINE::update_option('channel_id', sanitize_locale_name($_POST['channel-id'] ?? ''), false);
-            RY_LINE::update_option('channel_secret', sanitize_locale_name($_POST['channel-secret'] ?? ''), false);
-            RY_LINE::update_option('test_user_id', sanitize_locale_name($_POST['test-user-id'] ?? ''), false);
+            \RY_LINE::update_option('channel_id', sanitize_locale_name($_POST['channel-id'] ?? ''), false);
+            \RY_LINE::update_option('channel_secret', sanitize_locale_name($_POST['channel-secret'] ?? ''), false);
+            \RY_LINE::update_option('test_user_id', sanitize_locale_name($_POST['test-user-id'] ?? ''), false);
 
-            RY_LINE::set_transient('bot_info', []);
-            RY_LINE::set_transient('user_info', []);
-            RY_LINE_Api::revoke_access_token();
-            if (RY_LINE_Api::get_access_token()) {
+            \RY_LINE::set_transient('bot_info', []);
+            \RY_LINE::set_transient('user_info', []);
+            LineApi::revoke_access_token();
+            if (LineApi::get_access_token()) {
                 $this->add_notice('success', __('Settings saved.', 'ry-line'));
             } else {
                 $this->add_notice('error', __('Error channel ID or channel secret.', 'ry-line'));
@@ -156,5 +160,3 @@ final class RY_Line_Admin_Option extends AbstractAdminPage
         wp_safe_redirect(admin_url('admin.php?page=ry-line&type=option'));
     }
 }
-
-RY_Line_Admin_Option::init_menu();

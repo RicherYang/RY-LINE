@@ -1,8 +1,10 @@
 <?php
 
+namespace RY\Line;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_User
+final class User
 {
     public const MAYPE_USER_META_KEY = [
         'ry_line_user_id',
@@ -11,7 +13,7 @@ final class RY_LINE_User
 
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE_User
+    public static function instance(): User
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -26,7 +28,7 @@ final class RY_LINE_User
     public function get_wp_user(string $line_user_ID)
     {
         foreach (self::MAYPE_USER_META_KEY as $meta_key) {
-            $query = new WP_User_Query([
+            $query = new \WP_User_Query([
                 'meta_query' => [
                     [
                         'key' => $meta_key,
@@ -55,5 +57,3 @@ final class RY_LINE_User
         return '';
     }
 }
-
-RY_LINE_User::instance();

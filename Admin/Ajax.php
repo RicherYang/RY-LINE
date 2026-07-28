@@ -1,22 +1,15 @@
 <?php
 
+namespace RY\Line\Admin;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_Admin_Ajax
+use RY\Line\LineApi;
+use RY\Line\User;
+
+final class Ajax
 {
-    private static ?self $_instance = null;
-
-    public static function instance(): RY_LINE_Admin_Ajax
-    {
-        if (null === self::$_instance) {
-            self::$_instance = new self();
-            self::$_instance->do_init();
-        }
-
-        return self::$_instance;
-    }
-
-    protected function do_init(): void
+    public static function init_ajax(): void
     {
         if (isset($_GET['action'])) {
             $actions = [
@@ -37,20 +30,20 @@ final class RY_LINE_Admin_Ajax
                 'remote-richmenu-test',
             ];
             foreach ($actions as $action_hook) {
-                add_action('wp_ajax_ry-line/' . $action_hook, [$this, str_replace('-', '_', $action_hook)]);
+                add_action('wp_ajax_ry-line/' . $action_hook, [__CLASS__, str_replace('-', '_', $action_hook)]);
             }
         }
     }
 
-    public function get_info()
+    public static function get_info()
     {
         check_ajax_referer('get-info');
 
         $types = array_map('sanitize_key', wp_unslash($_POST['types'] ?? []));
-        wp_send_json_success(RY_LINE_Api::get_info($types));
+        wp_send_json_success(LineApi::get_info($types));
     }
 
-    public function get_image_areas()
+    public static function get_image_areas()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
         check_ajax_referer('get-image-areas_' . $post_ID);
@@ -59,7 +52,7 @@ final class RY_LINE_Admin_Ajax
         wp_send_json_success(get_post_meta($post_ID, $meta_key, true));
     }
 
-    public function save_image_position()
+    public static function save_image_position()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
         check_ajax_referer('save-image-position_' . $post_ID);
@@ -97,7 +90,7 @@ final class RY_LINE_Admin_Ajax
         wp_send_json_success($post_data['areas']);
     }
 
-    public function save_image_actions()
+    public static function save_image_actions()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
         check_ajax_referer('save-image-actions_' . $post_ID);
@@ -132,7 +125,7 @@ final class RY_LINE_Admin_Ajax
                         break;
                     case 'selfmessage':
                         $message = intval($actions["action-info-{$idx}-message"] ?? '');
-                        if (get_post_type($message) === RY_LINE::POSTTYPE_MESSAGE) {
+                        if (get_post_type($message) === \RY_LINE::POSTTYPE_MESSAGE) {
                             $action['type'] = $action_type;
                             $action['message'] = $message;
                             $action['label'] = sanitize_textarea_field($actions["action-info-{$idx}-label"] ?? '');
@@ -160,7 +153,7 @@ final class RY_LINE_Admin_Ajax
         wp_send_json_success($post_data['areas']);
     }
 
-    public function get_flex()
+    public static function get_flex()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
         check_ajax_referer('get-flex_' . $post_ID);
@@ -170,7 +163,7 @@ final class RY_LINE_Admin_Ajax
         $per_page = 20;
 
         $args = [
-            'post_type' => RY_LINE::POSTTYPE_MESSAGE,
+            'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
             'post_status' => 'publish',
             's' => $search,
             'posts_per_page' => $per_page,
@@ -184,7 +177,7 @@ final class RY_LINE_Admin_Ajax
         ];
 
         $results = [];
-        $wp_query = new WP_Query($args);
+        $wp_query = new \WP_Query($args);
         while ($wp_query->have_posts()) {
             $wp_query->the_post();
             $results[] = [
@@ -199,7 +192,7 @@ final class RY_LINE_Admin_Ajax
         ]);
     }
 
-    public function get_flex_preview()
+    public static function get_flex_preview()
     {
         $asset_info = include RY_LINE_PLUGIN_DIR . 'assets/admin/flex-message.asset.php';
         $style_url = esc_url(RY_LINE_PLUGIN_URL . 'assets/admin/flex-message.css?ver=' . $asset_info['version']);
@@ -222,22 +215,22 @@ HTML;
         wp_die();
     }
 
-    public function remote_message_testsend()
+    public static function remote_message_testsend()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
         check_ajax_referer('remote-message-testsend_' . $post_ID);
 
-        $line_user_ID = RY_LINE::get_option('test_user_id');
+        $line_user_ID = \RY_LINE::get_option('test_user_id');
         if (empty($line_user_ID)) {
             wp_send_json_error(['message' => __('Test user ID is not set.', 'ry-line')]);
             return;
         }
 
         $template_info = (object) [
-            'wp_user' => RY_LINE_User::instance()->get_wp_user($line_user_ID),
+            'wp_user' => User::instance()->get_wp_user($line_user_ID),
         ];
-        $message_object = RY_LINE_Api::build_message_object([get_post($post_ID)], $template_info);
-        $status = RY_LINE_Api::message_push($message_object, $line_user_ID);
+        $message_object = LineApi::build_message_object([get_post($post_ID)], $template_info);
+        $status = LineApi::message_push($message_object, $line_user_ID);
         if (isset($status) && is_wp_error($status)) {
             if ($status->get_error_code() === 'line_error') {
                 wp_send_json_error($status->get_error_data());
@@ -250,13 +243,13 @@ HTML;
         wp_send_json_success();
     }
 
-    public function remote_richmenu_create()
+    public static function remote_richmenu_create()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
         check_ajax_referer('remote-richmenu-create_' . $post_ID);
 
-        $richmenu_object = RY_LINE_Api::build_richmenu_object($post_ID);
-        $response = RY_LINE_Api::richmenu_validate($richmenu_object);
+        $richmenu_object = LineApi::build_richmenu_object($post_ID);
+        $response = LineApi::richmenu_validate($richmenu_object);
         if (is_wp_error($response)) {
             if ($response->get_error_code() === 'line_error') {
                 wp_send_json_error($response->get_error_data());
@@ -266,7 +259,7 @@ HTML;
             return;
         }
 
-        $response = RY_LINE_Api::richmenu_create($richmenu_object);
+        $response = LineApi::richmenu_create($richmenu_object);
         if (is_wp_error($response)) {
             if ($response->get_error_code() === 'line_error') {
                 wp_send_json_error($response->get_error_data());
@@ -282,7 +275,7 @@ HTML;
         update_post_meta($post_ID, 'ry_line_richmenu_richMenuId', $response->richMenuId);
 
         $thumbnail_ID = get_post_thumbnail_id($post_ID);
-        $response = RY_LINE_Api::richmenu_upload($response->richMenuId, $thumbnail_ID);
+        $response = LineApi::richmenu_upload($response->richMenuId, $thumbnail_ID);
         if (is_wp_error($response)) {
             if ($response->get_error_code() === 'line_error') {
                 wp_send_json_error($response->get_error_data());
@@ -295,19 +288,19 @@ HTML;
         wp_send_json_success($response);
     }
 
-    public function remote_richmenu_default()
+    public static function remote_richmenu_default()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
         check_ajax_referer('remote-richmenu-default_' . $post_ID);
 
         $richMenuId = get_post_meta($post_ID, 'ry_line_richmenu_richMenuId', true);
 
-        $default_ID = RY_LINE::get_option('richmenu_default');
+        $default_ID = \RY_LINE::get_option('richmenu_default');
         if ($default_ID == $post_ID) {
-            $response = RY_LINE_Api::richmenu_undefault();
+            $response = LineApi::richmenu_undefault();
             $post_ID = '';
         } else {
-            $response = RY_LINE_Api::richmenu_default($richMenuId);
+            $response = LineApi::richmenu_default($richMenuId);
         }
         if (is_wp_error($response)) {
             if ($response->get_error_code() === 'line_error') {
@@ -318,18 +311,18 @@ HTML;
             return;
         }
 
-        RY_LINE::update_option('richmenu_default', $post_ID);
+        \RY_LINE::update_option('richmenu_default', $post_ID);
         wp_send_json_success($post_ID == '' ? __('Default menu', 'ry-line') : __('Unset default menu', 'ry-line'));
     }
 
-    public function remote_richmenu_delete()
+    public static function remote_richmenu_delete()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
         check_ajax_referer('remote-richmenu-delete_' . $post_ID);
 
         $richMenuId = get_post_meta($post_ID, 'ry_line_richmenu_richMenuId', true);
 
-        $response = RY_LINE_Api::richmenu_delete($richMenuId);
+        $response = LineApi::richmenu_delete($richMenuId);
         if (is_wp_error($response)) {
             if ($response->get_error_code() === 'line_error') {
                 wp_send_json_error($response->get_error_data());
@@ -341,7 +334,7 @@ HTML;
 
         $richMenuAliasId = get_post_meta($post_ID, 'ry_line_richmenu_richMenuAliasId', true);
         if (!empty($richMenuAliasId)) {
-            $response = RY_LINE_Api::richmenu_alias_delete($richMenuAliasId);
+            $response = LineApi::richmenu_alias_delete($richMenuAliasId);
             update_post_meta($post_ID, 'ry_line_richmenu_richMenuAliasId', '');
         }
 
@@ -353,7 +346,7 @@ HTML;
         wp_send_json_success();
     }
 
-    public function remote_richmenu_alias()
+    public static function remote_richmenu_alias()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
         check_ajax_referer('remote-richmenu-alias_' . $post_ID);
@@ -364,14 +357,14 @@ HTML;
 
         if (empty($alias)) {
             if (!empty($richMenuAliasId)) {
-                $response = RY_LINE_Api::richmenu_alias_delete($richMenuAliasId);
+                $response = LineApi::richmenu_alias_delete($richMenuAliasId);
             }
         } else {
             if ($alias !== $richMenuAliasId) {
-                $response = RY_LINE_Api::richmenu_alias_create($richMenuId, $alias);
+                $response = LineApi::richmenu_alias_create($richMenuId, $alias);
                 if (is_wp_error($response) && $response->get_error_code() === 'line_error') {
                     if ($response->get_error_data()->message === 'conflict richmenu alias id') {
-                        $response = RY_LINE_Api::richmenu_alias_update($richMenuId, $alias);
+                        $response = LineApi::richmenu_alias_update($richMenuId, $alias);
                     }
                 }
             }
@@ -385,9 +378,9 @@ HTML;
             return;
         }
 
-        $wp_query = new WP_Query();
+        $wp_query = new \WP_Query();
         $alias_posts = $wp_query->query([
-            'post_type' => RY_LINE::POSTTYPE_RICHERMENU,
+            'post_type' => \RY_LINE::POSTTYPE_RICHERMENU,
             'meta_key' => 'ry_line_richmenu_richMenuAliasId',
             'meta_value' => $alias,
             'posts_per_page' => -1,
@@ -401,19 +394,19 @@ HTML;
         wp_send_json_success($alias);
     }
 
-    public function remote_richmenu_test()
+    public static function remote_richmenu_test()
     {
         $post_ID = intval($_POST['post_id'] ?? '');
         check_ajax_referer('remote-richmenu-test_' . $post_ID);
 
         $richMenuId = get_post_meta($post_ID, 'ry_line_richmenu_richMenuId', true);
-        $line_user_ID = RY_LINE::get_option('test_user_id');
+        $line_user_ID = \RY_LINE::get_option('test_user_id');
         if (empty($line_user_ID)) {
             wp_send_json_error(['message' => __('Test user ID is not set.', 'ry-line')]);
             return;
         }
 
-        $response = RY_LINE_Api::richmenu_link_user($line_user_ID, $richMenuId);
+        $response = LineApi::richmenu_link_user($line_user_ID, $richMenuId);
         if (isset($response) && is_wp_error($response)) {
             if ($response->get_error_code() === 'line_error') {
                 wp_send_json_error($response->get_error_data());
@@ -426,5 +419,3 @@ HTML;
         wp_send_json_success();
     }
 }
-
-RY_LINE_Admin_Ajax::instance();

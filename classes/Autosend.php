@@ -1,12 +1,17 @@
 <?php
 
+namespace RY\Line;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_Autosend
+use RY\Line\LineApi;
+use RY\Line\User;
+
+final class Autosend
 {
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE_Autosend
+    public static function instance(): Autosend
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -18,7 +23,7 @@ final class RY_LINE_Autosend
 
     protected function do_init(): void
     {
-        $autosend_hooks = RY_LINE::get_option('autosend_hooks', []);
+        $autosend_hooks = \RY_LINE::get_option('autosend_hooks', []);
         foreach ($autosend_hooks as $hook_name => $hook_info) {
             add_action($hook_name, [$this, 'do_autosend_event'], $hook_info['priority'] ?? 20, $hook_info['args'] ?? 1);
         }
@@ -39,7 +44,7 @@ final class RY_LINE_Autosend
 
     public function do_autosend_event(...$args): void
     {
-        $autosend_hooks = RY_LINE::get_option('autosend_hooks', []);
+        $autosend_hooks = \RY_LINE::get_option('autosend_hooks', []);
         $hook_name = current_filter();
         if (!isset($autosend_hooks[$hook_name])) {
             return;
@@ -58,9 +63,9 @@ final class RY_LINE_Autosend
             ];
         }
 
-        $wp_query = new WP_Query();
+        $wp_query = new \WP_Query();
         $messages = $wp_query->query([
-            'post_type' => RY_LINE::POSTTYPE_MESSAGE,
+            'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
             'posts_per_page' => -1,
             'post_status' => 'publish',
             'meta_query' => [$meta_query],
@@ -73,7 +78,7 @@ final class RY_LINE_Autosend
             $template_info = apply_filters('ry/line_autosend_template-' . $event_key, $template_info, $args);
         }
 
-        $message_object = RY_LINE_Api::build_message_object($messages, (object) $template_info);
+        $message_object = LineApi::build_message_object($messages, (object) $template_info);
         if (empty($message_object)) {
             return;
         }
@@ -83,7 +88,7 @@ final class RY_LINE_Autosend
             $replay_token = apply_filters('ry/line_autosend_token-' . $event_key, $replay_token, $args);
         }
         if (!empty($replay_token)) {
-            $status = RY_LINE_Api::message_reply($message_object, $replay_token);
+            $status = LineApi::message_reply($message_object, $replay_token);
             if (!is_wp_error($status)) {
                 return;
             }
@@ -103,18 +108,18 @@ final class RY_LINE_Autosend
             }
         }
         foreach ($line_users as &$line_user_ID) {
-            if ($line_user_ID instanceof WP_User) {
+            if ($line_user_ID instanceof \WP_User) {
                 $line_user_ID = (int) $line_user_ID->ID;
             }
             if (is_int($line_user_ID)) {
-                $line_user_ID = RY_LINE_User::instance()->get_line_user_id($line_user_ID);
+                $line_user_ID = User::instance()->get_line_user_id($line_user_ID);
             }
         }
         unset($line_user_ID);
         $line_users = array_filter($line_users);
 
         if (count($line_users)) {
-            $status = RY_LINE_Api::message_multicast($message_object, array_values($line_users));
+            $status = LineApi::message_multicast($message_object, array_values($line_users));
         }
     }
 
@@ -181,5 +186,3 @@ final class RY_LINE_Autosend
         return $reply_token;
     }
 }
-
-RY_LINE_Autosend::instance();

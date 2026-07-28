@@ -1,12 +1,16 @@
 <?php
 
+namespace RY\Line\Admin;
+
 defined('ABSPATH') or exit;
 
-final class RY_LINE_Admin_Message
+use RY\Line\LineApi;
+
+final class Message
 {
     private static ?self $_instance = null;
 
-    public static function instance(): RY_LINE_Admin_Message
+    public static function instance(): Message
     {
         if (null === self::$_instance) {
             self::$_instance = new self();
@@ -19,15 +23,15 @@ final class RY_LINE_Admin_Message
     protected function do_init(): void
     {
         add_filter('quick_edit_enabled_for_post_type', [$this, 'skip_quick_edit'], 10, 2);
-        add_filter('manage_' . RY_LINE::POSTTYPE_MESSAGE . '_posts_columns', [$this, 'add_columns']);
-        add_filter('manage_' . RY_LINE::POSTTYPE_MESSAGE . '_posts_custom_column', [$this, 'show_columns'], 10, 2);
+        add_filter('manage_' . \RY_LINE::POSTTYPE_MESSAGE . '_posts_columns', [$this, 'add_columns']);
+        add_filter('manage_' . \RY_LINE::POSTTYPE_MESSAGE . '_posts_custom_column', [$this, 'show_columns'], 10, 2);
         add_filter('wp_insert_post_data', [$this, 'change_post_data']);
-        add_action('save_post_' . RY_LINE::POSTTYPE_MESSAGE, [$this, 'save_date'], 10, 2);
+        add_action('save_post_' . \RY_LINE::POSTTYPE_MESSAGE, [$this, 'save_date'], 10, 2);
     }
 
     public function skip_quick_edit($enabled, $post_type)
     {
-        if ($post_type === RY_LINE::POSTTYPE_MESSAGE) {
+        if ($post_type === \RY_LINE::POSTTYPE_MESSAGE) {
             return false;
         }
 
@@ -98,7 +102,7 @@ final class RY_LINE_Admin_Message
 
     public function change_post_data($data)
     {
-        if ($data['post_type'] === RY_LINE::POSTTYPE_MESSAGE) {
+        if ($data['post_type'] === \RY_LINE::POSTTYPE_MESSAGE) {
             if (isset($_POST['message-type'])) {
                 $data['post_content'] = '';
                 $data['post_excerpt'] = '';
@@ -159,9 +163,9 @@ final class RY_LINE_Admin_Message
         switch ($message_type) {
             case 'flexes':
                 $message_data['use'] = array_map('intval', is_array($_POST['use-messages'] ?? '') ? $_POST['use-messages'] : []);
-                $wp_query = new WP_Query();
+                $wp_query = new \WP_Query();
                 $message_data['use'] = $wp_query->query([
-                    'post_type' => RY_LINE::POSTTYPE_MESSAGE,
+                    'post_type' => \RY_LINE::POSTTYPE_MESSAGE,
                     'post__in' => $message_data['use'],
                     'orderby' => 'menu_order',
                     'order' => 'DESC',
@@ -191,7 +195,7 @@ final class RY_LINE_Admin_Message
         $post_event = array_map('sanitize_text_field', wp_unslash(is_array($_POST['autosend-event'] ?? '') ? $_POST['autosend-event'] : []));
         $pre_autosend = get_post_meta($post_ID, 'ry_line_message_autosend');
         $pre_autosend = array_fill_keys($pre_autosend, true);
-        $autosend_hooks = RY_LINE::get_option('autosend_hooks', []);
+        $autosend_hooks = \RY_LINE::get_option('autosend_hooks', []);
         foreach ($post_event as $event_key) {
             if (!isset($pre_autosend[$event_key])) {
                 add_post_meta($post_ID, 'ry_line_message_autosend', $event_key, false);
@@ -222,17 +226,17 @@ final class RY_LINE_Admin_Message
             foreach ($pre_autosend as $autosend => $true) {
                 delete_post_meta($post_ID, 'ry_line_message_autosend', $autosend);
             }
-            as_schedule_single_action(time() + HOUR_IN_SECONDS, RY_LINE::OPTION_PREFIX . 'check_autosend_hooks', [], 'ry-line', true);
+            as_schedule_single_action(time() + HOUR_IN_SECONDS, \RY_LINE::OPTION_PREFIX . 'check_autosend_hooks', [], 'ry-line', true);
         }
-        RY_LINE::update_option('autosend_hooks', $autosend_hooks, true);
+        \RY_LINE::update_option('autosend_hooks', $autosend_hooks, true);
 
         if ($post->post_status === 'auto-draft') {
             return;
         }
 
-        $message_object = RY_LINE_Api::build_message_object([get_post($post_ID)]);
+        $message_object = LineApi::build_message_object([get_post($post_ID)]);
         if ($message_object) {
-            $status = RY_LINE_Api::message_validate($message_object);
+            $status = LineApi::message_validate($message_object);
             if (is_wp_error($status)) {
                 $error = $status->get_error_data();
                 $message_data['error'] = $error->message;
@@ -254,5 +258,3 @@ final class RY_LINE_Admin_Message
         }
     }
 }
-
-RY_LINE_Admin_Message::instance();

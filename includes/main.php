@@ -3,6 +3,18 @@
 defined('ABSPATH') or exit;
 
 use RY\General\V20260727\AbstractBasic;
+use RY\Line\Admin\Admin;
+use RY\Line\Autosend;
+use RY\Line\Cron;
+use RY\Line\License;
+use RY\Line\LinkServer;
+use RY\Line\Template;
+use RY\Line\Update;
+use RY\Line\Updater;
+use RY\Line\User;
+use RY\Line\Webhook;
+use RY\Line\WooCommerce\Autosend as WooCommerceAutosend;
+use RY\Line\WooCommerce\Template as WooCommerceTemplate;
 
 final class RY_LINE extends AbstractBasic
 {
@@ -33,8 +45,7 @@ final class RY_LINE extends AbstractBasic
         include_once RY_LINE_PLUGIN_DIR . 'includes/cron.php';
 
         if (is_admin()) {
-            include_once RY_LINE_PLUGIN_DIR . 'includes/update.php';
-            RY_LINE_Update::update();
+            Update::update();
         }
 
         add_action('init', [$this, 'do_wp_init'], 8);
@@ -42,31 +53,26 @@ final class RY_LINE extends AbstractBasic
 
     public function do_wp_init(): void
     {
-        include_once RY_LINE_PLUGIN_DIR . 'includes/license.php';
-        include_once RY_LINE_PLUGIN_DIR . 'includes/link-server.php';
-        include_once RY_LINE_PLUGIN_DIR . 'includes/updater.php';
-        RY_LINE_Updater::instance();
+        Updater::instance();
 
         $this->register_post_type();
 
         if (is_admin()) {
-            include_once RY_LINE_PLUGIN_DIR . 'admin/admin.php';
-            RY_LINE_Admin::instance();
+            Admin::instance();
         }
 
-        if (RY_LINE_License::instance()->is_activated()) {
-            include_once RY_LINE_PLUGIN_DIR . 'includes/cron.php';
+        if (License::instance()->is_activated()) {
             include_once RY_LINE_PLUGIN_DIR . 'includes/user.php';
-            RY_LINE_Cron::add_action();
+            Cron::add_action();
 
-            include_once RY_LINE_PLUGIN_DIR . 'includes/line-autosend.php';
-            include_once RY_LINE_PLUGIN_DIR . 'includes/line-api.php';
-            include_once RY_LINE_PLUGIN_DIR . 'includes/line-template.php';
-            include_once RY_LINE_PLUGIN_DIR . 'includes/line-webhook.php';
+            Autosend::instance();
+            Template::instance();
+            Webhook::instance();
+            User::instance();
 
-            if (defined('WC_PLUGIN_FILE')) {
-                include_once RY_LINE_PLUGIN_DIR . 'includes/integrations/woocommerce/template.php';
-                include_once RY_LINE_PLUGIN_DIR . 'includes/integrations/woocommerce/autosend.php';
+            if (did_action('woocommerce_init')) {
+                WooCommerceAutosend::instance();
+                WooCommerceTemplate::instance();
             }
         }
     }
@@ -147,7 +153,7 @@ final class RY_LINE extends AbstractBasic
             return;
         }
 
-        RY_LINE_LinkServer::instance()->send_tracking();
+        LinkServer::instance()->send_tracking();
     }
 
     public static function plugin_activation(): void
