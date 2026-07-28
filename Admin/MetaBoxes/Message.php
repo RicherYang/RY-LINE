@@ -52,7 +52,7 @@ final class Message
     {
         $message_data = get_post_meta($post->ID, 'ry_line_message_data', true);
 
-        __DIR__ . '/html/message-action.php';
+        include __DIR__ . '/html/message-action.php';
     }
 
     public static function display_message_autosend($post)
@@ -71,7 +71,7 @@ final class Message
 
         $autosend_events = apply_filters('ry/line_autosend_events', []);
 
-        __DIR__ . '/html/message-autosend.php';
+        include __DIR__ . '/html/message-autosend.php';
     }
 
     public static function display_message_info($post)
@@ -89,7 +89,7 @@ final class Message
                 break;
         }
 
-        __DIR__ . '/html/message-info.php';
-        __DIR__ . '/html/message-flex-teml.php';
+        include __DIR__ . '/html/message-info.php';
+        include __DIR__ . '/html/message-flex-teml.php';
     }
 }

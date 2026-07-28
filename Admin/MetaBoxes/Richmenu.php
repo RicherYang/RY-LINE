@@ -44,7 +44,7 @@ final class Richmenu
     {
         $richMenuId = get_post_meta($post->ID, 'ry_line_richmenu_richMenuId', true);
 
-        __DIR__ . '/html/richmenu-action.php';
+        include __DIR__ . '/html/richmenu-action.php';
     }
 
     public static function display_richmenu_operate($post)
@@ -59,7 +59,7 @@ final class Richmenu
         $default_ID = \RY_LINE::get_option('richmenu_default');
         $line_user_ID = \RY_LINE::get_option('test_user_id');
 
-        __DIR__ . '/html/richmenu-operate.php';
+        include __DIR__ . '/html/richmenu-operate.php';
     }
 
     public static function display_richmenu_info($post)
@@ -67,7 +67,7 @@ final class Richmenu
         $richMenuId = get_post_meta($post->ID, 'ry_line_richmenu_richMenuId', true);
         $richmenu_data = get_post_meta($post->ID, 'ry_line_richmenu_data', true);
 
-        __DIR__ . '/html/richmenu-info.php';
+        include __DIR__ . '/html/richmenu-info.php';
     }
 
     public static function display_image_area($post)
@@ -80,6 +80,6 @@ final class Richmenu
         $thumbnail_ID = get_post_thumbnail_id($post);
         $thumbnail_src = wp_get_attachment_image_src($thumbnail_ID, 'full');
 
-        __DIR__ . '/html/image-area.php';
+        include __DIR__ . '/html/image-area.php';
     }
 }

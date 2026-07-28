@@ -42,8 +42,6 @@ final class RY_LINE extends AbstractBasic
     {
         load_plugin_textdomain('ry-line', false, plugin_basename(dirname(__DIR__)) . '/languages');
 
-        include_once RY_LINE_PLUGIN_DIR . 'includes/cron.php';
-
         if (is_admin()) {
             Update::update();
         }
@@ -62,7 +60,6 @@ final class RY_LINE extends AbstractBasic
         }
 
         if (License::instance()->is_activated()) {
-            include_once RY_LINE_PLUGIN_DIR . 'includes/user.php';
             Cron::add_action();
 
             Autosend::instance();

@@ -40,8 +40,6 @@ final class Admin extends AbstractAdmin
 
         add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('add_meta_boxes', [$this, 'add_meta_boxes']);
-        include_once RY_LINE_PLUGIN_DIR . 'admin/message.php';
-        include_once RY_LINE_PLUGIN_DIR . 'admin/richmenu.php';
 
         Ajax::init_ajax();
 
