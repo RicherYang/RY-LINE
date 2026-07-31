@@ -1,24 +1,19 @@
 <?php defined('ABSPATH') or exit; ?>
 
+<?php
+use RY\General\V20260729\Utils;
+
+?>
+
 <h2 class="title"><?php esc_html_e('Webhook', 'ry-line'); ?></h2>
 <table>
     <tr>
         <td>
-            <form method="post" action="admin-post.php">
-                <input type="hidden" name="action" value="ry-line-option">
-                <input type="hidden" name="do" value="set-webhook">
-                <?php wp_nonce_field('ry-line-option'); ?>
-                <button type="submit" class="button ry-line-loading"><?php esc_html_e('Set webhook URL', 'ry-line'); ?></button>
-            </form>
+            <?php Utils::the_action_form('line-option', 'set-webhook', __('Set webhook URL', 'ry-line')); ?>
         </td>
         <td>&nbsp;</td>
         <td>
-            <form method="post" action="admin-post.php">
-                <input type="hidden" name="action" value="ry-line-option">
-                <input type="hidden" name="do" value="test-webhook">
-                <?php wp_nonce_field('ry-line-option'); ?>
-                <button type="submit" class="button ry-line-loading"><?php esc_html_e('Test webhook', 'ry-line'); ?></button>
-            </form>
+            <?php Utils::the_action_form('line-option', 'test-webhook', __('Test webhook', 'ry-line')); ?>
         </td>
     </tr>
 </table>

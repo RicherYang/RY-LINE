@@ -4,14 +4,14 @@ namespace RY\Line;
 
 defined('ABSPATH') or exit;
 
-use RY\General\V20260727\AbstractBasic;
+use RY\General\V20260729\AbstractBasic;
 use RY\Line\Admin\Admin;
 use RY\Line\WooCommerce\Autosend as WooCommerceAutosend;
 use RY\Line\WooCommerce\Template as WooCommerceTemplate;
 
 final class Main extends AbstractBasic
 {
-    public const OPTION_PREFIX = 'RY_LINE_';
+    public const PREFIX = 'RY_LINE_';
 
     public const PLUGIN_NAME = 'RY LINE';
 
@@ -39,7 +39,7 @@ final class Main extends AbstractBasic
             Update::update();
         }
 
-        add_action('init', [$this, 'do_wp_init'], 8);
+        add_action('init', [$this, 'do_wp_init'], 9);
     }
 
     public function do_wp_init(): void
@@ -153,7 +153,7 @@ final class Main extends AbstractBasic
 
     public static function plugin_deactivation(): void
     {
-        wp_unschedule_hook(self::OPTION_PREFIX . 'check_expire');
-        wp_unschedule_hook(self::OPTION_PREFIX . 'check_update');
+        wp_unschedule_hook(self::get_prefix_name('check_expire'));
+        wp_unschedule_hook(self::get_prefix_name('check_update'));
     }
 }

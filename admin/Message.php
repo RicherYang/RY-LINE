@@ -227,7 +227,7 @@ final class Message
             foreach ($pre_autosend as $autosend => $true) {
                 delete_post_meta($post_ID, 'ry_line_message_autosend', $autosend);
             }
-            as_schedule_single_action(time() + HOUR_IN_SECONDS, Main::OPTION_PREFIX . 'check_autosend_hooks', [], 'ry-line', true);
+            as_schedule_single_action(time() + HOUR_IN_SECONDS, Main::get_prefix_name('check_autosend_hooks'), [], 'ry-line', true);
         }
         Main::update_option('autosend_hooks', $autosend_hooks, true);
 

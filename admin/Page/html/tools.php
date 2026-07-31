@@ -1,6 +1,9 @@
 <?php defined('ABSPATH') or exit; ?>
 
-<h2 class="title"><?php esc_html_e('Tools', 'ry-line'); ?></h2>
+<?php
+use RY\General\V20260729\Utils;
+
+?>
 
 <style>
     table#ry-line-tools td {
@@ -19,12 +22,7 @@
                 <strong><?php esc_html_e('Reload rich menu', 'ry-line'); ?></strong>
             </td>
             <td class="action">
-                <form method="post" action="admin-post.php">
-                    <input type="hidden" name="action" value="ry-line-tools">
-                    <input type="hidden" name="do" value="reload-richmenu">
-                    <?php wp_nonce_field('ry-line-tools'); ?>
-                    <button type="submit" class="button ry-line-loading"><?php esc_html_e('Reload rich menu', 'ry-line'); ?></button>
-                </form>
+                <?php Utils::the_action_form('line-tools', 'reload-richmenu', __('Reload rich menu', 'ry-line')); ?>
             </td>
         </tr>
         <tr>
@@ -32,12 +30,7 @@
                 <strong><?php esc_html_e('Clear unused rich menu alias', 'ry-line'); ?></strong>
             </td>
             <td class="action">
-                <form method="post" action="admin-post.php">
-                    <input type="hidden" name="action" value="ry-line-tools">
-                    <input type="hidden" name="do" value="clear-unused-rich-aliases">
-                    <?php wp_nonce_field('ry-line-tools'); ?>
-                    <button type="submit" class="button ry-line-loading"><?php esc_html_e('Clear alias', 'ry-line'); ?></button>
-                </form>
+                <?php Utils::the_action_form('line-tools', 'clear-unused-rich-aliases', __('Clear alias', 'ry-line')); ?>
             </td>
         </tr>
         <?php if (!empty($line_user_ID)) { ?>
@@ -46,12 +39,7 @@
                 <strong><?php esc_html_e('Unlink test user rich menu', 'ry-line'); ?></strong>
             </td>
             <td class="action">
-                <form method="post" action="admin-post.php">
-                    <input type="hidden" name="action" value="ry-line-tools">
-                    <input type="hidden" name="do" value="clear-test-user-rich-menu">
-                    <?php wp_nonce_field('ry-line-tools'); ?>
-                    <button type="submit" class="button ry-line-loading"><?php esc_html_e('Unlink test user', 'ry-line'); ?></button>
-                </form>
+                <?php Utils::the_action_form('line-tools', 'clear-test-user-rich-menu', __('Unlink test user', 'ry-line')); ?>
             </td>
         </tr>
         <?php } ?>

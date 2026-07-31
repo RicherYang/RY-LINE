@@ -8,11 +8,11 @@ final class Cron
 {
     public static function add_action(): void
     {
-        add_action(Main::OPTION_PREFIX . 'check_expire', [__CLASS__, 'check_expire']);
+        add_action(Main::get_prefix_name('check_expire'), [__CLASS__, 'check_expire']);
 
-        add_action(Main::OPTION_PREFIX . 'check_autosend_hooks', [__CLASS__, 'check_autosend_hooks']);
+        add_action(Main::get_prefix_name('check_autosend_hooks'), [__CLASS__, 'check_autosend_hooks']);
 
-        add_action(Main::OPTION_PREFIX . 'update_0_5_5', [__CLASS__, 'update_0_5_5']);
+        add_action(Main::get_prefix_name('update_0_5_5'), [__CLASS__, 'update_0_5_5']);
     }
 
     public static function check_expire(): void
@@ -158,7 +158,7 @@ final class Cron
                     }
 
                     if ($start - time() > 5) {
-                        as_schedule_single_action(time(), Main::OPTION_PREFIX . 'update_0_5_5', [], 'ry-line', true);
+                        as_schedule_single_action(time(), Main::get_prefix_name('update_0_5_5'), [], 'ry-line', true);
                         break;
                     }
                 }

@@ -4,7 +4,7 @@ namespace RY\Line;
 
 defined('ABSPATH') or exit;
 
-use RY\General\V20260727\Logs;
+use RY\General\V20260729\Logs;
 
 final class Update
 {
@@ -38,7 +38,7 @@ final class Update
                     }
                 }
 
-                as_enqueue_async_action(Main::OPTION_PREFIX . 'update_0_5_5', [], 'ry-line', true);
+                as_enqueue_async_action(Main::get_prefix_name('update_0_5_5'), [], 'ry-line', true);
             });
 
             Main::update_option('version', '0.5.5', true);

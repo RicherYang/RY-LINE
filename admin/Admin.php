@@ -9,7 +9,8 @@ use RY\Line\Admin\MetaBoxes\Richmenu as MetaBoxRichmenu;
 use RY\Line\Admin\Page\Option as PageOption;
 use RY\Line\Admin\Page\Tools as PageTools;
 use RY\Line\License;
-use RY\Paid\V20260727\AbstractAdmin;
+use RY\Line\Main;
+use RY\Paid\V20260729\AbstractAdmin;
 
 final class Admin extends AbstractAdmin
 {
@@ -29,8 +30,6 @@ final class Admin extends AbstractAdmin
 
     protected function do_init(): void
     {
-        parent::do_init();
-
         $this->license = License::instance();
         add_filter('ry-plugin/license_list', [$this, 'add_license']);
 
@@ -49,6 +48,7 @@ final class Admin extends AbstractAdmin
             Message::instance();
             Richmenu::instance();
 
+            add_filter('admin_menu', [__CLASS__, 'change_post_type_menu'], 9);
             add_filter('ry-plugin/menu_list', [$this, 'add_menu']);
         }
     }
@@ -75,6 +75,15 @@ final class Admin extends AbstractAdmin
     {
         MetaBoxMessage::init_meta_boxes();
         MetaBoxRichmenu::init_meta_boxes();
+    }
+
+    public static function change_post_type_menu(): void
+    {
+        global $wp_post_types;
+
+        $menu_list = apply_filters('ry-plugin/menu_list', []);
+        $wp_post_types[Main::POSTTYPE_MESSAGE]->show_in_menu = $menu_list[0]['slug'];
+        $wp_post_types[Main::POSTTYPE_RICHERMENU]->show_in_menu = $menu_list[0]['slug'];
     }
 
     public function add_menu(array $menu_list): array

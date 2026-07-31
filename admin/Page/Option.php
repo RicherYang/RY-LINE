@@ -4,7 +4,8 @@ namespace RY\Line\Admin\Page;
 
 defined('ABSPATH') or exit;
 
-use RY\General\V20260727\AbstractAdminPage;
+use RY\General\V20260729\AbstractAdminPage;
+use RY\General\V20260729\Utils;
 use RY\Line\LineApi;
 use RY\Line\Main;
 use RY\Line\Webhook;
@@ -85,12 +86,9 @@ final class Option extends AbstractAdminPage
             }
         }
 
-        echo '<form method="post" action="admin-post.php">';
-        echo '<input type="hidden" name="action" value="ry-line-option">';
-        echo '<input type="hidden" name="do" value="save-option">';
-        wp_nonce_field('ry-line-option');
+        echo '<form method="post" action="' . esc_url(admin_url('admin-post.php')) . '">';
         include __DIR__ . '/html/option.php';
-        submit_button();
+        Utils::the_action_form_button('line-option', 'save-option', __('Save Changes', 'ry-line'), 'submit', 'button-primary');
         echo '</form>';
 
         if (!empty($bot_info)) {
@@ -98,66 +96,73 @@ final class Option extends AbstractAdminPage
         }
     }
 
-    public function do_admin_action(string $action): void
+    protected function do_admin_action(string $action, string $real_action): void
     {
         if ('ry-line-option' !== $action) {
             return;
         }
 
-        if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', 'ry-line-option')) {
-            wp_die('Invalid nonce');
-        }
-
-        $do = sanitize_key($_POST['do'] ?? '');
-        if ($do === 'set-webhook') {
-            $webhook_url = Webhook::get_webhook_url();
-            $set_status = LineApi::webhook_url($webhook_url);
-            if (is_wp_error($set_status)) {
-                if ($set_status->get_error_code() === 'line_error') {
-                    $this->add_notice('error', __('Settings failed.', 'ry-line') . ' ' . $set_status->get_error_data()->message);
-                } else {
-                    $this->add_notice('error', __('Settings failed.', 'ry-line') . ' ' . $set_status->get_error_message());
-                }
-            } else {
-                $this->add_notice('success', __('Settings saved.', 'ry-line'));
-            }
-
-            Main::set_transient('bot_info', []);
-            flush_rewrite_rules();
-        }
-
-        if ($do === 'test-webhook') {
-            $webhook_status = LineApi::test_webhook();
-            if (is_wp_error($webhook_status)) {
-                if ($webhook_status->get_error_code() === 'line_error') {
-                    $this->add_notice('error', __('Test failed.', 'ry-line') . ' ' . $webhook_status->get_error_data()->message);
-                } else {
-                    $this->add_notice('error', __('Test failed.', 'ry-line') . ' ' . $webhook_status->get_error_message());
-                }
-            } else {
-                if ($webhook_status->success === true) {
-                    $this->add_notice('success', __('Test success.', 'ry-line'));
-                } else {
-                    $this->add_notice('error', __('Test failed.', 'ry-line') . ' ' . $webhook_status->detail);
-                }
-            }
-        }
-
-        if ($do === 'save-option') {
-            Main::update_option('channel_id', sanitize_locale_name($_POST['channel-id'] ?? ''), false);
-            Main::update_option('channel_secret', sanitize_locale_name($_POST['channel-secret'] ?? ''), false);
-            Main::update_option('test_user_id', sanitize_locale_name($_POST['test-user-id'] ?? ''), false);
-
-            Main::set_transient('bot_info', []);
-            Main::set_transient('user_info', []);
-            LineApi::revoke_access_token();
-            if (LineApi::get_access_token()) {
-                $this->add_notice('success', __('Settings saved.', 'ry-line'));
-            } else {
-                $this->add_notice('error', __('Error channel ID or channel secret.', 'ry-line'));
-            }
+        if ($real_action !== '' && is_callable([$this, $real_action])) {
+            $this->$real_action();
         }
 
         wp_safe_redirect(admin_url('admin.php?page=ry-line&type=option'));
+        exit;
+    }
+
+    private function save_option(): void
+    {
+        check_ajax_referer('save-option', '_ajax_nonce');
+
+        Main::update_option('channel_id', sanitize_locale_name($_POST['channel-id'] ?? ''), false);
+        Main::update_option('channel_secret', sanitize_locale_name($_POST['channel-secret'] ?? ''), false);
+        Main::update_option('test_user_id', sanitize_locale_name($_POST['test-user-id'] ?? ''), false);
+
+        Main::set_transient('bot_info', []);
+        Main::set_transient('user_info', []);
+        LineApi::revoke_access_token();
+        if (LineApi::get_access_token()) {
+            $this->add_notice('success', __('Settings saved.', 'ry-line'));
+        } else {
+            $this->add_notice('error', __('Error channel ID or channel secret.', 'ry-line'));
+        }
+    }
+
+    private function set_webhook(): void
+    {
+        check_ajax_referer('set-webhook', '_ajax_nonce');
+        $webhook_url = Webhook::get_webhook_url();
+        $set_status = LineApi::webhook_url($webhook_url);
+        if (is_wp_error($set_status)) {
+            if ($set_status->get_error_code() === 'line_error') {
+                $this->add_notice('error', __('Settings failed.', 'ry-line') . ' ' . $set_status->get_error_data()->message);
+            } else {
+                $this->add_notice('error', __('Settings failed.', 'ry-line') . ' ' . $set_status->get_error_message());
+            }
+        } else {
+            $this->add_notice('success', __('Settings saved.', 'ry-line'));
+        }
+
+        Main::set_transient('bot_info', []);
+        flush_rewrite_rules();
+    }
+
+    private function test_webhook(): void
+    {
+        check_ajax_referer('test-webhook', '_ajax_nonce');
+        $webhook_status = LineApi::test_webhook();
+        if (is_wp_error($webhook_status)) {
+            if ($webhook_status->get_error_code() === 'line_error') {
+                $this->add_notice('error', __('Test failed.', 'ry-line') . ' ' . $webhook_status->get_error_data()->message);
+            } else {
+                $this->add_notice('error', __('Test failed.', 'ry-line') . ' ' . $webhook_status->get_error_message());
+            }
+        } else {
+            if ($webhook_status->success === true) {
+                $this->add_notice('success', __('Test success.', 'ry-line'));
+            } else {
+                $this->add_notice('error', __('Test failed.', 'ry-line') . ' ' . $webhook_status->detail);
+            }
+        }
     }
 }
