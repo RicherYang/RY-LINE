@@ -4,7 +4,7 @@ namespace RY\Line;
 
 defined('ABSPATH') or exit;
 
-use RY\General\V20260729\AbstractBasic;
+use RY\General\V20260801\AbstractBasic;
 use RY\Line\Admin\Admin;
 use RY\Line\WooCommerce\Autosend as WooCommerceAutosend;
 use RY\Line\WooCommerce\Template as WooCommerceTemplate;
