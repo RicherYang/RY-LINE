@@ -4,7 +4,7 @@
  * Plugin Name: RY LINE
  * Plugin URI: https://ry-plugin.com/ry-line
  * Description: LINE support
- * Version: 2026.7.31
+ * Version: 2026.8.5
  * Requires at least: 6.8
  * Requires PHP: 8.2
  * Author: Richer Yang
@@ -20,7 +20,7 @@ defined('ABSPATH') or exit;
 
 use RY\Line\Main;
 
-define('RY_LINE_VERSION', '2026.7.31');
+define('RY_LINE_VERSION', '2026.8.5');
 define('RY_LINE_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('RY_LINE_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('RY_LINE_PLUGIN_BASENAME', plugin_basename(__FILE__));
