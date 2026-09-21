@@ -44,6 +44,7 @@ final class Main extends AbstractBasic
 
     public function do_wp_init(): void
     {
+        Cron::add_action();
         Updater::instance();
 
         $this->register_post_type();
@@ -53,8 +54,6 @@ final class Main extends AbstractBasic
         }
 
         if (License::instance()->is_activated()) {
-            Cron::add_action();
-
             Autosend::instance();
             Template::instance();
             Webhook::instance();
@@ -154,6 +153,5 @@ final class Main extends AbstractBasic
     public static function plugin_deactivation(): void
     {
         wp_unschedule_hook(self::get_prefix_name('check_expire'));
-        wp_unschedule_hook(self::get_prefix_name('check_update'));
     }
 }

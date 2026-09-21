@@ -9,8 +9,8 @@
         "svgo-loader": "^5.0.0",
         "select2": "^4.1.0",
         "@types/jquery": "^4.0.1",
-        "@wordpress/i18n": "^6.24.0",
-        "@wordpress/scripts": "^33.0.0"
+        "@wordpress/i18n": "^6.27.0",
+        "@wordpress/scripts": "^34.2.0"
     },
     "scripts": {
         "start": "wp-scripts start",
