@@ -69,24 +69,24 @@ msgstr "Channel ID"
 msgid "Channel secret"
 msgstr "Channel secret"
 
-#: classes/Main.php:97
+#: classes/Main.php:96
 msgctxt "post type general name"
 msgid "LINE rich menu"
 msgstr "LINE 圖文選單"
 
-#: classes/Main.php:98
+#: classes/Main.php:97
 msgid "Add rich menu"
 msgstr "新增圖文選單"
 
-#: classes/Main.php:99
+#: classes/Main.php:98
 msgid "Edit rich menu"
 msgstr "編輯圖文選單"
 
-#: classes/Main.php:100
+#: classes/Main.php:99
 msgid "Search rich menu"
 msgstr "搜尋圖文選單"
 
-#: classes/Main.php:101
+#: classes/Main.php:100
 msgid "Uploaded to this rich menu"
 msgstr "已關聯至這圖文選單"
 
@@ -467,44 +467,44 @@ msgstr ""
 "歡迎 %s\n"
 "帳號綁定成功。"
 
-#: classes/Main.php:74
+#: classes/Main.php:73
 msgctxt "post type general name"
 msgid "LINE message"
 msgstr "LINE 訊息"
 
-#: classes/Main.php:75
+#: classes/Main.php:74
 msgid "Add message"
 msgstr "新增訊息"
 
-#: classes/Main.php:76
+#: classes/Main.php:75
 msgid "Edit message"
 msgstr "編輯訊息"
 
-#: classes/Main.php:77
+#: classes/Main.php:76
 msgid "Search message"
 msgstr "搜尋訊息"
 
-#: classes/Main.php:78
+#: classes/Main.php:77
 msgid "Uploaded to this message"
 msgstr "已關聯至這訊息"
 
-#: classes/Main.php:79
-#: classes/Main.php:102
+#: classes/Main.php:78
+#: classes/Main.php:101
 msgid "Show image"
 msgstr "顯示圖片"
 
-#: classes/Main.php:80
-#: classes/Main.php:103
+#: classes/Main.php:79
+#: classes/Main.php:102
 msgid "Set show image"
 msgstr "設定顯示圖片"
 
-#: classes/Main.php:81
-#: classes/Main.php:104
+#: classes/Main.php:80
+#: classes/Main.php:103
 msgid "Remove show image"
 msgstr "移除顯示圖片"
 
-#: classes/Main.php:82
-#: classes/Main.php:105
+#: classes/Main.php:81
+#: classes/Main.php:104
 msgid "Use as show image"
 msgstr "設定為顯示圖片"
 
@@ -1175,7 +1175,8 @@ msgstr "啟用追蹤"
 msgid "Allow usage of RY Plugin to be tracked"
 msgstr "允許 RY Plugin 追蹤使用情況"
 
-#: includes/ry-general/Page/html/options.php:18
+#. translators: %s: link to usage tracking information
+#: includes/ry-general/Page/html/options.php:19
 #, php-format
 msgid "Read about what usage data is tracked at: %s ."
 msgstr "閱讀 %s 以理解我們追蹤那些數據。"

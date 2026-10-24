@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: RY LINE 2026.8.5\n"
+"Project-Id-Version: RY LINE 2026.8.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ry-line\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -632,65 +632,65 @@ msgstr ""
 msgid "Unlinked LINE account"
 msgstr ""
 
-#: classes/Main.php:74
+#: classes/Main.php:73
 msgctxt "post type general name"
 msgid "LINE message"
 msgstr ""
 
-#: classes/Main.php:75
+#: classes/Main.php:74
 msgid "Add message"
 msgstr ""
 
-#: classes/Main.php:76
+#: classes/Main.php:75
 msgid "Edit message"
 msgstr ""
 
-#: classes/Main.php:77
+#: classes/Main.php:76
 msgid "Search message"
 msgstr ""
 
-#: classes/Main.php:78
+#: classes/Main.php:77
 msgid "Uploaded to this message"
+msgstr ""
+
+#: classes/Main.php:78
+#: classes/Main.php:101
+msgid "Show image"
 msgstr ""
 
 #: classes/Main.php:79
 #: classes/Main.php:102
-msgid "Show image"
+msgid "Set show image"
 msgstr ""
 
 #: classes/Main.php:80
 #: classes/Main.php:103
-msgid "Set show image"
+msgid "Remove show image"
 msgstr ""
 
 #: classes/Main.php:81
 #: classes/Main.php:104
-msgid "Remove show image"
-msgstr ""
-
-#: classes/Main.php:82
-#: classes/Main.php:105
 msgid "Use as show image"
 msgstr ""
 
-#: classes/Main.php:97
+#: classes/Main.php:96
 msgctxt "post type general name"
 msgid "LINE rich menu"
 msgstr ""
 
-#: classes/Main.php:98
+#: classes/Main.php:97
 msgid "Add rich menu"
 msgstr ""
 
-#: classes/Main.php:99
+#: classes/Main.php:98
 msgid "Edit rich menu"
 msgstr ""
 
-#: classes/Main.php:100
+#: classes/Main.php:99
 msgid "Search rich menu"
 msgstr ""
 
-#: classes/Main.php:101
+#: classes/Main.php:100
 msgid "Uploaded to this rich menu"
 msgstr ""
 
@@ -842,7 +842,8 @@ msgstr ""
 msgid "Allow usage of RY Plugin to be tracked"
 msgstr ""
 
-#: includes/ry-general/Page/html/options.php:18
+#. translators: %s: link to usage tracking information
+#: includes/ry-general/Page/html/options.php:19
 #, php-format
 msgid "Read about what usage data is tracked at: %s ."
 msgstr ""
