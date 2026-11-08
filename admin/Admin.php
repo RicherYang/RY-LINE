@@ -10,7 +10,7 @@ use RY\Line\Admin\Page\Option as PageOption;
 use RY\Line\Admin\Page\Tools as PageTools;
 use RY\Line\License;
 use RY\Line\Main;
-use RY\Paid\V20260729\AbstractAdmin;
+use RY\Paid\V20261107\AbstractAdmin;
 
 final class Admin extends AbstractAdmin
 {
