@@ -1,11 +1,10 @@
 {
     "name": "ry-line",
     "title": "RY LINE",
-    "version": "2026.8.5",
+    "version": "2026.11.7",
     "author": "Richer Yang",
     "private": true,
     "devDependencies": {
-        "mini-svg-data-uri": "1.4.4",
         "svgo-loader": "5.0.0",
         "select2": "4.1.0",
         "@types/jquery": "4.0.1",

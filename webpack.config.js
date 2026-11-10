@@ -1,5 +1,5 @@
 const path = require('path');
-const svgToMiniDataURI = require('mini-svg-data-uri', true);
+const { optimize } = require('svgo');
 
 const defaultConfig = require('@wordpress/scripts/config/webpack.config', true);
 const { fromProjectRoot } = require('@wordpress/scripts/utils/file', true);
@@ -29,8 +29,9 @@ module.exports = {
                 type: 'asset/inline',
                 generator: {
                     dataUrl: content => {
-                        content = content.toString();
-                        return svgToMiniDataURI(content);
+                        const result = optimize(content.toString());
+                        const encoded = Buffer.from(result.data).toString('base64');
+                        return `data:image/svg+xml;base64,${encoded}`;
                     },
                 },
                 use: ['svgo-loader']

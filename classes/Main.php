@@ -4,7 +4,7 @@ namespace RY\Line;
 
 defined('ABSPATH') or exit;
 
-use RY\General\V20260810\AbstractBasic;
+use RY\General\V20261107\AbstractBasic;
 use RY\Line\Admin\Admin;
 use RY\Line\WooCommerce\Autosend as WooCommerceAutosend;
 use RY\Line\WooCommerce\Template as WooCommerceTemplate;
@@ -138,7 +138,7 @@ final class Main extends AbstractBasic
 
     public static function usage_tracking(): void
     {
-        if (get_option('RY_General_tracking', 'yes') !== 'yes') {
+        if (get_option('RY_GENERAL_tracking', 'yes') !== 'yes') {
             return;
         }
 
@@ -147,12 +147,15 @@ final class Main extends AbstractBasic
 
     public static function plugin_activation(): void
     {
+        parent::plugin_activation();
+
         self::create_roles();
     }
 
     public static function plugin_deactivation(): void
     {
+        parent::plugin_deactivation();
+
         as_unschedule_all_actions(self::get_prefix_name('check_expire'));
-        as_unschedule_all_actions('RY_GENERAL_usage_tracking');
     }
 }
