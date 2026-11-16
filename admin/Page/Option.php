@@ -4,8 +4,8 @@ namespace RY\Line\Admin\Page;
 
 defined('ABSPATH') or exit;
 
-use RY\General\V20261107\AbstractAdminPage;
-use RY\General\V20261107\Utils;
+use RY\General\V20261116\AbstractAdminPage;
+use RY\General\V20261116\Utils;
 use RY\Line\LineApi;
 use RY\Line\Main;
 use RY\Line\Webhook;
