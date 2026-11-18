@@ -382,6 +382,7 @@ final class LineApi
         $response = wp_remote_request($url, [
             'method' => $method,
             'httpversion' => '1.1',
+            'user-agent' => apply_filters('http_headers_useragent', 'RY/' . date('Y.m')),
             'headers' => $header,
             'body' => $body ?? null,
         ]);
